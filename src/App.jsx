@@ -3,7 +3,7 @@ import MainContent from './Main/MainContent';
 
 function App() {
     return (
-        <div>
+        <div className='m-4'>
           <MainContent/>
         </div>
     );
