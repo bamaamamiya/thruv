@@ -52,12 +52,18 @@ const MainContent = () => {
                     Kapasitas baterai: 1800 mAh</p>
                     <p className='flex gap-2 items-center'>
                     <FontAwesomeIcon icon={faCircleCheck} />
-                    1 x Alat Pijat Elektrik Massage Gun</p>
-                    <p className='flex gap-2 items-center'>
+                    1 x Alat Pijat Elektrik Massage</p>
+                    <div className='flex text-start gap-2 items-center'>
+
                     <FontAwesomeIcon icon={faCircleCheck} /> 
-                    1 x Kabel Tipe C (tidak termasuk kepala charger)</p>
+                    <div>
+                    <p>1 x Kabel Tipe C</p>
+                    <p>(tidak termasuk kepala charger)</p>
                     </div>
+                    </div>
+
                 </div>
+            </div>
 
 
                 <div className='space-y-6'>
