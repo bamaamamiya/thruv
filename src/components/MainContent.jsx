@@ -1,12 +1,12 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'
+import { faCircleCheck,faArrowDown,faArrowUp } from '@fortawesome/free-solid-svg-icons'
 
 import Footer from './Footer';
 
 const MainContent = () => {
     return (
-        <div className='grid justify-center items-center h-screen gap-2'>
+        <div className='grid justify-center items-center h-screen gap-2 bg-greyto'>
 
             <h1 className='text-center text-5xl font-bold'>Sering pegal setelah olahraga atau aktivitas seharian??😫</h1>
 
@@ -65,25 +65,35 @@ const MainContent = () => {
                     <p className='text-3xl font-bold'>Beli Hari ini !</p>
                     <p className='text-3xl font-bold'>HARGA ASLINYA </p>
 
-                    <h1 className='text-redto font-bold text-4xl line-through'>Rp 299.000/Pcs</h1>
+                    <h1 className='text-redto font-bold text-4xl line-through'>Rp 358.000/Pcs</h1>
                     <p className='font-bold'>Anda beruntung datang hari ini, kami memberikan DISKON sebesar 50%</p>
                     <div className='flex justify-center'>
                     <img src="https://cdn.orderonline.id/uploads/images_1102061704446430091.gif" alt="promo" className='w-96 h-auto'/>
                     </div>
-                    <h1 className='text-5xl font-bold text-greento '>Rp. 149 Ribu</h1>
-                    <p>(Jangan tunggu! Stok terbatas, jadi manfaatkan kesempatan ini sekarang.)</p>
-                    <p>Kami Produksi Produk ini sendiri, sehingga bisa dipastikan bukan Produk yg abal- abal atau kualitas rendah</p>
+                    <h1 className='text-5xl font-bold text-greento '>Rp. 179 Ribu</h1>
+                    <p className='text-redto font-medium'>(Jangan tunggu! Stok terbatas, jadi manfaatkan kesempatan ini sekarang.)</p>
+                    <p className='font-medium'>Kami Produksi Produk ini sendiri, sehingga bisa dipastikan bukan Produk yg abal- abal atau kualitas rendah</p>
                 </div>
 
                 <div>
-                    <p>Silahkan isi 
-                        <span> FORMULIR </span>
-                        dibawah ini untuk melakukan pemesanan, lalu Klik Tombol 
-                        <span> "PESAN SEKARANG" </span>
+                    <p>Silahkan isi diform untuk melakukan pemesanan, lalu Klik Tombol 
+                        <span className='text-greento font-semibold'> "PESAN SEKARANG" </span>
                         dan tunggu sampai Customer Service kami membalas pesan Anda
                     </p>
 
+                </div>
+                <div className='grid gap-4 space-y-6'>
+                    <div className='space-x-10 text-greento animate-bounce'>
+                <FontAwesomeIcon icon={faArrowDown} size='4x'/>
+                <FontAwesomeIcon icon={faArrowDown} size='4x'/>
+                <FontAwesomeIcon icon={faArrowDown} size='4x'/>
+                    </div>
                     <a href='https://thruvshop.orderonline.id/gun-massager-alat-pijat-terapi-relaksasi-otot-4-in-1' className='text-5xl bg-greento p-4 text-white rounded-md'>Pesan Sekarang</a>
+                    <div className='space-x-10 text-greento animate-bounce'>
+                <FontAwesomeIcon icon={faArrowUp}  size='4x' />
+                <FontAwesomeIcon icon={faArrowUp}  size='4x' />
+                <FontAwesomeIcon icon={faArrowUp}  size='4x' />
+                    </div>
                 </div>
 
                 <div className='space-y-6'>
