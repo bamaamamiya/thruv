@@ -77,7 +77,7 @@ const MainContent = () => {
 
                 <div>
                     <p>Silahkan isi diform untuk dapatkan 
-                        <span className='text-greento font-semibold text-2xl'> GRATIS ONGKIR</span> dan melakukan pemesanan, lalu Klik Tombol 
+                        <span className='text-greento font-bold text-2xl'> GRATIS ONGKIR</span> dan melakukan pemesanan, lalu Klik Tombol 
                         <span className='text-greento font-semibold'> "PESAN SEKARANG" </span>
                         dan tunggu sampai Customer Service kami membalas pesan Anda
                     </p>
