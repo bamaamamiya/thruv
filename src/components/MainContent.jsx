@@ -65,12 +65,12 @@ const MainContent = () => {
                     <p className='text-3xl font-bold'>Beli Hari ini !</p>
                     <p className='text-3xl font-bold'>HARGA ASLINYA </p>
 
-                    <h1 className='text-redto font-bold text-4xl line-through'>Rp 358.000/Pcs</h1>
+                    <h1 className='text-redto font-bold text-4xl line-through'>Rp 380.000/Pcs</h1>
                     <p className='font-bold'>Anda beruntung datang hari ini, kami memberikan DISKON sebesar 50%</p>
                     <div className='flex justify-center'>
                     <img src="https://cdn.orderonline.id/uploads/images_1102061704446430091.gif" alt="promo" className='w-96 h-auto'/>
                     </div>
-                    <h1 className='text-5xl font-bold text-greento '>Rp. 179 Ribu</h1>
+                    <h1 className='text-5xl font-bold text-greento '>Rp. 190.000 Ribu</h1>
                     <p className='text-redto font-medium'>(Jangan tunggu! Stok terbatas, jadi manfaatkan kesempatan ini sekarang.)</p>
                     <p className='font-medium'>Kami Produksi Produk ini sendiri, sehingga bisa dipastikan bukan Produk yg abal- abal atau kualitas rendah</p>
                 </div>
