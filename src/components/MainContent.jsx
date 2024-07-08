@@ -8,7 +8,7 @@ const MainContent = () => {
     return (
         <div className='grid justify-center items-center h-screen gap-2 bg-greyto'>
 
-            <h1 className='text-center text-5xl font-bold'>Sering pegal setelah olahraga atau aktivitas seharian??😫</h1>
+            <h1 className='text-center text-5xl font-bold'>Sering pegal setelah KERJA atau aktivitas seharian??😫</h1>
 
             <div className='text-center space-y-6 text-xl gap-2 grid'>
                 <div className='flex justify-center'>
@@ -76,7 +76,8 @@ const MainContent = () => {
                 </div>
 
                 <div>
-                    <p>Silahkan isi diform untuk melakukan pemesanan, lalu Klik Tombol 
+                    <p>Silahkan isi diform untuk dapatkan 
+                        <span className='text-greento font-semibold text-2xl'> GRATIS ONGKIR</span> dan melakukan pemesanan, lalu Klik Tombol 
                         <span className='text-greento font-semibold'> "PESAN SEKARANG" </span>
                         dan tunggu sampai Customer Service kami membalas pesan Anda
                     </p>
