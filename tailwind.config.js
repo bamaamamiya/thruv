@@ -8,6 +8,7 @@ export default {
     extend: {
       colors: {
         redto: '#ff0808',
+        greento:'#3cb878',
       }
     },
   },
