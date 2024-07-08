@@ -89,7 +89,7 @@ const MainContent = () => {
                 <FontAwesomeIcon icon={faArrowDown} size='4x'/>
                 <FontAwesomeIcon icon={faArrowDown} size='4x'/>
                     </div>
-                    <a href='https://thruvshop.orderonline.id/gun-massager-alat-pijat-terapi-relaksasi-otot-4-in-1' className='text-5xl bg-greento p-4 text-white rounded-md'>Pesan Sekarang</a>
+                    <a href='https://thruvshop.orderonline.id/gun-massager-alat-pijat-terapi-relaksasi-otot-4-in-1' className='text-4xl bg-greento p-4 text-white rounded-md'>Pesan Sekarang</a>
                     <div className='space-x-10 text-greento animate-bounce'>
                 <FontAwesomeIcon icon={faArrowUp}  size='4x' />
                 <FontAwesomeIcon icon={faArrowUp}  size='4x' />
