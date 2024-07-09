@@ -5,6 +5,7 @@ const OrderForm = () => {
     const loadScript = (src, id) => {
       return new Promise((resolve, reject) => {
         if (document.getElementById(id)) {
+          console.log(`${id} already loaded`);
           resolve();
           return;
         }
@@ -12,15 +13,23 @@ const OrderForm = () => {
         script.src = src;
         script.async = true;
         script.id = id;
-        script.onload = resolve;
-        script.onerror = reject;
+        script.onload = () => {
+          console.log(`${id} loaded successfully`);
+          resolve();
+        };
+        script.onerror = (error) => {
+          console.error(`Failed to load ${id}`, error);
+          reject(error);
+        };
         document.body.appendChild(script);
       });
     };
 
     const loadOrderOnlineScripts = async () => {
       try {
+        console.log('Loading jQuery...');
         await loadScript('https://cdn.orderonline.id/js/vendor/jquery.min.js', 'oo-embed-jquery');
+        console.log('Loading embed script...');
         await loadScript('https://cdn.orderonline.id/js/embed-v2-slim.min.js?v=8.0.2', 'oo-embed-js');
 
         if (typeof window.ooe !== 'function') {
@@ -29,6 +38,7 @@ const OrderForm = () => {
           };
           window.ooe.queue = [];
           window.ooe.loaded = true;
+          console.log('Initialized ooe');
         }
 
         window.ooe('setup', 'redirect', 'https://thruvshop.orderonline.id');
@@ -39,6 +49,7 @@ const OrderForm = () => {
           triggerPixel: false,
           triggerGtm: false,
         });
+        console.log('ooe initialized');
       } catch (error) {
         console.error('Failed to load scripts', error);
       }
