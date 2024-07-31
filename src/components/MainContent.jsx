@@ -16,9 +16,6 @@ const MainContent = () => {
                     <img src="https://cdn.orderonline.id/uploads/images_9904061716624178468.jpg" alt="alat pijit" className='w-96 h-auto' />
                 </div>
                 <p>Pijat tradisional membutuhkan waktu dan cukup melelahkan. Belum lagi kalo mau pijat jaman sekarang pada Mahal-Mahal 😖😔</p>
-                <div className='flex justify-center'>
-                    <img src="https://images.tokopedia.net/img/cache/500-square/VqbcmM/2022/10/25/23ac26f8-d720-4fca-ac3a-a1467d284b7d.jpg.webp?ect=4g" alt="alat pijit2" className='w-96 h-auto' />
-                </div>
                 <p>Wah, capek banget kalo badan pegal tapi nggak sempat pijat. Mau biarin aja takutnya pegalnya semakin parah dan mengganggu aktivitas.😫😰</p>
                 <div className='flex justify-center'>
                     <img src="https://cdn.orderonline.id/uploads/images_7855651716624178451.jpg" alt="alat pijit2" className='w-96 h-auto' />
