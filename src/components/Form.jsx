@@ -54,7 +54,15 @@ const Form = () => {
     return (
         <div>
             <div class="ooef">
-                <form class="orderonline-embed-form" data-username="thruvshop" data-product-slug="gun-massager-alat-pijat-terapi-relaksasi-otot-4-in-1" data-product-id="668aac9df524ea15150edb70" id="oo-embed-form-gun-massager-alat-pijat-terapi-relaksasi-otot-4-in-1-4416" data-origin="orderonline">
+                
+                <form 
+                class="orderonline-embed-form" 
+                data-username="thruvshop" 
+                data-product-slug="gun-massager-alat-pijat-terapi-relaksasi-otot-4-in-1" 
+                data-product-id="668aac9df524ea15150edb70" 
+                id="oo-embed-form-gun-massager-alat-pijat-terapi-relaksasi-otot-4-in-1-4416" 
+                data-origin="orderonline">
+
                     <div class="ooef-loader">
                         <div aria-live="polite" role="status">
                             <div>Loading...</div>
