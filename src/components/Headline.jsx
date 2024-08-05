@@ -22,11 +22,11 @@ const Headline = () => {
 
             <div className="flex justify-center items-center">
                 <ul className="grid justify-start items-center text-justify">
-                    <li>✅ Cukup 1 alat untuk segala kebutuhan</li>
-                    <li>✅ Stabil dan tidak bising</li>
-                    <li>✅ Gak perlu ganti-ganti baterai, tinggal di charge gak ribet</li>
-                    <li>✅ Mudah dibersihan, sehingga mencukur tetap higenis tanpa khawatir iritasi</li>
-                    <li>✅ Awet, kuat dan anti karat</li>
+                    <li>Cukup 1 alat untuk segala kebutuhan</li>
+                    <li>Stabil dan tidak bising</li>
+                    <li>Gak perlu ganti-ganti baterai, tinggal di charge gak ribet</li>
+                    <li>Mudah dibersihan, sehingga mencukur tetap higenis tanpa khawatir iritasi</li>
+                    <li>Awet, kuat dan anti karat</li>
                 </ul>
             </div>
 
