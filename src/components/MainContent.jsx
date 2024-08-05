@@ -20,6 +20,12 @@ const MainContent = () => {
             </div>
             <Form />
 
+            <div className='space-y-2'>
+                <img src='/images/testi (1).webp'/>
+                <img src='/images/testi (2).webp'/>
+                <img src='/images/testi (3).webp'/>
+            </div>
+
             <div className='grid justify-center'>
                 <img src='/images/fotter.webp' alt='footer'/>
                 <img src='/images/fotter2.webp' alt='footer'/>
