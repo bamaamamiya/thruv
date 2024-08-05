@@ -37,19 +37,19 @@ const Headline = () => {
 
             <div>
                 <h1 className="text-center capitalize text-3xl bg-redto text-white">SPESIFIKASI PRODUK</h1>
-                <ul className="list-disc">
-                    <li>Warna : Dikirim acak sesuai stock</li>
-                    <li>Ukuran : 40mm x 86mm</li>
-                    <li>Power : 3W</li>
-                    <li>Daya : Baterry charging</li>
-                    <li>Bahan : ABS + d proses pelapisan listrik</li>
+                <div className="list-disc">
+                    <p>Warna : Dikirim acak sesuai stock</p>
+                    <p>Ukuran : 40mm x 86mm</p>
+                    <p>Power : 3W</p>
+                    <p>Daya : Baterry charging</p>
+                    <p>Bahan : ABS + d proses pelapisan listrik</p>
                     <br />
-                    <li>Isi Kemasan:</li>
-                    <li>1 * Mini Shaver V3</li>
-                    <li>1 * Sikat pembersih</li>
-                    <li>1 * Kabel pengisian USB</li>
-                    <li>1 * Kotak kemasan</li>
-                </ul>
+                    <p>Isi Kemasan:</p>
+                    <p>1 * Mini Shaver V3</p>
+                    <p>1 * Sikat pembersih</p>
+                    <p>1 * Kabel pengisian USB</p>
+                    <p>1 * Kotak kemasan</p>
+                </div>
             </div>
 
             <br />
@@ -59,7 +59,7 @@ const Headline = () => {
 
                 <p className="text-redto  text-center text-2xl font-extrabold">PROMO KHUSUS 50 PEMBELI!! DAN UNTUK KAMU YANG TRANSAKSI SEKARANG.</p>
 
-                <p className="text-gray-400 text-4xl font-extrabold line-through text-center">Rp. 320.191</p>
+                <p className="text-gray-700 text-4xl font-extrabold line-through text-center">Rp. 320.191</p>
 
                 <p className="text-center font-bold">Diskon Menjadi</p>
                 <p className="text-4xl font-extrabold line-through text-center">Rp. 220.191</p>
@@ -69,7 +69,7 @@ const Headline = () => {
             </div>
 
             <div>
-                <p className="bg-redto text-white text-center">SILAKAN ISI FORM DI BAWAH INI</p>
+                <p className="bg-redto font-extrabold text-white text-center">SILAKAN ISI FORM DI BAWAH INI</p>
             </div>
         </div>
     )
