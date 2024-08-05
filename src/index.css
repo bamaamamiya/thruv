@@ -2,3 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+img{
+    height:auto;
+    width:500px;
+}
