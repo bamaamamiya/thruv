@@ -20,13 +20,15 @@ const Headline = () => {
                 <h1 className="text-center capitalize text-3xl ">KEUNGGULAN PRODUK</h1>
             </div>
 
-            <ul className="grid justify-start items-center text-justify">
-                <li>✅ Cukup 1 alat untuk segala kebutuhan</li>
-                <li>✅ Stabil dan tidak bising</li>
-                <li>✅ Gak perlu ganti-ganti baterai, tinggal di charge gak ribet</li>
-                <li>✅ Mudah dibersihan, sehingga mencukur tetap higenis tanpa khawatir iritasi</li>
-                <li>✅ Awet, kuat dan anti karat</li>
-            </ul>
+            <div className="flex justify-center items-center">
+                <ul className="grid justify-start items-center text-justify">
+                    <li>✅ Cukup 1 alat untuk segala kebutuhan</li>
+                    <li>✅ Stabil dan tidak bising</li>
+                    <li>✅ Gak perlu ganti-ganti baterai, tinggal di charge gak ribet</li>
+                    <li>✅ Mudah dibersihan, sehingga mencukur tetap higenis tanpa khawatir iritasi</li>
+                    <li>✅ Awet, kuat dan anti karat</li>
+                </ul>
+            </div>
 
             <div className="space-y-2 grid justify-center">
                 <img src="/images/spek.webp" alt="produk" />
