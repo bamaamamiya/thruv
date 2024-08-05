@@ -16,8 +16,9 @@ const Headline = () => {
                 <p>Kepala pemotong baja presisi terbuat dari bahan ABS plus proses pelapisan listrik yang aman dan tajam, tidak mudah panas, memastikan efisiensi dan daya tahan</p>
             </div>
 
-            <div>
-                <h1 className="text-center capitalize text-3xl bg-redto text-white">KEUNGGULAN PRODUK</h1>
+            <div className="grid justify-center items-center bg-redto text-white">
+                <h1 className="text-center capitalize text-3xl ">KEUNGGULAN PRODUK</h1>
+            </div>
                 <div>
                     <p>✅ Cukup 1 alat untuk segala kebutuhan</p>
                     <p>✅ Stabil dan tidak bising</p>
@@ -25,7 +26,6 @@ const Headline = () => {
                     <p>✅ Mudah dibersihan, sehingga mencukur tetap higenis tanpa khawatir iritasi</p>
                     <p>✅ Awet, kuat dan anti karat</p>
                 </div>
-            </div>
 
             <div className="space-y-2 grid justify-center">
                 <img src="/images/spek.webp"/>
