@@ -19,7 +19,8 @@ const Headline = () => {
             <div className="grid justify-center items-center bg-redto text-white">
                 <h1 className="text-center capitalize text-3xl ">KEUNGGULAN PRODUK</h1>
             </div>
-                <div>
+
+                <div className="grid justify-start items-center text-justify">
                     <p>✅ Cukup 1 alat untuk segala kebutuhan</p>
                     <p>✅ Stabil dan tidak bising</p>
                     <p>✅ Gak perlu ganti-ganti baterai, tinggal di charge gak ribet</p>
