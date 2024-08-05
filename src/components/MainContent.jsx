@@ -13,6 +13,9 @@ const MainContent = () => {
             <Headline/>
             <CountdownTimer hours={3} minutes={0} seconds={0}/>
             <br/>
+            <div className='m-4'>
+                <img src='/images/2.webp' alt='cod'/>
+            </div>
             <div className='flex justify-center items-center gap-4 text-5xl text-redto animate-bounce'>
                 <FontAwesomeIcon icon={ faArrowDown}/>
                 <FontAwesomeIcon icon={ faArrowDown}/>

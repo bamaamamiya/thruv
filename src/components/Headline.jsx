@@ -1,4 +1,6 @@
 import React from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSquareCheck } from '@fortawesome/free-solid-svg-icons'
 
 const Headline = () => {
     return (
@@ -22,11 +24,11 @@ const Headline = () => {
 
             <div className="flex justify-center items-center">
                 <ul className="grid justify-start items-center text-justify">
-                    <li>Cukup 1 alat untuk segala kebutuhan</li>
-                    <li>Stabil dan tidak bising</li>
-                    <li>Gak perlu ganti-ganti baterai, tinggal di charge gak ribet</li>
-                    <li>Mudah dibersihan, sehingga mencukur tetap higenis tanpa khawatir iritasi</li>
-                    <li>Awet, kuat dan anti karat</li>
+                    <li><FontAwesomeIcon icon={faSquareCheck} /> Cukup 1 alat untuk segala kebutuhan</li>
+                    <li><FontAwesomeIcon icon={faSquareCheck} /> Stabil dan tidak bising</li>
+                    <li><FontAwesomeIcon icon={faSquareCheck} /> Gak perlu ganti-ganti baterai, tinggal di charge gak ribet</li>
+                    <li><FontAwesomeIcon icon={faSquareCheck} /> Mudah dibersihan, sehingga mencukur tetap higenis tanpa khawatir iritasi</li>
+                    <li><FontAwesomeIcon icon={faSquareCheck} /> Awet, kuat dan anti karat</li>
                 </ul>
             </div>
 
@@ -57,7 +59,7 @@ const Headline = () => {
             <div className="space-y-2">
                 <h1 className="text-center text-3xl font-bold">Berapa Harganya ?</h1>
 
-                <p className="text-redto  text-center text-2xl font-extrabold">PROMO KHUSUS 50 PEMBELI!! DAN UNTUK KAMU YANG TRANSAKSI SEKARANG.</p>
+                <p className="text-redto  text-center text-2xl font-extrabold">PROMO KHUSUS 10 PEMBELI!! DAN UNTUK KAMU YANG TRANSAKSI SEKARANG.</p>
 
                 <p className="text-gray-700 text-4xl font-extrabold line-through text-center">Rp. 320.191</p>
 
@@ -65,7 +67,7 @@ const Headline = () => {
                 <p className="text-4xl font-extrabold line-through text-center">Rp. 220.191</p>
 
                 <p className="text-center font-bold text-xl text-redto">Diskon Cuma Hari ini !</p>
-                <p className="text-4xl font-extrabold text-redto text-center">Rp. 95 RB</p>
+                <p className="text-4xl font-extrabold text-redto text-center">Rp. 99 RB</p>
             </div>
 
             <div>
