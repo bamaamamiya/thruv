@@ -6,6 +6,11 @@ const Footer = () => {
             <p>Copyright © 2024
             <span> Thruv™ All Right ® Reserved.</span>
             </p>
+
+
+
+
+            
         </div>
     )
 }
