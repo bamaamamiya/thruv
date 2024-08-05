@@ -27,7 +27,7 @@ const Headline = () => {
                 </div>
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-2 grid justify-center">
                 <img src="https://cdn.scalev.id/Image/1e285de2cdf843b89afb0868fa4fb15f.webp"/>
                 <img src="https://cdn.scalev.id/Image/8d80530908004f8bbcccb44c2fcb80ed.webp"/>
             </div>
