@@ -9,7 +9,7 @@ const Headline = () => {
                 <span className="text-redto"> GRATIS E-BOOK</span> khusus hari ini saja! </h2>
             </div>
             <div className="flex justify-center items-center">
-                <img src="/images/header.webp" />
+                <img src="/images/header.webp" alt="produk" />
             </div>
 
             <div className="text-center">
@@ -28,8 +28,8 @@ const Headline = () => {
                 </div>
 
             <div className="space-y-2 grid justify-center">
-                <img src="/images/spek.webp"/>
-                <img src="/images/spek2.webp"/>
+                <img src="/images/spek.webp" alt="produk"/>
+                <img src="/images/spek2.webp" alt="produk"/>
             </div>
 
             <div>

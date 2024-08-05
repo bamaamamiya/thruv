@@ -21,8 +21,8 @@ const MainContent = () => {
             <Form />
 
             <div className='grid justify-center'>
-                <img src='/images/fotter.webp'/>
-                <img src='/images/fotter2.webp'/>
+                <img src='/images/fotter.webp' alt='footer'/>
+                <img src='/images/fotter2.webp' alt='footer'/>
             </div>
         </div>
     );
