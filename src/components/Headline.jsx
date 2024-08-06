@@ -11,7 +11,7 @@ const Headline = () => {
                     <span className="text-redto"> GRATIS Sikat Pembersih</span> khusus hari ini saja! </h2>
             </div>
             <div className="flex justify-center items-center">
-                <img src="/images/header.webp" alt="produk" className="h-auto w-[100%]"/>
+                <img src="/images/header.webp" alt="produk" className="h-auto w-[100%]" />
             </div>
 
             <div className="text-center">
@@ -22,19 +22,28 @@ const Headline = () => {
                 <h1 className="text-center capitalize text-3xl ">KEUNGGULAN PRODUK</h1>
             </div>
 
-            <div className="flex justify-center items-center">
-                <ul className="grid justify-start items-center text-justify">
-                    <li className="text-green-500"><FontAwesomeIcon icon={faSquareCheck} /> <span className="text-black">Cukup 1 alat untuk segala kebutuhan</span> </li>
-                    <li className="text-green-500"><FontAwesomeIcon icon={faSquareCheck} /> <span className="text-black">Stabil dan tidak bising</span> </li>
-                    <li className="text-green-500"><FontAwesomeIcon icon={faSquareCheck} /> <span className="text-black">Gak perlu ganti-ganti baterai, tinggal di charge gak ribet</span> </li>
-                    <li className="text-green-500"><FontAwesomeIcon icon={faSquareCheck} /> <span className="text-black">Mudah dibersihan, sehingga mencukur tetap higenis tanpa khawatir iritasi</span> </li>
-                    <li className="text-green-500"><FontAwesomeIcon icon={faSquareCheck} /> <span className="text-black">Awet, kuat dan anti karat</span> </li>
-                </ul>
+            <div className="grid justify-center items-center">
+                <div className="text-green-500 flex justify-start gap-2 items-center">
+                    <FontAwesomeIcon icon={faSquareCheck} />
+                    <p className="text-black">Cukup 1 alat untuk segala kebutuhan</p>
+                </div>
+                <div className="text-green-500 flex justify-start gap-2 items-center">
+                    <FontAwesomeIcon icon={faSquareCheck} />
+                    <p className="text-black">Stabil dan tidak bising</p> </div>
+                <div className="text-green-500 flex justify-start gap-2 items-center">
+                    <FontAwesomeIcon icon={faSquareCheck} />
+                    <p className="text-black">Gak perlu ganti-ganti baterai, tinggal di charge gak ribet</p> </div>
+                <div className="text-green-500 flex justify-start gap-2 items-center">
+                    <FontAwesomeIcon icon={faSquareCheck} />
+                    <p className="text-black">Mudah dibersihan, sehingga mencukur tetap higenis tanpa khawatir iritasi</p> </div>
+                <div className="text-green-500 flex justify-start gap-2 items-center">
+                    <FontAwesomeIcon icon={faSquareCheck} />
+                    <p className="text-black">Awet, kuat dan anti karat</p> </div>
             </div>
 
             <div className="space-y-2 grid justify-center">
-                <img src="/images/spek.webp" alt="produk" className="h-auto w-[100%]"/>
-                <img src="/images/spek2.webp" alt="produk" className="h-auto w-[100%]"/>
+                <img src="/images/spek.webp" alt="produk" className="h-auto w-[100%]" />
+                <img src="/images/spek2.webp" alt="produk" className="h-auto w-[100%]" />
             </div>
 
             <div>
@@ -70,7 +79,7 @@ const Headline = () => {
                 <p className="text-5xl font-extrabold text-redto text-center">Rp. 99 RB</p>
             </div>
 
-            
+
         </div>
     )
 }
