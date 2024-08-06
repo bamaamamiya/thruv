@@ -67,12 +67,10 @@ const Headline = () => {
                 <p className="text-4xl font-extrabold line-through text-center">Rp. 220.191</p>
 
                 <p className="text-center font-bold text-xl text-redto">Diskon Cuma Hari ini !</p>
-                <p className="text-4xl font-extrabold text-redto text-center">Rp. 99 RB</p>
+                <p className="text-5xl font-extrabold text-redto text-center">Rp. 99 RB</p>
             </div>
 
-            <div>
-                <p className="bg-redto font-extrabold text-white text-center">SILAKAN ISI FORM DI BAWAH INI</p>
-            </div>
+            
         </div>
     )
 }

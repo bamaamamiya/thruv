@@ -54,6 +54,9 @@ const Form = () => {
 
     return (
         <div>
+            <div>
+                <p className="bg-redto font-extrabold text-white text-center">SILAKAN ISI FORM DI BAWAH INI</p>
+            </div>
             <div className="ooef">
                 <form className="orderonline-embed-form" data-username="thruvshop" data-product-slug="alat-cukur-mini-shaver-elektrik-portable-cukuran-serbaguna-original" data-product-id="66b0fe53b507289d8708e672" id="oo-embed-form-alat-cukur-mini-shaver-elektrik-portable-cukuran-serbaguna-original-4702" data-origin="orderonline">
                     <div className="ooef-loader">

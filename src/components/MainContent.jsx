@@ -11,7 +11,11 @@ const MainContent = () => {
 
         <div>
             <Headline/>
-            <CountdownTimer hours={3} minutes={0} seconds={0}/>
+            <div>
+            <img src='/images/diskonspesial.webp' alt='promo'/>
+            <p className='text-3xl text-center font-extrabold'>Promo Diskon Spesial akan berakhir dalam : </p>
+            <CountdownTimer hours={0} minutes={9} seconds={0}/>
+            </div>
             <br/>
             <div className='m-4'>
                 <img src='/images/2.webp' alt='cod'/>

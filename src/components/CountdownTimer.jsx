@@ -38,8 +38,7 @@ const CountdownTimer = ({ hours = 0, minutes = 0, seconds = 0 }) => {
 
     return (
         <div>
-            <br/>
-            <h1 className='text-5xl text-center p-2 text-redto font-bold'>
+            <h1 className='text-5xl text-center text-redto font-bold p-2'>
                 {String(time.hours).padStart(2, '0')}:
                 {String(time.minutes).padStart(2, '0')}:
                 {String(time.seconds).padStart(2, '0')}
