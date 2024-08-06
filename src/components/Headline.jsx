@@ -24,11 +24,11 @@ const Headline = () => {
 
             <div className="flex justify-center items-center">
                 <ul className="grid justify-start items-center text-justify">
-                    <li><FontAwesomeIcon icon={faSquareCheck} /> Cukup 1 alat untuk segala kebutuhan</li>
-                    <li><FontAwesomeIcon icon={faSquareCheck} /> Stabil dan tidak bising</li>
-                    <li><FontAwesomeIcon icon={faSquareCheck} /> Gak perlu ganti-ganti baterai, tinggal di charge gak ribet</li>
-                    <li><FontAwesomeIcon icon={faSquareCheck} /> Mudah dibersihan, sehingga mencukur tetap higenis tanpa khawatir iritasi</li>
-                    <li><FontAwesomeIcon icon={faSquareCheck} /> Awet, kuat dan anti karat</li>
+                    <li className="text-green-500"><FontAwesomeIcon icon={faSquareCheck} /> <span className="text-black">Cukup 1 alat untuk segala kebutuhan</span> </li>
+                    <li className="text-green-500"><FontAwesomeIcon icon={faSquareCheck} /> <span className="text-black">Stabil dan tidak bising</span> </li>
+                    <li className="text-green-500"><FontAwesomeIcon icon={faSquareCheck} /> <span className="text-black">Gak perlu ganti-ganti baterai, tinggal di charge gak ribet</span> </li>
+                    <li className="text-green-500"><FontAwesomeIcon icon={faSquareCheck} /> <span className="text-black">Mudah dibersihan, sehingga mencukur tetap higenis tanpa khawatir iritasi</span> </li>
+                    <li className="text-green-500"><FontAwesomeIcon icon={faSquareCheck} /> <span className="text-black">Awet, kuat dan anti karat</span> </li>
                 </ul>
             </div>
 
