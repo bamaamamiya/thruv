@@ -11,7 +11,7 @@ const Headline = () => {
                     <span className="text-redto"> GRATIS Sikat Pembersih</span> khusus hari ini saja! </h2>
             </div>
             <div className="flex justify-center items-center">
-                <img src="/images/header.webp" alt="produk" className="h-auto w-25" />
+                <img src="/images/header.webp" alt="produk" width="640" height="360"/>
             </div>
 
             <div className="text-center">
@@ -22,17 +22,17 @@ const Headline = () => {
                 <h1 className="text-center capitalize text-3xl ">KEUNGGULAN PRODUK</h1>
             </div>
 
-            <div className="h-auto p-2">
-                    <p className="text-black">Cukup 1 alat untuk segala kebutuhan</p>
-                    <p className="text-black">Stabil dan tidak bising</p> 
-                    <p className="text-black">Gak perlu ganti-ganti baterai, tinggal di charge gak ribet</p> 
-                    <p className="text-black">Mudah dibersihan, sehingga mencukur tetap higenis tanpa khawatir iritasi</p> 
-                    <p className="text-black">Awet, kuat dan anti karat</p> 
+            <div className="h-auto p-2 ">
+                    <p>Cukup 1 alat untuk segala kebutuhan</p>
+                    <p>Stabil dan tidak bising</p> 
+                    <p>Gak perlu ganti-ganti baterai, tinggal di charge gak ribet</p> 
+                    <p>Mudah dibersihan, sehingga mencukur tetap higenis tanpa khawatir iritasi</p> 
+                    <p>Awet, kuat dan anti karat</p> 
             </div>
 
             <div className="space-y-2 grid justify-center">
-                <img src="/images/spek.webp" alt="produk" className="h-auto w-25" />
-                <img src="/images/spek2.webp" alt="produk" className="h-auto w-25" />
+                <img src="/images/spek.webp" alt="produk" width="640" height="360" />
+                <img src="/images/spek2.webp" alt="produk" width="640" height="360"/>
             </div>
 
             <div>
