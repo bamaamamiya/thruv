@@ -22,21 +22,21 @@ const Headline = () => {
                 <h1 className="text-center capitalize text-3xl ">KEUNGGULAN PRODUK</h1>
             </div>
 
-            <div className="grid justify-center items-center">
-                <div className="text-green-500 flex justify-start gap-2 items-center">
+            <div>
+                <div>
                     <FontAwesomeIcon icon={faSquareCheck} />
                     <p className="text-black">Cukup 1 alat untuk segala kebutuhan</p>
                 </div>
-                <div className="text-green-500 flex justify-start gap-2 items-center">
+                <div>
                     <FontAwesomeIcon icon={faSquareCheck} />
                     <p className="text-black">Stabil dan tidak bising</p> </div>
-                <div className="text-green-500 flex justify-start gap-2 items-center">
+                <div>
                     <FontAwesomeIcon icon={faSquareCheck} />
                     <p className="text-black">Gak perlu ganti-ganti baterai, tinggal di charge gak ribet</p> </div>
-                <div className="text-green-500 flex justify-start gap-2 items-center">
+                <div>
                     <FontAwesomeIcon icon={faSquareCheck} />
                     <p className="text-black">Mudah dibersihan, sehingga mencukur tetap higenis tanpa khawatir iritasi</p> </div>
-                <div className="text-green-500 flex justify-start gap-2 items-center">
+                <div>
                     <FontAwesomeIcon icon={faSquareCheck} />
                     <p className="text-black">Awet, kuat dan anti karat</p> </div>
             </div>
