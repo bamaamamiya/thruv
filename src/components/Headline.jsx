@@ -23,22 +23,11 @@ const Headline = () => {
             </div>
 
             <div>
-                <div>
-                    <FontAwesomeIcon icon={faSquareCheck} />
                     <p className="text-black">Cukup 1 alat untuk segala kebutuhan</p>
-                </div>
-                <div>
-                    <FontAwesomeIcon icon={faSquareCheck} />
-                    <p className="text-black">Stabil dan tidak bising</p> </div>
-                <div>
-                    <FontAwesomeIcon icon={faSquareCheck} />
-                    <p className="text-black">Gak perlu ganti-ganti baterai, tinggal di charge gak ribet</p> </div>
-                <div>
-                    <FontAwesomeIcon icon={faSquareCheck} />
-                    <p className="text-black">Mudah dibersihan, sehingga mencukur tetap higenis tanpa khawatir iritasi</p> </div>
-                <div>
-                    <FontAwesomeIcon icon={faSquareCheck} />
-                    <p className="text-black">Awet, kuat dan anti karat</p> </div>
+                    <p className="text-black">Stabil dan tidak bising</p> 
+                    <p className="text-black">Gak perlu ganti-ganti baterai, tinggal di charge gak ribet</p> 
+                    <p className="text-black">Mudah dibersihan, sehingga mencukur tetap higenis tanpa khawatir iritasi</p> 
+                    <p className="text-black">Awet, kuat dan anti karat</p> 
             </div>
 
             <div className="space-y-2 grid justify-center">
