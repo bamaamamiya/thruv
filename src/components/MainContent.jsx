@@ -27,7 +27,7 @@ const MainContent = () => {
             </div>
             <Form />
 
-            <div className='space-y-2'>
+            <div className='space-y-2 grid justify-center'>
                 <img src='/images/testi (1).webp' alt='testi1' width="640" height="360"/>
                 <img src='/images/testi (2).webp' alt='testi2' width="640" height="360"/>
                 <img src='/images/testi (3).webp' alt='testi3' width="640" height="360"/>
