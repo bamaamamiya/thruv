@@ -16,7 +16,7 @@ const MainContent = () => {
             <div className='m-4'>
                 <img src='/images/2.webp' alt='cod'/>
             </div>
-            <div className='flex justify-center items-center gap-4 text-5xl text-redto animate-bounce'>
+            <div className='flex justify-center items-center gap-4 text-5xl text-redto animate-bounce space-x-6'>
                 <FontAwesomeIcon icon={ faArrowDown}/>
                 <FontAwesomeIcon icon={ faArrowDown}/>
                 <FontAwesomeIcon icon={ faArrowDown}/>

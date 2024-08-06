@@ -8,7 +8,7 @@ const Headline = () => {
             <div className="text-center">
                 <h1 className="uppercase text-redto text-4xl font-extrabold text-center"> alat cukur elektrik anti luka & iritasi  </h1>
                 <h2 className="capitalize text-xl font-bold">diskon 50% + diskon ongkir +
-                    <span className="text-redto"> GRATIS E-BOOK</span> khusus hari ini saja! </h2>
+                    <span className="text-redto"> GRATIS Sikat Pembersih</span> khusus hari ini saja! </h2>
             </div>
             <div className="flex justify-center items-center">
                 <img src="/images/header.webp" alt="produk" />
