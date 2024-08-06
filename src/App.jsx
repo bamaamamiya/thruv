@@ -3,7 +3,7 @@ import MainContent from './components/MainContent';
 import './index.css'
 function App() {
     return (
-        <div className='m-2 h-screen'>
+        <div className='m-2 '>
           <MainContent/>
         </div>
     );
