@@ -22,7 +22,7 @@ const Headline = () => {
                 <h1 className="text-center capitalize text-3xl ">KEUNGGULAN PRODUK</h1>
             </div>
 
-            <div>
+            <div className="h-auto p-2">
                     <p className="text-black">Cukup 1 alat untuk segala kebutuhan</p>
                     <p className="text-black">Stabil dan tidak bising</p> 
                     <p className="text-black">Gak perlu ganti-ganti baterai, tinggal di charge gak ribet</p> 
