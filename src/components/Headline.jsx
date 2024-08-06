@@ -11,7 +11,7 @@ const Headline = () => {
                     <span className="text-redto"> GRATIS Sikat Pembersih</span> khusus hari ini saja! </h2>
             </div>
             <div className="flex justify-center items-center">
-                <img src="/images/header.webp" alt="produk" className="h-auto w-96"/>
+                <img src="/images/header.webp" alt="produk" className="h-auto w-[100%]"/>
             </div>
 
             <div className="text-center">
@@ -33,8 +33,8 @@ const Headline = () => {
             </div>
 
             <div className="space-y-2 grid justify-center">
-                <img src="/images/spek.webp" alt="produk" className="h-auto w-96"/>
-                <img src="/images/spek2.webp" alt="produk" className="h-auto w-96"/>
+                <img src="/images/spek.webp" alt="produk" className="h-auto w-[100%]"/>
+                <img src="/images/spek2.webp" alt="produk" className="h-auto w-[100%]"/>
             </div>
 
             <div>
