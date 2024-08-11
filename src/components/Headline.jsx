@@ -11,7 +11,7 @@ const Headline = () => {
                     <span className="text-redto"> GRATIS Sikat Pembersih</span> khusus hari ini saja! </h2>
             </div>
             <div className="flex justify-center items-center">
-                <img src="/images/header.webp" alt="produk" width="640" height="360"/>
+                <img src="/images/header.webp" alt="produk" width="640" height="360" fetchpriority="high"/>
             </div>
 
             <div className="text-center">
