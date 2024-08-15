@@ -53,7 +53,7 @@ const Form = () => {
     }
 
     return (
-        <div>
+        <div id="form">
             <div>
                 <p className="bg-redto text-3xl text-white text-center p-2">SILAKAN ISI FORM DI BAWAH INI</p>
             </div>

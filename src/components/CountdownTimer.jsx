@@ -36,13 +36,22 @@ const CountdownTimer = ({ hours = 0, minutes = 0, seconds = 0 }) => {
         return () => clearInterval(timerId);
     }, [time]);
 
+    // Check if the countdown is over
+    const isTimeUp = time.hours === 0 && time.minutes === 0 && time.seconds === 0;
+
     return (
         <div>
-            <h1 className='text-5xl text-center text-redto font-bold p-2'>
-                {String(time.hours).padStart(2, '0')}:
-                {String(time.minutes).padStart(2, '0')}:
-                {String(time.seconds).padStart(2, '0')}
-            </h1>
+            {isTimeUp ? (
+                <h1 className='text-5xl text-center text-black font-bold p-2'>
+                    Promo Berakhir
+                </h1>
+            ) : (
+                <h1 className='text-5xl text-center text-redto font-bold p-2'>
+                    {String(time.hours).padStart(2, '0')}:
+                    {String(time.minutes).padStart(2, '0')}:
+                    {String(time.seconds).padStart(2, '0')}
+                </h1>
+            )}
         </div>
     );
 };

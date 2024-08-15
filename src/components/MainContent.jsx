@@ -5,11 +5,12 @@ import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
 import Form from './Form';
 import Headline from './Headline';
 import CountdownTimer from './CountdownTimer';
+import Sticky from './Sticky';
 
 const MainContent = () => {
     return (
 
-        <div>
+        <div className='m-4 space-y-2'>
             <Headline />
             <div className='grid justify-center items-center'>
                 <img src='/images/diskonspesial.webp' alt='promo' width="640" height="360" />
@@ -18,6 +19,7 @@ const MainContent = () => {
                 <br />
                 <img src='/images/2.webp' alt='cod' width="640" height="360" />
             </div>
+
 
             <div>
                 <div className='text-center space-x-6 text-redto text-5xl animate-bounce'>
@@ -38,6 +40,9 @@ const MainContent = () => {
                 <img src='/images/fotter.webp' alt='footer' width="640" height="360" />
                 <img src='/images/fotter2.webp' alt='footer' width="640" height="360" />
             </div>
+
+            <Sticky/>
+    
         </div>
     );
 };

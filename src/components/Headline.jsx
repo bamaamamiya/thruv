@@ -1,6 +1,5 @@
 import React from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSquareCheck } from '@fortawesome/free-solid-svg-icons'
+import Garansi from './Garansi';
 
 const Headline = () => {
     return (
@@ -18,6 +17,8 @@ const Headline = () => {
                 <p>Kepala pemotong baja presisi terbuat dari bahan ABS plus proses pelapisan listrik yang aman dan tajam, tidak mudah panas, memastikan efisiensi dan daya tahan</p>
             </div>
 
+            <Garansi/>
+            
             <div className="grid justify-center items-center bg-redto text-white">
                 <h1 className="text-center capitalize text-3xl ">KEUNGGULAN PRODUK</h1>
             </div>
