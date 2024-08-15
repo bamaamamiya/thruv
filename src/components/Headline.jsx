@@ -18,7 +18,7 @@ const Headline = () => {
             </div>
 
             <Garansi/>
-            
+
             <div className="grid justify-center items-center bg-redto text-white">
                 <h1 className="text-center capitalize text-3xl ">KEUNGGULAN PRODUK</h1>
             </div>
@@ -37,8 +37,8 @@ const Headline = () => {
             </div>
 
             <div>
-                <h1 className="text-center capitalize text-3xl bg-redto text-white">SPESIFIKASI PRODUK</h1>
-                <div className="list-disc">
+                <h1 className="text-center text-3xl bg-redto text-white">SPESIFIKASI PRODUK</h1>
+                <div>
                     <p>Warna : Dikirim acak sesuai stock</p>
                     <p>Ukuran : 40mm x 86mm</p>
                     <p>Power : 3W</p>
@@ -55,7 +55,7 @@ const Headline = () => {
 
             <br />
 
-            <div className="space-y-2">
+            <div>
                 <h1 className="text-center text-3xl font-bold">Berapa Harganya ?</h1>
 
                 <p className="text-redto  text-center text-2xl font-extrabold">PROMO KHUSUS 10 PEMBELI!! DAN UNTUK KAMU YANG TRANSAKSI SEKARANG.</p>
