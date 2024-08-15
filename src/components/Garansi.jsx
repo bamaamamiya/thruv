@@ -8,7 +8,7 @@ const Garansi = () => {
             <div className="bg-yellto">
                 <div className="flex justify-center items-center">
                     <img
-                        src="https://brdsg.com/img/300/bq7l6jnnbq9dv94oih_1/heOFIoEAC2udCvyheObpFNHgZHh41KT4e6FRpjdYj5EQ.png"
+                        src="images/garansi.webp"
                         alt="garansi"
                         className="w-32 h-32"
                         />
