@@ -2,6 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
 
+import { Link } from 'react-router-dom';
 import Form from './Form';
 import Headline from './Headline';
 import CountdownTimer from './set/CountdownTimer';
@@ -11,6 +12,9 @@ const MainContent = () => {
     return (
 
         <div className='m-4 space-y-2'>
+            <a>
+        <Link to='/pel'>PEL</Link>
+            </a>
             <Headline />
             <div className='grid justify-center items-center'>
                 <img src='/images/diskonspesial.webp' alt='promo' width="640" height="360" />
