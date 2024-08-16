@@ -10,7 +10,7 @@ const Pel = () => {
     return (
         <div className="m-2">
             <div className="flex justify-center items-center">
-                <img src="images/pel/headline2.webp" alt="haedline" />
+                <img src="images/pel/headline2.webp" alt="haedline" width="304" height="457" />
             </div>
 
             <div className="grid justify-center items-center text-center">
@@ -22,17 +22,17 @@ const Pel = () => {
 
             <div >
                 <div className="grid justify-center items-center">
-                    <img src="images/pel/tangansakit.webp" alt="tanganpain" />
+                    <img src="images/pel/tangansakit.webp" alt="tanganpain" width="304" height="457" />
                     <p className="uppercase text-center font-bold text-3xl">tangan pegal & sakit karena memeras kain pel ? </p>
                 </div>
                 <div className="grid justify-center items-center text-center">
                     <br />
                     <p className="uppercase text-center font-bold text-3xl">KALAU IYA, ANDA TIDAK PERLU KHAWATIR LAGI!</p>
-                    <img src="images/pel/peraspel.webp" alt="peraspel" />
+                    <img src="images/pel/peraspel.webp" alt="peraspel" width="304" height="457" />
                     <p>Karena dengan "Pel Anti Pegal", Anda tidak perlu lagi capek & pegal memeras kain pel di hidup Anda lagi.</p>
                 </div>
                 <div className="flex justify-center items-center">
-                    <img src="images/pel/peras.webp" alt="peras" />
+                    <img src="images/pel/peras.webp" alt="peras" width="304" height="457" />
                 </div>
 
                 <div className="text-xl space-y-2">
@@ -58,23 +58,23 @@ const Pel = () => {
                 <br />
                 <br />
                 <div className="grid justify-center items-center space-y-2">
-                    <img src="images/pel/gambar1.webp" />
-                    <img src="images/pel/gambar2.webp" />
+                    <img src="images/pel/gambar1.webp" alt="product1" width="304" height="457" />
+                    <img src="images/pel/gambar2.webp" alt="product2" width="304" height="457" />
                 </div>
 
 
                 <div className="space-y-2">
                     <div className="grid justify-center items-center m-2">
                         <h1 className="font-bold text-center text-4xl">TESTIMONI</h1>
-                        <br/>
-                        <br/>
-                        <img src="images/pel/1.webp" />
-                        <img src="images/pel/2.webp" />
-                        <img src="images/pel/3.webp" />
-                        <br/>
-                        <br/>
-                        <img src="images/pel/promo1.webp" />
-                        <img src="images/pel/promo.webp" />
+                        <br />
+                        <br />
+                        <img src="images/pel/1.webp" alt="testimoni" width="304" height="457" />
+                        <img src="images/pel/2.webp" alt="testimoni" width="304" height="457" />
+                        <img src="images/pel/3.webp" alt="testimoni" width="304" height="457" />
+                        <br />
+                        <br />
+                        <img src="images/pel/promo1.webp" alt="promo" width="304" height="457" />
+                        <img src="images/pel/promo.webp" alt="promo" width="304" height="457" />
                     </div>
                     <div className="p-4 bg-yellto text-center">
                         <p className="font-bold">Promo Akan Berakhir Dalam : </p>
@@ -91,8 +91,8 @@ const Pel = () => {
                 </div>
 
                 <div className="grid justify-center items-center ">
-                    <img src="images/fotter2.webp" />
-                    <img src="images/fotter.webp" />
+                    <img src="images/fotter2.webp" alt="footer" width="304" height="457" />
+                    <img src="images/fotter.webp" alt="footer" width="304" height="457" />
                 </div>
             </div>
 
