@@ -63,7 +63,7 @@ const Pel = () => {
                 </div>
 
 
-                <div className="space-y-2">
+                <div>
                     <div className="grid justify-center items-center m-2">
                         <h1 className="font-bold text-center text-4xl">TESTIMONI</h1>
                         <br />
@@ -90,7 +90,7 @@ const Pel = () => {
                     <Form />
                 </div>
 
-                <div className="grid justify-center items-center ">
+                <div>
                     <img src="images/fotter2.webp" alt="footer" width="640" height="360" />
                     <img src="images/fotter.webp" alt="footer" width="640" height="360" />
                 </div>
