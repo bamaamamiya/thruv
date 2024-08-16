@@ -10,7 +10,7 @@ const Garansi = () => {
                     <img
                         src="images/garansi.webp"
                         alt="garansi"
-                        className="w-32 h-32"
+                        className="w-[150px]"
                         />
                 </div>
 
