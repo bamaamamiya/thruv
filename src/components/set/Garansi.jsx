@@ -11,6 +11,7 @@ const Garansi = () => {
                         src="images/garansi.webp"
                         alt="garansi"
                         className="w-[150px]"
+                        width="640" height="360"
                         />
                 </div>
 
