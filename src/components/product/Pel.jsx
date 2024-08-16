@@ -10,17 +10,17 @@ const Pel = () => {
     return (
         <div className="m-2">
             <div className="flex justify-center items-center">
-                <img src="images/pel/headline2.jpg" alt="haedline" />
+                <img src="images/pel/headline2.webp" alt="haedline" />
             </div>
 
             <div className="grid justify-center items-center text-center">
-                <h1 className="font-semibold">Diskon <span className="text-redto">50%</span> Khusus Untuk Hari Ini</h1>
+                <h1 className="font-semibold">Diskon <span className="text-redto font-bold">50%</span> Khusus Untuk Hari Ini</h1>
                 <p className="font-semibold">Promo Akan Berakhir Dalam : </p>
                 <CountdownTimer hours={0} minutes={9} seconds={0} />
             </div>
             <Garansi />
 
-            <div className="space-y-4">
+            <div >
                 <div className="grid justify-center items-center">
                     <img src="images/pel/tangansakit.webp" alt="tanganpain" />
                     <p className="uppercase text-center font-bold text-3xl">tangan pegal & sakit karena memeras kain pel ? </p>
@@ -32,7 +32,7 @@ const Pel = () => {
                     <p>Karena dengan "Pel Anti Pegal", Anda tidak perlu lagi capek & pegal memeras kain pel di hidup Anda lagi.</p>
                 </div>
                 <div className="flex justify-center items-center">
-                    <img src="images/pel/peras.jpeg" alt="peras" />
+                    <img src="images/pel/peras.webp" alt="peras" />
                 </div>
 
                 <div className="text-xl space-y-2">
@@ -58,8 +58,8 @@ const Pel = () => {
                 <br />
                 <br />
                 <div className="grid justify-center items-center space-y-2">
-                    <img src="images/pel/gambar1.jpeg" />
-                    <img src="images/pel/gambar2.jpeg" />
+                    <img src="images/pel/gambar1.webp" />
+                    <img src="images/pel/gambar2.webp" />
                 </div>
 
 
@@ -68,13 +68,13 @@ const Pel = () => {
                         <h1 className="font-bold text-center text-4xl">TESTIMONI</h1>
                         <br/>
                         <br/>
-                        <img src="images/pel/1.png" />
-                        <img src="images/pel/2.png" />
-                        <img src="images/pel/3.png" />
+                        <img src="images/pel/1.webp" />
+                        <img src="images/pel/2.webp" />
+                        <img src="images/pel/3.webp" />
                         <br/>
                         <br/>
-                        <img src="images/pel/promo1.jpg" />
-                        <img src="images/pel/promo.jpg" />
+                        <img src="images/pel/promo1.webp" />
+                        <img src="images/pel/promo.webp" />
                     </div>
                     <div className="p-4 bg-yellto text-center">
                         <p className="font-bold">Promo Akan Berakhir Dalam : </p>
