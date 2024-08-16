@@ -42,7 +42,7 @@ const CountdownTimer = ({ hours = 0, minutes = 0, seconds = 0 }) => {
     return (
         <div>
             {isTimeUp ? (
-                <h1 className='text-5xl text-center text-black font-bold p-2'>
+                <h1 className='text-3xl text-center text-black font-bold p-2'>
                     Promo Berakhir
                 </h1>
             ) : (

@@ -4,8 +4,8 @@ import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
 
 import Form from './Form';
 import Headline from './Headline';
-import CountdownTimer from './CountdownTimer';
-import Sticky from './Sticky';
+import CountdownTimer from './set/CountdownTimer';
+import Sticky from './set/Sticky';
 
 const MainContent = () => {
     return (

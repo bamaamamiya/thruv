@@ -1,5 +1,5 @@
 import React from "react";
-import Garansi from './Garansi';
+import Garansi from "./set/Garansi";
 
 const Headline = () => {
     return (
