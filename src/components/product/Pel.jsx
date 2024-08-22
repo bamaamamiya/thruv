@@ -12,16 +12,23 @@ const Pel = () => {
             <div className="flex justify-center items-center">
                 <img src="images/pel/headline2.webp" alt="haedline" width="640" height="360" />
             </div>
+                <br/>
+                <br/>
+                <br/>
 
             <div className="grid justify-center items-center text-center">
                 <h1 className="font-semibold">Diskon <span className="text-redto font-bold">50%</span> Khusus Untuk Hari Ini</h1>
                 <p className="font-semibold">Promo Akan Berakhir Dalam : </p>
+                <br/>
                 <CountdownTimer hours={0} minutes={9} seconds={0} />
+                <br/>
             </div>
             <Garansi />
+                <br/>
 
             <div >
                 <div className="grid justify-center items-center">
+                <br/>
                     <img src="images/pel/tangansakit.webp" alt="tanganpain" width="640" height="360" />
                     <p className="uppercase text-center font-bold text-3xl">tangan pegal & sakit karena memeras kain pel ? </p>
                 </div>
@@ -73,15 +80,15 @@ const Pel = () => {
                         <img src="images/pel/3.webp" alt="testimoni" width="640" height="360" />
                         <br />
                         <br />
-                        <img src="images/pel/promo1.webp" alt="promo" width="640" height="360" />
-                        <img src="images/pel/promo.webp" alt="promo" width="640" height="360" />
+                        <img src="images/pel/diskon.webp" alt="promo" width="640" height="360" />
+                        <img src="images/pel/price.webp" alt="promo" width="640" height="360" />
                     </div>
                     <div className="p-4 bg-yellto text-center">
                         <p className="font-bold">Promo Akan Berakhir Dalam : </p>
                         <CountdownTimer hours={0} minutes={9} seconds={0} />
                     </div>
 
-                    <h1 className="text-center font-bold p-2 text-2xl">Cek Ongkir dan Potongan Harga disini</h1>
+                    <h1 className="text-center font-bold p-2 text-2xl">Isi Formulir untuk melakukan pemesanan</h1>
                     <div className='text-center space-x-6 text-redto text-5xl animate-bounce'>
                         <FontAwesomeIcon icon={faArrowDown} />
                         <FontAwesomeIcon icon={faArrowDown} />
