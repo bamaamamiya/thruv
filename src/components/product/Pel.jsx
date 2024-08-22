@@ -4,31 +4,60 @@ import Garansi from "../set/Garansi";
 import Form from './Form'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
+import { faArrowDown, faStar, faStarHalfStroke } from '@fortawesome/free-solid-svg-icons'
 
 const Pel = () => {
     return (
         <div className="m-2">
-            <div className="flex justify-center items-center">
-                <img src="images/pel/headline2.webp" alt="haedline" width="640" height="360" />
+            <div className="grid justify-center items-center">
+                <img src="images/pel/headline3.png" alt="haedline" width="640" height="360" />
+                <div className="grid justify-center items-center text-center text-5xl text-redto font-bold">
+                    <h1>PEL KARET</h1>
+                    <p>ANTI PERAS</p>
+                    <br />
+
+                    <div className="text-3xl">
+                        <p>Solusi Mengepel</p>
+                        <p>tanpa pegal untuk bunda</p>
+                    </div>
+                    <br />
+
+                    <div className="grid text-yellto text-2xl text-center">
+                        <div className="flex justify-center items-center">
+
+                            <FontAwesomeIcon icon={faStar} />
+                            <FontAwesomeIcon icon={faStar} />
+                            <FontAwesomeIcon icon={faStar} />
+                            <FontAwesomeIcon icon={faStar} />
+                            <FontAwesomeIcon icon={faStarHalfStroke} />
+
+                        </div>
+                        <br />
+                        <div className="text-black">
+                            <p>4.8 Rating</p>
+                            <p>Terjual 10.000 +</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-                <br/>
-                <br/>
-                <br/>
+            <br />
+            <br />
+            <br />
 
             <div className="grid justify-center items-center text-center">
-                <h1 className="font-semibold">Diskon <span className="text-redto font-bold">50%</span> Khusus Untuk Hari Ini</h1>
-                <p className="font-semibold">Promo Akan Berakhir Dalam : </p>
+                <h1 className="font-bold text-2xl m-2">Diskon <span className="text-redto font-bold">50%</span> Khusus Untuk Hari Ini</h1>
                 <br/>
+                <p className="font-bold text-2xl">Promo Akan Berakhir Dalam : </p>
+                <br />
                 <CountdownTimer hours={0} minutes={9} seconds={0} />
-                <br/>
+                <br />
             </div>
             <Garansi />
-                <br/>
+            <br />
 
             <div >
                 <div className="grid justify-center items-center">
-                <br/>
+                    <br />
                     <img src="images/pel/tangansakit.webp" alt="tanganpain" width="640" height="360" />
                     <p className="uppercase text-center font-bold text-3xl">tangan pegal & sakit karena memeras kain pel ? </p>
                 </div>
