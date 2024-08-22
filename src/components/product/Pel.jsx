@@ -10,7 +10,7 @@ const Pel = () => {
     return (
         <div className="m-2">
             <div className="grid justify-center items-center">
-                <img src="images/pel/headline3.png" alt="haedline" width="640" height="360" />
+                <img src="images/pel/headline3.webp" alt="haedline" width="640" height="360" />
                 <div className="grid justify-center items-center text-center text-5xl text-redto font-bold">
                     <h1>PEL KARET</h1>
                     <p>ANTI PERAS</p>
