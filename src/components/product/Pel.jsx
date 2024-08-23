@@ -93,9 +93,14 @@ const Pel = () => {
                 <br />
                 <br />
                 <br />
-                <div className="grid justify-center items-center space-y-2">
+                <div className="grid justify-center items-center space-y-4">
                     <img src="images/pel/gambar1.webp" alt="product1" width="640" height="360" />
-                    <img src="images/pel/gambar2.webp" alt="product2" width="640" height="360" />
+                    <img src="images/pel/product1.webp" alt="product2" width="640" height="360" />
+                    <img src="images/pel/product2.webp" alt="product2" width="640" height="360" />
+                    <img src="images/pel/product3.webp" alt="product2" width="640" height="360" />
+                    <img src="images/pel/product4.webp" alt="product2" width="640" height="360" />
+                    <img src="images/pel/serap.webp" alt="product2" width="640" height="360" />
+                    <img src="images/pel/q.webp" alt="product2" width="640" height="360" />
                 </div>
 
 
