@@ -9,6 +9,7 @@ export default {
       colors: {
         redto: '#ff0808',
         greento:'#00c764',
+        greentoo:'#3cb878',
         grayto:'#f4f4f4',
         yellto:'#ffee58'
       }
