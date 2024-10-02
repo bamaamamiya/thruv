@@ -137,7 +137,7 @@ const Pel = () => {
                     <div className="p-4 bg-yellto text-center">
                         <p className="font-bold">Promo Akan Berakhir Dalam : </p>
                         <CountdownTimer hours={0} minutes={9} seconds={0} />
-                        
+
                     </div>
                     <br />
                     <br />
@@ -148,10 +148,19 @@ const Pel = () => {
                         <FontAwesomeIcon icon={faArrowDown} />
                         <FontAwesomeIcon icon={faArrowDown} />
                         <FontAwesomeIcon icon={faArrowDown} />
+
+                    </div>
+
+                    <div className="text-center flex justify-center items-center gap-2 bg-greentoo/20 p-2">
+                        <span class="relative flex h-3 w-3 items-center">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-greento opacity-95"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-greento"></span>
+                        </span>
+                        <p className="text-sm">  73 orang sekarang sedang ingin mengambil promo!</p>
                     </div>
                     <Form />
                 </div>
-                
+
                 <br />
                 <br />
                 <div className="grid justify-center items-center">
