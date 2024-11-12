@@ -156,6 +156,14 @@ const Flat = () => {
                     <h1 className="text-center font-bold p-2 text-2xl" id="formulir">Isi Formulir untuk melakukan pemesanan</h1>
                     <br />
                     <br />
+                    <div className="text-center flex justify-center items-center gap-2 bg-greentoo/20 p-2">
+                        <span class="relative flex h-3 w-3 items-center">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-greento opacity-95"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-greento"></span>
+                        </span>
+                        <p className="text-sm">  73 orang sekarang sedang ingin mengambil promo!</p>
+                    </div>
+                    <br />
                     <div className='text-center space-x-6 text-redto text-5xl animate-bounce' >
                         <FontAwesomeIcon icon={faArrowDown} />
                         <FontAwesomeIcon icon={faArrowDown} />
