@@ -12,9 +12,9 @@ const Flat = () => {
     return (
         <div className="m-2">
             <div className="grid justify-center items-center">
-                <img src="/images/pelflat/headline.webp" alt="haedline" width="640" height="360" />
+                <img src="/images/pelflatl/headline.webp" alt="haedline" width="640" height="360" />
                 <div className="grid justify-center items-center text-center text-5xl text-redto font-bold">
-                    <h1>PEL TARIK</h1>
+                    <h1>ULTRA PEL</h1>
                     <p>ANTI PERAS</p>
                     <br />
 
@@ -37,7 +37,7 @@ const Flat = () => {
                         <br />
                         <div className="text-black">
                             <p>4.7 Rating</p>
-                            <p>Terjual 4.400 +</p>
+                            <p>Terjual 10.000 +</p>
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@ const Flat = () => {
             <br />
 
             <div className="grid justify-center items-center text-center">
-                <h1 className="font-bold text-2xl m-2">Diskon <span className="text-redto font-bold">50%</span> Khusus Untuk Hari Ini + <span className="text-redto">Kain Pel Cadangan</span></h1>
+                <h1 className="font-bold text-2xl m-2">Diskon <span className="text-redto font-bold">50%</span> Khusus Untuk Hari Ini </h1>
                 <br />
                 <p className="font-bold text-2xl">Promo Akan Berakhir Dalam : </p>
                 <br />
@@ -61,7 +61,7 @@ const Flat = () => {
                 <div className="grid justify-center items-center">
                     <br />
                     <div className="flex justify-center items-center">
-                    <img src="images/tangansakit.jpg" alt="tanganpain" width="640" height="360" />
+                        <img src="images/tangansakit.jpg" alt="tanganpain" width="640" height="360" />
                     </div>
                     <br />
                     <br />
@@ -78,12 +78,12 @@ const Flat = () => {
                     </div>
                     <br />
                     <br />
-                    <p className="text-xl">Karena dengan "Pel Tarik Anti Pegal", Anda tidak perlu lagi capek & pegal memeras kain pel di hidup Anda lagi.</p>
+                    <p className="text-xl">Karena dengan "ULTRA Pel Anti Pegal", Anda tidak perlu lagi capek & pegal memeras kain pel di hidup Anda lagi.</p>
                     <br />
                     <br />
                 </div>
                 <div className="flex justify-center items-center">
-                    <img src="/images/pelflat/otomatis.webp" alt="peras" width="640" height="360" />
+                    <img src="/images/pelflatl/lengkap.webp" alt="peras" width="640" height="360" />
                 </div>
 
                 <div className="text-xl space-y-2">
@@ -92,9 +92,9 @@ const Flat = () => {
                         <br />
                         <br />
                         <br />
-                        <p className="font-bold text-center">Apa itu "Pel Tarik Anti Pegal " ?</p>
+                        <p className="font-bold text-center">Apa itu "ULTRA Pel Anti Pegal " ?</p>
                         <br />
-                        <p>"Pel Tarik Pegal" adalah pel yang bisa memeras kainnya sendiri.</p>
+                        <p>"ULTRA Pel" adalah pel yang bisa memeras kainnya sendiri.</p>
                         <p>Menyerap air sangat kuat dalam beberapa detik saja,yang membuat anda tidak perlu khawatir kalau ada yang basah</p>
                         <br />
                         <br />
@@ -102,14 +102,15 @@ const Flat = () => {
                     </div>
                     <br />
                     <br />
-                    <p className="font-bold text-center text-2xl m-2">Kenapa Anda Harus Punya "Pel Tarik anti Pegal" ini ?</p>
+                    <p className="font-bold text-center text-2xl m-2">Kenapa Anda Harus Punya "ULTRA Pel anti Pegal" ini ?</p>
                     <ul className="list-inside list-disc grid  justify-center items-center m-2">
                         <li>Tidak perlu pegal lagi memeras kain pel.</li>
                         <li>Kain pel bisa dicuci dan diganti</li>
                         <li>Gagang pel stainless steel (anti karat)</li>
                         <li>Alat pel yang bisa di tekuk 180 derajat</li>
-                        <li>Tinggi pel 119 cm</li>
-                        <li>Besar bidang kain 36 cm x 11 cm</li>
+                        <li>Ukuran pel 32x11x123 cm</li>
+                        <li>Size ember 19x16x35.5 cm</li>
+                        <li>Berat 2500 gram</li>
                     </ul>
                     <br />
                 </div>
@@ -117,12 +118,14 @@ const Flat = () => {
                 <br />
                 <br />
                 <div className="grid justify-center items-center space-y-4">
-                    <img src="/images/pelflat/produk4.webp" alt="product1" width="640" height="360" />
-                    <img src="/images/pelflat/produk1.webp" alt="product1" width="640" height="360" />
-                    <img src="/images/pelflat/produk5.webp" alt="product1" width="640" height="360" />
-                    <img src="/images/pelflat/produk2.webp" alt="product1" width="640" height="360" />
-                    <img src="/images/pelflat/produk3.webp" alt="product1" width="640" height="360" />
-                    <img src="/images/pelflat/produk6.webp" alt="product1" width="640" height="360" />
+                    <img src="/images/pelflatl/1.webp" alt="product1" width="640" height="360" />
+                    <img src="/images/pelflatl/2.webp" alt="product1" width="640" height="360" />
+                    <img src="/images/pelflatl/3.webp" alt="product1" width="640" height="360" />
+                    <img src="images/pelflatl/4.webp" alt="testimoni" width="640" height="360" />
+                    <img src="images/pelflatl/5.webp" alt="testimoni" width="640" height="360" />
+                    <img src="images/pelflatl/6.webp" alt="testimoni" width="640" height="360" />
+                    <img src="images/pelflatl/7.webp" alt="testimoni" width="640" height="360" />
+                    <img src="images/pelflatl/8.webp" alt="testimoni" width="640" height="360" />
                     <br />
                     <br />
                     <br />
@@ -134,14 +137,14 @@ const Flat = () => {
                         <h1 className="font-bold text-center text-4xl">TESTIMONI</h1>
                         <br />
                         <br />
-                        <img src="images/pelflat/1.webp" alt="testimoni" width="640" height="360" />
-                        <img src="images/pelflat/2.webp" alt="testimoni" width="640" height="360" />
-                        <img src="images/pelflat/3.webp" alt="testimoni" width="640" height="360" />
+                        <img src="images/pelflatl/1t.webp" alt="testimoni" width="640" height="360" />
+                        <img src="images/pelflatl/2t.webp" alt="testimoni" width="640" height="360" />
+                        <img src="images/pelflatl/3t.webp" alt="testimoni" width="640" height="360" />
                         <br />
                         <br />
                         <br />
                         <img src="images/pel/diskon.webp" alt="promo" width="640" height="360" />
-                        <img src="images/pel/99.webp" alt="promo" width="640" height="360" />
+                        <img src="images/pelflatl/ofer.webp" alt="promo" width="640" height="360" />
                     </div>
                     <div className="p-4 bg-yellto text-center">
                         <p className="font-bold">Promo Akan Berakhir Dalam : </p>
