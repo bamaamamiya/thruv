@@ -94,7 +94,7 @@ const Flat = () => {
                         <br />
                         <p className="font-bold text-center">Apa itu "Pel Tarik Anti Pegal " ?</p>
                         <br />
-                        <p>"Pel Tarik Pegal" adalah pel yang bisa memeras kainnya sendiri.</p>
+                        <p>"Pel Tarik Anti Pegal" adalah pel yang bisa memeras kainnya sendiri.</p>
                         <p>Menyerap air sangat kuat dalam beberapa detik saja,yang membuat anda tidak perlu khawatir kalau ada yang basah</p>
                         <br />
                         <br />

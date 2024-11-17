@@ -2,6 +2,7 @@ import React from "react";
 import '../../assets/form.css'
 
 const Form = () => {
+
     if (typeof xLogError != 'function') {
         var xLogError = function (error) {
             var req = new XMLHttpRequest();
@@ -20,7 +21,7 @@ const Form = () => {
                     t = d.createElement(e); t.async = !0; t.src = v; t.id = id;
                     s = d.getElementsByTagName(e)[0];
                     s.parentNode.insertBefore(t, s);
-                }(window, document, 'script', 'https://cdn.orderonline.id/js/embed-v2-slim.min.js?v=8.0.3', 'oo-embed-js');
+                }(window, document, 'script', 'https://cdn.orderonline.id/js/embed-v2-slim.min.js?v=8.0.4', 'oo-embed-js');
             };
         }
         if (typeof xEmbedInit != 'function') {
@@ -28,12 +29,12 @@ const Form = () => {
                 if (w.ooe) return;
                 n = w.ooe = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) };
                 if (!w._ooe) w._ooe = n;
-                n.push = n; n.loaded = !0; n.version = '8.0.3'; n.queue = [];
+                n.push = n; n.loaded = !0; n.version = '8.0.4'; n.queue = [];
             };
         }
         xEmbedInit(window);
         ooe('setup', 'redirect', 'https://thruvshop.orderonline.id');
-        ooe('init', '666cb298b1eb0751550d4892', '66db34cae9e96835230df12a', null, 'oo-embed-form-pel-tarik-2241', { "mode": "page", "action": "Klik untuk pemesanan", "title": "Form Pemesanan", "triggerPixel": false, "triggerGtm": false });
+        ooe('init', '666cb298b1eb0751550d4892', '66db34cae9e96835230df12a', '66db36825dd40557130e6824', 'oo-embed-form-pel-tarik-8780', { "mode": "page", "action": "Klik untuk pemesanan", "title": "Form Pemesanan", "triggerPixel": false, "triggerGtm": false });
         if (!window.jQuery) {
             !function (w, d, e, v, id, t, s) {
                 if (d.getElementById(id)) return;
@@ -50,22 +51,19 @@ const Form = () => {
         throw e;
     }
 
+
     return (
         <div id="form">
             <div class="ooef">
-                <form class="orderonline-embed-form" data-username="thruvshop" data-product-slug="pel-tarik" data-product-id="66db34cae9e96835230df12a" id="oo-embed-form-pel-tarik-2241" data-origin="orderonline">
-                    <div class="ooef-loader">
-                        <div aria-live="polite" role="status">
-                            <div>Loading...</div>
-                        </div>
-                    </div>
+                <form class="orderonline-embed-form" data-username="thruvshop" data-product-slug="pel-tarik" data-product-id="66db34cae9e96835230df12a" id="oo-embed-form-pel-tarik-8780" data-origin="orderonline">
+                    <div class="ooef-loader"><div aria-live="polite" role="status"><div>Loading...</div></div></div>
                 </form>
             </div>
-
-
         </div>
     )
 }
+
+
 
 
 
