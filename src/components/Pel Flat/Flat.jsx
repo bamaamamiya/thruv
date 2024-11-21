@@ -123,7 +123,7 @@ const Flat = () => {
                     <img src="/images/pelflat/produk2.webp" alt="product1" width="640" height="360" />
                     <img src="/images/pelflat/produk3.webp" alt="product1" width="640" height="360" />
                     <img src="/images/pelflat/produk6.webp" alt="product1" width="640" height="360" />
-                    <img src="/images/pelflat/bonus.webp" alt="product1" width="640" height="360" />
+                    {/* <img src="/images/pelflat/bonus.webp" alt="product1" width="640" height="360" /> */}
                     <br />
                     <br />
                     <br />
