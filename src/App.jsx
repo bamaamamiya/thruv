@@ -7,6 +7,7 @@ import Pel from './components/product/Pel'
 import './index.css'
 import Page from './components/Page';
 import Flat from './components/Pel Flat/Flat';
+import Flatb from './components/Pel Flat B/Flat';
 import Flatl from './components/Pel Flat L/Flat'
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path='/shaver' element={<MainContent />} />
         <Route path='/pel' element={<Pel />} />
         <Route path='/flat' element={<Flat />} />
+        <Route path='/flatb' element={<Flatb />} />
         <Route path='/flatl' element={<Flatl />} />
       </Routes>
     </BrowserRouter>
