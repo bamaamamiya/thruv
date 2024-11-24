@@ -2,7 +2,6 @@ import React from "react";
 import '../../assets/form.css'
 
 const Form = () => {
-
     if (typeof xLogError != 'function') {
         var xLogError = function (error) {
             var req = new XMLHttpRequest();
@@ -34,7 +33,7 @@ const Form = () => {
         }
         xEmbedInit(window);
         ooe('setup', 'redirect', 'https://thruvshop.orderonline.id');
-        ooe('init', '666cb298b1eb0751550d4892', '6743456596c3f9647d03171e', '674346625f357f779907487a', 'oo-embed-form-pel-tarik-kain-cadangan-8919', { "mode": "page", "action": "Klik untuk pemesanan", "title": "Form Pemesanan", "triggerPixel": false, "triggerGtm": false });
+        ooe('init', '666cb298b1eb0751550d4892', '6741a95aee95d9a1bc06c7fb', '6741a95aee95d9a1bc06c7fc', 'oo-embed-form-pel-tarik-2-1053', { "mode": "page", "action": "Klik untuk pemesanan", "title": "Form Pemesanan", "triggerPixel": false, "triggerGtm": false });
         if (!window.jQuery) {
             !function (w, d, e, v, id, t, s) {
                 if (d.getElementById(id)) return;
@@ -52,19 +51,20 @@ const Form = () => {
     }
 
 
+
+
     return (
         <div id="form">
+
             <div class="ooef">
-                <form class="orderonline-embed-form" data-username="thruvshop" data-product-slug="pel-tarik-kain-cadangan" data-product-id="6743456596c3f9647d03171e" id="oo-embed-form-pel-tarik-kain-cadangan-8919" data-origin="orderonline">
+                <form class="orderonline-embed-form" data-username="thruvshop" data-product-slug="pel-tarik-2" data-product-id="6741a95aee95d9a1bc06c7fb" id="oo-embed-form-pel-tarik-2-1053" data-origin="orderonline">
                     <div class="ooef-loader"><div aria-live="polite" role="status"><div>Loading...</div></div></div>
                 </form>
             </div>
+
         </div>
     )
 }
-
-
-
 
 
 

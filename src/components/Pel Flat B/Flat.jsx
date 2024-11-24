@@ -61,7 +61,7 @@ const Flat = () => {
                 <div className="grid justify-center items-center">
                     <br />
                     <div className="flex justify-center items-center">
-                    <img src="images/tangansakit.jpg" alt="tanganpain" width="640" height="360" />
+                        <img src="images/tangansakit.jpg" alt="tanganpain" width="640" height="360" />
                     </div>
                     <br />
                     <br />
@@ -123,7 +123,6 @@ const Flat = () => {
                     <img src="/images/pelflat/produk2.webp" alt="product1" width="640" height="360" />
                     <img src="/images/pelflat/produk3.webp" alt="product1" width="640" height="360" />
                     <img src="/images/pelflat/produk6.webp" alt="product1" width="640" height="360" />
-                    {/* <img src="/images/pelflat/bonus.webp" alt="product1" width="640" height="360" /> */}
                     <br />
                     <br />
                     <br />
@@ -143,6 +142,8 @@ const Flat = () => {
                         <br />
                         <img src="images/pel/diskon.webp" alt="promo" width="640" height="360" />
                         <img src="images/149.webp" alt="promo" width="640" height="360" />
+                        <img src="/images/refil.webp" alt="product1" width="640" height="360" />
+
                     </div>
                     <div className="p-4 bg-yellto text-center">
                         <p className="font-bold">Promo Akan Berakhir Dalam : </p>
