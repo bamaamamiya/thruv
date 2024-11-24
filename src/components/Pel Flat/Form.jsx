@@ -3,6 +3,7 @@ import '../../assets/form.css'
 
 const Form = () => {
 
+
     if (typeof xLogError != 'function') {
         var xLogError = function (error) {
             var req = new XMLHttpRequest();
@@ -34,7 +35,7 @@ const Form = () => {
         }
         xEmbedInit(window);
         ooe('setup', 'redirect', 'https://thruvshop.orderonline.id');
-        ooe('init', '666cb298b1eb0751550d4892', '66db34cae9e96835230df12a', '66db36825dd40557130e6824', 'oo-embed-form-pel-tarik-8780', { "mode": "page", "action": "Klik untuk pemesanan", "title": "Form Pemesanan", "triggerPixel": false, "triggerGtm": false });
+        ooe('init', '666cb298b1eb0751550d4892', '6743476a882c790ad50d89f5', '6743476a882c790ad50d89f6', 'oo-embed-form-pel-tarik-3-2368', { "mode": "page", "action": "Klik untuk pemesanan", "title": "Form Pemesanan", "triggerPixel": false, "triggerGtm": false });
         if (!window.jQuery) {
             !function (w, d, e, v, id, t, s) {
                 if (d.getElementById(id)) return;
@@ -52,16 +53,18 @@ const Form = () => {
     }
 
 
+
     return (
         <div id="form">
             <div class="ooef">
-                <form class="orderonline-embed-form" data-username="thruvshop" data-product-slug="pel-tarik" data-product-id="66db34cae9e96835230df12a" id="oo-embed-form-pel-tarik-8780" data-origin="orderonline">
+                <form class="orderonline-embed-form" data-username="thruvshop" data-product-slug="pel-tarik-3" data-product-id="6743476a882c790ad50d89f5" id="oo-embed-form-pel-tarik-3-2368" data-origin="orderonline">
                     <div class="ooef-loader"><div aria-live="polite" role="status"><div>Loading...</div></div></div>
                 </form>
             </div>
         </div>
     )
 }
+
 
 
 

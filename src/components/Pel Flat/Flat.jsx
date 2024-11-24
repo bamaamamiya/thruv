@@ -47,7 +47,7 @@ const Flat = () => {
             <br />
 
             <div className="grid justify-center items-center text-center">
-                <h1 className="font-bold text-2xl m-2">Diskon <span className="text-redto font-bold">50%</span> Khusus Untuk Hari Ini + <span className="text-redto">Kain Pel Cadangan</span></h1>
+                <h1 className="font-bold text-2xl m-2">Diskon <span className="text-redto font-bold">50%</span> Khusus Untuk Hari Ini</h1>
                 <br />
                 <p className="font-bold text-2xl">Promo Akan Berakhir Dalam : </p>
                 <br />
