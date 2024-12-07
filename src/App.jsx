@@ -8,7 +8,6 @@ import Page from "./components/Page";
 import Pel from "./components/Pel/Pel";
 import Flat from "./components/Pel Flat/Flat";
 import Flatl from "./components/Pel Flat L/Flat";
-import Mini from "./components/Mini/Mini";
 import MiniMop from "./components/Mini Mop/Mini";
 
 function App() {
@@ -20,7 +19,6 @@ function App() {
         <Route path="/pel" element={<Pel />} />
         <Route path="/flat" element={<Flat />} />
         <Route path="/flatl" element={<Flatl />} />
-        <Route path="/mini" element={<Mini />} />
         <Route path="/minimop" element={<MiniMop />} />
       </Routes>
     </BrowserRouter>
