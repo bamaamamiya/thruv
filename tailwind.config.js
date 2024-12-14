@@ -11,7 +11,8 @@ export default {
         greento:'#00c764',
         greentoo:'#3cb878',
         grayto:'#f4f4f4',
-        yellto:'#ffee58'
+        yellto:'#ffee58',
+        purpelto:'#581970'
       }
     },
   },

@@ -9,6 +9,7 @@ import Pel from "./components/Pel/Pel";
 import Flat from "./components/Pel Flat/Flat";
 import Flatl from "./components/Pel Flat L/Flat";
 import MiniMop from "./components/Mini Mop/Mini";
+import Eye from './components/Eye Cream/Eye'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/flat" element={<Flat />} />
         <Route path="/flatl" element={<Flatl />} />
         <Route path="/minimop" element={<MiniMop />} />
+        <Route path="/eyecream" element={<Eye />} />
       </Routes>
     </BrowserRouter>
   );
