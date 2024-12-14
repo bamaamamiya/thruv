@@ -16,7 +16,7 @@ const Flat = () => {
             </div>
             <br/>
             <div className="grid justify-center items-center">
-                <img src="/images/eye/1.jpg" alt="haedline" width="640" height="360" />
+                <img src="/images/eye/1.webp" alt="haedline" width="640" height="360" />
             </div>
             <div className="text-center text-2xl font-bold">
             <p>Perawatan yang Anda Butuhkan untuk Mata Bebas Lingkaran Hitam dan Kerutan</p>
@@ -24,7 +24,7 @@ const Flat = () => {
             <br />
 
             <div className="grid justify-center items-center">
-                <img src="images/eye/problem.jpg" alt="mata" width="640" height="360"  />
+                <img src="images/eye/problem.webp" alt="mata" width="640" height="360"  />
 
             </div>
             <br />
@@ -45,9 +45,9 @@ const Flat = () => {
                 <h1 className="text-3xl font-semibold">Beauty Of Angel Eye Cream, Solusi Tepat dan Terbaik Buat Kamu!!</h1>
                 <br/>
                 <div className="p-2 space-y-2 grid justify-center items-center">
-                    <img src="images/eye/2.jpg" alt="produk"  width="640" height="360" />
-                    <img src="images/eye/3.jpg" alt="produk"  width="640" height="360" />
-                    <img src="images/eye/4.jpg" alt="produk"  width="640" height="360" />
+                    <img src="images/eye/2.webp" alt="produk"  width="640" height="360" />
+                    <img src="images/eye/3.webp" alt="produk"  width="640" height="360" />
+                    <img src="images/eye/4.webp" alt="produk"  width="640" height="360" />
                     <img src="images/eye/6.webp" alt="produk"  width="640" height="360" />
                     <img src="images/eye/7.webp" alt="produk"  width="640" height="360" />
                     <img src="images/eye/8.webp" alt="produk"  width="640" height="360" />
