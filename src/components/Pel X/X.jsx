@@ -144,7 +144,7 @@ const X = () => {
                         <br />
                         <br />
                         <img src="images/pel/diskon.webp" alt="promo" width="640" height="360" />
-                        <img src="images/pel/99.webp" alt="promo" width="640" height="360" />
+                        <img src="images/119.webp" alt="promo" width="640" height="360" />
                     </div>
                     <div className="p-4 bg-yellto text-center">
                         <p className="font-bold">Promo Akan Berakhir Dalam : </p>
