@@ -7,6 +7,7 @@ import "./index.css";
 import Page from "./components/Page";
 import Pel from "./components/Pel/Pel";
 import Flat from "./components/Pel Flat/Flat";
+import Flat2 from "./components/Pel Flat 2/Flat2"
 import Flatl from "./components/Pel Flat L/Flat";
 import MiniMop from "./components/Mini Mop/Mini";
 import Eye from './components/Eye Cream/Eye'
@@ -20,6 +21,7 @@ function App() {
         <Route path="/shaver" element={<MainContent />} />
         <Route path="/pel" element={<Pel />} />
         <Route path="/flat" element={<Flat />} />
+        <Route path="/flat2" element={<Flat2 />} />
         <Route path="/flatl" element={<Flatl />} />
         <Route path="/minimop" element={<MiniMop />} />
         <Route path="/eyecream" element={<Eye />} />
