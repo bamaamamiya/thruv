@@ -125,6 +125,8 @@ const Flat = () => {
                     <img src="/images/pelflat/produk3.webp" alt="product1" width="640" height="360" />
                     <img src="/images/pelflat/produk6.webp" alt="product1" width="640" height="360" />
                     {/* <img src="/images/pelflat/bonus.webp" alt="product1" width="640" height="360" /> */}
+
+                    
                     <br />
                     <br />
                     <br />
@@ -144,6 +146,7 @@ const Flat = () => {
                         <br />
                         <img src="images/pel/diskon.webp" alt="promo" width="640" height="360" />
                         <img src="images/149.webp" alt="promo" width="640" height="360" />
+                        <img src="images/offer/bonus.webp" alt="promo" width="640" height="360" />
                     </div>
                     <div className="p-4 bg-yellto text-center">
                         <p className="font-bold">Promo Akan Berakhir Dalam : </p>
