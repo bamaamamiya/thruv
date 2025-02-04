@@ -145,7 +145,7 @@ const Flat = () => {
                         <br />
                         <br />
                         <img src="images/pel/diskon.webp" alt="promo" width="640" height="360" />
-                        <img src="images/149.webp" alt="promo" width="640" height="360" />
+                        <img src="images/157.webp" alt="promo" width="640" height="360" />
                         <img src="images/offer/bonus.webp" alt="promo" width="640" height="360" />
                     </div>
                     <div className="p-4 bg-yellto text-center">
