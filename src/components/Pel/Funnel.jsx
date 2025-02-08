@@ -4,7 +4,7 @@ const Funnel = () => {
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("COD");
-  const [bundle, setBundle] = useState("Paket A");
+  const [bundle, setBundle] = useState("");
 
   const handlePaymentChange = (method) => {
     setPaymentMethod(method);
