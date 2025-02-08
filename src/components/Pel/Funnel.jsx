@@ -4,6 +4,7 @@ const Funnel = () => {
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("COD");
+  const [bundle, setBundle] = useState("Paket A");
 
   const handlePaymentChange = (method) => {
     setPaymentMethod(method);
@@ -19,7 +20,7 @@ const Funnel = () => {
     const customerServiceNumber = "6282387881505"; // Ganti dengan nomor CS Anda
 
     // Pesan WhatsApp yang ingin dikirim
-    const message = `Halo, saya ${name}. Saya tertarik memesan Pel Tarik Premium dengan metode pembayaran ${paymentMethod}`;
+    const message = `Halo, saya ${name}. Saya tertarik memesan ${bundle} dengan metode pembayaran ${paymentMethod}`;
 
     // Redirect ke WhatsApp
     const whatsappURL = `https://wa.me/${customerServiceNumber}?text=${encodeURIComponent(
@@ -52,12 +53,30 @@ const Funnel = () => {
             className="w-full border rounded-lg p-2 focus:outline-none focus:ring focus:ring-green-300"
           />
         </div>
+        {/* nama & wa end */}
 
-        <h3 className="text-lg font-bold mb-3">Metode Pembayaran:</h3>
+        <h3 className="text-lg font-bold mb-3">Pilih Bundle:</h3>
 
         <div className="mb-4">
+          <select
+            value={bundle}
+            onChange={(e) => setBundle(e.target.value)}
+            className="w-full border rounded-lg p-2 focus:outline-none focus:ring focus:ring-green-300"
+          >
+            <option value="Pel Tarik Premium">Pel Tarik Premium</option>
+            <option value="Mop + Cairan Pembersih">Mop + Cairan Pembersih</option>
+            <option value="Paket C">
+              Paket C (Mop + Ember + Cairan Pembersih)
+            </option>
+          </select>
+        </div>
+
+        {/* metode pembayaran */}
+        <h3 className="text-lg font-bold mb-3">Metode Pembayaran:</h3>
+
+        <div className="mb-4 ">
           <div
-            className="flex items-center mb-2 cursor-pointer"
+            className="flex items-center cursor-pointer border-2 p-4 rounded-md"
             onClick={() => handlePaymentChange("COD")}
           >
             <input
@@ -78,7 +97,7 @@ const Funnel = () => {
           </div>
 
           <div
-            className="flex items-center cursor-pointer"
+            className="flex items-center cursor-pointer border-2 p-4 rounded-md"
             onClick={() => handlePaymentChange("Bank Transfer")}
           >
             <input
@@ -101,7 +120,7 @@ const Funnel = () => {
         <button
           onClick={handleSubmit}
           type="button"
-          className="w-full bg-greentoo text-white font-bold py-2 px-4 rounded-lg hover:bg-green-600 transition"
+          className="w-full text-2xl bg-greentoo text-white font-bold py-2 px-4 rounded-lg hover:bg-green-600 transition"
         >
           Konfirmasi Pesanan Di WhatsApp
         </button>
