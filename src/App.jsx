@@ -7,11 +7,11 @@ import "./index.css";
 import Page from "./components/Page";
 import Pel from "./components/Pel/Pel";
 import Flat from "./components/Pel Flat/Flat";
-import Flat2 from "./components/Pel Flat 2/Flat2"
+import Flat2 from "./components/Pel Flat 2/Flat2";
 import Flatl from "./components/Pel Flat L/Flat";
 import MiniMop from "./components/Mini Mop/Mini";
-import Eye from './components/Eye Cream/Eye'
-import PelX from './components/Pel X/X'
+import Eye from "./components/Eye Cream/Eye";
+import PelX from "./components/Pel X/X";
 
 function App() {
   return (

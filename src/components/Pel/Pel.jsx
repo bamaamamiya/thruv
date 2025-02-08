@@ -7,6 +7,7 @@ import Floting from "./Floting";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowDown, faStar, faStarHalfStroke } from '@fortawesome/free-solid-svg-icons'
+import Funnel from "./Funnel";
 
 const Pel = () => {
     return (
@@ -158,7 +159,11 @@ const Pel = () => {
                         </span>
                         <p className="text-sm">  73 orang sekarang sedang ingin mengambil promo!</p>
                     </div>
-                    <Form />
+                    <div  id="form">
+                    <Funnel/>
+                    {/* <Form /> */}
+
+                    </div>
                 </div>
 
                 <br />

@@ -50,7 +50,7 @@ const Form = () => {
         throw e;
     }
     return (
-        <div id="form">
+        <div>
             <div className="ooef">
                 <form className="orderonline-embed-form" data-username="thruvshop" data-product-slug="pel-karet" data-product-id="66be797597b63667bc01ac79" id="oo-embed-form-pel-karet-4719" data-origin="orderonline">
                     <div className="ooef-loader">
