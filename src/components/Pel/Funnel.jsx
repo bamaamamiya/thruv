@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import BundleOption from "./BundleOption";
 const Funnel = () => {
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
@@ -57,18 +57,26 @@ const Funnel = () => {
 
         <h3 className="text-lg font-bold mb-3">Pilih Bundle:</h3>
 
-        <div className="mb-4">
-          <select
-            value={bundle}
-            onChange={(e) => setBundle(e.target.value)}
-            className="w-full border rounded-lg p-2 focus:outline-none focus:ring focus:ring-green-300"
-          >
-            <option value="Pel Tarik Premium">Pel Tarik Premium</option>
-            <option value="Mop + Cairan Pembersih">Mop + Cairan Pembersih</option>
-            <option value="Paket C">
-              Paket C (Mop + Ember + Cairan Pembersih)
-            </option>
-          </select>
+        {/* Gunakan komponen BundleOption */}
+        <div className="grid grid-cols-1 gap-3 mb-4">
+          <BundleOption
+            title="Pel Tarik Premium"
+            description="Pel + 1 Kain Reffil"
+            isActive={bundle === "Paket A"}
+            onClick={() => setBundle("Paket A")}
+          />
+          <BundleOption
+            title="Paket B"
+            description="Mop + Cairan Pembersih"
+            isActive={bundle === "Paket B"}
+            onClick={() => setBundle("Paket B")}
+          />
+          <BundleOption
+            title="Paket C"
+            description="Mop + Ember + Cairan Pembersih"
+            isActive={bundle === "Paket C"}
+            onClick={() => setBundle("Paket C")}
+          />
         </div>
 
         {/* metode pembayaran */}
@@ -88,10 +96,12 @@ const Funnel = () => {
               onChange={() => handlePaymentChange("COD")}
               className="mr-2 cursor-pointer"
             />
-            <label htmlFor="cod" className="cursor-pointer flex items-center">
-              <span className="bg-green-500 text-white text-xs font-bold px-2 py-1 rounded mr-2">
-                COD
-              </span>
+            <label htmlFor="cod" className="cursor-pointer grid items-center">
+              <div className="flex">
+                <span className="bg-green-500 text-white text-xs font-bold px-2 py-1 rounded mr-2">
+                  COD
+                </span>
+              </div>
               Bayar di Tempat
             </label>
           </div>
@@ -109,10 +119,13 @@ const Funnel = () => {
               onChange={() => handlePaymentChange("Bank Transfer")}
               className="mr-2 cursor-pointer"
             />
-            <label htmlFor="bank" className="cursor-pointer flex items-center">
-              <span className="bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded mr-2">
-                BANK TRANSFER
-              </span>
+            <label htmlFor="bank" className="cursor-pointer grid items-center">
+              <div>
+                <span className="bg-blue-500 grid text-white text-xs font-bold px-2 py-1 rounded mr-2">
+                  BANK
+                  <span>TRANSFER</span>
+                </span>
+              </div>
             </label>
           </div>
         </div>
