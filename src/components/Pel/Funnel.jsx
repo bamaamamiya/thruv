@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import BundleOption from "./BundleOption";
+import BundleOption from "../BundleOption";
 const Funnel = () => {
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("COD");
-  const [bundle, setBundle] = useState("");
+  const [bundle, setBundle] = useState("Pel Tarik Premium");
 
   const handlePaymentChange = (method) => {
     setPaymentMethod(method);
@@ -17,7 +17,7 @@ const Funnel = () => {
     }
 
     // Nomor WhatsApp customer service
-    const customerServiceNumber = "6282387881505"; // Ganti dengan nomor CS Anda
+    const customerServiceNumber = "6282392135589"; // Ganti dengan nomor CS Anda
 
     // Pesan WhatsApp yang ingin dikirim
     const message = `Halo, saya ${name}. Saya tertarik memesan ${bundle} dengan metode pembayaran ${paymentMethod}`;
@@ -29,6 +29,23 @@ const Funnel = () => {
     window.open(whatsappURL, "_blank");
   };
 
+  const bundles = [
+    {
+      title: "Pel Tarik Premium",
+      description: "Pel + 1 Kain Reffil",
+      isRecommended: false,
+    },
+    {
+      title: "Pel Hemat",
+      description: "Pel + 2 Kain Reffil",
+      isRecommended: true,
+    },
+    {
+      title: "Paket Ekonomis",
+      description: "Pel + 3 Kain Reffil",
+      isRecommended: false,
+    },
+  ];
   return (
     <div className="max-w-md mx-auto bg-white p-6 rounded-2xl">
       <h2 className="text-xl font-bold mb-4">Data Penerima:</h2>
@@ -58,28 +75,21 @@ const Funnel = () => {
         <h3 className="text-lg font-bold mb-3">Pilih Bundle:</h3>
 
         {/* Gunakan komponen BundleOption */}
-        <div className="grid grid-cols-1 gap-3 mb-4">
-          <BundleOption
-            title="Pel Tarik Premium"
-            description="Pel + 1 Kain Reffil"
-            isActive={bundle === "Paket A"}
-            onClick={() => setBundle("Paket A")}
-          />
-          <BundleOption
-            title="Paket B"
-            description="Mop + Cairan Pembersih"
-            isActive={bundle === "Paket B"}
-            onClick={() => setBundle("Paket B")}
-          />
-          <BundleOption
-            title="Paket C"
-            description="Mop + Ember + Cairan Pembersih"
-            isActive={bundle === "Paket C"}
-            onClick={() => setBundle("Paket C")}
-          />
+        <div className="space-y-2">
+          {bundles.map((bundleOption) => (
+            <BundleOption
+              key={bundleOption.title}
+              title={bundleOption.title}
+              description={bundleOption.description}
+              isRecommended={bundleOption.isRecommended}
+              isActive={bundle === bundleOption.title} // Menggunakan title
+              onClick={() => setBundle(bundleOption.title)} // Menggunakan title
+            />
+          ))}
         </div>
 
         {/* metode pembayaran */}
+        <br/>
         <h3 className="text-lg font-bold mb-3">Metode Pembayaran:</h3>
 
         <div className="mb-4 ">
