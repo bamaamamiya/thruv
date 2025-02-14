@@ -21,7 +21,7 @@ function App() {
         <Route path="/shaver" element={<MainContent />} />
         <Route path="/pel" element={<Pel />} />
         <Route path="/flat" element={<Flat />} />
-        <Route path="/pel-tarik-premium" element={<Flat2 />} />
+        <Route path="/pel-premium" element={<Flat2 />} />
         <Route path="/flatl" element={<Flatl />} />
         <Route path="/minimop" element={<MiniMop />} />
         <Route path="/eyecream" element={<Eye />} />
