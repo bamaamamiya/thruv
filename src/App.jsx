@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import MainContent from "./components/MainContent";
 
 import "./index.css";
+import MainContent from "./components/Shaver/MainContent";
 import Page from "./components/Page";
 import Pel from "./components/Pel/Pel";
 import Flat from "./components/Pel Flat/Flat";
@@ -12,7 +12,7 @@ import Flatl from "./components/Pel Flat L/Flat";
 import MiniMop from "./components/Mini Mop/Mini";
 import Eye from "./components/Eye Cream/Eye";
 import PelX from "./components/Pel X/X";
-
+import Test from './components/Test'
 function App() {
   return (
     <BrowserRouter>
@@ -26,6 +26,7 @@ function App() {
         <Route path="/minimop" element={<MiniMop />} />
         <Route path="/eyecream" element={<Eye />} />
         <Route path="/pelx" element={<PelX />} />
+        <Route path="test" element={<Test/>}/>
       </Routes>
     </BrowserRouter>
   );

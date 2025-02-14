@@ -1,13 +1,29 @@
 import React, { useState } from "react";
-import BundleOption from "../BundleOption";
-const Funnel = () => {
+import BundleOption from "./BundleOption";
+
+const FunnelAtc = () => {
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("COD");
-  const [bundle, setBundle] = useState("Pel Tarik Premium");
+  const [bundle, setBundle] = useState("Beli 1");
 
   const handlePaymentChange = (method) => {
     setPaymentMethod(method);
+  };
+
+  const handleAddToCart = (bundleTitle) => {
+    // Set the selected bundle
+    setBundle(bundleTitle);
+
+    // Facebook Pixel tracking for "AddToCart"
+    if (window.fbq) {
+      fbq("track", "AddToCart", {
+        content_name: bundleTitle,
+        content_category: "Product Bundle",
+        value: 157000, // Example: You can adjust the value based on your bundle price
+        currency: "IDR",
+      });
+    }
   };
 
   const handleSubmit = () => {
@@ -19,8 +35,13 @@ const Funnel = () => {
     // Nomor WhatsApp customer service
     const customerServiceNumber = "6282392135589"; // Ganti dengan nomor CS Anda
 
+    // Temukan bundle yang dipilih berdasarkan `bundle` yang ada di state
+    const selectedBundle = bundles.find(
+      (bundleOption) => bundleOption.title === bundle);
+
     // Pesan WhatsApp yang ingin dikirim
-    const message = `Halo, saya ${name}. Saya tertarik memesan ${bundle} dengan metode pembayaran ${paymentMethod}`;
+    const message = `Halo, saya ${name}. Saya tertarik memesan ${selectedBundle.title} ${selectedBundle.description} dengan metode pembayaran ${paymentMethod}`;
+
 
     // Redirect ke WhatsApp
     const whatsappURL = `https://wa.me/${customerServiceNumber}?text=${encodeURIComponent(
@@ -31,19 +52,25 @@ const Funnel = () => {
 
   const bundles = [
     {
-      title: "Pel Tarik Premium",
-      description: "Pel + 1 Kain Reffil",
+      title: "Beli 1",
+      description: "Bonus 1 Kain Reffil",
       isRecommended: false,
+      price: 479000,
+      isPrice: 149000,
     },
     {
-      title: "Pel Hemat",
-      description: "Pel + 2 Kain Reffil",
+      title: "Beli 2",
+      description: "Bonus 2 Kain Reffil",
       isRecommended: true,
+      price: 958000,
+      isPrice: 200000,
     },
     {
-      title: "Paket Ekonomis",
-      description: "Pel + 3 Kain Reffil",
+      title: "Beli 3",
+      description: "Bonus 3 Kain Reffil",
       isRecommended: false,
+      price: 1000000,
+      isPrice: 250000,
     },
   ];
   return (
@@ -82,14 +109,16 @@ const Funnel = () => {
               title={bundleOption.title}
               description={bundleOption.description}
               isRecommended={bundleOption.isRecommended}
-              isActive={bundle === bundleOption.title} // Menggunakan title
-              onClick={() => setBundle(bundleOption.title)} // Menggunakan title
+              isActive={bundle === bundleOption.title}
+              price={bundleOption.price}
+              isPrice={bundleOption.isPrice}
+              onClick={() => handleAddToCart(bundleOption.title)} // Panggil AddToCart di sini
             />
           ))}
         </div>
 
         {/* metode pembayaran */}
-        <br/>
+        <br />
         <h3 className="text-lg font-bold mb-3">Metode Pembayaran:</h3>
 
         <div className="mb-4 ">
@@ -152,4 +181,4 @@ const Funnel = () => {
   );
 };
 
-export default Funnel;
+export default FunnelAtc;

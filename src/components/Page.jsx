@@ -1,4 +1,4 @@
-
+import Headline from "./Headline"
 const Page = () => {
     return (
         <div className="text-center text-5xl grid justify-center items-center h-screen">
