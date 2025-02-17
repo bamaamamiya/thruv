@@ -9,67 +9,110 @@ import Floting from "../Pel/Floting";
 import Count from "../Count";
 import Garansi from "../set/Garansi";
 import Footer from "../Footer";
+import Rating from "../Rating";
 const Hair = () => {
   return (
     <div className="m-2">
       <div className="grid justify-center items-center">
+				<div className="flex justify-center">
         <img
-          src="./images/hair/2.jpg"
+          src="./images/hair/2.webp"
           alt="headline"
           width="640"
           height="360"
-        />
-				<br/>
-				<h1 className="text-center text-3xl ">Rambut kamu kering, bercabang, kusam, susah diatur?</h1>
-				<br/>
-				<h2 className="text-center text-2xl">Tanpa Ribet! Cukup oleskan 5 menit langsung sehat & glowing</h2>
-        <img
-          src="./images/hair/7.jpg"
-          alt="headline"
-          width="640"
-          height="360"
-        />
+					/>
+					</div>
+        <br />
+        <h1 className="text-center text-3xl font-bold text-greendo">
+          Rambut kamu kering, bercabang, kusam, susah diatur?
+        </h1>
+        <br />
+        <br />
+        <h2 className="text-center text-2xl font-semibold text-greendoo">
+          Tanpa Ribet! Cukup oleskan 5 menit langsung sehat & glowing
+        </h2>
+        <br />
+        <br />
+        <Rating rating="4.8 Rating" terjual="1.800 +" />
+        <br />
         <Count />
         <Garansi />
         <br />
-        <img
-          src="./images/hair/9.png"
-          alt="headline"
-          width="640"
-          height="360"
-        />
-        <img
-          src="./images/hair/10.png"
-          alt="headline"
-          width="640"
-          height="360"
-        />
-        <img
-          src="./images/hair/11.png"
-          alt="headline"
-          width="640"
-          height="360"
-        />
-        <img
-          src="./images/hair/8.png"
-          alt="headline"
-          width="640"
-          height="360"
-        />
-      </div>
 
-      <img
-        src="./images/diskonspesial.webp"
-        alt="headline"
-        width="640"
-        height="360"
-      />
-      <img
-        src="./images/hair/offerhair.png"
-        alt="headline"
-        width="640"
-        height="360"
-      />
+				<div className="grid justify-center">
+
+        <img
+          src="./images/hair/manfaat.webp"
+          alt="headline"
+          width="640"
+          height="360"
+        />
+        <img
+          src="./images/hair/9.webp"
+          alt="headline"
+          width="640"
+          height="360"
+        />
+        <img
+          src="./images/hair/10.webp"
+          alt="headline"
+          width="640"
+          height="360"
+        />
+        <img
+          src="./images/hair/11.webp"
+          alt="headline"
+          width="640"
+          height="360"
+        />
+        <img
+          src="./images/hair/8.webp"
+          alt="headline"
+          width="640"
+          height="360"
+        />
+				</div>
+
+        <br />
+        <div className="grid justify-center items-center space-y-2">
+          <h1 className="font-bold text-center text-4xl">TESTIMONI</h1>
+          <br />
+          <br />
+          <img
+            src="images/hair/testi.webp"
+            alt="testimoni"
+            width="640"
+            height="360"
+          />
+          <img
+            src="images/hair/testi2.webp"
+            alt="testimoni"
+            width="640"
+            height="360"
+          />
+          <img
+            src="images/hair/testi3.webp"
+            alt="testimoni"
+            width="640"
+            height="360"
+          />
+          <br />
+          <br />
+          <br />
+        <img
+          src="./images/diskonspesial.webp"
+          alt="headline"
+          width="640"
+          height="360"
+					/>
+        <img
+          src="./images/hair/offerhair.webp"
+          alt="headline"
+          width="640"
+          height="360"
+					/>
+					</div>
+      </div>
       <br />
       <div className=" bg-yellto text-center">
         <Count />
@@ -89,7 +132,7 @@ const Hair = () => {
       <div id="form">
         <Form />
       </div>
-			<Footer/>
+      <Footer />
 
       <Floting />
     </div>
