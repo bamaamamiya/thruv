@@ -12,7 +12,8 @@ import Flatl from "./components/Pel Flat L/Flat";
 import MiniMop from "./components/Mini Mop/Mini";
 import Eye from "./components/Eye Cream/Eye";
 import PelX from "./components/Pel X/X";
-import Test from './components/Test'
+import Test from './components/Test';
+import Hair from "./components/Hair/Hair";
 function App() {
   return (
     <BrowserRouter>
@@ -26,7 +27,8 @@ function App() {
         <Route path="/minimop" element={<MiniMop />} />
         <Route path="/eyecream" element={<Eye />} />
         <Route path="/pelx" element={<PelX />} />
-        <Route path="test" element={<Test/>}/>
+        <Route path="/test" element={<Test/>}/>
+        <Route path="/hair" element={<Hair/>}/>
       </Routes>
     </BrowserRouter>
   );
