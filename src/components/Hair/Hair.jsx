@@ -48,6 +48,12 @@ const Hair = () => {
           height="360"
         />
         <img
+          src="./images/hair/4.webp"
+          alt="headline"
+          width="640"
+          height="360"
+        />
+        <img
           src="./images/hair/9.webp"
           alt="headline"
           width="640"
