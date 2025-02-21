@@ -28,12 +28,15 @@ const Hair = () => {
         </h1>
         <br />
         <br />
+        <br />
         <h2 className="text-center text-2xl font-semibold text-greendoo">
           Tanpa Ribet! Cukup oleskan 5 menit langsung sehat & glowing
         </h2>
         <br />
         <br />
         <Rating rating="4.8 Rating" terjual="1.800 +" />
+        <br />
+        <br />
         <br />
         <Count />
         <Garansi />

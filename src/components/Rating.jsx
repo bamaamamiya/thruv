@@ -12,6 +12,7 @@ const Rating = ({ rating, terjual }) => {
           <FontAwesomeIcon icon={faStarHalfStroke} size="2x" />
         </div>
         <br />
+        <br />
         <div className="text-black font-bold text-center">
           <p>{rating}</p>
           <p>{terjual}</p>
