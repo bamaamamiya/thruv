@@ -16,7 +16,7 @@ const Hair = () => {
       <div className="grid justify-center items-center">
 				<div className="flex justify-center">
         <img
-          src="./images/hair/2.webp"
+          src="./images/hair/headlinee.webp"
           alt="headline"
           width="640"
           height="360"
