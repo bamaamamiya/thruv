@@ -15,11 +15,10 @@ const Garansi = () => {
                         />
                 </div>
 
-                <div>
+                <div className="p-2">
                     <h1 className="text-redto font-extrabold text-2xl text-center">GARANSI RETURN/UANG KEMBALI</h1>
-                    <p className="text-black font-bold text-xl text-center">Jika produk tidak berfungsi/cacat</p>
+                    <p className="text-black font-bold text-lg text-center">Jika produk tidak berfungsi/cacat</p>
                 </div>
-
             </div>
             <SvgBackgroundDiv/>
         </div>
