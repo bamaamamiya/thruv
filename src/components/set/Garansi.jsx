@@ -5,7 +5,7 @@ const Garansi = () => {
     return (
         <div>
             <SvgBackgroundDiv/>
-            <div className="bg-yellto p-4">
+            <div className="bg-yellto">
                 <div className="flex justify-center items-center">
                     <img
                         src="images/garansi.webp"
