@@ -52,9 +52,9 @@ const Form = () => {
 
   return (
     <div id="form">
-      <div class="ooef">
-	<form class="orderonline-embed-form" data-username="thruvshop" data-product-slug="boa-eye-cream-krim-penghilang-mata-panda-dan-garis-halus" data-product-id="676ed426d4ca112b230afc63" id="oo-embed-form-boa-eye-cream-krim-penghilang-mata-panda-dan-garis-halus-3565" data-origin="orderonline">
-		<div class="ooef-loader"><div aria-live="polite" role="status"><div>Loading...</div></div></div>
+      <div className="ooef">
+	<form className="orderonline-embed-form" data-username="thruvshop" data-product-slug="boa-eye-cream-krim-penghilang-mata-panda-dan-garis-halus" data-product-id="676ed426d4ca112b230afc63" id="oo-embed-form-boa-eye-cream-krim-penghilang-mata-panda-dan-garis-halus-3565" data-origin="orderonline">
+		<div className="ooef-loader"><div aria-live="polite" role="status"><div>Loading...</div></div></div>
 	</form>
 </div>
     </div>
