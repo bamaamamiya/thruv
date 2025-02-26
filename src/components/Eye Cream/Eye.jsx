@@ -16,17 +16,17 @@ import {
 const Flat = () => {
   return (
     <div
-      className="m-2"
+      className="ml-2 mr-2"
       style={{ fontFamily: "Poppins, sans-serif", fontWeight: 400 }}
     >
-      <div className="text-center text-2xl font-bold">
+      <div className="text-center text-2xl font-bold bg-pinkto text-white">
         <p>Kulit Lebih Kencang, Mata Tampak Lebih Muda</p>
       </div>
       <br />
       <div className="grid justify-center items-center">
         <img src="/images/eye/1.webp" alt="haedline" width="640" height="360" />
       </div>
-      <div className="text-center text-2xl font-bold">
+      <div className="text-center text-2xl font-bold bg-pinkto text-white">
         <p>
           Perawatan yang Anda Butuhkan untuk Mata Bebas Lingkaran Hitam dan
           Kerutan
@@ -80,7 +80,7 @@ const Flat = () => {
         </p>
         <br />
         <br />
-        <h1 className="text-3xl font-semibold">
+        <h1 className="text-3xl font-semibold bg-pinkto text-white">
           Beauty Of Angel Eye Cream, Solusi Tepat dan Terbaik Buat Kamu!!
         </h1>
         <br />

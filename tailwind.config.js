@@ -14,7 +14,8 @@ export default {
         yellto:'#ffee58',
         purpelto:'#581970',
 				greendo:'#2d6343',
-				greendoo:'#1c3424'
+				greendoo:'#1c3424',
+				pinkto:'#c75d73'
       }
     },
   },
