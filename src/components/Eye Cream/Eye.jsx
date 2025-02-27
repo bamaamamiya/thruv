@@ -59,9 +59,11 @@ const Flat = () => {
         <p className="text-redto text-3xl font-bold">
           !!! BAHAYA BANGET MATA PANDA !!!
         </p>
+        <br />
         <div className="flex justify-center items-center p-2">
           <img src="images/eye/matapanda.webp" />
         </div>
+        <br />
         <div className="font-bold bg-redto text-white text-2xl rounded-xl">
           <p>SOLUSI HILANGKAN MATA PANDA</p>
           <p>KEMBALI LEBIH MUDA SEPERTI UMUR 20 TAHUN 😱</p>
