@@ -13,6 +13,7 @@ import {
   faStarHalfStroke,
 } from "@fortawesome/free-solid-svg-icons";
 import FAQComponent from "../Faqs";
+import Popup from "../PopUp";
 
 const Flat = () => {
   return (
@@ -155,7 +156,7 @@ const Flat = () => {
               width="640"
               height="360"
             />
-            <p className="text-center font-semibold text-2xl">
+            <p className="text-center font-bold text-2xl text-redto">
               Promo Khusus 20 Pembeli Pertama
             </p>
           </div>
@@ -194,7 +195,7 @@ const Flat = () => {
         </div>
         <br />
       </div>
-
+			{/* <Popup/> */}
       <Floting />
       {/* end div */}
     </div>
