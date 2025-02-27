@@ -8,6 +8,7 @@ import Floting from "./Floting";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowDown, faStar, faStarHalfStroke } from '@fortawesome/free-solid-svg-icons'
 import Funnel from "../FunnelAtc";
+import Popup from "../PopUp";
 
 const Pel = () => {
     return (
@@ -175,7 +176,7 @@ const Pel = () => {
                 </div>
                 <br />
             </div>
-
+						<Popup/>
             <Floting />
             {/* end div */}
         </div>
