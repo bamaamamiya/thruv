@@ -177,6 +177,9 @@ const Flat = () => {
         </div>
 
         <br />
+        <div>
+          <FAQComponent />
+        </div>
         <br />
         <div className="grid justify-center items-center">
           <img
@@ -185,9 +188,6 @@ const Flat = () => {
             width="640"
             height="360"
           />
-          <div>
-            <FAQComponent />
-          </div>
           <img src="images/fotter.webp" alt="footer" width="640" height="360" />
         </div>
         <br />
