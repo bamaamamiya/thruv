@@ -1,7 +1,7 @@
 const faqs = [
   {
     question: "Apakah ini aman untuk kulit sensitif?",
-    answer: "Ya, sudah diuji di lab & tanpa bahan iritasi!",
+    answer: "Ya, sudah diuji di BPOM & tanpa bahan iritasi!",
   },
   {
     question: "Berapa lama hasilnya terlihat?",
