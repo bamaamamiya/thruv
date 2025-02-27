@@ -12,6 +12,7 @@ import {
   faStar,
   faStarHalfStroke,
 } from "@fortawesome/free-solid-svg-icons";
+import FAQComponent from "../Faqs";
 
 const Flat = () => {
   return (
@@ -19,18 +20,19 @@ const Flat = () => {
       className="ml-2 mr-2"
       style={{ fontFamily: "Poppins, sans-serif", fontWeight: 400 }}
     >
-      <div className="text-center text-2xl font-bold bg-pinkto text-white">
-        <p>Kulit Lebih Kencang, Mata Tampak Lebih Muda</p>
-      </div>
-      <br />
       <div className="grid justify-center items-center">
         <img src="/images/eye/1.webp" alt="haedline" width="640" height="360" />
       </div>
-      <div className="text-center text-2xl font-bold bg-pinkto text-white">
+      <br />
+      <div className="text-center text-2xl font-bold text-redto">
         <p>
-          Perawatan yang Anda Butuhkan untuk Mata Bebas Lingkaran Hitam dan
-          Kerutan
+          Hapus Kerutan Mata dan Mata Panda dalam 7 Hari Tanpa Botox & Tanpa
+          Ribet!
         </p>
+      </div>
+      <br />
+      <div className="text-center text-xl font-bold text-redto ">
+        <p>97% pelanggan melihat perbedaan dalam 3 hari! </p>
       </div>
       <br />
       <br />
@@ -40,29 +42,34 @@ const Flat = () => {
       <br />
       <br />
       <br />
-      <p className="font-bold text-center text-xl">Promo Akan Berakhir Dalam : </p>
+      <p className="font-bold text-center text-xl">
+        Promo Akan Berakhir Dalam :{" "}
+      </p>
       <br />
-      <CountdownTimer hours={0} minutes={9} seconds={0} />
+      <CountdownTimer hours={0} minutes={20} seconds={0} />
       <br />
       <Garansi />
       <br />
       <br />
-      <div className="grid justify-center items-center">
-        <img
-          src="images/eye/problem.webp"
-          alt="mata"
-          width="640"
-          height="360"
-        />
-      </div>
+
       <br />
 
       {/* problem */}
       <div className="text-center ">
+        <p className="text-redto text-3xl font-bold">
+          !!! BAHAYA BANGET MATA PANDA !!!
+        </p>
+        <div className="flex justify-center items-center p-2">
+          <img src="images/eye/matapanda.jpeg" />
+        </div>
+        <div className="font-bold bg-redto text-white text-2xl rounded-xl">
+          <p>SOLUSI HILANGKAN MATA PANDA</p>
+          <p>KEMBALI LEBIH MUDA SEPERTI UMUR 20 TAHUN 😱</p>
+        </div>
+        <br />
         <h1 className="text-3xl font-semibold">
           APA ANDA SEDANG MENGALAMAI MASALAH INI?
         </h1>
-        <br />
         <br />
         <p>
           Capek melihat mata panda setiap kali bercermin? Kenapa tidak mencoba
@@ -79,18 +86,27 @@ const Flat = () => {
           segar setiap pagi?
         </p>
         <br />
+        <div className="grid justify-center items-center">
+          <img
+            src="images/eye/problem.webp"
+            alt="mata"
+            width="640"
+            height="360"
+          />
+        </div>
         <br />
-        <h1 className="text-3xl font-semibold bg-pinkto text-white">
+
+        <h1 className="text-3xl font-semibold ">
           Beauty Of Angel Eye Cream, Solusi Tepat dan Terbaik Buat Kamu!!
         </h1>
         <br />
         <div className="p-2 space-y-2 grid justify-center items-center">
-          <img src="images/eye/2.webp" alt="produk" width="640" height="360" />
-          <img src="images/eye/3.webp" alt="produk" width="640" height="360" />
-          <img src="images/eye/4.webp" alt="produk" width="640" height="360" />
-          <img src="images/eye/6.webp" alt="produk" width="640" height="360" />
+          {/* <img src="images/eye/2.webp" alt="produk" width="640" height="360" /> */}
+          {/* <img src="images/eye/3.webp" alt="produk" width="640" height="360" /> */}
           <img src="images/eye/7.webp" alt="produk" width="640" height="360" />
           <img src="images/eye/8.webp" alt="produk" width="640" height="360" />
+          <img src="images/eye/6.webp" alt="produk" width="640" height="360" />
+          <img src="images/eye/4.webp" alt="produk" width="640" height="360" />
         </div>
         <br />
       </div>
@@ -137,10 +153,13 @@ const Flat = () => {
               width="640"
               height="360"
             />
+            <p className="text-center font-semibold text-2xl">
+              Promo Khusus 20 Pembeli Pertama
+            </p>
           </div>
           <div className="p-4 bg-yellto text-center">
             <p className="font-bold">Promo Akan Berakhir Dalam : </p>
-            <CountdownTimer hours={0} minutes={9} seconds={0} />
+            <CountdownTimer hours={0} minutes={20} seconds={0} />
           </div>
           <br />
           <br />
@@ -166,6 +185,9 @@ const Flat = () => {
             width="640"
             height="360"
           />
+          <div>
+            <FAQComponent />
+          </div>
           <img src="images/fotter.webp" alt="footer" width="640" height="360" />
         </div>
         <br />

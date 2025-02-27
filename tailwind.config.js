@@ -12,6 +12,7 @@ export default {
         greentoo:'#3cb878',
         grayto:'#f4f4f4',
         yellto:'#ffee58',
+        goldento:'#ffb91e',
         purpelto:'#581970',
 				greendo:'#2d6343',
 				greendoo:'#1c3424',

@@ -3,7 +3,7 @@ import { faArrowDown, faStar, faStarHalfStroke } from '@fortawesome/free-solid-s
 const Rating = ({ rating, terjual }) => {
   return (
     <div>
-      <div className="grid text-yellto text-2xl text-center">
+      <div className="grid text-goldento text-2xl text-center">
         <div className="flex justify-center items-center ">
           <FontAwesomeIcon icon={faStar} size="2x" />
           <FontAwesomeIcon icon={faStar} size="2x" />
