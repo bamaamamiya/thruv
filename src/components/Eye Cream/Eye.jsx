@@ -60,7 +60,7 @@ const Flat = () => {
           !!! BAHAYA BANGET MATA PANDA !!!
         </p>
         <div className="flex justify-center items-center p-2">
-          <img src="images/eye/matapanda.jpeg" />
+          <img src="images/eye/matapanda.webp" />
         </div>
         <div className="font-bold bg-redto text-white text-2xl rounded-xl">
           <p>SOLUSI HILANGKAN MATA PANDA</p>
