@@ -9,7 +9,7 @@ export default function Popup() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowPopup(true);
-    }, 3000); // 20 detik
+    },30000); // 20 detik
 
     return () => clearTimeout(timer);
   }, []);
@@ -17,13 +17,15 @@ export default function Popup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formattedPhone = `'${phone}`; // Tambahin petik biar gak ilang 0
+    const date = new Date().toLocaleDateString("id-ID"); // Format tanggal lokal Indonesia
+
     try {
       const response = await fetch("https://sheetdb.io/api/v1/3rkzb46uv8cuf", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ data: [{ phone: formattedPhone }] }),
+        body: JSON.stringify({ data: [{ phone: formattedPhone, date: date }] }),
       });
 
       if (response.ok) {
