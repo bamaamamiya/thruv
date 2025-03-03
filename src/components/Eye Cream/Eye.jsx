@@ -195,7 +195,7 @@ const Flat = () => {
         </div>
         <br />
       </div>
-			<Popup/>
+			{/* <Popup/> */}
       <Floting />
       {/* end div */}
     </div>
