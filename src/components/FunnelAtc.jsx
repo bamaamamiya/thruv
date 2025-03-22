@@ -12,19 +12,20 @@ const FunnelAtc = () => {
   };
 
   const handleAddToCart = (bundleTitle) => {
-    // Set the selected bundle
-    setBundle(bundleTitle);
-
-    // Facebook Pixel tracking for "AddToCart"
-    if (window.fbq) {
-      fbq("track", "AddToCart", {
-        content_name: bundleTitle,
-        content_category: "Product Bundle",
-        value: 157000, // Example: You can adjust the value based on your bundle price
-        currency: "IDR",
-      });
-    }
-  };
+		setBundle(bundleTitle);
+		console.log("AddToCart Clicked:", bundleTitle);
+	
+		if (window.fbq) {
+			fbq("track", "AddToCart", {
+				content_name: bundleTitle,
+				content_category: "Product Bundle",
+			});
+			console.log("FB Pixel Event Sent!");
+		} else {
+			console.log("FB Pixel not loaded!");
+		}
+	};
+	
 
   const handleSubmit = () => {
     if (!name || !whatsapp) {
