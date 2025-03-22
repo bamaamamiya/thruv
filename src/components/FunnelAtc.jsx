@@ -16,6 +16,7 @@ const FunnelAtc = () => {
 		console.log("AddToCart Clicked:", bundleTitle);
 	
 		if (window.fbq) {
+			console.log("Triggering AddToCart Event"); // <- tambahin log biar yakin
 			fbq("track", "AddToCart", {
 				content_name: bundleTitle,
 				content_category: "Product Bundle",
