@@ -12,21 +12,20 @@ const FunnelAtc = () => {
   };
 
   const handleAddToCart = (bundleTitle) => {
-		setBundle(bundleTitle);
-		console.log("AddToCart Clicked:", bundleTitle);
-	
-		if (window.fbq) {
-			console.log("Triggering AddToCart Event"); // <- tambahin log biar yakin
-			fbq("track", "AddToCart", {
-				content_name: bundleTitle,
-				content_category: "Product Bundle",
-			});
-			console.log("FB Pixel Event Sent!");
-		} else {
-			console.log("FB Pixel not loaded!");
-		}
-	};
-	
+    setBundle(bundleTitle);
+    console.log("AddToCart Clicked:", bundleTitle);
+
+    if (window.fbq) {
+      console.log("Triggering AddToCart Event"); // <- tambahin log biar yakin
+      fbq("track", "AddToCart", {
+        content_name: bundleTitle,
+        content_category: "Product Bundle",
+      });
+      console.log("FB Pixel Event Sent!");
+    } else {
+      console.log("FB Pixel not loaded!");
+    }
+  };
 
   const handleSubmit = () => {
     if (!name || !whatsapp) {
@@ -39,11 +38,11 @@ const FunnelAtc = () => {
 
     // Temukan bundle yang dipilih berdasarkan `bundle` yang ada di state
     const selectedBundle = bundles.find(
-      (bundleOption) => bundleOption.title === bundle);
+      (bundleOption) => bundleOption.title === bundle
+    );
 
     // Pesan WhatsApp yang ingin dikirim
     const message = `Halo, saya ${name}. Saya tertarik memesan ${selectedBundle.title} ${selectedBundle.description} dengan metode pembayaran ${paymentMethod}`;
-
 
     // Redirect ke WhatsApp
     const whatsappURL = `https://wa.me/${customerServiceNumber}?text=${encodeURIComponent(
@@ -137,13 +136,13 @@ const FunnelAtc = () => {
               onChange={() => handlePaymentChange("COD")}
               className="mr-2 cursor-pointer"
             />
-            <label htmlFor="cod" className="cursor-pointer grid items-center">
-              <div className="flex">
-                <span className="bg-green-500 text-white text-xs font-bold px-2 py-1 rounded mr-2">
-                  COD
-                </span>
-              </div>
-              Bayar di Tempat
+            <label htmlFor="cod" className="cursor-pointer grid items-center ">
+              <img
+                src="/images/funnel/cod.webp"
+                alt="COD"
+                className="w-12 h-12 object-contain"
+              />
+              <span className="font-medium">Bayar di Tempat</span>
             </label>
           </div>
 
@@ -161,12 +160,12 @@ const FunnelAtc = () => {
               className="mr-2 cursor-pointer"
             />
             <label htmlFor="bank" className="cursor-pointer grid items-center">
-              <div>
-                <span className="bg-blue-500 grid text-white text-xs font-bold px-2 py-1 rounded mr-2">
-                  BANK
-                  <span>TRANSFER</span>
-                </span>
-              </div>
+              <img
+                src="/images/funnel/transfer.webp"
+                alt="Bank Transfer"
+                className="w-12 h-12 object-contain"
+              />
+              <span className="font-medium">Bank Transfer</span>
             </label>
           </div>
         </div>
