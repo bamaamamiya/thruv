@@ -14,6 +14,7 @@ import Eye from "./components/Eye Cream/Eye";
 import PelX from "./components/Pel X/X";
 import Test from './components/Test';
 import Hair from "./components/Hair/Hair";
+
 function App() {
   return (
     <BrowserRouter>

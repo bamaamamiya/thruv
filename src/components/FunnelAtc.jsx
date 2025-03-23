@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import BundleOption from "./BundleOption";
+import BundleOption from "./Funnel/BundleOption";
 
 const FunnelAtc = () => {
   const [name, setName] = useState("");
