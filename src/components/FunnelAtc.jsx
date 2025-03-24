@@ -17,7 +17,7 @@ const FunnelAtc = () => {
 
     if (window.fbq) {
       console.log("Triggering AddToCart Event"); // <- tambahin log biar yakin
-      fbq("track", "AddToCart", {
+      fbq('trackSingle', '1250623926188998', "AddToCart", {
         content_name: bundleTitle,
         content_category: "Product Bundle",
       });
@@ -58,20 +58,6 @@ const FunnelAtc = () => {
       isRecommended: false,
       price: 479000,
       isPrice: 149000,
-    },
-    {
-      title: "Beli 2",
-      description: "Bonus 2 Kain Reffil",
-      isRecommended: true,
-      price: 958000,
-      isPrice: 200000,
-    },
-    {
-      title: "Beli 3",
-      description: "Bonus 3 Kain Reffil",
-      isRecommended: false,
-      price: 1000000,
-      isPrice: 250000,
     },
   ];
   return (

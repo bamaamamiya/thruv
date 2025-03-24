@@ -11,8 +11,7 @@ import {
   faStar,
   faStarHalfStroke,
 } from "@fortawesome/free-solid-svg-icons";
-import FunnelReUse from "../FunnelReUse";
-
+import FunnelAtc from '../FunnelAtc'
 const bundles = [
   {
     title: "Beli 1",
