@@ -14,9 +14,10 @@ const FunnelAtc = () => {
   const handleAddToCart = (bundleTitle) => {
     setBundle(bundleTitle);
     console.log("AddToCart Clicked:", bundleTitle);
+		console.log('Available Pixels:', fbq.getState().pixels); // cek pixel mana aja ke-load
 
     if (window.fbq) {
-      console.log("Triggering AddToCart Event"); // <- tambahin log biar yakin
+			console.log("Triggering AddToCart Event to specific Pixel");
       fbq('trackSingle', '1250623926188998', "AddToCart", {
         content_name: bundleTitle,
         content_category: "Product Bundle",
