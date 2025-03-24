@@ -9,24 +9,26 @@ const BundleOption = ({
   price,
   isPrice,
 }) => {
-  const discound = price && isPrice ? price - isPrice : null;
+  const discount = price && isPrice ? price - isPrice : null;
 
   // Fungsi untuk memformat angka dengan pemisah ribuan
   const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('id-ID', {
-      style: 'currency',
-      currency: 'IDR'
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
     }).format(amount);
   };
 
   return (
-    <div className={`flex border rounded-lg p-6 cursor-pointer justify-between items-center 
+    <div
+      className={`flex border rounded-lg p-6 cursor-pointer justify-between items-center 
       ${isActive ? "border-green-500 bg-green-50" : "border-gray-300"} 
-      hover:shadow-md transition relative`}>
+      hover:shadow-md transition relative`}
+    >
       <div
         onClick={onClick}
-        // className={`border rounded-lg p-4 cursor-pointer grid items-center 
-        // ${isActive ? "border-green-500 bg-green-50" : "border-gray-300"} 
+        // className={`border rounded-lg p-4 cursor-pointer grid items-center
+        // ${isActive ? "border-green-500 bg-green-50" : "border-gray-300"}
         // hover:shadow-md transition relative`}
       >
         {/* Badge Rekomendasi */}
@@ -40,13 +42,17 @@ const BundleOption = ({
 
         {/* Menampilkan informasi diskon jika ada */}
 
-        {discound !== null ? <p className="text-sm">Hemat {formatCurrency(discound)}</p> : <p></p>
-        }
+        {discount !== null && (
+          <p className="text-sm">Hemat {formatCurrency(discount)}</p>
+        )}
       </div>
-        <div className="text-end">
-          <p className="text-lg font-bold text-greento "> {formatCurrency(isPrice)}</p>
-          <p className="line-through text-xs">{formatCurrency(price)}</p>
-        </div>
+      <div className="text-end">
+        <p className="text-lg font-bold text-greento ">
+          {" "}
+          {formatCurrency(isPrice)}
+        </p>
+        <p className="line-through text-xs">{formatCurrency(price)}</p>
+      </div>
     </div>
   );
 };

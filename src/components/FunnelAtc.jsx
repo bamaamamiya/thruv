@@ -14,11 +14,10 @@ const FunnelAtc = () => {
   const handleAddToCart = (bundleTitle) => {
     setBundle(bundleTitle);
     console.log("AddToCart Clicked:", bundleTitle);
-		console.log('Available Pixels:', fbq.getState().pixels); // cek pixel mana aja ke-load
 
     if (window.fbq) {
-			console.log("Triggering AddToCart Event to specific Pixel");
-      fbq('trackSingle', '1250623926188998', "AddToCart", {
+      console.log("Triggering AddToCart Event"); // <- tambahin log biar yakin
+      fbq('trackSingle', '1250623926188998', 'AddToCart', {
         content_name: bundleTitle,
         content_category: "Product Bundle",
       });
@@ -59,6 +58,20 @@ const FunnelAtc = () => {
       isRecommended: false,
       price: 479000,
       isPrice: 149000,
+    },
+    {
+      title: "Beli 2",
+      description: "Bonus 2 Kain Reffil",
+      isRecommended: true,
+      price: 958000,
+      isPrice: 200000,
+    },
+    {
+      title: "Beli 3",
+      description: "Bonus 3 Kain Reffil",
+      isRecommended: false,
+      price: 1000000,
+      isPrice: 250000,
     },
   ];
   return (
