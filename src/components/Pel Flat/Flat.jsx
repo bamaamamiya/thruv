@@ -273,7 +273,7 @@ const Flat = () => {
             <FontAwesomeIcon icon={faArrowDown} />
             <FontAwesomeIcon icon={faArrowDown} />
           </div>
-          <Form />
+          {/* <Form /> */}
           <FunnelAtc
             bundlesData={bundles}
             customerServiceNumber="6282392135589"
