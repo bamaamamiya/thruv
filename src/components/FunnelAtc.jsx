@@ -53,7 +53,7 @@ const FunnelAtc = () => {
       (bundleOption) => bundleOption.title === bundle
     );
 
-    const message = `Halo, saya ${name}. Saya tertarik memesan ${selectedBundle.title} ${selectedBundle.description} dengan metode pembayaran ${paymentMethod}`;
+    const message = `Halo, saya ${name}. Saya tertarik memesan ${selectedBundle.title} dengan metode pembayaran ${paymentMethod}`;
 
     const whatsappURL = `https://wa.me/${customerServiceNumber}?text=${encodeURIComponent(
       message
