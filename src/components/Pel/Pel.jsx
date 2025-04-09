@@ -259,7 +259,7 @@ const Pel = () => {
             </p>
           </div>
           <div id="form">
-            <Funnel />
+            <Funnel productName="Pel Tarik"/>
             {/* <Form /> */}
           </div>
         </div>

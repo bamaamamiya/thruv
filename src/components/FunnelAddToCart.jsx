@@ -1,31 +1,9 @@
 import React, { useState } from "react";
 
-const FunnelAtc = () => {
+const FunnelAtc = ({ productName = "Produk Default" }) => {
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("COD");
-  const [bundle] = useState("Beli 1"); // Set default bundle (bisa kamu ubah kalau mau ganti default)
-
-  const bundles = [
-    {
-      title: "Beli 1",
-      description: "Bonus 1 Kain Reffil",
-      price: 479000,
-      isPrice: 149000,
-    },
-    {
-      title: "Beli 2",
-      description: "Bonus 2 Kain Reffil",
-      price: 958000,
-      isPrice: 200000,
-    },
-    {
-      title: "Beli 3",
-      description: "Bonus 3 Kain Reffil",
-      price: 1000000,
-      isPrice: 250000,
-    },
-  ];
 
   const handlePaymentChange = (method) => {
     setPaymentMethod(method);
@@ -37,23 +15,21 @@ const FunnelAtc = () => {
       return;
     }
 
+    // Trigger AddToCart event saat submit
     if (window.fbq) {
       console.log("Triggering AddToCart on Submit");
-      fbq("trackSingle", '1250623926188998', "AddToCart", {
-        content_name: bundle,
-        content_category: "Product Bundle",
+      fbq("trackSingle", "1250623926188998", "AddToCart", {
+        content_name: productName,
+        content_category: "Single Product",
       });
+      console.log("FB Pixel Event Sent on Submit!");
     } else {
       console.log("FB Pixel not loaded!");
     }
 
-    const customerServiceNumber = "6282392135589";
+    const customerServiceNumber = "6282392135589"; // Ganti nomor CS Anda
 
-    const selectedBundle = bundles.find(
-      (bundleOption) => bundleOption.title === bundle
-    );
-
-    const message = `Halo, saya ${name}. Saya tertarik memesan ${selectedBundle.title} ${selectedBundle.description} dengan metode pembayaran ${paymentMethod}`;
+    const message = `Halo, saya ${name}. Saya tertarik memesan ${productName} dengan metode pembayaran ${paymentMethod}`;
 
     const whatsappURL = `https://wa.me/${customerServiceNumber}?text=${encodeURIComponent(
       message
@@ -69,7 +45,6 @@ const FunnelAtc = () => {
         <div className="mb-4">
           <input
             type="text"
-            id="name"
             onChange={(e) => setName(e.target.value)}
             placeholder="Nama Anda"
             className="w-full border rounded-lg p-2 focus:outline-none focus:ring focus:ring-green-300"
@@ -79,7 +54,6 @@ const FunnelAtc = () => {
         <div className="mb-4">
           <input
             type="text"
-            id="whatsapp"
             onChange={(e) => setWhatsapp(e.target.value)}
             placeholder="No. WhatsApp Anda"
             className="w-full border rounded-lg p-2 focus:outline-none focus:ring focus:ring-green-300"
@@ -95,14 +69,13 @@ const FunnelAtc = () => {
           >
             <input
               type="radio"
-              id="cod"
               name="payment"
               value="COD"
               checked={paymentMethod === "COD"}
               onChange={() => handlePaymentChange("COD")}
               className="mr-2 cursor-pointer"
             />
-            <label htmlFor="cod" className="cursor-pointer grid items-center ">
+            <label className="cursor-pointer grid items-center">
               <img
                 src="/images/funnel/cod.webp"
                 alt="COD"
@@ -118,14 +91,13 @@ const FunnelAtc = () => {
           >
             <input
               type="radio"
-              id="bank"
               name="payment"
               value="Bank Transfer"
               checked={paymentMethod === "Bank Transfer"}
               onChange={() => handlePaymentChange("Bank Transfer")}
               className="mr-2 cursor-pointer"
             />
-            <label htmlFor="bank" className="cursor-pointer grid items-center">
+            <label className="cursor-pointer grid items-center">
               <img
                 src="/images/funnel/transfer.webp"
                 alt="Bank Transfer"
