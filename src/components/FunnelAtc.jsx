@@ -4,11 +4,11 @@ const FunnelAtc = () => {
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("COD");
-  const [bundle] = useState("Beli 1"); // Set default bundle (bisa kamu ubah kalau mau ganti default)
+  const [bundle] = useState("Pel Tarik"); // Set default bundle (bisa kamu ubah kalau mau ganti default)
 
   const bundles = [
     {
-      title: "Beli 1",
+      title: "Pel Tarik",
       description: "Bonus 1 Kain Reffil",
       price: 479000,
       isPrice: 149000,
