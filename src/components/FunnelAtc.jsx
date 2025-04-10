@@ -47,7 +47,7 @@ const FunnelAtc = () => {
       console.log("FB Pixel not loaded!");
     }
 
-    const customerServiceNumber = "6282392135589";
+    const customerServiceNumber = "6282387881505";
 
     const selectedBundle = bundles.find(
       (bundleOption) => bundleOption.title === bundle
