@@ -5,7 +5,6 @@ const FunnelAtc = () => {
   const [whatsapp, setWhatsapp] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("COD");
   const [bundle] = useState("Pel Tarik"); // Set default bundle (bisa kamu ubah kalau mau ganti default)
-	const [isSubmitting, setIsSubmitting] = useState(false);
 
   const bundles = [
     {
@@ -33,34 +32,34 @@ const FunnelAtc = () => {
   };
 
   const handleSubmit = () => {
-		if (isSubmitting) return;
-	
-		if (!name || !whatsapp) {
-			alert("Silakan isi semua data!");
-			return;
-		}
-	
-		setIsSubmitting(true); // prevent double click
-	
-		if (window.fbq) {
-			fbq("trackSingle", '1250623926188998', "AddToCart", {
-				content_name: bundle,
-				content_category: "Product Bundle",
-			});
-		}
+    if (!name || !whatsapp) {
+      alert("Silakan isi semua data!");
+      return;
+    }
+
+    if (window.fbq) {
+      console.log("Triggering AddToCart on Submit");
+      fbq("trackSingle", '1250623926188998', "AddToCart", {
+        content_name: bundle,
+        content_category: "Product Bundle",
+      });
+    } else {
+      console.log("FB Pixel not loaded!");
+    }
 
     const customerServiceNumber = "6282392135589";
-  const selectedBundle = bundles.find((bundleOption) => bundleOption.title === bundle);
 
-  const message = `Halo, saya ${name}. Saya tertarik memesan ${selectedBundle.title} dengan metode pembayaran ${paymentMethod}`;
-  const whatsappURL = `https://wa.me/${customerServiceNumber}?text=${encodeURIComponent(message)}`;
-  window.open(whatsappURL, "_blank");
+    const selectedBundle = bundles.find(
+      (bundleOption) => bundleOption.title === bundle
+    );
 
-  setTimeout(() => setIsSubmitting(false), 2000); // allow retry after 2 sec
-};
+    const message = `Halo, saya ${name}. Saya tertarik memesan ${selectedBundle.title} dengan metode pembayaran ${paymentMethod}`;
 
-window.fbq = (...args) => console.log("fbq called:", args)
-
+    const whatsappURL = `https://wa.me/${customerServiceNumber}?text=${encodeURIComponent(
+      message
+    )}`;
+    window.open(whatsappURL, "_blank");
+  };
 
   return (
     <div className="max-w-md mx-auto bg-white p-6 rounded-2xl">
