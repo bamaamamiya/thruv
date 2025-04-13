@@ -14,6 +14,15 @@ import {
 import Funnel from "../FunnelAtc";
 import Popup from "../PopUp";
 
+const pixelId = "1250623926188998"; // FB Pixel ID
+
+const produkBaru = {
+	title: "Pel Tarik",
+	description: "Bonus 1 kain Refill",
+	price: 399000,
+	isPrice: 99000,
+};
+
 const Pel = () => {
   return (
     <div className="m-2">
@@ -259,7 +268,7 @@ const Pel = () => {
             </p>
           </div>
           <div id="form">
-            <Funnel/>
+            <Funnel pixel={pixelId} product={produkBaru}/>
             {/* <Form /> */}
           </div>
         </div>
