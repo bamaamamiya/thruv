@@ -1,19 +1,5 @@
-const faqs = [
-  {
-    question: "Apakah ini aman untuk kulit sensitif?",
-    answer: "Ya, sudah diuji di BPOM & tanpa bahan iritasi!",
-  },
-  {
-    question: "Berapa lama hasilnya terlihat?",
-    answer: "Rata-rata 7 hari, tapi hasil bisa lebih cepat!",
-  },
-  {
-    question: "Apa garansinya?",
-    answer: "Kalau dalam 30 hari gak puas, uang kembali 100%!",
-  },
-];
-
-export default function FAQComponent() {
+// Faqs.jsx
+export default function Faqs({ faqs }) {
   return (
     <div className="w-full max-w-lg mx-auto p-4">
       <h2 className="text-2xl font-bold text-center mb-6">FAQ (Pertanyaan yang Sering Diajukan)</h2>

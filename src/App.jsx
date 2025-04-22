@@ -14,6 +14,7 @@ import Eye from "./components/Eye Cream/Eye";
 import PelX from "./components/Pel X/X";
 import Test from './components/Test';
 import Hair from "./components/Hair/Hair";
+import LandingPage from "./components/LandingPage/LandingPage";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/pelx" element={<PelX />} />
         <Route path="/test" element={<Test/>}/>
         <Route path="/hair" element={<Hair/>}/>
+        <Route path="/lp" element={<LandingPage/>}/>
       </Routes>
     </BrowserRouter>
   );

@@ -2,8 +2,7 @@ import React from "react";
 import CountdownTimer from "../set/CountdownTimer";
 import Garansi from "../set/Garansi";
 import Form from "./Form";
-
-import Floting from "./Floting";
+import Floting from "../Floting";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -17,10 +16,10 @@ import Popup from "../PopUp";
 const pixelId = "1250623926188998"; // FB Pixel ID
 
 const produkBaru = {
-	title: "Pel Tarik",
-	description: "Bonus 1 kain Refill",
-	price: 399000,
-	isPrice: 99000,
+  title: "Pel Tarik",
+  description: "Bonus 1 kain Refill",
+  price: 399000,
+  isPrice: 99000,
 };
 
 const Pel = () => {
@@ -268,7 +267,7 @@ const Pel = () => {
             </p>
           </div>
           <div id="form">
-            <Funnel pixel={pixelId} product={produkBaru}/>
+            <Funnel pixel={pixelId} product={produkBaru} />
             {/* <Form /> */}
           </div>
         </div>

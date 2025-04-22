@@ -5,7 +5,7 @@ import {
   faStar,
   faStarHalfStroke,
 } from "@fortawesome/free-solid-svg-icons";
-import Floting from "../Pel/Floting";
+import Floting from "../Floting";
 import Count from "../Count";
 import Garansi from "../set/Garansi";
 import Footer from "../Footer";
@@ -14,14 +14,14 @@ const Hair = () => {
   return (
     <div className="m-2">
       <div className="grid justify-center items-center">
-				<div className="flex justify-center">
-        <img
-          src="./images/hair/headlinee.webp"
-          alt="headline"
-          width="640"
-          height="360"
-					/>
-					</div>
+        <div className="flex justify-center">
+          <img
+            src="./images/hair/headlinee.webp"
+            alt="headline"
+            width="640"
+            height="360"
+          />
+        </div>
         <br />
         <h1 className="text-center text-3xl font-bold text-greendo">
           Rambut kamu kering, bercabang, kusam, susah diatur?
@@ -42,45 +42,44 @@ const Hair = () => {
         <Garansi />
         <br />
 
-				<div className="grid justify-center">
-
-        <img
-          src="./images/hair/manfaat.webp"
-          alt="headline"
-          width="640"
-          height="360"
-        />
-        <img
-          src="./images/hair/4.webp"
-          alt="headline"
-          width="640"
-          height="360"
-        />
-        <img
-          src="./images/hair/9.webp"
-          alt="headline"
-          width="640"
-          height="360"
-        />
-        <img
-          src="./images/hair/10.webp"
-          alt="headline"
-          width="640"
-          height="360"
-        />
-        <img
-          src="./images/hair/11.webp"
-          alt="headline"
-          width="640"
-          height="360"
-        />
-        <img
-          src="./images/hair/8.webp"
-          alt="headline"
-          width="640"
-          height="360"
-        />
-				</div>
+        <div className="grid justify-center">
+          <img
+            src="./images/hair/manfaat.webp"
+            alt="headline"
+            width="640"
+            height="360"
+          />
+          <img
+            src="./images/hair/4.webp"
+            alt="headline"
+            width="640"
+            height="360"
+          />
+          <img
+            src="./images/hair/9.webp"
+            alt="headline"
+            width="640"
+            height="360"
+          />
+          <img
+            src="./images/hair/10.webp"
+            alt="headline"
+            width="640"
+            height="360"
+          />
+          <img
+            src="./images/hair/11.webp"
+            alt="headline"
+            width="640"
+            height="360"
+          />
+          <img
+            src="./images/hair/8.webp"
+            alt="headline"
+            width="640"
+            height="360"
+          />
+        </div>
 
         <br />
         <div className="grid justify-center items-center space-y-2">
@@ -108,19 +107,19 @@ const Hair = () => {
           <br />
           <br />
           <br />
-        <img
-          src="./images/diskonspesial.webp"
-          alt="headline"
-          width="640"
-          height="360"
-					/>
-        <img
-          src="./images/hair/offerhair.webp"
-          alt="headline"
-          width="640"
-          height="360"
-					/>
-					</div>
+          <img
+            src="./images/diskonspesial.webp"
+            alt="headline"
+            width="640"
+            height="360"
+          />
+          <img
+            src="./images/hair/offerhair.webp"
+            alt="headline"
+            width="640"
+            height="360"
+          />
+        </div>
       </div>
       <br />
       <div className=" bg-yellto text-center">

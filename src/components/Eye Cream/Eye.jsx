@@ -12,7 +12,7 @@ import {
   faStar,
   faStarHalfStroke,
 } from "@fortawesome/free-solid-svg-icons";
-import FAQComponent from "../Faqs";
+import FAQComponent from "../set/Faqs";
 import Popup from "../PopUp";
 
 const Flat = () => {

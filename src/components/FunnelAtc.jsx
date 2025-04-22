@@ -17,24 +17,38 @@ const FunnelAtc = ({ pixel, product }) => {
     }
 
     // FB Pixel trigger
-    if (window.fbq) {
-      const eventData = {
-        content_name: product.title,
-        content_category: "Product Bundle",
-      };
+    // if (window.fbq) {
+    //   const eventData = {
+    //     content_name: product.title,
+    //     content_category: "Product Bundle",
+    //   };
 
-      if (pixel) {
-        fbq("trackSingle", pixel, "AddToCart", eventData);
-      } else {
-        fbq("track", "AddToCart", eventData);
-      }
-    }
+    //   if (pixel) {
+    //     fbq("trackSingle", pixel, "AddToCart", eventData);
+    //   } else {
+    //     fbq("track", "AddToCart", eventData);
+    //   }
+    // }
 
-    const message = `Halo, saya ${name}. Saya tertarik memesan ${product.title} dengan metode pembayaran ${paymentMethod}`;
-    const whatsappURL = `https://wa.me/6282387881505?text=${encodeURIComponent(
-      message
-    )}`;
-    window.open(whatsappURL, "_blank");
+		// FB Pixel trigger
+if (window.fbq) {
+  console.log("Triggering AddToCart on Submit. Pixel:", pixel);
+  fbq("trackSingle", pixel, "AddToCart", {
+    content_name: product.title,
+    content_ids: [product.id || "123"],
+    content_type: "product",
+    value: product.price || 0,
+    currency: "IDR",
+  });
+  console.log("FB Pixel Event Sent on Submit!");
+}
+
+setTimeout(() => {
+  const message = `Halo, saya ${name}. Saya tertarik memesan ${product.title} dengan metode pembayaran ${paymentMethod}`;
+  const whatsappURL = `https://wa.me/6282387881505?text=${encodeURIComponent(message)}`;
+  window.open(whatsappURL, "_blank");
+}, 500); // 500ms delay biar AddToCart sempat dikirim
+
   };
 
   return (
