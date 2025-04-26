@@ -33,11 +33,11 @@ const HeadLine = ({imgHeadLine , headLine , subHeadLine ,rating , terjual}) => {
 
           <div className="grid text-yellto text-2xl text-center">
             <div className="flex justify-center items-center">
-              <FontAwesomeIcon icon={faStar} />
-              <FontAwesomeIcon icon={faStar} />
-              <FontAwesomeIcon icon={faStar} />
-              <FontAwesomeIcon icon={faStar} />
-              <FontAwesomeIcon icon={faStarHalfStroke} />
+              <FontAwesomeIcon icon={faStar} size="xl"/>
+              <FontAwesomeIcon icon={faStar} size="xl"/>
+              <FontAwesomeIcon icon={faStar} size="xl"/>
+              <FontAwesomeIcon icon={faStar} size="xl"/>
+              <FontAwesomeIcon icon={faStarHalfStroke} size="xl"/>
             </div>
             <br />
             <div className="text-black">
