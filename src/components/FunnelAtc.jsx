@@ -110,7 +110,7 @@ setTimeout(() => {
         <button
           onClick={handleSubmit}
           type="button"
-          className="w-full text-2xl bg-redto text-white font-bold py-2 px-4 rounded-lg hover:bg-green-600 transition"
+          className="w-full text-2xl bg-redto text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 transition"
         >
           Konfirmasi Pesanan Di WhatsApp
         </button>

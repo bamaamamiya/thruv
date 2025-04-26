@@ -15,6 +15,7 @@ import PelX from "./components/Pel X/X";
 import Test from './components/Test';
 import Hair from "./components/Hair/Hair";
 import LandingPage from "./components/LandingPage/LandingPage";
+import LandingPagePump from "./components/Pump/LandingPage";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/test" element={<Test/>}/>
         <Route path="/hair" element={<Hair/>}/>
         <Route path="/lp" element={<LandingPage/>}/>
+        <Route path="/pump" element={<LandingPagePump/>}/>
       </Routes>
     </BrowserRouter>
   );
