@@ -4,6 +4,7 @@ const FunnelAtc = ({ pixel, product }) => {
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("COD");
+  const [address, setAddress] = useState(""); // <-- Tambahan
 
   const handleSubmit = () => {
     if (!name || !whatsapp) {
@@ -17,38 +18,25 @@ const FunnelAtc = ({ pixel, product }) => {
     }
 
     // FB Pixel trigger
-    // if (window.fbq) {
-    //   const eventData = {
-    //     content_name: product.title,
-    //     content_category: "Product Bundle",
-    //   };
+    if (window.fbq) {
+      console.log("Triggering AddToCart on Submit. Pixel:", pixel);
+      fbq("trackSingle", pixel, "AddToCart", {
+        content_name: product.title,
+        content_ids: [product.id || "123"],
+        content_type: "product",
+        value: product.price || 0,
+        currency: "IDR",
+      });
+      console.log("FB Pixel Event Sent on Submit!");
+    }
 
-    //   if (pixel) {
-    //     fbq("trackSingle", pixel, "AddToCart", eventData);
-    //   } else {
-    //     fbq("track", "AddToCart", eventData);
-    //   }
-    // }
-
-		// FB Pixel trigger
-if (window.fbq) {
-  console.log("Triggering AddToCart on Submit. Pixel:", pixel);
-  fbq("trackSingle", pixel, "AddToCart", {
-    content_name: product.title,
-    content_ids: [product.id || "123"],
-    content_type: "product",
-    value: product.price || 0,
-    currency: "IDR",
-  });
-  console.log("FB Pixel Event Sent on Submit!");
-}
-
-setTimeout(() => {
-  const message = `Halo, saya ${name}. Saya tertarik memesan ${product.title} dengan metode pembayaran ${paymentMethod}`;
-  const whatsappURL = `https://wa.me/6282387881505?text=${encodeURIComponent(message)}`;
-  window.open(whatsappURL, "_blank");
-}, 500); // 500ms delay biar AddToCart sempat dikirim
-
+    setTimeout(() => {
+      const message = `Halo, saya ${name}. Saya tertarik memesan ${product.title} dengan metode pembayaran ${paymentMethod}. Alamat lengkap saya : \n${address}`;
+      const whatsappURL = `https://wa.me/6282387881505?text=${encodeURIComponent(
+        message
+      )}`;
+      window.open(whatsappURL, "_blank");
+    }, 500); // 500ms delay biar AddToCart sempat dikirim
   };
 
   return (
@@ -76,6 +64,17 @@ setTimeout(() => {
           />
         </div>
 
+        <div className="mb-4">
+          <label className="block font-semibold mb-1">Alamat Lengkap</label>
+          <textarea
+            placeholder="Masukkan Nomor Rumah, RT/RW, Kecamatan, Kota/Kab, Ciri2 Rumah"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            rows={4}
+            className="w-full border rounded-lg p-2 focus:outline-none focus:ring resize-none"
+          />
+        </div>
+
         <h3 className="text-lg font-bold mb-3">Metode Pembayaran:</h3>
 
         <div className="mb-4">
@@ -95,7 +94,9 @@ setTimeout(() => {
               />
               <label className="cursor-pointer grid items-center">
                 <img
-                  src={`/images/funnel/${method === "COD" ? "cod" : "transfer"}.webp`}
+                  src={`/images/funnel/${
+                    method === "COD" ? "cod" : "transfer"
+                  }.webp`}
                   alt={method}
                   className="w-12 h-12 object-contain"
                 />

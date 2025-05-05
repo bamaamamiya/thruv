@@ -1,7 +1,7 @@
 import Content from "./Content";
 import Headline from "./Headline";
 import Footer from "./Footer";
-import Floting from "../Floting";
+import Floting from "../set/Floting";
 
 const LandingPage = () => {
   const productImages = [
@@ -22,26 +22,27 @@ const LandingPage = () => {
   const promoImages = ["images/pel/diskon.webp", "images/pel/99.webp"];
 
   const funnelProduct = {
-		title: "Pel Tarik Anti Peras",
-		description: "Bonus 1 kain Refill",
-
-	};
+    title: "Pel Tarik Anti Peras",
+    description: "Bonus 1 kain Refill",
+  };
 
   const faqs = [
-		{
-			question: "Apakah pel ini cocok untuk semua jenis lantai?",
-			answer: "Iya! Cocok untuk keramik, kayu, marmer, hingga vinyl.",
-		},
-		{
-			question: "Perlukah pakai tangan untuk peras airnya?",
-			answer: "Tidak perlu! Sudah dilengkapi sistem peras otomatis tanpa sentuhan tangan.",
-		},
-		{
-			question: "Apakah kain pel-nya bisa dicuci ulang?",
-			answer: "Bisa! Kain pel bisa dicuci & dipakai berulang hingga puluhan kali.",
-		},
-	];
-	
+    {
+      question: "Apakah pel ini cocok untuk semua jenis lantai?",
+      answer: "Iya! Cocok untuk keramik, kayu, marmer, hingga vinyl.",
+    },
+    {
+      question: "Perlukah pakai tangan untuk peras airnya?",
+      answer:
+        "Tidak perlu! Sudah dilengkapi sistem peras otomatis tanpa sentuhan tangan.",
+    },
+    {
+      question: "Apakah kain pel-nya bisa dicuci ulang?",
+      answer:
+        "Bisa! Kain pel bisa dicuci & dipakai berulang hingga puluhan kali.",
+    },
+  ];
+
   return (
     <div>
       <Headline
@@ -67,12 +68,11 @@ const LandingPage = () => {
         produkBaru={funnelProduct}
         footerImages={[
           "images/fotter2.webp",
-          "images/sek.webp",
           "images/fotter.webp",
         ]}
         faqs={faqs}
       />
-      <Floting/>
+      <Floting />
     </div>
   );
 };

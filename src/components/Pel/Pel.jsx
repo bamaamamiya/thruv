@@ -2,7 +2,7 @@ import React from "react";
 import CountdownTimer from "../set/CountdownTimer";
 import Garansi from "../set/Garansi";
 import Form from "./Form";
-import Floting from "../Floting";
+import Floting from "../set/Floting";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -281,7 +281,6 @@ const Pel = () => {
             width="640"
             height="360"
           />
-          <img src="images/sek.webp" alt="footer" width="640" height="360" />
           <img src="images/fotter.webp" alt="footer" width="640" height="360" />
         </div>
         <br />

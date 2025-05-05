@@ -3,17 +3,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 
 import "./index.css";
-import MainContent from "./components/Shaver/MainContent";
 import Page from "./components/Page";
 import Pel from "./components/Pel/Pel";
 import Flat from "./components/Pel Flat/Flat";
-import Flat2 from "./components/Pel Flat 2/Flat2";
-import Flatl from "./components/Pel Flat L/Flat";
-import MiniMop from "./components/Mini Mop/Mini";
-import Eye from "./components/Eye Cream/Eye";
 import PelX from "./components/Pel X/X";
-import Test from './components/Test';
-import Hair from "./components/Hair/Hair";
 import LandingPage from "./components/LandingPage/LandingPage";
 import LandingPagePump from "./components/Pump/LandingPage";
 
@@ -22,16 +15,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Page />} />
-        <Route path="/shaver" element={<MainContent />} />
         <Route path="/pel" element={<Pel />} />
         <Route path="/flat" element={<Flat />} />
-        <Route path="/pel-premium" element={<Flat2 />} />
-        <Route path="/flatl" element={<Flatl />} />
-        <Route path="/minimop" element={<MiniMop />} />
-        <Route path="/eyecream" element={<Eye />} />
         <Route path="/pelx" element={<PelX />} />
-        <Route path="/test" element={<Test/>}/>
-        <Route path="/hair" element={<Hair/>}/>
         <Route path="/lp" element={<LandingPage/>}/>
         <Route path="/pump" element={<LandingPagePump/>}/>
       </Routes>

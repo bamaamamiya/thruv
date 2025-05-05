@@ -4,7 +4,7 @@ const ImageSection = ({ images, altPrefix = "image" }) => (
   <div className="grid justify-center items-center space-y-4">
     {images.map((src, index) => (
       <img
-				className="space-y-2 flex justify-center"
+        className="space-y-2 flex justify-center"
         key={index}
         src={src}
         alt={`${altPrefix}-${index + 1}`}
@@ -15,44 +15,50 @@ const ImageSection = ({ images, altPrefix = "image" }) => (
   </div>
 );
 
-
 const Content = ({
   mainImage,
-  introText,
-	secondText,
-	solution,
-  secondImage,
+  secondText,
+  solutions,
+	solutionTitle,
   productImages,
   testimonies,
 }) => {
   return (
-		<div>
-		{/* Bagian Intro */}
-		<div className="grid justify-center items-center gap-6">
-			<img className="flex justify-center items-center" src={mainImage} alt="main" width="640" height="360" />
-			<p className="uppercase text-center font-bold text-3xl m-2">
-				{introText}
-			</p>
+    <div>
+      {/* Bagian Intro */}
+      <div className="grid justify-center items-center gap-6">
+        <img
+          className="flex justify-center items-center"
+          src={mainImage}
+          alt="main"
+          width="640"
+          height="360"
+        />
+      </div>
+      <div className="flex justify-center">
+        <section className="space-y-4 p-4">
+          <h2 className="text-xl font-bold text-center">{solutionTitle}</h2>
+          <ul className="space-y-2" style={{ "--emoji": "'✅'" }}>
+            {solutions.map((item, idx) => (
+              <li
+                key={idx}
+                className="relative pl-6 before:content-[var(--emoji)] before:absolute before:left-0 before:top-0.5"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
+
+      {/* Produk */}
+      <ImageSection images={productImages} altPrefix="product" />
+
+      {/* Testimoni */}
+      <h1 className="font-bold text-center text-4xl mt-2">TESTIMONI</h1>
+      <ImageSection images={testimonies} altPrefix="testimoni" />
 			<br/>
-			<p className="uppercase text-center font-bold text-3xl m-2">
-				{secondText}
-			</p>
-		</div>
-
-		{/* Gambar ke-2 */}
-		<div className="grid justify-center items-center text-center">
-			<img className="flex justify-center items-center" src={secondImage} alt="second" width="640" height="360" />
-			<p className="p-4 capitalize">{solution}</p>
-		</div>
-
-		{/* Produk */}
-		<ImageSection images={productImages} altPrefix="product" />
-
-		{/* Testimoni */}
-		<h1 className="font-bold text-center text-4xl mt-2">TESTIMONI</h1>
-		<ImageSection images={testimonies} altPrefix="testimoni" />
-
-	</div>
+    </div>
   );
 };
 

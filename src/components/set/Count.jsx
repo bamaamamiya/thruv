@@ -1,4 +1,4 @@
-import CountdownTimer from "./set/CountdownTimer";
+import CountdownTimer from "./CountdownTimer";
 const Count = () => {
   return (
     <div className="text-center">

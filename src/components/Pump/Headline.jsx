@@ -1,69 +1,56 @@
 import React from "react";
-import CountdownTimer from "../set/CountdownTimer";
-import Garansi from "../set/Garansi";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faStar,
-  faStarHalfStroke,
-} from "@fortawesome/free-solid-svg-icons";
 
-
-
-const HeadLine = ({imgHeadLine , headLine , subHeadLine ,rating , terjual}) => {
+const HeadLine = ({
+  imgHeadLine,
+  headLine,
+  subHeadLine,
+  rating,
+  terjual,
+  problems,
+  problemTitle,
+}) => {
+	const ImageSection = ({ images, altPrefix = "image" }) => (
+		<div className="grid justify-center items-center space-y-4">
+			{images.map((src, index) => (
+				<img
+					className="space-y-2 flex justify-center"
+					key={index}
+					src={src}
+					alt={`${altPrefix}-${index + 1}`}
+					width="640"
+					height="360"
+				/>
+			))}
+		</div>
+	);
   return (
     <div>
+      <div className="grid justify-center items-center text-center text-3xl text-redto font-bold p-4">
+        <h1>{headLine}</h1>
+        <p>{subHeadLine}</p>
+      </div>
       <div className="grid justify-center items-center">
-        <img
-          src={imgHeadLine}
-          alt="headline"
-          width="640"
-          height="360"
-        />
-				<br/>
-        <div className="grid justify-center items-center text-center text-5xl text-redto font-bold">
-					<div className="grid">
-          <h1>{headLine}</h1>
-					</div>
-          <br />
-
-          <div className="text-3xl">
-            <p>{subHeadLine}</p>
-          </div>
-          <br />
-
-          <div className="grid text-yellto text-2xl text-center">
-            <div className="flex justify-center items-center">
-              <FontAwesomeIcon icon={faStar} size="xl"/>
-              <FontAwesomeIcon icon={faStar} size="xl"/>
-              <FontAwesomeIcon icon={faStar} size="xl"/>
-              <FontAwesomeIcon icon={faStar} size="xl"/>
-              <FontAwesomeIcon icon={faStarHalfStroke} size="xl"/>
-            </div>
-            <br />
-            <div className="text-black">
-              <p>{rating} Rating</p>
-              <p>Terjual {terjual} +</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <br />
-      <br />
-      <br />
-
-      <div className="grid justify-center items-center text-center">
-        <h1 className="font-bold text-2xl m-2">
-          Diskon <span className="text-redto font-bold">50%</span> Khusus Untuk
-          Hari Ini
-        </h1>
-        <br />
-        <p className="font-bold text-2xl">Promo Akan Berakhir Dalam : </p>
-        <br />
-        <CountdownTimer hours={0} minutes={9} seconds={0} />
+        <img src={imgHeadLine} alt="headline" width="640" height="360" />
         <br />
       </div>
-      <Garansi />
-      <br />
+      <div className="flex justify-center">
+        <section className="space-y-4 p-4">
+          <h2 className="text-xl font-bold text-center">
+            
+						{problemTitle}
+          </h2>
+					<ul className="space-y-2" style={{ "--emoji": "'🚫'" }}>
+        {problems.map((item, idx) => (
+          <li
+            key={idx}
+            className="relative pl-6 before:content-[var(--emoji)] before:absolute before:left-0 before:top-0.5"
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+        </section>
+      </div>
     </div>
   );
 };

@@ -2,29 +2,52 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import CountdownTimer from "../set/CountdownTimer";
 import Funnel from "../FunnelAtc";
-import Faqs from '../set/Faqs'
+import Faqs from "../set/Faqs";
 
-const Footer = ({ promoImages, pixelId, produkBaru, footerImages ,faqs}) => {
+const Footer = ({ promoImages, pixelId, produkBaru, footerImages, faqs }) => {
   return (
     <div>
+      <div className="space-y-2">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold">
+            ⚠Promo 40% Hanya Untuk 3 Orang Pemesanan Pertama⚠
+          </h1>
+          <br />
+          <p className="text-lg">
+            Harga Normal <span className="line-through">250rb</span>
+          </p>
+          <p className="text-lg">Harga Promo</p>
+        </div>
+        <div className="text-center text-4xl font-bold">
+          <h1>Cuma 149rb</h1>
+          <h1>🔥Gratis Ongkir 🔥</h1>
+        </div>
+        <br />
+        <div className="w-auto h-8 bg-gray-300 rounded overflow-hidden m-2">
+          <div className="bg-redto text-white text-sm px-3 flex items-center h-full w-1/3">
+            Sisa Promo: 1
+          </div>
+        </div>
+      </div>
       {/* PROMO SECTION */}
-      <div className="grid justify-center items-center">
+      {/* <div className="grid justify-center items-center">
         {promoImages.map((img, i) => (
           <img key={i} src={img} alt={`promo-${i}`} width="640" height="360" />
         ))}
-      </div>
+      </div> */}
 
       {/* COUNTDOWN */}
-      <div className="p-4 bg-yellto text-center">
+      {/* <div className="p-4 bg-yellto text-center">
         <p className="font-bold">Promo Akan Berakhir Dalam : </p>
         <CountdownTimer hours={0} minutes={9} seconds={0} />
-      </div>
+      </div> */}
 
       {/* FORM TITLE + ARROW */}
       <br />
-      <h1 className="text-center font-bold p-2 text-2xl" id="formulir">
-        Isi Formulir untuk melakukan pemesanan
+      <h1 className="text-center font-bold text-xl p-2" id="formulir">
+        Isi Data Sekarang Sebelum Promonya Habis — Siapa Cepat Dia Dapat!
       </h1>
+
       <br />
       <div className="text-center space-x-6 text-redto text-5xl animate-bounce">
         <FontAwesomeIcon icon={faArrowDown} />
@@ -33,7 +56,7 @@ const Footer = ({ promoImages, pixelId, produkBaru, footerImages ,faqs}) => {
       </div>
 
       {/* URGENCY */}
-      <div className="text-center flex justify-center items-center gap-2 bg-greentoo/20 p-2">
+      {/* <div className="text-center flex justify-center items-center gap-2 bg-greentoo/20 p-2">
         <span className="relative flex h-3 w-3 items-center">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-greento opacity-95"></span>
           <span className="relative inline-flex rounded-full h-3 w-3 bg-greento"></span>
@@ -41,18 +64,17 @@ const Footer = ({ promoImages, pixelId, produkBaru, footerImages ,faqs}) => {
         <p className="text-sm">
           73 orang sekarang sedang ingin mengambil promo!
         </p>
-      </div>
+      </div> */}
 
       {/* FORM FUNNEL */}
       <div id="form">
         <Funnel pixel={pixelId} product={produkBaru} />
       </div>
 
-				{/* FAQ */}
-				<div>
+      {/* FAQ */}
+      <div>
         <Faqs faqs={faqs} />
       </div>
-
 
       {/* FOOTER IMAGE */}
       <br />
@@ -62,7 +84,6 @@ const Footer = ({ promoImages, pixelId, produkBaru, footerImages ,faqs}) => {
         ))}
       </div>
       <br />
-
     </div>
   );
 };

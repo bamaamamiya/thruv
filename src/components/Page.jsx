@@ -1,8 +1,7 @@
-import Headline from "./Headline"
 const Page = () => {
     return (
         <div className="text-center text-5xl grid justify-center items-center h-screen">
-            <h1 className="text-7xl">THRUV SHOP</h1>
+            <img src="images/thruv.jpg" alt="Thruv Shop"/>
             <p>Selamat Datang 😊🔥🖐</p>
         </div>
     )
