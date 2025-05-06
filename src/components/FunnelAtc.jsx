@@ -65,7 +65,7 @@ const FunnelAtc = ({ pixel, product }) => {
         </div>
 
         <div className="mb-4">
-          <label className="block font-semibold mb-1">Alamat Lengkap</label>
+          <label id="addrest" className="block font-semibold mb-1">Alamat Lengkap</label>
           <textarea
             placeholder="Masukkan Nomor Rumah, RT/RW, Kecamatan, Kota/Kab, Ciri2 Rumah"
             value={address}
@@ -85,6 +85,7 @@ const FunnelAtc = ({ pixel, product }) => {
               onClick={() => setPaymentMethod(method)}
             >
               <input
+								id="metodePick"
                 type="radio"
                 name="payment"
                 value={method}
@@ -92,7 +93,7 @@ const FunnelAtc = ({ pixel, product }) => {
                 onChange={() => setPaymentMethod(method)}
                 className="mr-2 cursor-pointer"
               />
-              <label className="cursor-pointer grid items-center">
+              <label id="metodePayments" className="cursor-pointer grid items-center">
                 <img
                   src={`/images/funnel/${
                     method === "COD" ? "cod" : "transfer"
