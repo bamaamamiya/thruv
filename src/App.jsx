@@ -9,6 +9,7 @@ import Flat from "./components/Pel Flat/Flat";
 import PelX from "./components/Pel X/X";
 import LandingPage from "./components/LandingPage/LandingPage";
 import LandingPagePump from "./components/Pump/LandingPage";
+import LandingPageApar from "./components/Apar/LandingPage"
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/pelx" element={<PelX />} />
         <Route path="/lp" element={<LandingPage/>}/>
         <Route path="/pump" element={<LandingPagePump/>}/>
+        <Route path="/apar" element={<LandingPageApar/>}/>
       </Routes>
     </BrowserRouter>
   );
