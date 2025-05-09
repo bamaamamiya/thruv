@@ -57,6 +57,7 @@ const Content = ({
 
       {/* Testimoni */}
       <h1 className="font-bold text-center text-4xl mt-2">TESTIMONI</h1>
+			<br/>
       <ImageSection images={testimonies} altPrefix="testimoni" />
 			<br/>
     </div>
