@@ -19,6 +19,7 @@
     "cheerio": "^1.0.0",
     "cors": "^2.8.5",
     "express": "^4.21.2",
+    "firebase": "^11.7.1",
     "framer-motion": "^12.4.7",
     "lucide-react": "^0.476.0",
     "react": "^18.3.1",

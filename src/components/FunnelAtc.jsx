@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-
+import { collection, addDoc, Timestamp } from "firebase/firestore";
+import { db } from "../firebase"; // path sesuai struktur file kamu
 const FunnelAtc = ({ pixel, product }) => {
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("COD");
   const [address, setAddress] = useState(""); // <-- Tambahan
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!name || !whatsapp) {
       alert("Silakan isi semua data!");
       return;
@@ -17,24 +18,36 @@ const FunnelAtc = ({ pixel, product }) => {
       return;
     }
 
+		 // Simpan data ke Firestore
+  try {
+    await addDoc(collection(db, "leads"), {
+      name,
+      whatsapp,
+      address,
+      paymentMethod,
+      productTitle: product.title,
+      productId: product.id || "unknown",
+      createdAt: Timestamp.now(),
+    });
+    console.log("Data disimpan ke Firestore!");
+  } catch (error) {
+    console.error("Gagal menyimpan data:", error);
+  }
+
     // FB Pixel trigger
-    if (window.fbq) {
-      console.log("Triggering AddToCart on Submit. Pixel:", pixel);
-      fbq("trackSingle", pixel, "AddToCart", {
-        content_name: product.title,
-        content_ids: [product.id || "123"],
-        content_type: "product",
-        value: product.price || 0,
-        currency: "IDR",
-      });
-      console.log("FB Pixel Event Sent on Submit!");
-    }
+  if (window.fbq) {
+    fbq("trackSingle", pixel, "AddToCart", {
+      content_name: product.title,
+      content_ids: [product.id || "123"],
+      content_type: "product",
+      value: product.price || 0,
+      currency: "IDR",
+    });
+  }
 
     setTimeout(() => {
       const message = `Halo, saya ${name}. Saya tertarik memesan ${product.title} dengan metode pembayaran ${paymentMethod}. Alamat lengkap saya : \n${address}`;
-      const whatsappURL = `https://wa.me/6282387881505?text=${encodeURIComponent(
-        message
-      )}`;
+      const whatsappURL = `https://wa.me/6282387881505?text=${encodeURIComponent(message)}`;
       window.open(whatsappURL, "_blank");
     }, 500); // 500ms delay biar AddToCart sempat dikirim
   };

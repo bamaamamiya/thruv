@@ -10,6 +10,7 @@ import PelX from "./components/Pel X/X";
 import LandingPage from "./components/LandingPage/LandingPage";
 import LandingPagePump from "./components/Pump/LandingPage";
 import LandingPageApar from "./components/Apar/LandingPage"
+import LeadsDashboard from "./components/dashboard/LeadsDashboard";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/lp" element={<LandingPage/>}/>
         <Route path="/pump" element={<LandingPagePump/>}/>
         <Route path="/apar" element={<LandingPageApar/>}/>
+        <Route path="/dashboard" element={<LeadsDashboard/>}/>
       </Routes>
     </BrowserRouter>
   );

@@ -12,13 +12,18 @@ const LandingPage = () => {
     "images/apar/2.webp",
   ];
 
-
   const funnelProduct = {
     title: "Apar Portable",
     description: "Product Apar",
   };
 
   const faqs = [
+    {
+      question:
+        "Apakah APAR ini Aman di taro di mobil yang sedang panas di parkiran?",
+      answer:
+        "Sangat Aman ! jika di taruh di kantong belakang kursi atau taruh di daerah yang bukan langsung dari sinar matahari",
+    },
     {
       question: "Apakah APAR ini bisa digunakan lebih dari sekali?",
       answer:
