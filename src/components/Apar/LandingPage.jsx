@@ -47,30 +47,31 @@ const LandingPage = () => {
   ];
 
   const problems = [
-    "Korsleting listrik bisa picu kebakaran dalam hitungan detik.",
-    "Kompor lupa dimatikan bisa bikin dapur terbakar tanpa disadari.",
-    "Kebakaran kecil bisa jadi besar sebelum bantuan datang.",
-    "Rumah, mobil, atau kantor belum punya alat pemadam darurat.",
+    " Korsleting di mobil bisa picu asap & api dalam hitungan detik.",
+    "Mesin terlalu panas bisa nyulut api pas lagi nyetir bareng keluarga.",
+    "Kebakaran kecApi kecil bisa jadi besar sebelum bantuan datang.",
+    "Banyak mobil, rumah, & kantor belum punya APAR darurat.",
   ];
   const solutions = [
-    "Gampang disimpan di mobil, dapur, kamar, atau kantor!",
-    "Bisa dipakai siapa aja, bahkan tanpa pelatihan khusus.",
-    "Lebih tenang di rumah & perjalanan — selalu siap hadapi korsleting atau kebakaran kecil.",
-    "Lebih hemat. 1 alat bisa cegah kerugian puluhan juta karena kebakaran!",
-    " Sekali semprot langsung padam, tanpa perlu selang atau alat berat!",
-  ];
+  "Lindungi keluarga dari risiko mobil terbakar saat perjalanan jauh atau macet.",
+  "Cegah api dari korsleting atau tumpahan bensin sejak detik pertama muncul.",
+  "Tenang saat bawa anak atau orang tua ada FireStop yang siap digunakan kapan saja.",
+  "Gampang disimpan di bawah jok mobil atau bagasi, langsung dijangkau saat darurat.",
+  "Bisa dipakai siapa saja, tanpa pelatihan tinggal tarik & semprot, api langsung padam.",
+];
+
 
   return (
     <div>
       <Headline
         imgHeadLine="images/apar/car.webp"
         headLine="Mobil Bisa Terbakar Dalam Hitungan Detik"
-        subHeadLine="Cegah kerugian jutaan rupiah hanya dengan alat cuma seharga 99RB yang bisa digunakan siapa saja."
-        problemTitle="⚠️ Kebakaran Bisa Terjadi Karena Hal Sepele Seperti Ini ⚠️ "
+        subHeadLine="Amankan mobil & keluarga hanya dengan 99rb FireStop bantu padamkan api dalam hitungan detik sebelum jadi bencana besar."
+        problemTitle="🔥 Kebakaran Bisa Terjadi Karena Hal Sepele Seperti Ini 🔥 "
         problems={problems}
       />
       <Content
-        solutionTitle="Bayangin Pak… Lagi Masak di Dapur atau Nyalain Stop Kontak, Eh Api Tiba-Tiba Nyala! Untung Ada FireStop — Tinggal Semprot, Api Langsung Padam dalam Hitungan Detik!🔥"
+        solutionTitle="Bayangin Pak… Lagi di jalan bareng keluarga, tiba-tiba mobil kepanasan, keluar asap dari kap mesin!😱 Untung ada FireStop di laci — tinggal ambil, semprot, api langsung padam dalam hitungan detik!🔥"
         solutions={solutions}
         mainImage="images/apar/apar4.webp"
         productImages={productImages}
