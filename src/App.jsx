@@ -14,6 +14,7 @@ import LeadsDashboard from "./components/dashboard/LeadsDashboard";
 import LoginPage from "./components/dashboard/LoginPage";
 import Dashboard from "./components/dashboard/DashBoard";
 import PrivateRoute from "./components/dashboard/PrivateRoute";
+import CctvBohlam from "./components/Cctv/LandingPage";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/lp" element={<LandingPage />} />
         <Route path="/pump" element={<LandingPagePump />} />
         <Route path="/apar" element={<LandingPageApar />} />
+        <Route path="/cctv" element={<CctvBohlam />} />
         <Route path="/login" element={<LoginPage />} />
         <Route
           path="/dashboard"
