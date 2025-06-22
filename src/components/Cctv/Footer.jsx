@@ -36,7 +36,7 @@ const Footer = ({ pixelId, produkBaru, footerImages, faqs }) => {
 
   useEffect(() => {
     if (isVisible && currentValue > promoPrice) {
-      const step = (normalPrice - promoPrice) / 60; // adjust speed
+      const step = (normalPrice - promoPrice) / 50; // adjust speed
       const interval = setInterval(() => {
         setCurrentValue((prev) => {
           if (prev - step <= promoPrice) {
@@ -53,7 +53,7 @@ const Footer = ({ pixelId, produkBaru, footerImages, faqs }) => {
       <div className="space-y-2">
         <div className="text-center">
           <h1 className="text-2xl font-bold">
-            ⚠Promo 40% Hanya Untuk 3 Orang Pemesanan Pertama⚠
+            ⚠Promo 50% Hanya Untuk 3 Orang Pemesanan Pertama⚠
           </h1>
           <br />
           <p className="text-lg">
