@@ -79,7 +79,7 @@ const LandingPage = () => {
         testimonies={testimonies}
       />
       <Footer
-        pixelId="2111198546014232"
+        pixelId="1250623926188998"
         produkBaru={funnelProduct}
         footerImages={["images/fotter2.webp", "images/fotter.webp"]}
         faqs={faqs}
