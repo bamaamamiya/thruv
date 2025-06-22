@@ -15,6 +15,7 @@ const LandingPage = () => {
   const funnelProduct = {
     title: "Apar Portable",
     description: "Product Apar",
+		price:99000,
   };
 
   const faqs = [

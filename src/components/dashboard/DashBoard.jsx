@@ -15,7 +15,7 @@ const Dashboard = () => {
     fetchLeads();
   }, []);
 
-  const handleLogout = () => {
+  const handleLogout = () => {_
     const auth = getAuth();
     signOut(auth);
     window.location.reload();
