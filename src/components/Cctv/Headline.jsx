@@ -9,25 +9,27 @@ const HeadLine = ({
   problems,
   problemTitle,
 }) => {
-	const ImageSection = ({ images, altPrefix = "image" }) => (
-		<div className="grid justify-center items-center space-y-4">
-			{images.map((src, index) => (
-				<img
-					className="space-y-2 flex justify-center"
-					key={index}
-					src={src}
-					alt={`${altPrefix}-${index + 1}`}
-					width="640"
-					height="360"
-				/>
-			))}
-		</div>
-	);
+  const ImageSection = ({ images, altPrefix = "image" }) => (
+    <div className="grid justify-center items-center space-y-4">
+      {images.map((src, index) => (
+        <img
+          className="space-y-2 flex justify-center"
+          key={index}
+          src={src}
+          alt={`${altPrefix}-${index + 1}`}
+          width="640"
+          height="360"
+          loading="eager"
+          decoding="async"
+        />
+      ))}
+    </div>
+  );
   return (
     <div>
       <div className="grid justify-center items-center text-center text-3xl text-redto font-bold p-4">
         <h1>{headLine}</h1>
-				<br/>
+        <br />
         <p className="text-xl">{subHeadLine}</p>
       </div>
       <div className="grid justify-center items-center">
@@ -36,20 +38,17 @@ const HeadLine = ({
       </div>
       <div className="flex justify-center">
         <section className="space-y-4 p-4">
-          <h2 className="text-xl font-bold text-center">
-            
-						{problemTitle}
-          </h2>
-					<ul className="space-y-2" style={{ "--emoji": "'🚨'" }}>
-        {problems.map((item, idx) => (
-          <li
-            key={idx}
-            className="relative pl-6 before:content-[var(--emoji)] before:absolute before:left-0 before:top-0.5"
-          >
-            {item}
-          </li>
-        ))}
-      </ul>
+          <h2 className="text-xl font-bold text-center">{problemTitle}</h2>
+          <ul className="space-y-2" style={{ "--emoji": "'🚨'" }}>
+            {problems.map((item, idx) => (
+              <li
+                key={idx}
+                className="relative pl-6 before:content-[var(--emoji)] before:absolute before:left-0 before:top-0.5"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
         </section>
       </div>
     </div>
