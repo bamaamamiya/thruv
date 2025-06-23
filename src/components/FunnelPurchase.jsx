@@ -46,7 +46,7 @@ const FunnelPurchase = ({ pixel, product }) => {
   }
 
     setTimeout(() => {
-      const message = `Halo, saya ${name}. Saya tertarik memesan ${product.title} dengan metode pembayaran ${paymentMethod}. Alamat lengkap saya : \n${address}`;
+      const message = `Halo, saya ${name}. Saya memesan ${product.title} dengan metode pembayaran ${paymentMethod}. Alamat lengkap saya : \n${address} . tolong segera di proses.`;
       const whatsappURL = `https://wa.me/6282387881505?text=${encodeURIComponent(message)}`;
       window.open(whatsappURL, "_blank");
     }, 500); // 500ms delay biar AddToCart sempat dikirim
