@@ -18,36 +18,46 @@ const FunnelPurchase = ({ pixel, product }) => {
       return;
     }
 
-		 // Simpan data ke Firestore
-  try {
-    await addDoc(collection(db, "leads"), {
-      name,
-      whatsapp,
-      address,
-      paymentMethod,
-      productTitle: product.title,
-      productId: product.id || "unknown",
-      createdAt: Timestamp.now(),
-    });
-    console.log("Data disimpan ke Firestore!");
-  } catch (error) {
-    console.error("Gagal menyimpan data:", error);
-  }
+    // Simpan data ke Firestore
+    try {
+      await addDoc(collection(db, "leads"), {
+        name,
+        whatsapp,
+        address,
+        paymentMethod,
+        productTitle: product.title,
+        productId: product.id || "unknown",
+        createdAt: Timestamp.now(),
+      });
+      console.log("Data disimpan ke Firestore!");
+    } catch (error) {
+      console.error("Gagal menyimpan data:", error);
+    }
 
     // FB Pixel trigger
-  if (window.fbq) {
-    fbq("trackSingle", pixel, "Purchase", {
-      content_name: product.title,
-      content_ids: [product.id || "123"],
-      content_type: "product",
-      value: product.price || 0,
-      currency: "IDR",
-    });
-  }
+    if (window.fbq) {
+      fbq("trackSingle", pixel, "Purchase", {
+        content_name: product.title,
+        content_ids: [product.id || "123"],
+        content_type: "product",
+        value: product.price || 0,
+        currency: "IDR",
+      });
+    }
 
     setTimeout(() => {
-      const message = `Halo, saya ${name}. Saya memesan ${product.title} dengan metode pembayaran ${paymentMethod}. Alamat lengkap saya : \n${address} . tolong segera di proses.`;
-      const whatsappURL = `https://wa.me/6282387881505?text=${encodeURIComponent(message)}`;
+      // const message = `Halo, saya ${name}. Saya memesan ${product.title} dengan metode pembayaran ${paymentMethod}. Alamat lengkap saya : \n${address} . tolong segera di proses.`;
+      const message =
+        `*PESANAN BARU*\n\n` +
+        `📦 *Produk:* ${product.title}\n` +
+        `👤 *Nama:* ${name}\n` +
+        `📱 *No. WhatsApp:* ${whatsapp}\n` +
+        `🏠 *Alamat:* ${address}\n` +
+        `💳 *Metode Pembayaran:* ${paymentMethod}\n\n` +
+        `Mohon segera diproses, terima kasih 🙏`;
+      const whatsappURL = `https://wa.me/6282387881505?text=${encodeURIComponent(
+        message
+      )}`;
       window.open(whatsappURL, "_blank");
     }, 500); // 500ms delay biar AddToCart sempat dikirim
   };
@@ -78,7 +88,9 @@ const FunnelPurchase = ({ pixel, product }) => {
         </div>
 
         <div className="mb-4">
-          <label id="addrest" className="block font-semibold mb-1">Alamat Lengkap</label>
+          <label id="addrest" className="block font-semibold mb-1">
+            Alamat Lengkap
+          </label>
           <textarea
             placeholder="Masukkan Nomor Rumah, RT/RW, Kecamatan, Kota/Kab, Ciri2 Rumah"
             value={address}
@@ -98,7 +110,7 @@ const FunnelPurchase = ({ pixel, product }) => {
               onClick={() => setPaymentMethod(method)}
             >
               <input
-								id="metodePick"
+                id="metodePick"
                 type="radio"
                 name="payment"
                 value={method}
@@ -106,7 +118,10 @@ const FunnelPurchase = ({ pixel, product }) => {
                 onChange={() => setPaymentMethod(method)}
                 className="mr-2 cursor-pointer"
               />
-              <label id="metodePayments" className="cursor-pointer grid items-center">
+              <label
+                id="metodePayments"
+                className="cursor-pointer grid items-center"
+              >
                 <img
                   src={`/images/funnel/${
                     method === "COD" ? "cod" : "transfer"
