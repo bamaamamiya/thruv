@@ -64,7 +64,7 @@ const CctvBohlam = () => {
   return (
     <div>
       <Headline
-        imgHeadLine="images/cctv/1.webp"
+        imgHeadLine="images/cctv/11.webp"
         headLine="Pernah kepikiran, rumah ditinggal sebentar aja bisa jadi sasaran maling?"
         subHeadLine="Atau tiba-tiba barang hilang tapi gak tau siapa pelakunya?"
         problemTitle="📹 Banyak Rumah Masih Rentan Karena Masalah Seperti Ini:"
