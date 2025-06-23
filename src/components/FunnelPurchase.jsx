@@ -49,12 +49,13 @@ const FunnelPurchase = ({ pixel, product }) => {
       // const message = `Halo, saya ${name}. Saya memesan ${product.title} dengan metode pembayaran ${paymentMethod}. Alamat lengkap saya : \n${address} . tolong segera di proses.`;
       const message =
         `*PESANAN BARU*\n\n` +
-        `📦 *Produk:* ${product.title}\n` +
-        `👤 *Nama:* ${name}\n` +
-        `📱 *No. WhatsApp:* ${whatsapp}\n` +
-        `🏠 *Alamat:* ${address}\n` +
-        `💳 *Metode Pembayaran:* ${paymentMethod}\n\n` +
+        `*Produk:* ${product.title}\n` +
+        `*Nama:* ${name}\n` +
+        `*No. WhatsApp:* ${whatsapp}\n` +
+        `*Alamat:* ${address}\n` +
+        `*Metode Pembayaran:* ${paymentMethod}\n\n` +
         `Mohon segera diproses, terima kasih 🙏`;
+
       const whatsappURL = `https://wa.me/6282387881505?text=${encodeURIComponent(
         message
       )}`;
