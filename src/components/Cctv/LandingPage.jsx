@@ -73,7 +73,7 @@ const CctvBohlam = () => {
       <Content
         solutionTitle="Bayangin Pak… Rumah kosong pas lagi mudik atau kerja, eh tiba-tiba ada orang asing masuk halaman rumah!😱 Untungnya, CCTV Bohlam ini kirim notifikasi ke HP + rekam kejadian secara real-time!📲"
         solutions={solutions}
-        mainImage="images/cctv/2.webp"
+        mainImage="images/cctv/22.webp"
         productImages={productImages}
         testimonies={testimonies}
       />
