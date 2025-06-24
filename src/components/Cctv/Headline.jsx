@@ -10,20 +10,21 @@ const HeadLine = ({
   problemTitle,
 }) => {
   const ImageSection = ({ images, altPrefix = "image" }) => (
-    <div className="grid justify-center items-center space-y-4">
-      {images.map((src, index) => (
-        <img
-          className="space-y-2 flex justify-center"
-          key={index}
-          src={src}
-          alt={`${altPrefix}-${index + 1}`}
-          width="640"
-          height="360"
-          loading="eager"
-          decoding="async"
-        />
-      ))}
-    </div>
+    <div className="flex flex-col items-center space-y-4">
+  {images.map((src, index) => (
+    <img
+      key={index}
+      src={src}
+      alt={`${altPrefix}-${index + 1}`}
+      width="640"
+      height="360"
+      loading="lazy"
+      decoding="async"
+      className="rounded-lg shadow-md"
+    />
+  ))}
+</div>
+
   );
   return (
     <div>
