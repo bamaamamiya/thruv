@@ -70,7 +70,7 @@ const FunnelPurchase = ({ pixel, product }) => {
       `*No. WhatsApp:* ${cleanedWhatsapp}\n` +
       `*Alamat:* ${address}\n` +
       `*Metode Pembayaran:* ${paymentMethod}\n\n` +
-      `Mohon segera diproses, terima kasih 🙏`;
+      `Mohon segera diproses, terima kasih`;
 
     const whatsappURL = `https://wa.me/6282387881505?text=${encodeURIComponent(message)}`;
     window.open(whatsappURL, "_blank");
