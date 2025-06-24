@@ -58,7 +58,7 @@ const FunnelPurchase = ({ pixel, product }) => {
         `*PESANAN BARU*\n\n` +
         `*Produk:* ${product.title}\n` +
         `*Nama:* ${name}\n` +
-        `*No. WhatsApp:* ${whatsapp}\n` +
+        `*No. WhatsApp:* ${cleanedWhatsapp}\n` +
         `*Alamat:* ${address}\n` +
         `*Metode Pembayaran:* ${paymentMethod}\n\n` +
         `Mohon segera diproses, terima kasih 🙏`;
