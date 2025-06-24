@@ -1,54 +1,28 @@
 <!doctype html>
-<html lang="en">
+	<html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Thruv Shop</title>
-    <meta name="description" content="Thruv Shop">
-    <meta name="keywords" content="Thruv Shop">
-    <meta property="og:title" content="Thruv Shop">
-    <meta property="og:description" content="Thruv Shop , Toko Rumahan Termurah">
-    <meta property="og:url" content="https://www.thruv.shop/">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta property="og:image" content="/images/thruv.jpg">
+    <meta name="description" content="Thruv Shop" />
+    <meta name="keywords" content="Thruv Shop" />
+    <meta property="og:title" content="Thruv Shop" />
+    <meta property="og:description" content="Thruv Shop , Toko Rumahan Termurah" />
+    <meta property="og:url" content="https://www.thruv.shop/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:image" content="/images/thruv.jpg" />
 
-    <link rel=preconnect href="https://connect.facebook.net/en_US/fbevents.js">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		
-    <link rel="preload" fetchpriority="high" as="image" href="/images/cctv/1.webp" type="image/webp">
+    <!-- Preload: hanya 1 gambar LCP -->
+    <link rel="preload" fetchpriority="high" as="image" href="/images/cctv/1.webp" type="image/webp" />
 
-		<!-- Hotjar Tracking Code for https://www.thruv.shop/ -->
-<script>
-    (function(h,o,t,j,a,r){
-        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-        h._hjSettings={hjid:6400760,hjsv:6};
-        a=o.getElementsByTagName('head')[0];
-        r=o.createElement('script');r.async=1;
-        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-        a.appendChild(r);
-    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-</script>
-		
-<script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-	fbq('init', '1250623926188998');
-  fbq('init', '454553801046165');
-  fbq('init', '600654142367970');
-	fbq('init', '1383077222724690');
-	fbq('init', '1093785025490959');
-	fbq('init', '2111198546014232');
-	fbq('init', '2588889891453558');
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://connect.facebook.net" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-  fbq('track', 'PageView');
-  </script>
+    <!-- Load Pixel dan Hotjar setelah load -->
+    <script defer src="/defer-fb-hotjar.js"></script>
+  </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
