@@ -4,7 +4,7 @@ import Footer from "./Footer";
 import Floting from "../set/Floting";
 
 const CctvBohlam = () => {
-  const productImages = ["images/cctv/33.webp", "images/cctv/44.webp"];
+  const productImages = ["images/cctv/3.webp", "images/cctv/4.webp"];
 
   const testimonies = [
     "images/cctv/testi1.webp",
@@ -64,7 +64,7 @@ const CctvBohlam = () => {
   return (
     <div>
       <Headline
-        imgHeadLine="images/cctv/111.webp"
+        imgHeadLine="images/cctv/1.webp"
         headLine="Pernah kepikiran, rumah ditinggal sebentar aja bisa jadi sasaran maling?"
         subHeadLine="Atau tiba-tiba barang hilang tapi gak tau siapa pelakunya?"
         problemTitle="📹 Banyak Rumah Masih Rentan Karena Masalah Seperti Ini:"
@@ -73,7 +73,7 @@ const CctvBohlam = () => {
       <Content
         solutionTitle="Bayangin Pak… Rumah kosong pas lagi mudik atau kerja, eh tiba-tiba ada orang asing masuk halaman rumah!😱 Untungnya, CCTV Bohlam ini kirim notifikasi ke HP + rekam kejadian secara real-time!📲"
         solutions={solutions}
-        mainImage="images/cctv/22.webp"
+        mainImage="images/cctv/2.webp"
         productImages={productImages}
         testimonies={testimonies}
       />
