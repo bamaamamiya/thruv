@@ -18,11 +18,18 @@ const FunnelPurchase = ({ pixel, product }) => {
       return;
     }
 
+		
+    // ✨ Bersihkan nomor WhatsApp customer
+    let cleanedWhatsapp = whatsapp.replace(/\D/g, "");
+    if (cleanedWhatsapp.startsWith("0")) {
+      cleanedWhatsapp = "62" + cleanedWhatsapp.slice(1);
+    }
+
     // Simpan data ke Firestore
     try {
       await addDoc(collection(db, "leads"), {
         name,
-        whatsapp,
+        whatsapp: cleanedWhatsapp,
         address,
         paymentMethod,
         productTitle: product.title,
