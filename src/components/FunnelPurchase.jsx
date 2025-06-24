@@ -8,10 +8,10 @@ const FunnelPurchase = ({ pixel, product }) => {
   const [address, setAddress] = useState(""); // <-- Tambahan
 
   const handleSubmit = async () => {
-    if (!name || !whatsapp) {
-      alert("Silakan isi semua data!");
-      return;
-    }
+     if (!name || !whatsapp || !address) {
+    alert("Silakan isi semua data dengan lengkap!");
+    return;
+  }
 
     if (!product) {
       alert("Produk tidak ditemukan!");
@@ -19,55 +19,62 @@ const FunnelPurchase = ({ pixel, product }) => {
     }
 
 		
-    // ✨ Bersihkan nomor WhatsApp customer
-    let cleanedWhatsapp = whatsapp.replace(/\D/g, "");
-    if (cleanedWhatsapp.startsWith("0")) {
-      cleanedWhatsapp = "62" + cleanedWhatsapp.slice(1);
-    }
+    
+  // ✨ Bersihkan nomor WA dari simbol
+  let cleanedWhatsapp = whatsapp.replace(/\D/g, "");
+  if (cleanedWhatsapp.startsWith("0")) {
+    cleanedWhatsapp = "62" + cleanedWhatsapp.slice(1);
+  }
 
-    // Simpan data ke Firestore
-    try {
-      await addDoc(collection(db, "leads"), {
-        name,
-        whatsapp: cleanedWhatsapp,
-        address,
-        paymentMethod,
-        productTitle: product.title,
-        productId: product.id || "unknown",
-        createdAt: Timestamp.now(),
-      });
-      console.log("Data disimpan ke Firestore!");
-    } catch (error) {
-      console.error("Gagal menyimpan data:", error);
-    }
+  // ✅ Validasi nomor WA
+  const isValidWA = /^62[0-9]{9,13}$/.test(cleanedWhatsapp);
+  if (!isValidWA) {
+    alert("Nomor WhatsApp tidak valid. Harus dimulai dengan 08 atau 62 dan hanya angka.");
+    return;
+  }
 
-    // FB Pixel trigger
-    if (window.fbq) {
-      fbq("trackSingle", pixel, "Purchase", {
-        content_name: product.title,
-        content_ids: [product.id || "123"],
-        content_type: "product",
-        value: product.price || 0,
-        currency: "IDR",
-      });
-    }
+  // ✅ Simpan ke Firestore
+  try {
+    await addDoc(collection(db, "leads"), {
+      name,
+      whatsapp: cleanedWhatsapp,
+      address,
+      paymentMethod,
+      productTitle: product.title,
+      productId: product.id || "unknown",
+      createdAt: Timestamp.now(),
+    });
+    console.log("Data disimpan ke Firestore!");
+  } catch (error) {
+    console.error("Gagal menyimpan data:", error);
+    return; // stop lanjut
+  }
 
-    setTimeout(() => {
-      // const message = `Halo, saya ${name}. Saya memesan ${product.title} dengan metode pembayaran ${paymentMethod}. Alamat lengkap saya : \n${address} . tolong segera di proses.`;
-      const message =
-        `*PESANAN BARU*\n\n` +
-        `*Produk:* ${product.title}\n` +
-        `*Nama:* ${name}\n` +
-        `*No. WhatsApp:* ${cleanedWhatsapp}\n` +
-        `*Alamat:* ${address}\n` +
-        `*Metode Pembayaran:* ${paymentMethod}\n\n` +
-        `Mohon segera diproses, terima kasih 🙏`;
+  // ✅ Facebook Pixel trigger
+  if (window.fbq) {
+    fbq("trackSingle", pixel, "Purchase", {
+      content_name: product.title,
+      content_ids: [product.id || "123"],
+      content_type: "product",
+      value: product.price || 0,
+      currency: "IDR",
+    });
+  }
 
-      const whatsappURL = `https://wa.me/6282387881505?text=${encodeURIComponent(
-        message
-      )}`;
-      window.open(whatsappURL, "_blank");
-    }, 500); // 500ms delay biar AddToCart sempat dikirim
+  // ✅ Kirim ke WhatsApp Admin
+  setTimeout(() => {
+    const message =
+      `*PESANAN BARU*\n\n` +
+      `*Produk:* ${product.title}\n` +
+      `*Nama:* ${name}\n` +
+      `*No. WhatsApp:* ${cleanedWhatsapp}\n` +
+      `*Alamat:* ${address}\n` +
+      `*Metode Pembayaran:* ${paymentMethod}\n\n` +
+      `Mohon segera diproses, terima kasih 🙏`;
+
+    const whatsappURL = `https://wa.me/6282387881505?text=${encodeURIComponent(message)}`;
+    window.open(whatsappURL, "_blank");
+  }, 500);
   };
 
   return (
