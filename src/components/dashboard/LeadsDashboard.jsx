@@ -11,6 +11,7 @@ import { db } from "../../firebase";
 
 const LeadsDashboard = () => {
   const [leads, setLeads] = useState([]);
+  const [copiedId, setCopiedId] = useState(null); // untuk notifikasi salin
 
   useEffect(() => {
     const q = query(collection(db, "leads"), orderBy("createdAt", "desc"));
@@ -24,6 +25,28 @@ const LeadsDashboard = () => {
 
     return () => unsubscribe();
   }, []);
+
+  const handleCopy = (lead) => {
+    const pesan = `Terima kasih sudah melakukan pemesanan 🙏  
+Berikut detail pesanan Kakak:
+
+Nama Produk: ${lead.productTitle}  
+Harga Produk: [isi harga produk]  
+Ongkir: [isi ongkir]  
+Total Pembayaran: [isi total pembayaran]
+
+Nama: ${lead.name}  
+Alamat Lengkap: ${lead.address}
+
+Apakah alamat yang Kakak berikan sudah benar?  
+Kami akan segera proses pesanan Kakak jika alamatnya sudah sesuai ya.  
+Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
+
+    navigator.clipboard.writeText(pesan).then(() => {
+      setCopiedId(lead.id);
+      setTimeout(() => setCopiedId(null), 2000); // reset notif setelah 2 detik
+    });
+  };
 
   return (
     <div className="max-w-5xl mx-auto p-6">
@@ -61,6 +84,7 @@ const LeadsDashboard = () => {
                     key={lead.id}
                     className="relative bg-white border rounded-xl shadow-sm p-5 hover:shadow-md transition"
                   >
+                    {/* Tombol Hapus */}
                     <button
                       onClick={async () => {
                         const confirmDelete = window.confirm(
@@ -76,6 +100,7 @@ const LeadsDashboard = () => {
                       🗑️
                     </button>
 
+                    {/* Konten Lead */}
                     <div className="space-y-1 text-gray-800">
                       <p>
                         <strong>Nama:</strong> {lead.name}
@@ -107,6 +132,14 @@ const LeadsDashboard = () => {
                         ).toLocaleString()}
                       </p>
                     </div>
+
+                    {/* Tombol Copy */}
+                    <button
+                      onClick={() => handleCopy(lead)}
+                      className="mt-4 inline-block bg-blue-600 text-white text-sm px-4 py-2 rounded-md hover:bg-blue-700 transition"
+                    >
+                      {copiedId === lead.id ? "✅ Disalin!" : "📋 Salin Pesan"}
+                    </button>
                   </div>
                 ))}
               </div>
