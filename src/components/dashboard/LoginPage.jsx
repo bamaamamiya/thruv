@@ -22,40 +22,49 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white p-6 rounded-2xl">
-      <h2 className="text-xl font-bold mb-4">Login</h2>
+    <div className="min-h-screen bg-black text-white px-4 py-20 flex items-center justify-center">
+  <div className="w-full max-w-md bg-zinc-900/70 border border-zinc-700 rounded-2xl p-8 shadow-xl backdrop-blur-lg">
+    <h2 className="text-2xl font-bold mb-6 text-center tracking-tight">
+      🔐 Login Akun
+    </h2>
 
-      {error && <div className="text-red-500 mb-4">{error}</div>}
+    {error && (
+      <div className="bg-red-500/10 text-red-400 text-sm px-4 py-2 rounded-lg mb-4 border border-red-500/30">
+        {error}
+      </div>
+    )}
 
-      <form onSubmit={handleLogin}>
-        <div className="mb-4">
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full border rounded-lg p-2 focus:outline-none focus:ring"
-          />
-        </div>
+    <form onSubmit={handleLogin} className="space-y-5">
+      <div>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full bg-zinc-800 text-white border border-zinc-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-white/20 transition"
+        />
+      </div>
 
-        <div className="mb-4">
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full border rounded-lg p-2 focus:outline-none focus:ring"
-          />
-        </div>
+      <div>
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-full bg-zinc-800 text-white border border-zinc-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-white/20 transition"
+        />
+      </div>
 
-        <button
-          type="submit"
-          className="w-full text-2xl bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition"
-        >
-          Login
-        </button>
-      </form>
-    </div>
+      <button
+        type="submit"
+        className="w-full bg-white text-black font-bold text-lg py-2 rounded-lg hover:bg-gray-200 transition"
+      >
+        Login
+      </button>
+    </form>
+  </div>
+</div>
+
   );
 };
 
