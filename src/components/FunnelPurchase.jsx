@@ -19,9 +19,7 @@ const FunnelPurchase = ({ pixel, product }) => {
     }
 
     if (address.length < 20) {
-      alert(
-        "Alamat terlalu singkat. Mohon isi alamat lengkap."
-      );
+      alert("Alamat terlalu singkat. Mohon isi alamat lengkap.");
       return;
     }
 
@@ -39,6 +37,8 @@ const FunnelPurchase = ({ pixel, product }) => {
       );
       return;
     }
+
+    
 
     // ✅ Simpan ke Firestore
     try {
