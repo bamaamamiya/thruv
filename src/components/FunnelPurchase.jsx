@@ -18,7 +18,7 @@ const FunnelPurchase = ({ pixel, product }) => {
       return;
     }
 
-    if (address.length < 10) {
+    if (address.length < 20) {
       alert(
         "Alamat terlalu singkat. Mohon isi alamat lengkap."
       );
