@@ -53,7 +53,7 @@ const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual }) => {
       <div className="space-y-2">
         <div className="text-center">
           <h1 className="text-2xl font-bold">
-            ⚠Promo 50% Hanya Untuk 3 Orang Pemesanan Pertama⚠
+            ⚠ Promo 50% Hanya Untuk 3 Orang Pemesanan Pertama ⚠
           </h1>
           <br />
           <p className="text-lg">
@@ -61,10 +61,6 @@ const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual }) => {
           </p>
           <p className="text-lg">Harga Promo</p>
         </div>
-        {/* <div className="text-center text-4xl font-bold">
-          <h1>Cuma 149rb</h1>
-          <h1>🔥Gratis Ongkir 🔥</h1>
-        </div> */}
         <div className="text-center text-5xl font-bold" ref={promoRef}>
           <h1 className="text-redto">
             Rp {Math.floor(currentValue).toLocaleString("id-ID")}
@@ -76,19 +72,18 @@ const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual }) => {
             Sisa Promo: 1
           </p>
         </div>
+        {/* <div className="bg-yellow-100 border border-yellow-400 rounded-md p-3 text-sm text-gray-800 text-center mx-2 mb-4">
+          🎁 <strong>Bonus Hari Ini:</strong>
+          Dapatkan{" "}
+          <span className="font-semibold">
+            Adapter Bulb senilai Rp20.000
+          </span>{" "}
+          secara GRATIS khusus untuk pembayaran via Transfer!
+          <span className="text-red-500 font-medium block mt-1">
+            *Hanya untuk 3 pembeli pertama hari ini*
+          </span>
+        </div> */}
       </div>
-      {/* PROMO SECTION */}
-      {/* <div className="grid justify-center items-center">
-        {promoImages.map((img, i) => (
-          <img key={i} src={img} alt={`promo-${i}`} width="640" height="360" />
-        ))}
-      </div> */}
-
-      {/* COUNTDOWN */}
-      {/* <div className="p-4 bg-yellto text-center">
-        <p className="font-bold">Promo Akan Berakhir Dalam : </p>
-        <CountdownTimer hours={0} minutes={9} seconds={0} />
-      </div> */}
 
       {/* FORM TITLE + ARROW */}
       <br />
@@ -103,20 +98,9 @@ const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual }) => {
         <FontAwesomeIcon icon={faArrowDown} />
       </div>
 
-      {/* URGENCY */}
-      {/* <div className="text-center flex justify-center items-center gap-2 bg-greentoo/20 p-2">
-        <span className="relative flex h-3 w-3 items-center">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-greento opacity-95"></span>
-          <span className="relative inline-flex rounded-full h-3 w-3 bg-greento"></span>
-        </span>
-        <p className="text-sm">
-          73 orang sekarang sedang ingin mengambil promo!
-        </p>
-      </div> */}
-
       {/* FORM FUNNEL */}
       <div id="form">
-        <Funnel pixel={pixelId} product={produkBaru} price={promoPrice}/>
+        <Funnel pixel={pixelId} product={produkBaru} price={promoPrice} />
       </div>
 
       {/* FAQ */}

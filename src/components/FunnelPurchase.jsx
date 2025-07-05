@@ -127,7 +127,6 @@ const FunnelPurchase = ({ pixel, product, price}) => {
         </div>
 
         <h3 className="text-lg font-bold mb-3">Metode Pembayaran:</h3>
-
         <div className="mb-4">
           {["Bank Transfer","COD"].map((method) => (
             <div
@@ -162,7 +161,6 @@ const FunnelPurchase = ({ pixel, product, price}) => {
             </div>
           ))}
         </div>
-
         <button
           onClick={handleSubmit}
           type="button"
