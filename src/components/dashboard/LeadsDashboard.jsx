@@ -28,28 +28,6 @@ const LeadsDashboard = () => {
     return () => unsubscribe();
   }, []);
 
-  const handleCopy = (lead) => {
-    const pesan = `Terima kasih sudah melakukan pemesanan 🙏  
-Berikut detail pesanan Kakak:
-
-Nama Produk: ${lead.productTitle}  
-Harga Produk: [isi harga produk]  
-Ongkir: [isi ongkir]  
-Total Pembayaran: [isi total pembayaran]
-
-Nama: ${lead.name}  
-Alamat Lengkap: ${lead.address}
-
-Apakah alamat yang Kakak berikan sudah benar?  
-Kami akan segera proses pesanan Kakak jika alamatnya sudah sesuai ya.  
-Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
-
-    navigator.clipboard.writeText(pesan).then(() => {
-      setCopiedId(lead.id);
-      setTimeout(() => setCopiedId(null), 2000); // reset notif setelah 2 detik
-    });
-  };
-
   return (
     <div className="min-h-screen bg-zinc-950 text-white px-4 py-12">
       <div className="max-w-4xl mx-auto">

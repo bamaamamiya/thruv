@@ -19,8 +19,8 @@ Berikut detail pesanan Kakak:
 
 Nama Produk: ${lead.productTitle}  
 Harga Produk: ${formatHargaSingkat(lead.price)}  
-Ongkir: [isi ongkir]  
-Total Pembayaran: [isi total pembayaran]
+Ongkir: 
+Total Pembayaran: 
 
 Nama: ${lead.name}  
 Alamat Lengkap: ${lead.address}
