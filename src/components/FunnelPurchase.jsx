@@ -4,7 +4,7 @@ import { db } from "../firebase"; // path sesuai struktur file kamu
 const FunnelPurchase = ({ pixel, product, price}) => {
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState("COD");
+  const [paymentMethod, setPaymentMethod] = useState("Bank Transfer");
   const [address, setAddress] = useState(""); // <-- Tambahan
 
   const handleSubmit = async () => {
@@ -129,7 +129,7 @@ const FunnelPurchase = ({ pixel, product, price}) => {
         <h3 className="text-lg font-bold mb-3">Metode Pembayaran:</h3>
 
         <div className="mb-4">
-          {["COD", "Bank Transfer"].map((method) => (
+          {["Bank Transfer","COD"].map((method) => (
             <div
               key={method}
               className="flex items-center cursor-pointer border-2 p-4 rounded-md mb-2"
