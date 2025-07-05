@@ -4,16 +4,16 @@ import CountdownTimer from "../set/CountdownTimer";
 import Funnel from "../FunnelPurchase";
 import Faqs from "../set/Faqs";
 import { useEffect, useRef, useState } from "react";
-import PriceDisplay from "../set/PriceDisplay"
+import PriceDisplay from "../set/PriceDisplay";
 
-const Footer = ({ pixelId, produkBaru, footerImages, faqs }) => {
-	const normalPrice = 249000;  // harga normal
-  const promoPrice = 129000;    // harga promo
+const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual }) => {
+  const normalPrice = 249000; // harga normal
+  const promoPrice = hargaJual; // harga promo
   const [isVisible, setIsVisible] = useState(false);
   const [currentValue, setCurrentValue] = useState(normalPrice);
   const promoRef = useRef(null);
 
-	useEffect(() => {
+  useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -65,9 +65,11 @@ const Footer = ({ pixelId, produkBaru, footerImages, faqs }) => {
           <h1>Cuma 149rb</h1>
           <h1>🔥Gratis Ongkir 🔥</h1>
         </div> */}
-				<div className="text-center text-5xl font-bold" ref={promoRef}>
-        <h1 className="text-redto">Rp {Math.floor(currentValue).toLocaleString("id-ID")}</h1>
-      </div>
+        <div className="text-center text-5xl font-bold" ref={promoRef}>
+          <h1 className="text-redto">
+            Rp {Math.floor(currentValue).toLocaleString("id-ID")}
+          </h1>
+        </div>
         <br />
         <div className="w-auto h-8 bg-gray-300 rounded overflow-hidden m-2">
           <p className="bg-redto text-white text-sm px-3 flex items-center h-full w-1/3">
@@ -114,7 +116,7 @@ const Footer = ({ pixelId, produkBaru, footerImages, faqs }) => {
 
       {/* FORM FUNNEL */}
       <div id="form">
-        <Funnel pixel={pixelId} product={produkBaru} />
+        <Funnel pixel={pixelId} product={produkBaru} price={promoPrice}/>
       </div>
 
       {/* FAQ */}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { db } from "../firebase"; // path sesuai struktur file kamu
-const FunnelPurchase = ({ pixel, product }) => {
+const FunnelPurchase = ({ pixel, product, price}) => {
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("COD");
@@ -45,6 +45,7 @@ const FunnelPurchase = ({ pixel, product }) => {
       await addDoc(collection(db, "leads"), {
         name,
         whatsapp: cleanedWhatsapp,
+				price,
         address,
         paymentMethod,
         productTitle: product.title,

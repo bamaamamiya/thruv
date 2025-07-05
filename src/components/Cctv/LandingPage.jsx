@@ -78,6 +78,7 @@ const CctvBohlam = () => {
         testimonies={testimonies}
       />
       <Footer
+        hargaJual={funnelProduct.price}
         pixelId="2111198546014232"
         produkBaru={funnelProduct}
         footerImages={["images/fotter2.webp", "images/fotter.webp"]}
