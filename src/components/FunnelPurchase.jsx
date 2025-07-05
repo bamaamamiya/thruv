@@ -51,6 +51,7 @@ const FunnelPurchase = ({ pixel, product, price}) => {
         productTitle: product.title,
         productId: product.id || "unknown",
         createdAt: Timestamp.now(),
+				status:"Pending"
       });
       console.log("Data disimpan ke Firestore!");
     } catch (error) {

@@ -43,12 +43,13 @@ const LeadsDashboard = () => {
 
         {/* Header hanya desktop */}
         {!isMobile && (
-          <div className="grid grid-cols-5 border-b border-white/10 py-3 text-sm font-semibold text-gray-400">
+          <div className="grid grid-cols-6 border-b border-white/10 py-3 text-sm font-semibold text-gray-400">
             <span>Tgl</span>
             <span>Nama</span>
             <span>WA</span>
             <span>Metode</span>
             <span>Produk</span>
+            <span>Status</span>
           </div>
         )}
 

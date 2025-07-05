@@ -1,15 +1,17 @@
 import { useState } from "react";
-import { deleteDoc, doc } from "firebase/firestore";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
 const formatHargaSingkat = (harga) => {
   if (!harga) return "-";
-  if (harga >= 1_000_000) return (harga / 1_000_000).toFixed(1).replace(".0", "") + "jt";
+  if (harga >= 1_000_000)
+    return (harga / 1_000_000).toFixed(1).replace(".0", "") + "jt";
   return (harga / 1000).toFixed(0) + "rb";
 };
 
 const LeadRowMobile = ({ lead, copiedId, setCopiedId }) => {
   const [showModal, setShowModal] = useState(false);
+  const [updating, setUpdating] = useState(false);
 
   const handleCopy = () => {
     const pesan = `Terima kasih sudah melakukan pemesanan 🙏  
@@ -28,6 +30,21 @@ Apakah alamat yang Kakak berikan sudah benar?`;
     });
   };
 
+  const handleStatusChange = async (newStatus) => {
+    if (newStatus === lead.status) return;
+    setUpdating(true);
+    try {
+      await updateDoc(doc(db, "leads", lead.id), { status: newStatus });
+    } catch (err) {
+      console.error("Gagal update status:", err);
+      alert("Gagal update status.");
+    } finally {
+      setUpdating(false);
+    }
+  };
+
+  const statusOptions = ["pending", "complete", "cancel","none"];
+
   return (
     <>
       <div
@@ -36,15 +53,29 @@ Apakah alamat yang Kakak berikan sudah benar?`;
       >
         <div className="flex justify-between text-sm mb-2 text-gray-400">
           <span>
-            {new Date(lead.createdAt.seconds * 1000).toLocaleDateString("id-ID", {
-              day: "2-digit",
-              month: "short",
-            })}
+            {new Date(lead.createdAt.seconds * 1000).toLocaleDateString(
+              "id-ID",
+              {
+                day: "2-digit",
+                month: "short",
+              }
+            )}
           </span>
           <span className="text-emerald-400">{lead.paymentMethod}</span>
         </div>
         <div className="text-white font-semibold">{lead.name}</div>
         <div className="text-blue-400 text-sm">{lead.whatsapp}</div>
+        <span
+          className={`text-sm font-bold capitalize ${
+            lead.status === "complete"
+              ? "text-green-400"
+              : lead.status === "cancel"
+              ? "text-red-400"
+              : "text-yellow-300"
+          }`}
+        >
+          {lead.status}
+        </span>
         <div className="text-sm text-white mt-1">{lead.productTitle}</div>
       </div>
 
@@ -61,7 +92,9 @@ Apakah alamat yang Kakak berikan sudah benar?`;
             <h2 className="text-xl font-semibold mb-4">📄 Detail Order</h2>
 
             <div className="space-y-2">
-              <p><span className="text-gray-400">Nama:</span> {lead.name}</p>
+              <p>
+                <span className="text-gray-400">Nama:</span> {lead.name}
+              </p>
               <p>
                 <span className="text-gray-400">WA:</span>{" "}
                 <a
@@ -77,9 +110,50 @@ Apakah alamat yang Kakak berikan sudah benar?`;
                 <span className="text-gray-400">Harga Produk:</span>{" "}
                 {formatHargaSingkat(lead.price)}
               </p>
-              <p><span className="text-gray-400">Alamat:</span> {lead.address}</p>
-              <p><span className="text-gray-400">Metode:</span> {lead.paymentMethod}</p>
-              <p><span className="text-gray-400">Produk:</span> {lead.productTitle}</p>
+              <p>
+                <span className="text-gray-400">Alamat:</span> {lead.address}
+              </p>
+              <p>
+                <span className="text-gray-400">Metode:</span>{" "}
+                {lead.paymentMethod}
+              </p>
+              <p>
+                <span className="text-gray-400">Produk:</span>{" "}
+                {lead.productTitle}
+              </p>
+              <p>
+                <span className="text-gray-400">Status:</span> {lead.status}
+              </p>
+            </div>
+
+            {/* Status Controls */}
+            <div className="flex flex-wrap gap-2 mt-4">
+              {statusOptions.map((status) => {
+                const isActive =
+                  lead.status === (status === "none" ? "" : status);
+                return (
+                  <button
+                    key={status}
+                    disabled={updating}
+                    onClick={() =>
+                      handleStatusChange(status === "none" ? "" : status)
+                    }
+                    className={`px-3 py-1 text-xs font-bold rounded-full transition border-2 ${
+                      isActive
+                        ? "bg-white text-black"
+                        : "border-white text-white hover:bg-white/10"
+                    }`}
+                  >
+                    {status === "pending"
+                      ? "🕓 Pending"
+                      : status === "complete"
+                      ? "✅ Complete"
+                      : status === "cancel"
+                      ? "❌ Cancel"
+                      : "🧼 None"}
+                  </button>
+                );
+              })}
             </div>
 
             <div className="flex justify-between items-center mt-6">
@@ -91,7 +165,9 @@ Apakah alamat yang Kakak berikan sudah benar?`;
               </button>
               <button
                 onClick={async () => {
-                  const konfirmasi = window.confirm(`Hapus data atas nama ${lead.name}?`);
+                  const konfirmasi = window.confirm(
+                    `Hapus data atas nama ${lead.name}?`
+                  );
                   if (konfirmasi) {
                     await deleteDoc(doc(db, "leads", lead.id));
                     setShowModal(false);
