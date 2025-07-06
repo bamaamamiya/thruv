@@ -5,6 +5,7 @@ import Funnel from "../FunnelPurchase";
 import Faqs from "../set/Faqs";
 import { useEffect, useRef, useState } from "react";
 import PriceDisplay from "../set/PriceDisplay";
+import PaymentComparison from "../set/PaymentComparisonTable";
 
 const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual }) => {
   const normalPrice = 249000; // harga normal
@@ -72,6 +73,16 @@ const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual }) => {
             Sisa Promo: 1
           </p>
         </div>
+
+        <PaymentComparison
+          bonusItem="Bonus Bulb Adapter"
+          cashback="Potongan ongkir 15RB"
+          priorityShipping="Prioritas Kirim"
+          digitalGuide="Panduan Digital"
+          guarantee="Garansi 7 HARI"
+          codFee="Biaya COD"
+        />
+
         {/* <div className="bg-yellow-100 border border-yellow-400 rounded-md p-3 text-sm text-gray-800 text-center mx-2 mb-4">
           🎁 <strong>Bonus Hari Ini:</strong>
           Dapatkan{" "}

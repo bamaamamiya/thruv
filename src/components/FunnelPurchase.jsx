@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { db } from "../firebase"; // path sesuai struktur file kamu
-const FunnelPurchase = ({ pixel, product, price}) => {
+const FunnelPurchase = ({ pixel, product, price }) => {
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("Bank Transfer");
@@ -45,13 +45,13 @@ const FunnelPurchase = ({ pixel, product, price}) => {
       await addDoc(collection(db, "leads"), {
         name,
         whatsapp: cleanedWhatsapp,
-				price,
+        price,
         address,
         paymentMethod,
         productTitle: product.title,
         productId: product.id || "unknown",
         createdAt: Timestamp.now(),
-				status:"Pending"
+        status: "Pending",
       });
       console.log("Data disimpan ke Firestore!");
     } catch (error) {
@@ -128,7 +128,7 @@ const FunnelPurchase = ({ pixel, product, price}) => {
 
         <h3 className="text-lg font-bold mb-3">Metode Pembayaran:</h3>
         <div className="mb-4">
-          {["Bank Transfer","COD"].map((method) => (
+          {["Bank Transfer", "COD"].map((method) => (
             <div
               key={method}
               className="flex items-center cursor-pointer border-2 p-4 rounded-md mb-2"
@@ -157,6 +157,12 @@ const FunnelPurchase = ({ pixel, product, price}) => {
                 <span className="font-medium">
                   {method === "COD" ? "Bayar di Tempat" : "Bank Transfer"}
                 </span>
+                {/* ✨ Badge Rekomendasi untuk Transfer */}
+                {method === "Bank Transfer" && (
+                  <span className="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-full">
+                    Rekomendasi
+                  </span>
+                )}
               </label>
             </div>
           ))}
