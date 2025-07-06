@@ -123,7 +123,15 @@ const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual }) => {
       <br />
       <div className="grid justify-center items-center">
         {footerImages.map((img, i) => (
-          <img key={i} src={img} alt={`footer-${i}`} width="640" height="360" />
+          <img
+            key={i}
+            src={img}
+            alt={`footer-${i}`}
+            width="640"
+            height="360"
+            loading="lazy"
+            decoding="async"
+          />
         ))}
       </div>
       <br />
