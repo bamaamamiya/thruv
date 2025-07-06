@@ -34,7 +34,7 @@ const HeadLine = ({
         <p className="text-xl">{subHeadLine}</p>
       </div>
       <div className="grid justify-center items-center">
-        <img src={imgHeadLine} alt="headline" width="640" height="360" />
+        <img src={imgHeadLine} alt="headline" width="640" height="360" loading="eager" decoding="async" />
         <br />
       </div>
       <div className="flex justify-center">
