@@ -54,23 +54,45 @@ const LeadsDashboard = () => {
         )}
 
         <div className="divide-y divide-white/5">
-          {leads.map((lead) =>
-            isMobile ? (
-              <LeadRowMobile
-                key={lead.id}
-                lead={lead}
-                copiedId={copiedId}
-                setCopiedId={setCopiedId}
-              />
-            ) : (
-              <LeadRow
-                key={lead.id}
-                lead={lead}
-                copiedId={copiedId}
-                setCopiedId={setCopiedId}
-              />
-            )
-          )}
+          {leads.map((lead, index) => {
+            const currentMonth = new Date(lead.createdAt.seconds * 1000).toLocaleString("id-ID", {
+              month: "long",
+              year: "numeric",
+            });
+
+            const prevLead = leads[index - 1];
+            const prevMonth =
+              prevLead &&
+              new Date(prevLead.createdAt.seconds * 1000).toLocaleString("id-ID", {
+                month: "long",
+                year: "numeric",
+              });
+
+            const showMonth = index === 0 || currentMonth !== prevMonth;
+
+            return (
+              <React.Fragment key={lead.id}>
+                {showMonth && (
+                  <div className=" text-center text-sm font-semibold text-gray-300 bg-zinc-800 rounded-lg ">
+                    📅 {currentMonth}
+                  </div>
+                )}
+                {isMobile ? (
+                  <LeadRowMobile
+                    lead={lead}
+                    copiedId={copiedId}
+                    setCopiedId={setCopiedId}
+                  />
+                ) : (
+                  <LeadRow
+                    lead={lead}
+                    copiedId={copiedId}
+                    setCopiedId={setCopiedId}
+                  />
+                )}
+              </React.Fragment>
+            );
+          })}
         </div>
       </div>
     </div>
