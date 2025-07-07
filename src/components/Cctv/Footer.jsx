@@ -5,7 +5,7 @@ import Funnel from "../FunnelPurchase";
 import Faqs from "../set/Faqs";
 import { useEffect, useRef, useState } from "react";
 import PriceDisplay from "../set/PriceDisplay";
-import PaymentComparison from "../set/PaymentComparisonTable";
+import BonusTF from "../set/BonusTF";
 
 const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual }) => {
   const normalPrice = 249000; // harga normal
@@ -52,10 +52,7 @@ const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual }) => {
   return (
     <div>
       <div className="space-y-2">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold">
-            ⚠ Promo 50% Hanya Untuk 3 Orang Pemesanan Pertama ⚠
-          </h1>
+        {/* <div className="text-center">
           <br />
           <p className="text-lg">
             Harga Normal <span className="line-through">Rp.249.000</span>
@@ -72,10 +69,32 @@ const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual }) => {
           <p className="bg-redto text-white text-sm px-3 flex items-center h-full w-1/3">
             Sisa Promo: 1
           </p>
+        </div> */}
+
+        <BonusTF
+          valueStack={[
+            { item: "CCTV Bohlam", value: 249000 },
+            {
+              item: "Bonus Fitting Adapter",
+              value: 15000,
+            },
+            {
+              item: "Buku Panduan Instalasi & Pemakaian",
+              value: 25000,
+            },
+            { item: "Potongan Ongkir (Hemat pengiriman)", value: 15000 },
+            { item: "Pengiriman Prioritas (Dikirim lebih dulu)", value: 30000 },
+          ]}
+          hargaPromo={hargaJual}
+        />
+        <h1 className="text-2xl font-bold text-center">
+          ⚠ Promo 50% Hanya Untuk 3 Orang Pemesanan Pertama ⚠
+        </h1>
+        <div className="w-auto h-8 bg-gray-300 rounded overflow-hidden m-2">
+          <p className="bg-redto text-white text-sm px-3 flex items-center h-full w-1/3">
+            Sisa Promo: 1
+          </p>
         </div>
-
-        
-
         {/* <div className="bg-yellow-100 border border-yellow-400 rounded-md p-3 text-sm text-gray-800 text-center mx-2 mb-4">
           🎁 <strong>Bonus Hari Ini:</strong>
           Dapatkan{" "}
@@ -106,17 +125,7 @@ const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual }) => {
       <div id="form">
         <Funnel pixel={pixelId} product={produkBaru} price={promoPrice} />
       </div>
-			
-			<div>
-				<PaymentComparison
-          bonusItem="Bonus Ekslusif Bulb Adapter"
-          cashback="Potongan ongkir Rp.15.000"
-          priorityShipping="Prioritas Kirim"
-          digitalGuide="Panduan Digital"
-          guarantee="Garansi 7 HARI"
-          codFee="Biaya COD"
-        />
-			</div>
+
       {/* FAQ */}
       <div>
         <Faqs faqs={faqs} />
