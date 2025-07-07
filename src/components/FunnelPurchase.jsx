@@ -114,8 +114,8 @@ const FunnelPurchase = ({ pixel, product, price }) => {
         </div>
 
         <div className="mb-4">
-          <label id="addrest" className="block font-semibold mb-1">
-            Alamat Lengkap
+          <label id="addrest" className="block font-bold mb-1">
+            Alamat Lengkap :
           </label>
           <textarea
             placeholder="Masukkan Nomor Rumah, RT/RW, Kecamatan, Kota/Kab, Ciri2 Rumah"
@@ -158,11 +158,11 @@ const FunnelPurchase = ({ pixel, product, price }) => {
                   {method === "COD" ? "Bayar di Tempat" : "Bank Transfer"}
                 </span>
                 {/* ✨ Badge Rekomendasi untuk Transfer */}
-                {method === "Bank Transfer" && (
+                {/* {method === "Bank Transfer" && (
                   <span className="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-full">
                     Rekomendasi
                   </span>
-                )}
+                )} */}
               </label>
             </div>
           ))}

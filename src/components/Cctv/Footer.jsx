@@ -74,14 +74,7 @@ const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual }) => {
           </p>
         </div>
 
-        {/* <PaymentComparison
-          bonusItem="Bonus Bulb Adapter"
-          cashback="Potongan ongkir 15RB"
-          priorityShipping="Prioritas Kirim"
-          digitalGuide="Panduan Digital"
-          guarantee="Garansi 7 HARI"
-          codFee="Biaya COD"
-        /> */}
+        
 
         {/* <div className="bg-yellow-100 border border-yellow-400 rounded-md p-3 text-sm text-gray-800 text-center mx-2 mb-4">
           🎁 <strong>Bonus Hari Ini:</strong>
@@ -113,7 +106,17 @@ const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual }) => {
       <div id="form">
         <Funnel pixel={pixelId} product={produkBaru} price={promoPrice} />
       </div>
-
+			
+			<div>
+				<PaymentComparison
+          bonusItem="Bonus Ekslusif Bulb Adapter"
+          cashback="Potongan ongkir Rp.15.000"
+          priorityShipping="Prioritas Kirim"
+          digitalGuide="Panduan Digital"
+          guarantee="Garansi 7 HARI"
+          codFee="Biaya COD"
+        />
+			</div>
       {/* FAQ */}
       <div>
         <Faqs faqs={faqs} />
