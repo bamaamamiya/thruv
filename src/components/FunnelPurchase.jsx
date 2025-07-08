@@ -159,8 +159,8 @@ const FunnelPurchase = ({ pixel, product, price }) => {
                 </span>
                 {/* ✨ Badge Rekomendasi untuk Transfer */}
                 {method === "Bank Transfer" && (
-                  <span className="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-full">
-                    Rekomendasi
+                  <span className="inline-block bg-red-100 text-red-600 text-[11px] font-bold px-3 py-[2px] rounded-md shadow-sm border border-red-700 capitalize tracking-wide">
+                    🔥 Promo Terbatas
                   </span>
                 )}
               </label>
