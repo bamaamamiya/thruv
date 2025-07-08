@@ -8,7 +8,7 @@ const BonusTF = ({ valueStack, hargaPromo }) => {
       <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-4 text-center capitalize">
         Semua ini{" "}
         <span className="text-redto font-semibold ">Khusus untuk kamu</span>{" "}
-        yang pilih <span className="text-black italic">Transfer</span>
+        yang pilih <span className="text-redto italic">Transfer</span>
       </h2>
 
       <div className="space-y-3">
