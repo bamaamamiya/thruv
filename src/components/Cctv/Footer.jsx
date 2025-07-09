@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import PriceDisplay from "../set/PriceDisplay";
 import BonusTF from "../set/BonusTF";
 
-const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual }) => {
+const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual , namaProduct}) => {
   const normalPrice = 249000; // harga normal
   const promoPrice = hargaJual; // harga promo
   const [isVisible, setIsVisible] = useState(false);
@@ -123,7 +123,7 @@ const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual }) => {
 
       {/* FORM FUNNEL */}
       <div id="form">
-        <Funnel pixel={pixelId} product={produkBaru} price={promoPrice} />
+        <Funnel pixel={pixelId} product={produkBaru} price={promoPrice} namaProduct={namaProduct}/>
       </div>
 
       {/* FAQ */}

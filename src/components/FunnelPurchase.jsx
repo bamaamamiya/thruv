@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { db } from "../firebase"; // path sesuai struktur file kamu
-const FunnelPurchase = ({ pixel, product, price }) => {
+const FunnelPurchase = ({ pixel, product, price , namaProduct }) => {
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("Bank Transfer");
@@ -166,7 +166,7 @@ const FunnelPurchase = ({ pixel, product, price }) => {
 
                 {method === "COD" && (
                   <span className="inline-block bg-gray-100 text-gray-600 text-[11px] font-bold px-3 py-[2px] rounded-md shadow-sm border border-gray-400 capitalize tracking-wide">
-                    ⚠️ Hanya Produk Utama (Tanpa Bonus)
+                    ⚠️ Hanya {namaProduct} (Tanpa Bonus)
                   </span>
                 )}
               </label>

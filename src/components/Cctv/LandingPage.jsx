@@ -83,6 +83,7 @@ const CctvBohlam = () => {
         produkBaru={funnelProduct}
         footerImages={["images/fotter2.webp", "images/fotter.webp"]}
         faqs={faqs}
+				namaProduct={funnelProduct.title}
       />
       <Floting />
     </div>
