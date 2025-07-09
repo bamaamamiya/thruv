@@ -52,7 +52,7 @@ const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual , namaProdu
   return (
     <div>
       <div className="space-y-2">
-				 <h1 className="text-2xl font-bold text-center">
+				 {/* <h1 className="text-2xl font-bold text-center">
           ⚠ Promo 50% Hanya Untuk 3 Orang Pemesanan Pertama ⚠
         </h1>
         <div className="text-center">
@@ -72,9 +72,9 @@ const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual , namaProdu
           <p className="bg-redto text-white text-sm px-3 flex items-center h-full w-1/3">
             Sisa Promo: 1
           </p>
-        </div>
+        </div> */}
 
-        {/* <BonusTF
+        <BonusTF
           valueStack={[
             { item: "CCTV Bohlam", value: 249000 },
             {
@@ -97,18 +97,8 @@ const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual , namaProdu
           <p className="bg-redto text-white text-sm px-3 flex items-center h-full w-1/3">
             Sisa Promo: 1
           </p>
-        </div> */}
-        {/* <div className="bg-yellow-100 border border-yellow-400 rounded-md p-3 text-sm text-gray-800 text-center mx-2 mb-4">
-          🎁 <strong>Bonus Hari Ini:</strong>
-          Dapatkan{" "}
-          <span className="font-semibold">
-            Adapter Bulb senilai Rp20.000
-          </span>{" "}
-          secara GRATIS khusus untuk pembayaran via Transfer!
-          <span className="text-red-500 font-medium block mt-1">
-            *Hanya untuk 3 pembeli pertama hari ini*
-          </span>
-        </div> */}
+        </div>
+
       </div>
 
       {/* FORM TITLE + ARROW */}
