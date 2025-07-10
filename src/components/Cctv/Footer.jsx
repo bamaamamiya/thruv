@@ -52,7 +52,7 @@ const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual , namaProdu
   return (
     <div>
       <div className="space-y-2">
-				 {/* <h1 className="text-2xl font-bold text-center">
+									<h1 className="text-2xl font-bold text-center">
           ⚠ Promo 50% Hanya Untuk 3 Orang Pemesanan Pertama ⚠
         </h1>
         <div className="text-center">
@@ -72,9 +72,9 @@ const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual , namaProdu
           <p className="bg-redto text-white text-sm px-3 flex items-center h-full w-1/3">
             Sisa Promo: 1
           </p>
-        </div> */}
+        </div>
 
-        <BonusTF
+        {/* <BonusTF
           valueStack={[
             { item: "CCTV Bohlam", value: 249000 },
             {
@@ -97,7 +97,7 @@ const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual , namaProdu
           <p className="bg-redto text-white text-sm px-3 flex items-center h-full w-1/3">
             Sisa Promo: 1
           </p>
-        </div>
+        </div> */}
 
       </div>
 
