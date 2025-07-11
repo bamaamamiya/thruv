@@ -84,7 +84,7 @@ const Footer = ({
         <BonusTF
           valueStack={[
             {
-              item: "✅ Kamera CCTV Bohlam Smart 360°",
+              item: "✅ Kamera CCTV Bohlam E27",
               value: 249000,
             },
             {
@@ -92,7 +92,7 @@ const Footer = ({
               value: 15000,
             },
             {
-              item: "📘 Buku Panduan Instalasi & Pemakaian",
+              item: "📘 Buku Panduan Instalasi",
               value: 25000,
             },
             {
