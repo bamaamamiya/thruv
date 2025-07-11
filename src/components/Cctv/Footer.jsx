@@ -59,7 +59,7 @@ const Footer = ({
   return (
     <div>
       <div className="space-y-2">
-        <h1 className="text-2xl font-bold text-center">
+        <h1 className="text-2xl font-bold text-center" id="formulir">
           ⚠ Promo 50% Hanya Untuk 3 Orang Pemesanan Pertama ⚠
         </h1>
         <div className="text-center">
@@ -127,7 +127,7 @@ const Footer = ({
 
       {/* FORM TITLE + ARROW */}
       <br />
-      <h1 className="text-center font-bold text-xl p-2" id="formulir">
+      <h1 className="text-center font-bold text-xl p-2" >
         Isi Data Sekarang Sebelum Promonya Habis — Siapa Cepat Dia Dapat!
       </h1>
 
