@@ -7,7 +7,14 @@ import { useEffect, useRef, useState } from "react";
 import PriceDisplay from "../set/PriceDisplay";
 import BonusTF from "../set/BonusTF";
 
-const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual , namaProduct}) => {
+const Footer = ({
+  pixelId,
+  produkBaru,
+  footerImages,
+  faqs,
+  hargaJual,
+  namaProduct,
+}) => {
   const normalPrice = 249000; // harga normal
   const promoPrice = hargaJual; // harga promo
   const [isVisible, setIsVisible] = useState(false);
@@ -52,7 +59,7 @@ const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual , namaProdu
   return (
     <div>
       <div className="space-y-2">
-									<h1 className="text-2xl font-bold text-center">
+        {/* <h1 className="text-2xl font-bold text-center">
           ⚠ Promo 50% Hanya Untuk 3 Orang Pemesanan Pertama ⚠
         </h1>
         <div className="text-center">
@@ -72,24 +79,38 @@ const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual , namaProdu
           <p className="bg-redto text-white text-sm px-3 flex items-center h-full w-1/3">
             Sisa Promo: 1
           </p>
-        </div>
+        </div> */}
 
-        {/* <BonusTF
+        <BonusTF
           valueStack={[
-            { item: "CCTV Bohlam", value: 249000 },
             {
-              item: "Bonus Fitting Adapter",
+              item: "✅ Kamera CCTV Bohlam Smart 360°",
+              value: 249000,
+            },
+            {
+              item: "🎁 Bonus Fitting Adapter E27",
               value: 15000,
             },
             {
-              item: "Buku Panduan Instalasi & Pemakaian",
+              item: "📘 Buku Panduan Instalasi & Pemakaian",
               value: 25000,
             },
-            { item: "Potongan Ongkir (Hemat pengiriman)", value: 15000 },
-            { item: "Pengiriman Prioritas (Dikirim lebih dulu)", value: 30000 },
+            {
+              item: "💸 Potongan Ongkir",
+              value: 15000,
+            },
+            {
+              item: "🚀 Pengiriman Prioritas",
+              value: 30000,
+            },
+            {
+              item: "🛡️ Garansi 7 Hari Ganti Baru",
+              value: 40000,
+            },
           ]}
           hargaPromo={hargaJual}
         />
+
         <h1 className="text-2xl font-bold text-center">
           ⚠ Promo 50% Hanya Untuk 3 Orang Pemesanan Pertama ⚠
         </h1>
@@ -97,8 +118,7 @@ const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual , namaProdu
           <p className="bg-redto text-white text-sm px-3 flex items-center h-full w-1/3">
             Sisa Promo: 1
           </p>
-        </div> */}
-
+        </div>
       </div>
 
       {/* FORM TITLE + ARROW */}
@@ -116,7 +136,12 @@ const Footer = ({ pixelId, produkBaru, footerImages, faqs, hargaJual , namaProdu
 
       {/* FORM FUNNEL */}
       <div id="form">
-        <Funnel pixel={pixelId} product={produkBaru} price={promoPrice} namaProduct={namaProduct}/>
+        <Funnel
+          pixel={pixelId}
+          product={produkBaru}
+          price={promoPrice}
+          namaProduct={namaProduct}
+        />
       </div>
 
       {/* FAQ */}
