@@ -60,7 +60,7 @@ const Content = ({
       <ImageSection images={productImages} altPrefix="product" />
 
       {/* Testimoni */}
-      <h1 className="font-bold text-center text-4xl mt-2">Apa Kata Pelanggan Kami?</h1>
+      <h1 className="font-bold text-center text-4xl mt-2">TESTIMONI</h1>
       <br />
       <ImageSection images={testimonies} altPrefix="testimoni" />
       <br />

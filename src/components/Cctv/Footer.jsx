@@ -6,7 +6,7 @@ import Faqs from "../set/Faqs";
 import { useEffect, useRef, useState } from "react";
 import PriceDisplay from "../set/PriceDisplay";
 import BonusTF from "../set/BonusTF";
-
+import PaymentComparison from "../set/PaymentComparisonTable";
 const Footer = ({
   pixelId,
   produkBaru,
@@ -147,6 +147,17 @@ const Footer = ({
           namaProduct={namaProduct}
         />
       </div>
+
+			<div>
+				<PaymentComparison
+				bonusItem="Bonus Fitting"
+  cashback="Potongan ongkir"
+  priorityShipping="Proritas Paket"
+  digitalGuide="Buku panduan"
+  guarantee="Garanasi 7Hari"
+  codFee="Biaya COD"
+				/>
+			</div>
 
       {/* FAQ */}
       <div>
