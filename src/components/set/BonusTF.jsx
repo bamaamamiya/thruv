@@ -26,7 +26,7 @@ const BonusTF = ({ valueStack, hargaPromo }) => {
 
         <div className=" pt-4 mt-4 text-center">
           <p className="text-gray-500 text-xs mb-1 ">Total Nilai Produk + Bonus Sebenarnya :</p>
-          <p className="text-2xl font-bold text-gray-800 mb-2 line-through">
+          <p className="text-xl font-bold text-gray-800 mb-2 line-through">
             Rp{totalValue.toLocaleString("id-ID")}
           </p>
           <p className=" text-sm mb-1">Promo cuma untuk kamu :</p>
