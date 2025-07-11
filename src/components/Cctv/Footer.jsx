@@ -69,10 +69,14 @@ const Footer = ({
           </p>
           <p className="text-lg">Harga Promo</p>
         </div>
-        <div className="text-center text-5xl font-bold" ref={promoRef}>
+        <div className="text-center text-5xl font-bold " ref={promoRef}>
           <h1 className="text-redto">
             Rp {Math.floor(currentValue).toLocaleString("id-ID")}
           </h1>
+        </div>
+        <div className="text-center text-sm">
+          <p className="font-bold">Transfer Sekarang Dapat :</p>
+          <p className="font-semibold ">Bonus Fitting + Potongan Ongkir + Prioritas Pengiriman</p>
         </div>
         <br />
         <div className="w-auto h-8 bg-gray-300 rounded overflow-hidden m-2">

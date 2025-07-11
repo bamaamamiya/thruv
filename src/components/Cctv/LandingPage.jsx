@@ -19,6 +19,10 @@ const CctvBohlam = () => {
   };
 
   const faqs = [
+		{
+			question:"Aman gak transfer dulu?",
+			answer: "Aman kak, rekening atas nama resmi & kami kasih garansi 7 hari tukar baru. Sudah ratusan customer transfer duluan ✅"
+		},
     {
       question: "Apakah CCTV ini harus pakai kabel?",
       answer:

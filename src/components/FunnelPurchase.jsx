@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { db } from "../firebase"; // path sesuai struktur file kamu
-const FunnelPurchase = ({ pixel, product, price , namaProduct }) => {
+const FunnelPurchase = ({ pixel, product, price, namaProduct }) => {
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("Bank Transfer");
@@ -126,7 +126,7 @@ const FunnelPurchase = ({ pixel, product, price , namaProduct }) => {
           />
         </div>
 
-        <h3 className="text-lg font-bold mb-3">Metode Pembayaran:</h3>
+        <h3 className="text-lg font-bold mb-2">Metode Pembayaran:</h3>
         <div className="mb-4">
           {["Bank Transfer", "COD"].map((method) => (
             <div
@@ -145,7 +145,7 @@ const FunnelPurchase = ({ pixel, product, price , namaProduct }) => {
               />
               <label
                 id="metodePayments"
-                className="cursor-pointer grid items-center"
+                className="cursor-pointer grid items-center relative"
               >
                 <img
                   src={`/images/funnel/${
@@ -154,19 +154,19 @@ const FunnelPurchase = ({ pixel, product, price , namaProduct }) => {
                   alt={method}
                   className="w-12 h-12 object-contain"
                 />
-                <span className="font-medium">
+                <span className="font-medium -mt-2">
                   {method === "COD" ? "Bayar di Tempat" : "Bank Transfer"}
                 </span>
                 {/* ✨ Badge Rekomendasi untuk Transfer */}
                 {method === "Bank Transfer" && (
-                  <span className="inline-block bg-green-100 text-green-700 text-[11px] font-bold px-3 py-[2px] rounded-md shadow-sm border border-green-600 capitalize tracking-wide">
+                  <span className="inline-block bg-redto/10 text-redto text-[11px] font-bold px-3 py-[2px] rounded-md shadow-sm border border-redto/70 capitalize tracking-wide">
                     🎁 Dapat Bonus & Potongan Ongkir
                   </span>
                 )}
 
                 {method === "COD" && (
                   <span className="inline-block bg-gray-100 text-gray-600 text-[11px] font-bold px-3 py-[2px] rounded-md shadow-sm border border-gray-400 capitalize tracking-wide">
-                    ⚠️ Hanya {namaProduct} (Tanpa Bonus)
+                    ⚠️ Tanpa Bonus, Ongkir Normal
                   </span>
                 )}
               </label>
