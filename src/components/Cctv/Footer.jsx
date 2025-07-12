@@ -74,10 +74,12 @@ const Footer = ({
             Rp {Math.floor(currentValue).toLocaleString("id-ID")}
           </h1>
         </div>
-        <div className="text-center text-sm">
+        {/* <div className="text-center text-sm">
           <p className="font-bold">Transfer Sekarang Dapat :</p>
-          <p className="font-semibold ">Bonus Fitting + Potongan Ongkir + Prioritas Pengiriman</p>
-        </div>
+          <p className="font-semibold ">
+            Bonus Fitting + Potongan Ongkir + Prioritas Pengiriman
+          </p>
+        </div> */}
         <br />
         <div className="w-auto h-8 bg-gray-300 rounded overflow-hidden m-2">
           <p className="bg-redto text-white text-sm px-3 flex items-center h-full w-1/3">
@@ -127,7 +129,7 @@ const Footer = ({
 
       {/* FORM TITLE + ARROW */}
       <br />
-      <h1 className="text-center font-bold text-xl p-2" >
+      <h1 className="text-center font-bold text-xl p-2">
         Isi Data Sekarang Sebelum Promonya Habis — Siapa Cepat Dia Dapat!
       </h1>
 
@@ -147,17 +149,17 @@ const Footer = ({
           namaProduct={namaProduct}
         />
       </div>
-
-			<div>
-				<PaymentComparison
-				bonusItem="Bonus Fitting"
-  cashback="Potongan ongkir 15RB"
-  priorityShipping="Proritas Paket"
-  digitalGuide="Buku panduan"
-  guarantee="Garanasi 7Hari"
-  codFee="Biaya COD"
-				/>
-			</div>
+{/* 
+      <div>
+        <PaymentComparison
+          bonusItem="Bonus Fitting"
+          cashback="Potongan ongkir 15RB"
+          priorityShipping="Proritas Paket"
+          digitalGuide="Buku panduan"
+          guarantee="Garanasi 7Hari"
+          codFee="Biaya COD"
+        />
+      </div> */}
 
       {/* FAQ */}
       <div>
