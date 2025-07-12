@@ -151,7 +151,7 @@ const Footer = ({
 			<div>
 				<PaymentComparison
 				bonusItem="Bonus Fitting"
-  cashback="Potongan ongkir"
+  cashback="Potongan ongkir 15RB"
   priorityShipping="Proritas Paket"
   digitalGuide="Buku panduan"
   guarantee="Garanasi 7Hari"
