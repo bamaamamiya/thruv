@@ -47,6 +47,7 @@ Apakah alamat yang Kakak berikan sudah benar?`;
 
   return (
     <>
+		
       <div
         onClick={() => setShowModal(true)}
         className="bg-zinc-900 rounded-xl p-4 mb-4 shadow hover:bg-zinc-800 transition cursor-pointer"

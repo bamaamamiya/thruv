@@ -14,6 +14,7 @@ const LeadsDashboard = () => {
   const [leads, setLeads] = useState([]);
   const [copiedId, setCopiedId] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [selectedStatus, setSelectedStatus] = useState("Semua"); // ⬅️ State filter status
 
   useEffect(() => {
     const q = query(collection(db, "leads"), orderBy("createdAt", "desc"));
@@ -28,20 +29,42 @@ const LeadsDashboard = () => {
     return () => unsubscribe();
   }, []);
 
-  // Deteksi ukuran layar untuk mobile
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 640);
-    handleResize(); // inisialisasi
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // 🔍 Filter leads berdasarkan status
+  const filteredLeads =
+    selectedStatus === "Semua"
+      ? leads
+      : leads.filter((lead) => lead.status === selectedStatus);
+
+  // ✅ Daftar status yang bisa dipilih
+  const statusOptions = ["Semua", "Pending", "complete", "cancel"];
+
   return (
     <div className="min-h-screen bg-zinc-950 text-white px-4 py-12">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold text-center mb-8">📦 Order Masuk</h1>
+        <h1 className="text-3xl font-bold text-center mb-6">📦 Order Masuk</h1>
 
-        {/* Header hanya desktop */}
+        {/* Dropdown Filter */}
+        <div className="mb-6 text-center">
+          <select
+            value={selectedStatus}
+            onChange={(e) => setSelectedStatus(e.target.value)}
+            className="bg-zinc-800 text-white px-4 py-2 rounded-lg border border-zinc-700 capitalize"
+          >
+            {statusOptions.map((status) => (
+              <option key={status} value={status}>
+                {status}
+              </option>
+            ))}
+          </select>
+        </div>
+
         {!isMobile && (
           <div className="grid grid-cols-6 border-b border-white/10 py-3 text-sm font-semibold text-gray-400">
             <span>Tgl</span>
@@ -54,13 +77,15 @@ const LeadsDashboard = () => {
         )}
 
         <div className="divide-y divide-white/5">
-          {leads.map((lead, index) => {
-            const currentMonth = new Date(lead.createdAt.seconds * 1000).toLocaleString("id-ID", {
+          {filteredLeads.map((lead, index) => {
+            const currentMonth = new Date(
+              lead.createdAt.seconds * 1000
+            ).toLocaleString("id-ID", {
               month: "long",
               year: "numeric",
             });
 
-            const prevLead = leads[index - 1];
+            const prevLead = filteredLeads[index - 1];
             const prevMonth =
               prevLead &&
               new Date(prevLead.createdAt.seconds * 1000).toLocaleString("id-ID", {
@@ -73,7 +98,7 @@ const LeadsDashboard = () => {
             return (
               <React.Fragment key={lead.id}>
                 {showMonth && (
-                  <div className=" text-center text-sm font-semibold text-gray-300 bg-zinc-800 rounded-lg ">
+                  <div className="text-center text-sm font-semibold text-gray-300 bg-zinc-800 rounded-lg">
                     📅 {currentMonth}
                   </div>
                 )}
