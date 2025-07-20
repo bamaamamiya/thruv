@@ -13,6 +13,15 @@ const LeadRowMobile = ({ lead, copiedId, setCopiedId }) => {
   const [showModal, setShowModal] = useState(false);
   const [updating, setUpdating] = useState(false);
 
+  const handleCopyAddress = () => {
+    const prompt = `[PROVINSI], [KABUPATEN/KOTA], [KECAMATAN], [DESA/KELURAHAN], [KODEPOS (jika ada)] dan rapikan alamat lengkap, dan kecamatan terpisah.\n\nAlamat mentah: ${lead.address}`;
+
+    navigator.clipboard.writeText(prompt).then(() => {
+      setCopiedId(lead.id);
+      setTimeout(() => setCopiedId(null), 2000);
+    });
+  };
+
   const handleCopy = () => {
     const pesan = `Terima kasih sudah melakukan pemesanan 🙏  
 Nama Produk: ${lead.productTitle}  
@@ -43,11 +52,10 @@ Apakah alamat yang Kakak berikan sudah benar?`;
     }
   };
 
-  const statusOptions = ["pending", "complete", "cancel","none"];
+  const statusOptions = ["pending", "complete", "cancel", "none"];
 
   return (
     <>
-		
       <div
         onClick={() => setShowModal(true)}
         className="bg-zinc-900 rounded-xl p-4 mb-4 shadow hover:bg-zinc-800 transition cursor-pointer"
@@ -158,26 +166,36 @@ Apakah alamat yang Kakak berikan sudah benar?`;
             </div>
 
             <div className="flex justify-between items-center mt-6">
-              <button
-                onClick={handleCopy}
-                className="bg-white text-black text-xs font-semibold px-3 py-1 rounded-md hover:bg-gray-200 transition"
-              >
-                {copiedId === lead.id ? "✅ Disalin!" : "📋 Salin"}
-              </button>
-              <button
-                onClick={async () => {
-                  const konfirmasi = window.confirm(
-                    `Hapus data atas nama ${lead.name}?`
-                  );
-                  if (konfirmasi) {
-                    await deleteDoc(doc(db, "leads", lead.id));
-                    setShowModal(false);
-                  }
-                }}
-                className="text-red-400 hover:text-red-500 text-sm"
-              >
-                🗑️ Hapus
-              </button>
+              <div className="space-x-2">
+                <button
+                  onClick={handleCopy}
+                  className="bg-white text-black text-xs font-semibold px-3 py-1 rounded-md hover:bg-gray-200 transition"
+                >
+                  {copiedId === lead.id ? "✅ Disalin!" : "📋 Salin Total"}
+                </button>
+                <button
+                  onClick={handleCopyAddress}
+                  className="bg-white text-black text-xs font-semibold px-3 py-1 rounded-md hover:bg-gray-200 transition"
+                >
+                  {copiedId === lead.id ? "✅ Disalin!" : "📋 Salin Alamat"}
+                </button>
+              </div>
+              <div>
+                <button
+                  onClick={async () => {
+                    const konfirmasi = window.confirm(
+                      `Hapus data atas nama ${lead.name}?`
+                    );
+                    if (konfirmasi) {
+                      await deleteDoc(doc(db, "leads", lead.id));
+                      setShowModal(false);
+                    }
+                  }}
+                  className="text-red-400 hover:text-red-500 text-sm flex"
+                >
+                  🗑️ Hapus
+                </button>
+              </div>
             </div>
           </div>
         </div>
