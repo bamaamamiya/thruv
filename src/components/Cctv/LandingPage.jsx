@@ -18,11 +18,30 @@ const CctvBohlam = () => {
     price: 129000,
   };
 
+  const bundles = [
+    {
+      id: "bohlam-only",
+      title: "CCTV Bohlam",
+      price: 129000,
+    },
+    {
+      id: "bohlam-16gb",
+      title: "CCTV + Memori 16GB",
+      price: 199000,
+    },
+    {
+      id: "bohlam-32gb",
+      title: "CCTV + Memori 32GB",
+      price: 249000,
+    },
+  ];
+
   const faqs = [
-		{
-			question:"Aman gak transfer dulu?",
-			answer: "Aman kak, rekening atas nama resmi & kami kasih garansi 7 hari tukar baru. Sudah ratusan customer transfer duluan ✅"
-		},
+    {
+      question: "Aman gak transfer dulu?",
+      answer:
+        "Aman kak, rekening atas nama resmi & kami kasih garansi 7 hari tukar baru. Sudah ratusan customer transfer duluan ✅",
+    },
     {
       question: "Apakah CCTV ini harus pakai kabel?",
       answer:
@@ -81,13 +100,22 @@ const CctvBohlam = () => {
         productImages={productImages}
         testimonies={testimonies}
       />
-      <Footer
+      {/* <Footer
         hargaJual={funnelProduct.price}
         pixelId="2111198546014232"
         produkBaru={funnelProduct}
         footerImages={["images/fotter2.webp", "images/fotter.webp"]}
         faqs={faqs}
-				namaProduct={funnelProduct.title}
+        namaProduct={funnelProduct.title}
+      /> */}
+      <Footer
+        hargaJual={bundles[0].price}
+        pixelId="2111198546014232"
+        produkBaru={bundles}
+        footerImages={["images/fotter2.webp", "images/fotter.webp"]}
+				bundles={bundles}
+        faqs={faqs}
+				namaProduct={bundles.title}
       />
       <Floting />
     </div>
