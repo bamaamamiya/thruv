@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import CountdownTimer from "../set/CountdownTimer";
-import Funnel from "../FunnelPurchaseBundles";
+import Funnel from "../FunnelPurchase";
 import Faqs from "../set/Faqs";
 import { useEffect, useRef, useState } from "react";
 import PriceDisplay from "../set/PriceDisplay";
@@ -146,7 +146,6 @@ const Footer = ({
         <Funnel
           pixel={pixelId}
           product={produkBaru}
-					bundles={bundles}
           price={promoPrice}
           namaProduct={namaProduct}
         />
