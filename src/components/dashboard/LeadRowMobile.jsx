@@ -14,7 +14,7 @@ const LeadRowMobile = ({ lead, copiedId, setCopiedId }) => {
   const [updating, setUpdating] = useState(false);
 
   const handleCopyAddress = () => {
-    const prompt = `[PROVINSI], [KABUPATEN/KOTA], [KECAMATAN], [DESA/KELURAHAN], [KODEPOS (jika ada)] dan rapikan alamat lengkap, dan kecamatan terpisah.\n\nAlamat mentah: ${lead.address}`;
+    const prompt = `[PROVINSI], [KABUPATEN/KOTA], [KECAMATAN], [DESA/KELURAHAN] dan rapikan alamat lengkap, dan kecamatan terpisah.\n\nAlamat mentah: ${lead.address}`;
 
     navigator.clipboard.writeText(prompt).then(() => {
       setCopiedId(lead.id);
@@ -24,15 +24,20 @@ const LeadRowMobile = ({ lead, copiedId, setCopiedId }) => {
 
   const handleCopy = () => {
     const pesan = `Terima kasih sudah melakukan pemesanan 🙏  
+Berikut detail pesanan Kakak:
+
 Nama Produk: ${lead.productTitle}  
 Harga Produk: ${formatHargaSingkat(lead.price)}  
-Ongkir: [isi ongkir]  
-Total Pembayaran: [isi total pembayaran]
+Ongkir: 
+Total Pembayaran: 
 
 Nama: ${lead.name}  
 Alamat Lengkap: ${lead.address}
 
-Apakah alamat yang Kakak berikan sudah benar?`;
+Apakah alamat yang Kakak berikan sudah benar?  
+Kami akan segera proses pesanan Kakak jika alamatnya sudah sesuai ya.  
+Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
+
     navigator.clipboard.writeText(pesan).then(() => {
       setCopiedId(lead.id);
       setTimeout(() => setCopiedId(null), 2000);
