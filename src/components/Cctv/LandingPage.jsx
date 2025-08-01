@@ -100,15 +100,15 @@ const CctvBohlam = () => {
         productImages={productImages}
         testimonies={testimonies}
       />
-      {/* <Footer
+      <Footer
         hargaJual={funnelProduct.price}
         pixelId="2111198546014232"
         produkBaru={funnelProduct}
         footerImages={["images/fotter2.webp", "images/fotter.webp"]}
         faqs={faqs}
         namaProduct={funnelProduct.title}
-      /> */}
-      <Footer
+      />
+      {/* <Footer
         hargaJual={bundles[0].price}
         pixelId="2111198546014232"
         produkBaru={bundles}
@@ -116,7 +116,7 @@ const CctvBohlam = () => {
 				bundles={bundles}
         faqs={faqs}
 				namaProduct={bundles.title}
-      />
+      /> */}
       <Floting />
     </div>
   );
