@@ -12,11 +12,17 @@ const CctvBohlam = () => {
     "images/cctv/testi3.webp",
   ];
 
+
   const funnelProduct = {
     title: "Cctv bohlam",
     description: "Product CCTV BOHLAM",
     price: 129000,
   };
+
+	const BonusData = {
+		title:"Bonus yang di dapatkan :",
+		bonus: "Fitting & Baut + Buku Panduan + Vidio Panduan"
+	}
 
   const bundles = [
     {
@@ -104,6 +110,8 @@ const CctvBohlam = () => {
         hargaJual={funnelProduct.price}
         pixelId="2111198546014232"
         produkBaru={funnelProduct}
+				bonus={BonusData.bonus}
+				bonusTitle={BonusData.title}
         footerImages={["images/fotter2.webp", "images/fotter.webp"]}
         faqs={faqs}
         namaProduct={funnelProduct.title}
