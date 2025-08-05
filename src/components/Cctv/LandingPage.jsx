@@ -21,7 +21,7 @@ const CctvBohlam = () => {
 
 	const BonusData = {
 		title:"Bonus yang di dapatkan :",
-		bonus: "Fitting & Baut + Buku Panduan + Vidio Panduan"
+		bonus: "Fitting & Baut + Vidio Panduan"
 	}
 
   const bundles = [
