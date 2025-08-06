@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { collection, setDoc, doc, Timestamp } from "firebase/firestore";
 import { db } from "../firebase";
+import emailjs from "@emailjs/browser";
 
 const FunnelPurchase = ({ pixel, product, price, namaProduct }) => {
   const [name, setName] = useState("");
@@ -9,7 +10,7 @@ const FunnelPurchase = ({ pixel, product, price, namaProduct }) => {
   const [address, setAddress] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // 🧼 Format & Validasi Nomor WhatsApp
+  // ✅ Format & Validasi Nomor WhatsApp
   const cleanAndValidateWA = (wa) => {
     let cleaned = wa.replace(/\D/g, "");
     if (cleaned.startsWith("0")) cleaned = "62" + cleaned.slice(1);
@@ -17,12 +18,40 @@ const FunnelPurchase = ({ pixel, product, price, namaProduct }) => {
     return isValid ? cleaned : null;
   };
 
+  // ✅ Kirim Email via EmailJS
+  const sendOrderEmail = async (data) => {
+    const templateParams = {
+      order_id: `${data.whatsapp}_${data.productId}`,
+      name: data.name,
+      whatsapp: data.whatsapp,
+      address: data.address,
+      product_title: data.productTitle,
+      price: data.price.toLocaleString("id-ID"),
+      total: data.total.toLocaleString("id-ID"),
+      payment_method: data.paymentMethod,
+      order_date: data.order_date,
+    };
+
+    try {
+      await emailjs.send(
+        "service_ibqyju2",      // Ganti dengan Service ID kamu
+        "template_jwgdbwb",     // Ganti dengan Template ID kamu
+        templateParams,
+        "2eHmhZIn-wgy07zki"       // Ganti dengan Public Key kamu
+      );
+      console.log("Email sent successfully!");
+    } catch (err) {
+      console.error("Email sending failed:", err);
+    }
+  };
+
+  // ✅ Submit Form
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (loading) return;
     setLoading(true);
 
-    // 🧠 Validasi Form
+    // ❗ Validasi
     if (!name || !whatsapp || !address) {
       alert("Silakan isi semua data dengan lengkap!");
       setLoading(false);
@@ -48,10 +77,13 @@ const FunnelPurchase = ({ pixel, product, price, namaProduct }) => {
       return;
     }
 
-    // 🔐 Gunakan ID unik: noWA + productID
+    // 🔑 ID unik: noWA + productID
     const docId = `${cleanedWA}_${product.id || "unknown"}`;
+    const codFee = paymentMethod === "COD" ? 5000 : 0;
+    const totalPrice = price + codFee;
 
     try {
+      // ✅ Simpan ke Firestore
       await setDoc(doc(db, "leads", docId), {
         name,
         whatsapp: cleanedWA,
@@ -65,7 +97,20 @@ const FunnelPurchase = ({ pixel, product, price, namaProduct }) => {
         resiCheck: "not",
       });
 
-      // 🎯 Facebook Pixel
+      // ✅ Kirim Email ke Admin
+      await sendOrderEmail({
+        name,
+        whatsapp: cleanedWA,
+        address,
+        productTitle: product.title,
+        productId: product.id || "unknown",
+        price,
+        total: totalPrice,
+        paymentMethod,
+        order_date: new Date().toLocaleString("id-ID"),
+      });
+
+      // ✅ FB Pixel
       if (window.fbq) {
         try {
           fbq("trackSingle", pixel, "Purchase", {
@@ -80,14 +125,15 @@ const FunnelPurchase = ({ pixel, product, price, namaProduct }) => {
         }
       }
 
-      // 📲 Kirim ke WA Admin
+      // ✅ Kirim WhatsApp ke Admin
       const message =
         `*PESANAN BARU*\n\n` +
         `*Produk:* ${product.title}\n` +
         `*Nama:* ${name}\n` +
         `*No. WhatsApp:* ${cleanedWA}\n` +
         `*Alamat:* ${address}\n` +
-        `*Metode Pembayaran:* ${paymentMethod}\n\n` +
+        `*Metode Pembayaran:* ${paymentMethod}\n` +
+        `*Total Bayar:* Rp ${totalPrice.toLocaleString("id-ID")}\n\n` +
         `Mohon segera diproses, terima kasih`;
 
       const ADMIN_WA = "6282387881505";
@@ -96,7 +142,7 @@ const FunnelPurchase = ({ pixel, product, price, namaProduct }) => {
       )}`;
       window.open(whatsappURL, "_blank");
 
-      // 🧹 Reset form
+      // ✅ Reset form
       setName("");
       setWhatsapp("");
       setAddress("");
@@ -109,6 +155,7 @@ const FunnelPurchase = ({ pixel, product, price, namaProduct }) => {
     }
   };
 
+  // ✅ UI Form
   return (
     <div className="max-w-md mx-auto bg-white p-6 rounded-2xl">
       <h2 className="text-xl font-bold mb-4">Data Penerima:</h2>
