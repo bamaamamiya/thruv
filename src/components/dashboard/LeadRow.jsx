@@ -15,7 +15,6 @@ const LeadRow = ({ lead, copiedId, setCopiedId }) => {
 
   const handleCopyAddress = () => {
     const prompt = `[PROVINSI], [KABUPATEN/KOTA], [KECAMATAN], [DESA/KELURAHAN] dan rapikan alamat lengkap, dan kecamatan terpisah.\n\nAlamat mentah: ${lead.address}`;
-
     navigator.clipboard.writeText(prompt).then(() => {
       setCopiedId(lead.id);
       setTimeout(() => setCopiedId(null), 2000);
@@ -57,7 +56,21 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
     }
   };
 
+  const handleResiCheckChange = async (newResiCheck) => {
+    if (newResiCheck === lead.resiCheck) return;
+    setUpdating(true);
+    try {
+      await updateDoc(doc(db, "leads", lead.id), { resiCheck: newResiCheck });
+    } catch (err) {
+      console.error("Gagal update resiCheck:", err);
+      alert("Gagal update status resi.");
+    } finally {
+      setUpdating(false);
+    }
+  };
+
   const statusOptions = ["pending", "complete", "cancel", "none"];
+  const resiOptions = ["not", "done"];
 
   return (
     <>
@@ -148,6 +161,12 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
                 <span className="text-gray-400">Status:</span>{" "}
                 <span className="capitalize font-semibold">{lead.status}</span>
               </p>
+              <p>
+                <span className="text-gray-400">Resi Check:</span>{" "}
+                <span className="capitalize font-semibold">
+                  {lead.resiCheck || "not"}
+                </span>
+              </p>
               <p className="text-xs text-gray-500">
                 Masuk:{" "}
                 {new Date(lead.createdAt.seconds * 1000).toLocaleString(
@@ -156,6 +175,7 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
               </p>
             </div>
 
+            {/* Tombol Status */}
             <div className="flex flex-wrap gap-2 mt-5">
               {statusOptions.map((status) => {
                 const isActive =
@@ -185,6 +205,28 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
               })}
             </div>
 
+            {/* Tombol Resi Check */}
+            <div className="flex flex-wrap gap-2 mt-3">
+              {resiOptions.map((status) => {
+                const isActive = (lead.resiCheck || "not") === status;
+                return (
+                  <button
+                    key={status}
+                    disabled={updating}
+                    onClick={() => handleResiCheckChange(status)}
+                    className={`px-3 py-1 text-xs font-bold rounded-full transition border-2 ${
+                      isActive
+                        ? "bg-white text-black"
+                        : "border-white text-white hover:bg-white/10"
+                    }`}
+                  >
+                    {status === "done" ? "📦 Resi Dicek" : "🕓 Belum Dicek"}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Copy dan Hapus */}
             <div className="flex justify-between items-center mt-6">
               <div className="space-x-2">
                 <button

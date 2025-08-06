@@ -62,6 +62,7 @@ const FunnelPurchase = ({ pixel, product, price, namaProduct }) => {
         productId: product.id || "unknown",
         createdAt: Timestamp.now(),
         status: "Pending",
+        resiCheck: "not",
       });
 
       // 🎯 Facebook Pixel
