@@ -1,3 +1,4 @@
+// dahsboard/dashboard.jsx
 import React, { useEffect, useState } from "react";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { getAuth, signOut } from "firebase/auth";

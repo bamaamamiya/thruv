@@ -10,6 +10,8 @@ const ImageSection = ({ images, altPrefix = "image" }) => (
         alt={`${altPrefix}-${index + 1}`}
         width="640"
         height="360"
+        loading="lazy"
+        decoding="async"
       />
     ))}
   </div>
@@ -19,7 +21,7 @@ const Content = ({
   mainImage,
   secondText,
   solutions,
-	solutionTitle,
+  solutionTitle,
   productImages,
   testimonies,
 }) => {
@@ -33,12 +35,14 @@ const Content = ({
           alt="main"
           width="640"
           height="360"
+          loading="lazy"
+          decoding="async"
         />
       </div>
       <div className="flex justify-center">
         <section className="space-y-4 p-4">
           <h2 className="text-xl font-bold text-center">{solutionTitle}</h2>
-					<br/>
+          <br />
           <ul className="space-y-2" style={{ "--emoji": "'✅'" }}>
             {solutions.map((item, idx) => (
               <li
@@ -57,9 +61,9 @@ const Content = ({
 
       {/* Testimoni */}
       <h1 className="font-bold text-center text-4xl mt-2">TESTIMONI</h1>
-			<br/>
+      <br />
       <ImageSection images={testimonies} altPrefix="testimoni" />
-			<br/>
+      <br />
     </div>
   );
 };

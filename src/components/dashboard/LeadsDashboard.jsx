@@ -1,3 +1,4 @@
+// dashboard/leadDashboard.jsx
 import React, { useEffect, useState } from "react";
 import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import { db } from "../../firebase";
