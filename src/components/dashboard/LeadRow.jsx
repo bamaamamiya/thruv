@@ -76,7 +76,7 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
     <>
       {/* Baris utama */}
       <div
-        className="grid grid-cols-6 items-center gap-2 cursor-pointer hover:bg-white/5 px-2 py-2 rounded-md transition text-sm"
+        className="grid grid-cols-7 items-center gap-2 cursor-pointer hover:bg-white/5 px-2 py-2 rounded-md transition text-sm"
         onClick={() => setShowModal(true)}
       >
         <span className="text-xs text-gray-400">
@@ -110,6 +110,16 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
           }`}
         >
           {lead.status}
+        </span>
+        {/* Kolom Resi Check */}
+        <span
+          className={`text-xs text-center font-semibold px-2 py-0.5 rounded-full ${
+            lead.resiCheck === "done"
+              ? "bg-green-800 text-green-300"
+              : "bg-gray-800 text-gray-400"
+          }`}
+        >
+          {lead.resiCheck === "done" ? "✅ Sudah Dicek" : "❌ Belum Dicek"}
         </span>
       </div>
 

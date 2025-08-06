@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
-import {
-  collection,
-  onSnapshot,
-  query,
-  orderBy,
-} from "firebase/firestore";
+import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import { db } from "../../firebase";
 
 import LeadRow from "./LeadRow";
 import LeadRowMobile from "./LeadRowMobile";
+
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { startOfDay, endOfDay } from "date-fns";
 
 const LeadsDashboard = () => {
   const [leads, setLeads] = useState([]);
   const [copiedId, setCopiedId] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState("Semua"); // ⬅️ State filter status
+  const [selectedDate, setSelectedDate] = useState(null); // ⬅️ Tambahan baru
 
   useEffect(() => {
     const q = query(collection(db, "leads"), orderBy("createdAt", "desc"));
@@ -37,21 +37,43 @@ const LeadsDashboard = () => {
   }, []);
 
   // 🔍 Filter leads berdasarkan status
-  const filteredLeads =
-    selectedStatus === "Semua"
-      ? leads
-      : leads.filter((lead) => lead.status === selectedStatus);
+  // const filteredLeads =
+  //   selectedStatus === "Semua"
+  //     ? leads
+  //     : leads.filter((lead) => lead.status === selectedStatus);
+
+  const filteredLeads = leads.filter((lead) => {
+    const matchStatus =
+      selectedStatus === "Semua" || lead.status === selectedStatus;
+
+    const matchDate =
+      !selectedDate ||
+      (lead.createdAt &&
+        lead.createdAt.seconds * 1000 >= startOfDay(selectedDate).getTime() &&
+        lead.createdAt.seconds * 1000 <= endOfDay(selectedDate).getTime());
+
+    return matchStatus && matchDate;
+  });
 
   // ✅ Daftar status yang bisa dipilih
   const statusOptions = ["Semua", "Pending", "complete", "cancel"];
+  const resiOptions = ["not", "done"];
 
   return (
     <div className="min-h-screen bg-zinc-950 text-white px-4 py-12">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold text-center mb-6">📦 Order Masuk</h1>
 
-        {/* Dropdown Filter */}
-        <div className="mb-6 text-center">
+        <div className="mb-6 text-center flex justify-between">
+          <DatePicker
+            selected={selectedDate}
+            onChange={(date) => setSelectedDate(date)}
+            placeholderText="Filter berdasarkan tanggal"
+            className="bg-zinc-800 text-white px-4 py-2 rounded-lg border border-zinc-700"
+            dateFormat="dd/MM/yyyy"
+            isClearable
+          />
+
           <select
             value={selectedStatus}
             onChange={(e) => setSelectedStatus(e.target.value)}
@@ -65,14 +87,30 @@ const LeadsDashboard = () => {
           </select>
         </div>
 
+        {/* Dropdown Filter */}
+        {/* <div className="mb-6 text-center">
+          <select
+            value={selectedStatus}
+            onChange={(e) => setSelectedStatus(e.target.value)}
+            className="bg-zinc-800 text-white px-4 py-2 rounded-lg border border-zinc-700 capitalize"
+          >
+            {statusOptions.map((status) => (
+              <option key={status} value={status}>
+                {status}
+              </option>
+            ))}
+          </select>
+        </div> */}
+
         {!isMobile && (
-          <div className="grid grid-cols-6 border-b border-white/10 py-3 text-sm font-semibold text-gray-400">
+          <div className="grid grid-cols-7 border-b border-white/10 py-3 text-sm font-semibold text-gray-400">
             <span>Tgl</span>
             <span>Nama</span>
             <span>WA</span>
             <span>Metode</span>
             <span>Produk</span>
             <span>Status</span>
+            <span>Resi</span>
           </div>
         )}
 
@@ -88,10 +126,13 @@ const LeadsDashboard = () => {
             const prevLead = filteredLeads[index - 1];
             const prevMonth =
               prevLead &&
-              new Date(prevLead.createdAt.seconds * 1000).toLocaleString("id-ID", {
-                month: "long",
-                year: "numeric",
-              });
+              new Date(prevLead.createdAt.seconds * 1000).toLocaleString(
+                "id-ID",
+                {
+                  month: "long",
+                  year: "numeric",
+                }
+              );
 
             const showMonth = index === 0 || currentMonth !== prevMonth;
 

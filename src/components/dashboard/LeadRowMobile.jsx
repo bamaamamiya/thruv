@@ -104,6 +104,19 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
           {lead.status}
         </span>
         <div className="text-sm text-white mt-1">{lead.productTitle}</div>
+        {/* Resi Check */}
+        <div className="flex justify-between text-sm">
+          <span className="text-gray-400">Resi:</span>
+          <span
+            className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
+              lead.resiCheck === "done"
+                ? "bg-green-800 text-green-300"
+                : "bg-gray-800 text-gray-400"
+            }`}
+          >
+            {lead.resiCheck === "done" ? "✅ Sudah Dicek" : "❌ Belum Dicek"}
+          </span>
+        </div>
       </div>
 
       {showModal && (

@@ -1,3 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Tambahkan di atas atau di bawah import Tailwind */
+@import "react-datepicker/dist/react-datepicker.css";
