@@ -18,7 +18,6 @@ const ShopifyStyleDashboard = () => {
   const [leads, setLeads] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState("today");
   const [customRange, setCustomRange] = useState([new Date(), new Date()]);
-
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "leads"), (snapshot) => {
       const docs = snapshot.docs.map((doc) => ({
@@ -30,6 +29,7 @@ const ShopifyStyleDashboard = () => {
 
     return () => unsub();
   }, []);
+
 
   // Process date range and filter
   const [start, end] = getDateRange(selectedFilter, customRange);
@@ -45,7 +45,12 @@ const ShopifyStyleDashboard = () => {
   } = calculateSummary(filteredLeads);
 
   // Generate chart data
-  const chartData = generateChartData(filteredLeads, selectedFilter, start, end);
+  const chartData = generateChartData(
+    filteredLeads,
+    selectedFilter,
+    start,
+    end
+  );
 
   return (
     <div>

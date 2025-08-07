@@ -3,7 +3,10 @@ import Headline from "./Headline";
 import Footer from "./Footer";
 import Floting from "../../components/set/Floting";
 
+import { useEffect } from "react";
 const CctvBohlam = () => {
+
+
   const productImages = ["images/cctv/3.webp", "images/cctv/4.webp"];
 
   const testimonies = [
@@ -12,17 +15,16 @@ const CctvBohlam = () => {
     "images/cctv/testi3.webp",
   ];
 
-
   const funnelProduct = {
     title: "Cctv bohlam",
     description: "Product CCTV BOHLAM",
     price: 129000,
   };
 
-	// const BonusData = {
-	// 	title:"Bonus yang di dapatkan :",
-	// 	bonus: "Fitting & Baut + Vidio Panduan"
-	// }
+  // const BonusData = {
+  // 	title:"Bonus yang di dapatkan :",
+  // 	bonus: "Fitting & Baut + Vidio Panduan"
+  // }
 
   const bundles = [
     {
