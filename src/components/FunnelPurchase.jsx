@@ -10,6 +10,28 @@ const FunnelPurchase = ({ pixel, product, price, namaProduct }) => {
   const [address, setAddress] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const emailJSConfigs = [
+    {
+      serviceID: "service_ibqyju2",
+      templateID: "template_jwgdbwb",
+      publicKey: "2eHmhZIn-wgy07zki",
+    },
+    {
+      serviceID: "service_7xk5qdi",
+      templateID: "template_rsvrrcr",
+      publicKey: "r6eSMw--zC23rNBwt",
+    },
+  ];
+
+  const getCurrentEmailJS = () => {
+    const now = new Date();
+    const day = now.getDate(); // 1–31
+
+    // Ganti setiap 2 minggu (15 hari)
+    const isFirstHalf = day <= 15;
+    return isFirstHalf ? emailJSConfigs[0] : emailJSConfigs[1];
+  };
+
   // ✅ Format & Validasi Nomor WhatsApp
   const cleanAndValidateWA = (wa) => {
     let cleaned = wa.replace(/\D/g, "");
@@ -20,6 +42,8 @@ const FunnelPurchase = ({ pixel, product, price, namaProduct }) => {
 
   // ✅ Kirim Email via EmailJS
   const sendOrderEmail = async (data) => {
+    const { serviceID, templateID, publicKey } = getCurrentEmailJS();
+
     const templateParams = {
       order_id: `${data.whatsapp}_${data.productId}`,
       name: data.name,
@@ -33,13 +57,8 @@ const FunnelPurchase = ({ pixel, product, price, namaProduct }) => {
     };
 
     try {
-      await emailjs.send(
-        "service_ibqyju2",      // Ganti dengan Service ID kamu
-        "template_jwgdbwb",     // Ganti dengan Template ID kamu
-        templateParams,
-        "2eHmhZIn-wgy07zki"       // Ganti dengan Public Key kamu
-      );
-      console.log("Email sent successfully!");
+      await emailjs.send(serviceID, templateID, templateParams, publicKey);
+      console.log("Email sent successfully from", serviceID);
     } catch (err) {
       console.error("Email sending failed:", err);
     }

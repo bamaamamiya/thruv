@@ -1,4 +1,9 @@
-import { format, isWithinInterval, differenceInDays, startOfWeek } from "date-fns";
+import {
+  format,
+  isWithinInterval,
+  differenceInDays,
+  startOfWeek,
+} from "date-fns";
 
 // Filter leads berdasarkan rentang tanggal
 export const filterLeadsByDate = (leads, start, end) => {
@@ -35,15 +40,20 @@ export const calculateSummary = (leads) => {
 // Buat data chart berdasarkan filter waktu (per jam, per hari, per bulan)
 export const generateChartData = (leads, selectedFilter, start, end) => {
   if (selectedFilter === "today" || selectedFilter === "yesterday") {
-    return Array.from({ length: 12 }, (_, i) => {
-      const hour = i + 12; // 12 to 23
+    return Array.from({ length: 24 }, (_, i) => {
+      const hour = i; // 0 to 23
       const label = `${hour.toString().padStart(2, "0")}:00`;
-      const count = leads.filter((lead) => {
+      const complete = leads.filter((lead) => {
         const time = new Date(lead.createdAt.seconds * 1000);
-        return time.getHours() === hour;
+        return time.getHours() === hour && lead.status === "complete";
       }).length;
 
-      return { label, count };
+      const pending = leads.filter((lead) => {
+        const time = new Date(lead.createdAt.seconds * 1000);
+        return time.getHours() === hour && lead.status === "Pending";
+      }).length;
+
+      return { label, complete, pending };
     });
   }
 

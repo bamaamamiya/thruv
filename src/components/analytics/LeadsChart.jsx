@@ -53,62 +53,67 @@ const LeadsChart = ({ data }) => {
   }));
 
   return (
-    <div className="bg-white p-4 md:p-6 rounded-2xl shadow-md border border-gray-200">
+    <div className="bg-white p-4 md:p-6 rounded-2xl shadow-md border border-gray-200 ">
       <h2 className="text-base md:text-lg font-bold text-gray-800 mb-4">
         Leads
       </h2>
+      <div className="overflow-x-auto">
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart data={enhancedData} barCategoryGap="20%">
+            <CartesianGrid strokeDasharray="2 6" stroke="#e5e7eb" />
 
-      <ResponsiveContainer width="100%" height={300}>
-        <BarChart data={enhancedData} barCategoryGap="20%">
-          <CartesianGrid strokeDasharray="2 6" stroke="#e5e7eb" />
+            <XAxis
+              dataKey="label"
+              interval={barSize === 20 ? 2 : 0} // skip 1 saat mobile
+              angle={barSize === 20 ? -15 : 0}
+              tick={{
+                fontSize: barSize === 20 ? 10 : 12,
+                fill: "#6b7280",
+              }}
+              textAnchor={barSize === 20 ? "end" : "middle"}
+              height={barSize === 20 ? 60 : 50}
+              axisLine={false}
+              tickLine={false}
+            />
 
-          <XAxis
-            dataKey="label"
-            interval={0}
-            angle={barSize === 20 ? -15 : 0}
-            tick={{ fontSize: 11, fill: "#6b7280" }}
-            height={50}
-            axisLine={false}
-            tickLine={false}
-          />
+            <YAxis
+              allowDecimals={false}
+              tick={{ fontSize: 12, fontWeight: 600, fill: "#6b7280" }}
+              axisLine={false}
+              tickLine={false}
+            />
 
-          <YAxis
-            allowDecimals={false}
-            tick={{ fontSize: 12, fontWeight: 600, fill: "#6b7280" }}
-            axisLine={false}
-            tickLine={false}
-          />
+            <Tooltip content={<CustomTooltip />} />
+            <Legend verticalAlign="top" height={36} />
 
-          <Tooltip content={<CustomTooltip />} />
-          <Legend verticalAlign="top" height={36} />
+            <Bar
+              dataKey="complete"
+              fill="#10b981"
+              radius={[6, 6, 0, 0]}
+              barSize={barSize}
+              name="Complete"
+            />
 
-          <Bar
-            dataKey="complete"
-            fill="#10b981"
-            radius={[6, 6, 0, 0]}
-            barSize={barSize}
-            name="Complete"
-          />
+            <Bar
+              dataKey="pending"
+              fill="#facc15"
+              radius={[6, 6, 0, 0]}
+              barSize={barSize}
+              name="Pending"
+            />
 
-          <Bar
-            dataKey="pending"
-            fill="#facc15"
-            radius={[6, 6, 0, 0]}
-            barSize={barSize}
-            name="Pending"
-          />
-
-          <Line
-            type="monotone"
-            dataKey="total"
-            stroke="#3b82f6"
-            strokeWidth={2}
-            dot={false}
-            name="Total Leads"
-            animationDuration={800}
-          />
-        </BarChart>
-      </ResponsiveContainer>
+            <Line
+              type="monotone"
+              dataKey="total"
+              stroke="#3b82f6"
+              strokeWidth={2}
+              dot={false}
+              name="Total Leads"
+              animationDuration={800}
+            />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 };

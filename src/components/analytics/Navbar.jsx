@@ -5,7 +5,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   return (
-    <nav className="text-white w-full bg-black border-b border-gray-200 px-4 py-3 flex justify-between items-center shadow-sm">
+    <nav className="text-white w-full bg-black border-b border-gray-200 px-4 py-4 flex justify-between items-center shadow-sm top-0 sticky">
       {/* Left: Order Button */}
       <button
         onClick={() => navigate("/order")}
