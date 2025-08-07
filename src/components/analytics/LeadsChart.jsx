@@ -64,7 +64,7 @@ const LeadsChart = ({ data,chartType = "bar" }) => {
       <div className="overflow-x-auto">
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={enhancedData} barCategoryGap="20%">
-            <CartesianGrid strokeDasharray="2 6" stroke="#e5e7eb" />
+            <CartesianGrid strokeDasharray="2 6" />
 
             <XAxis
               dataKey="label"
@@ -106,12 +106,14 @@ const LeadsChart = ({ data,chartType = "bar" }) => {
             <Line
               type="monotone"
               dataKey="total"
-              stroke="#3b82f6"
+              stroke="#04a7aa"
               strokeWidth={2}
               dot={false}
               name="Total Leads"
               animationDuration={800}
             />
+
+						
           </BarChart>
         </ResponsiveContainer>
       </div>

@@ -1,25 +1,21 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import CountdownTimer from "../set/CountdownTimer";
 import Funnel from "../FunnelPurchase";
 import Faqs from "../set/Faqs";
 import { useEffect, useRef, useState } from "react";
-import PriceDisplay from "../set/PriceDisplay";
-import BonusTF from "../set/BonusTF";
-import PaymentComparison from "../set/PaymentComparisonTable";
 const Footer = ({
   pixelId,
   produkBaru,
   footerImages,
   faqs,
   namaProduct,
-	bundles,
-	hargaJual,
-	bonus,
-	bonusTitle
+  bundles,
+  hargaJual,
+  bonus,
+  bonusTitle,
 }) => {
   const normalPrice = 249000; // harga normal
-  const promoPrice =  hargaJual; // harga promo
+  const promoPrice = hargaJual; // harga promo
   const [isVisible, setIsVisible] = useState(false);
   const [currentValue, setCurrentValue] = useState(normalPrice);
   const promoRef = useRef(null);
@@ -89,45 +85,6 @@ const Footer = ({
             Sisa Promo: 1
           </p>
         </div>
-
-        {/* <BonusTF
-          valueStack={[
-            {
-              item: "✅ Kamera CCTV Bohlam E27",
-              value: 249000,
-            },
-            {
-              item: "🎁 Bonus Fitting Adapter E27",
-              value: 15000,
-            },
-            {
-              item: "📘 Buku Panduan Instalasi",
-              value: 25000,
-            },
-            {
-              item: "💸 Potongan Ongkir",
-              value: 15000,
-            },
-            {
-              item: "🚀 Pengiriman Prioritas",
-              value: 30000,
-            },
-            {
-              item: "🛡️ Garansi 7 Hari Ganti Baru",
-              value: 40000,
-            },
-          ]}
-          hargaPromo={hargaJual}
-        />
-
-        <h1 className="text-2xl font-bold text-center">
-          ⚠ Promo 50% Hanya Untuk 3 Orang Pemesanan Pertama ⚠
-        </h1>
-        <div className="w-auto h-8 bg-gray-300 rounded overflow-hidden m-2">
-          <p className="bg-redto text-white text-sm px-3 flex items-center h-full w-1/3">
-            Sisa Promo: 1
-          </p>
-        </div> */}
       </div>
 
       {/* FORM TITLE + ARROW */}
@@ -152,17 +109,6 @@ const Footer = ({
           namaProduct={namaProduct}
         />
       </div>
-{/* 
-      <div>
-        <PaymentComparison
-          bonusItem="Bonus Fitting"
-          cashback="Potongan ongkir 15RB"
-          priorityShipping="Proritas Paket"
-          digitalGuide="Buku panduan"
-          guarantee="Garanasi 7Hari"
-          codFee="Biaya COD"
-        />
-      </div> */}
 
       {/* FAQ */}
       <div>

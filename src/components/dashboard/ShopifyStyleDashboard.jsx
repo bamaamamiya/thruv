@@ -6,8 +6,10 @@ import Navbar from "../analytics/Navbar";
 import FilterBar from "../analytics/FilterBar";
 import Summary from "../analytics/Summary";
 import LeadsChart from "../analytics/LeadsChart";
+import OrderStatus from "../analytics/OrderStatus";
+
 import { getDateRange } from "../../utils/dateFilters";
-import { getPreviousRange } from "../../utils/getPreviousRange"; // ✅ Tambahkan ini
+import { getPreviousRange } from "../../utils/getPreviousRange";
 import {
   filterLeadsByDate,
   calculateSummary,
@@ -16,9 +18,10 @@ import {
 
 const ShopifyStyleDashboard = () => {
   const [leads, setLeads] = useState([]);
-  const [selectedFilter, setSelectedFilter] = useState("today");
+  const [selectedFilter, setSelectedFilter] = useState("month");
   const [customRange, setCustomRange] = useState([new Date(), new Date()]);
 
+  // 1. Listen to Firebase leads
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "leads"), (snapshot) => {
       const docs = snapshot.docs.map((doc) => ({
@@ -31,11 +34,9 @@ const ShopifyStyleDashboard = () => {
     return () => unsub();
   }, []);
 
-  // ✅ Dapatkan range aktif
+  // 2. Active range & metrics
   const [start, end] = getDateRange(selectedFilter, customRange);
   const filteredLeads = filterLeadsByDate(leads, start, end);
-
-  // ✅ Hitung metrik saat ini
   const {
     totalOrders,
     completedOrders,
@@ -44,24 +45,8 @@ const ShopifyStyleDashboard = () => {
     totalPendingValue,
   } = calculateSummary(filteredLeads);
 
-  // ✅ Dapatkan range sebelumnya
+  // 3. Previous range & metrics
   const [prevStart, prevEnd] = getPreviousRange(selectedFilter, start, end);
-
-  // ✅ Hitung metrik sebelumnya
-  let pendingOrdersPrevious = 0;
-  if (prevStart && prevEnd) {
-    const previousLeads = filterLeadsByDate(leads, prevStart, prevEnd);
-    const previousSummary = calculateSummary(previousLeads);
-    pendingOrdersPrevious = previousSummary.pendingOrders || 0;
-  }
-
-  // ✅ Siapkan data grafik
-  const chartData = generateChartData(
-    filteredLeads,
-    selectedFilter,
-    start,
-    end
-  );
   const previousLeads = filterLeadsByDate(leads, prevStart, prevEnd);
   const previousSummary = calculateSummary(previousLeads);
 
@@ -70,11 +55,20 @@ const ShopifyStyleDashboard = () => {
       ? (previousSummary.completedOrders / previousSummary.totalOrders) * 100
       : null;
 
+  // 4. Chart data
+  const chartData = generateChartData(
+    filteredLeads,
+    selectedFilter,
+    start,
+    end
+  );
+
   return (
     <div>
       <Navbar />
       <div className="min-h-screen bg-white text-black px-4 py-6">
         <div className="max-w-4xl mx-auto space-y-6">
+          {/* Filter Selection */}
           <FilterBar
             selectedFilter={selectedFilter}
             setSelectedFilter={setSelectedFilter}
@@ -82,6 +76,7 @@ const ShopifyStyleDashboard = () => {
             setCustomRange={setCustomRange}
           />
 
+          {/* Summary Cards */}
           <Summary
             totalSales={totalSales}
             totalOrders={totalOrders}
@@ -90,14 +85,24 @@ const ShopifyStyleDashboard = () => {
             totalPendingValue={totalPendingValue}
             start={start}
             end={end}
-            pendingOrdersPrevious={pendingOrdersPrevious}
+            pendingOrdersPrevious={previousSummary.pendingOrders || 0}
           />
 
+          {/* Leads Chart */}
           <LeadsChart data={chartData} />
-					  <ConversionRate
+
+          {/* Conversion Rate */}
+          <ConversionRate
             completedOrders={completedOrders}
             totalOrders={totalOrders}
             previousRate={previousConversionRate}
+          />
+
+          {/* Order Status */}
+          <OrderStatus
+            completedOrders={completedOrders}
+            pendingOrders={pendingOrders}
+            totalOrders={totalOrders}
           />
         </div>
       </div>

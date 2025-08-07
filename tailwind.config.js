@@ -17,7 +17,8 @@ export default {
 				greendo:'#2d6343',
 				greendoo:'#1c3424',
 				pinkto:'#c75d73',
-				blackto:'#1a1a1a'
+				blackto:'#1a1a1a',
+				shopify:'#04a7aa'
       }
     },
   },

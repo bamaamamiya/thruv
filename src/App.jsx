@@ -9,8 +9,8 @@ import LeadsDashboard from "./components/dashboard/LeadsDashboard";
 import LoginPage from "./components/dashboard/LoginPage";
 import PrivateRoute from "./components/dashboard/PrivateRoute";
 import CctvBohlam from "./components/Cctv/LandingPage";
-import AlatPijat from "./pages/Pijat/LandingPage";
 import OrderSummaryDashboard from "./components/dashboard/ShopifyStyleDashboard";
+import AlatPijat from "./components/Pijat/LandingPage"
 function App() {
   return (
     <BrowserRouter>

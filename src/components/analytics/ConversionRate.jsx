@@ -13,7 +13,7 @@ const ConversionRate = ({ completedOrders, totalOrders, previousRate }) => {
   return (
     <div className="bg-gray-100 p-4 rounded-xl shadow-sm">
       <h3 className="text-lg font-semibold mb-2">Conversion Rate</h3>
-      <div className="text-3xl font-bold text-blue-600">
+      <div className="text-3xl font-bold text-shopify">
         {currentRate.toFixed(1)}%
       </div>
       {delta !== null && (
@@ -23,7 +23,7 @@ const ConversionRate = ({ completedOrders, totalOrders, previousRate }) => {
       )}
       <div className="w-full bg-gray-300 h-2 mt-3 rounded">
         <div
-          className="bg-blue-600 h-2 rounded"
+          className="bg-shopify h-2 rounded"
           style={{ width: `${currentRate}%` }}
         />
       </div>

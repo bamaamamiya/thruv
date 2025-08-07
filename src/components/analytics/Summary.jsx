@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { format } from "date-fns";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCartShopping ,faArrowTrendUp} from '@fortawesome/free-solid-svg-icons'
 const Summary = ({
   totalSales,
   totalPendingValue,
@@ -45,7 +46,7 @@ const Summary = ({
 
         {/* 📈 Persen Kenaikan */}
         <p
-          className={`text-3xl font-semibold ${
+          className={`text-3xl font-bold ${
             pendingChangePercent === 0
               ? "text-black"
               : isIncrease
