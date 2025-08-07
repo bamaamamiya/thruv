@@ -5,14 +5,22 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   return (
-    <nav className="text-white w-full bg-black border-b border-gray-200 px-4 py-4 flex justify-between items-center shadow-sm top-0 sticky">
+    <nav className="text-white w-full bg-black border-b border-gray-200 px-4 py-4 flex justify-between items-center shadow-sm top-0 sticky z-30">
       {/* Left: Order Button */}
-      <button
-        onClick={() => navigate("/order")}
-        className="text-sm font-semibold  transition"
-      >
-        Order
-      </button>
+      <div className="space-x-4">
+        <button
+          onClick={() => navigate("/dashboard")}
+          className="text-sm font-semibold  transition"
+        >
+          Dash
+        </button>
+        <button
+          onClick={() => navigate("/order")}
+          className="text-sm font-semibold  transition"
+        >
+          Order
+        </button>
+      </div>
 
       {/* Right: Store Name */}
       <div className="pl-2 rounded-xl font-bold flex items-center gap-2 bg-blackto text-sm">
