@@ -47,10 +47,13 @@ const LeadsChart = ({ data }) => {
   }, []);
 
   // Tambahkan nilai total untuk line chart (jika dibutuhkan)
-  const enhancedData = data.map((item) => ({
-    ...item,
-    total: (item.complete || 0) + (item.pending || 0),
-  }));
+  const enhancedData = [
+    { label: "", complete: 0, pending: 0, total: 0 },
+    ...data.map((item) => ({
+      ...item,
+      total: (item.complete || 0) + (item.pending || 0),
+    })),
+  ];
 
   return (
     <div className="bg-white p-4 md:p-6 rounded-2xl shadow-md border border-gray-200 ">
@@ -64,12 +67,9 @@ const LeadsChart = ({ data }) => {
 
             <XAxis
               dataKey="label"
-              interval={barSize === 20 ? 2 : 0} // skip 1 saat mobile
+              interval={barSize === 20 ? 2 : 1} // skip 1 saat mobile
               angle={barSize === 20 ? -15 : 0}
-              tick={{
-                fontSize: barSize === 20 ? 10 : 12,
-                fill: "#6b7280",
-              }}
+              tickFormatter={(value) => (value === "" ? "" : value)}
               textAnchor={barSize === 20 ? "end" : "middle"}
               height={barSize === 20 ? 60 : 50}
               axisLine={false}

@@ -5,27 +5,31 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   return (
-    <nav className="text-white w-full bg-black border-b border-gray-200 px-4 py-4 flex justify-between items-center shadow-sm top-0 sticky z-30">
-      {/* Left: Order Button */}
-      <div className="space-x-4">
+    <nav className="sticky top-0 z-30 bg-white border-b border-gray-200 px-6 py-3 flex justify-between items-center shadow-sm">
+      {/* Left Nav */}
+      <div className="flex gap-2">
         <button
           onClick={() => navigate("/dashboard")}
-          className="text-sm font-semibold  transition"
+          className="px-3 py-1.5 text-sm font-medium text-gray-700 hover:text-black hover:bg-gray-100 rounded-md transition"
         >
-          Dash
+          Dashboard
         </button>
         <button
           onClick={() => navigate("/order")}
-          className="text-sm font-semibold  transition"
+          className="px-3 py-1.5 text-sm font-medium text-gray-700 hover:text-black hover:bg-gray-100 rounded-md transition"
         >
-          Order
+          Orders
         </button>
       </div>
 
-      {/* Right: Store Name */}
-      <div className="pl-2 rounded-xl font-bold flex items-center gap-2 bg-blackto text-sm">
-        <p>Thruv Shop</p>
-        <img src="images/thruv.jpg" className="w-10 h-10 rounded-xl" />
+      {/* Right - Store Brand */}
+      <div className="flex items-center gap-3">
+        <p className="text-sm font-semibold text-gray-800">Thruv Shop</p>
+        <img
+          src="images/thruv.jpg"
+          alt="Store Logo"
+          className="w-8 h-8 rounded-md object-cover border border-gray-200"
+        />
       </div>
     </nav>
   );

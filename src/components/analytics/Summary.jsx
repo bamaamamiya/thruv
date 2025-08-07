@@ -24,12 +24,6 @@ const Summary = ({
 
   const isIncrease = pendingChangePercent >= 0;
 
-  console.log({
-    pendingOrders,
-    pendingOrdersPrevious,
-    pendingChangePercent,
-  });
-
   return (
     <div className="text-center mb-8">
       <div className="flex justify-between items-center text-left">
@@ -61,7 +55,8 @@ const Summary = ({
         >
           {pendingChangePercent > 0 && "↑"}
           {pendingChangePercent < 0 && "↓"}
-          {Math.abs(pendingChangePercent).toFixed(1)}%
+					{Math.min(100, Math.round(Math.abs(pendingChangePercent)))}%
+
         </p>
       </div>
 
