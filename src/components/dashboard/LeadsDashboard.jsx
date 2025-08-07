@@ -65,12 +65,12 @@ const LeadsDashboard = () => {
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold text-center mb-6">📦 Order Masuk</h1>
 
-        <div className="mb-6 text-center flex gap-2 w-full">
+        <div className="mb-6 flex flex-wrap gap-2 justify-between w-full">
           <DatePicker
             selected={selectedDate}
             onChange={(date) => setSelectedDate(date)}
             placeholderText="Filter berdasarkan tanggal"
-            className="bg-zinc-800 text-white px-4 py-2 rounded-lg border border-zinc-700"
+            className="bg-zinc-800 text-white px-4 py-2 rounded-lg border border-zinc-700 flex-1 min-w-[140px] max-w-[100%]"
             dateFormat="dd/MM/yyyy"
             isClearable
           />
@@ -78,7 +78,7 @@ const LeadsDashboard = () => {
           <select
             value={selectedStatus}
             onChange={(e) => setSelectedStatus(e.target.value)}
-            className="bg-zinc-800 text-white px-4 py-2 rounded-lg border border-zinc-700 capitalize"
+            className="bg-zinc-800 text-white px-4 py-2 rounded-lg border border-zinc-700 capitalize flex-1 min-w-[140px] max-w-[100%] text-center"
           >
             {statusOptions.map((status) => (
               <option key={status} value={status}>
