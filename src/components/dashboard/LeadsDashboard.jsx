@@ -15,8 +15,8 @@ const LeadsDashboard = () => {
   const [leads, setLeads] = useState([]);
   const [copiedId, setCopiedId] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
-  const [selectedStatus, setSelectedStatus] = useState("Semua"); // ⬅️ State filter status
-  const [selectedDate, setSelectedDate] = useState(null); // ⬅️ Tambahan baru
+  const [selectedStatus, setSelectedStatus] = useState("Semua");
+  const [selectedDate, setSelectedDate] = useState(null);
 
   useEffect(() => {
     const q = query(collection(db, "leads"), orderBy("createdAt", "desc"));
@@ -38,12 +38,6 @@ const LeadsDashboard = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // 🔍 Filter leads berdasarkan status
-  // const filteredLeads =
-  //   selectedStatus === "Semua"
-  //     ? leads
-  //     : leads.filter((lead) => lead.status === selectedStatus);
-
   const filteredLeads = leads.filter((lead) => {
     const matchStatus =
       selectedStatus === "Semua" || lead.status === selectedStatus;
@@ -57,25 +51,23 @@ const LeadsDashboard = () => {
     return matchStatus && matchDate;
   });
 
-  // ✅ Daftar status yang bisa dipilih
   const statusOptions = ["Semua", "pending", "complete", "cancel"];
-  const resiOptions = ["not", "done"];
 
   return (
-    <div>
-			<Navbar/>
-      <div className="min-h-screen bg-zinc-950 text-white px-4 py-12">
+    <div className="font-sans">
+      <Navbar />
+      <div className="min-h-screen bg-white text-gray-900 px-4 py-12">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl font-bold text-center mb-6">
+          <h1 className="text-2xl font-semibold text-center mb-8">
             📦 Order Masuk
           </h1>
 
-          <div className="mb-6 flex flex-wrap gap-2 justify-between w-full">
+          <div className="mb-6 flex flex-wrap gap-4 justify-between items-center w-full">
             <DatePicker
               selected={selectedDate}
               onChange={(date) => setSelectedDate(date)}
-              placeholderText="Filter berdasarkan tanggal"
-              className="bg-zinc-800 text-white px-4 py-2 rounded-lg border border-zinc-700 flex-1 min-w-[140px] max-w-[100%]"
+              placeholderText="Filter by date"
+              className="bg-white border border-gray-300 text-gray-800 px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-[200px]"
               dateFormat="dd/MM/yyyy"
               isClearable
             />
@@ -83,7 +75,7 @@ const LeadsDashboard = () => {
             <select
               value={selectedStatus}
               onChange={(e) => setSelectedStatus(e.target.value)}
-              className="bg-zinc-800 text-white px-4 py-2 rounded-lg border border-zinc-700 capitalize flex-1 min-w-[140px] max-w-[100%] text-center"
+              className="bg-white border border-gray-300 text-gray-800 px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-[200px]"
             >
               {statusOptions.map((status) => (
                 <option key={status} value={status}>
@@ -93,26 +85,11 @@ const LeadsDashboard = () => {
             </select>
           </div>
 
-          {/* Dropdown Filter */}
-          {/* <div className="mb-6 text-center">
-          <select
-            value={selectedStatus}
-            onChange={(e) => setSelectedStatus(e.target.value)}
-            className="bg-zinc-800 text-white px-4 py-2 rounded-lg border border-zinc-700 capitalize"
-          >
-            {statusOptions.map((status) => (
-              <option key={status} value={status}>
-                {status}
-              </option>
-            ))}
-          </select>
-        </div> */}
-
           {!isMobile && (
-            <div className="grid grid-cols-7 border-b border-white/10 py-3 text-sm font-semibold text-gray-400">
-              <span>Tgl</span>
+            <div className="grid grid-cols-7 border-b border-gray-200 py-3 text-sm font-medium text-gray-500 px-2">
+              <span>Tanggal</span>
               <span>Nama</span>
-              <span>WA</span>
+              <span>WhatsApp</span>
               <span>Metode</span>
               <span>Produk</span>
               <span>Status</span>
@@ -120,7 +97,7 @@ const LeadsDashboard = () => {
             </div>
           )}
 
-          <div className="divide-y divide-white/5">
+          <div className="divide-y divide-gray-100">
             {filteredLeads.map((lead, index) => {
               const currentMonth = new Date(
                 lead.createdAt.seconds * 1000
@@ -145,7 +122,7 @@ const LeadsDashboard = () => {
               return (
                 <React.Fragment key={lead.id}>
                   {showMonth && (
-                    <div className="text-center text-sm font-semibold text-gray-300 bg-zinc-800 rounded-lg">
+                    <div className="text-center text-sm font-medium text-gray-500 py-2 bg-gray-50 rounded-md my-4">
                       📅 {currentMonth}
                     </div>
                   )}

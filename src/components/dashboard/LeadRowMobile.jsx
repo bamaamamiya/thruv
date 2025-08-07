@@ -1,4 +1,4 @@
-// dashboard/leadrowmobile.jsx
+// dashboard/LeadRowMobile.jsx
 import { useState } from "react";
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
@@ -77,7 +77,7 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
     <>
       <div
         onClick={() => setShowModal(true)}
-        className="bg-zinc-900 rounded-xl p-4 mb-4 shadow hover:bg-zinc-800 transition cursor-pointer"
+        className="bg-white rounded-xl p-4 mb-4 shadow-sm hover:ring ring-gray-200 transition cursor-pointer"
       >
         <div className="flex justify-between text-sm mb-2 text-gray-400">
           <span>
@@ -89,43 +89,45 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
               }
             )}
           </span>
-          <span className="text-emerald-400">{lead.paymentMethod}</span>
+          <span className="text-emerald-500 font-medium">
+            {lead.paymentMethod}
+          </span>
         </div>
-        <div className="text-white font-semibold">{lead.name}</div>
-        <div className="text-blue-400 text-sm">{lead.whatsapp}</div>
+        <div className="text-gray-800 font-semibold text-base">{lead.name}</div>
+        <div className="text-blue-600 text-sm mb-1">{lead.whatsapp}</div>
         <span
-          className={`text-sm font-bold capitalize ${
+          className={`text-sm font-medium capitalize rounded px-2 py-0.5 inline-block mt-1 ${
             lead.status === "complete"
-              ? "text-green-400"
+              ? "bg-green-100 text-green-700"
               : lead.status === "cancel"
-              ? "text-red-400"
-              : "text-yellow-300"
+              ? "bg-red-100 text-red-700"
+              : "bg-yellow-100 text-yellow-700"
           }`}
         >
-          {lead.status}
+          {lead.status || "None"}
         </span>
-        <div className="text-sm text-white mt-1">{lead.productTitle}</div>
-        {/* Resi Check */}
-        <div className="flex justify-between text-sm">
-          <span className="text-gray-400">Resi:</span>
+        <div className="text-sm text-gray-700 mt-1">{lead.productTitle}</div>
+        <div className="flex justify-between text-sm mt-1">
+          <span className="text-gray-500">Resi:</span>
           <span
-            className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
+            className={`text-xs font-medium px-2 py-0.5 rounded-full ${
               lead.resiCheck === "done"
-                ? "bg-green-800 text-green-300"
-                : "bg-gray-800 text-gray-400"
+                ? "bg-green-100 text-green-700"
+                : "bg-gray-100 text-gray-600"
             }`}
           >
-            {lead.resiCheck === "done" ? "✅ Sudah Dicek" : "❌ Belum Dicek"}
+            {lead.resiCheck === "done" ? "✅ Dicek" : "❌ Belum"}
           </span>
         </div>
       </div>
 
+      {/* Modal tetap dark biar kontras, atau bisa dibuat terang */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center px-4">
-          <div className="bg-zinc-900 w-full max-w-md p-6 rounded-xl shadow-lg relative border border-white/10 text-sm text-white">
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center px-4">
+          <div className="bg-white w-full max-w-md p-6 rounded-xl shadow-xl relative text-sm text-gray-800">
             <button
               onClick={() => setShowModal(false)}
-              className="absolute top-3 right-4 text-gray-400 hover:text-white text-xl"
+              className="absolute top-3 right-4 text-gray-400 hover:text-gray-600 text-xl"
             >
               ❌
             </button>
@@ -134,68 +136,55 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
 
             <div className="space-y-2">
               <p>
-                <span className="text-gray-400">Nama:</span> {lead.name}
+                <span className="text-gray-500">Nama:</span> {lead.name}
               </p>
               <p>
-                <span className="text-gray-400">WA:</span>{" "}
+                <span className="text-gray-500">WA:</span>{" "}
                 <a
                   href={`https://wa.me/${lead.whatsapp}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-400 hover:underline"
+                  className="text-blue-600 hover:underline"
                 >
                   {lead.whatsapp}
                 </a>
               </p>
               <p>
-                <span className="text-gray-400">Harga Produk:</span>{" "}
+                <span className="text-gray-500">Harga:</span>{" "}
                 {formatHargaSingkat(lead.price)}
               </p>
               <p>
-                <span className="text-gray-400">Alamat:</span> {lead.address}
+                <span className="text-gray-500">Alamat:</span> {lead.address}
               </p>
               <p>
-                <span className="text-gray-400">Metode:</span>{" "}
-                {lead.paymentMethod}
+                <span className="text-gray-500">Metode:</span> {lead.paymentMethod}
               </p>
               <p>
-                <span className="text-gray-400">Produk:</span>{" "}
-                {lead.productTitle}
+                <span className="text-gray-500">Produk:</span> {lead.productTitle}
               </p>
               <p>
-                <span className="text-gray-400">Status:</span>{" "}
-                <span className="capitalize font-semibold">{lead.status}</span>
+                <span className="text-gray-500">Status:</span> <span className="capitalize font-semibold">{lead.status}</span>
               </p>
               <p>
-                <span className="text-gray-400">Resi Check:</span>{" "}
-                <span className="capitalize font-semibold">
-                  {lead.resiCheck || "not"}
-                </span>
+                <span className="text-gray-500">Resi Check:</span> <span className="capitalize font-semibold">{lead.resiCheck || "not"}</span>
               </p>
-              <p className="text-xs text-gray-500">
-                Masuk:{" "}
-                {new Date(lead.createdAt.seconds * 1000).toLocaleString(
-                  "id-ID"
-                )}
+              <p className="text-xs text-gray-400">
+                Masuk: {new Date(lead.createdAt.seconds * 1000).toLocaleString("id-ID")}
               </p>
             </div>
 
-            {/* Status Controls */}
             <div className="flex flex-wrap gap-2 mt-4">
               {statusOptions.map((status) => {
-                const isActive =
-                  lead.status === (status === "none" ? "" : status);
+                const isActive = lead.status === (status === "none" ? "" : status);
                 return (
                   <button
                     key={status}
                     disabled={updating}
-                    onClick={() =>
-                      handleStatusChange(status === "none" ? "" : status)
-                    }
-                    className={`px-3 py-1 text-xs font-bold rounded-full transition border-2 ${
+                    onClick={() => handleStatusChange(status === "none" ? "" : status)}
+                    className={`px-3 py-1 text-xs font-bold rounded-full transition border ${
                       isActive
-                        ? "bg-white text-black"
-                        : "border-white text-white hover:bg-white/10"
+                        ? "bg-black text-white"
+                        : "border-gray-300 text-gray-700 hover:bg-gray-100"
                     }`}
                   >
                     {status === "pending"
@@ -210,7 +199,6 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
               })}
             </div>
 
-            {/* Resi Check Controls */}
             <div className="flex flex-wrap gap-2 mt-3">
               {resiOptions.map((status) => {
                 const isActive = (lead.resiCheck || "not") === status;
@@ -219,10 +207,10 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
                     key={status}
                     disabled={updating}
                     onClick={() => handleResiCheckChange(status)}
-                    className={`px-3 py-1 text-xs font-bold rounded-full transition border-2 ${
+                    className={`px-3 py-1 text-xs font-bold rounded-full transition border ${
                       isActive
-                        ? "bg-white text-black"
-                        : "border-white text-white hover:bg-white/10"
+                        ? "bg-black text-white"
+                        : "border-gray-300 text-gray-700 hover:bg-gray-100"
                     }`}
                   >
                     {status === "done" ? "📦 Resi Dicek" : "🕓 Belum Dicek"}
@@ -231,18 +219,17 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
               })}
             </div>
 
-            {/* Salin dan Hapus */}
             <div className="flex justify-between items-center mt-6">
               <div className="space-x-2">
                 <button
                   onClick={handleCopy}
-                  className="bg-white text-black text-xs font-semibold px-3 py-1 rounded-md hover:bg-gray-200 transition"
+                  className="bg-black text-white text-xs font-semibold px-3 py-1 rounded-md hover:bg-gray-800 transition"
                 >
                   {copiedId === lead.id ? "✅ Disalin!" : "📋 Salin Total"}
                 </button>
                 <button
                   onClick={handleCopyAddress}
-                  className="bg-white text-black text-xs font-semibold px-3 py-1 rounded-md hover:bg-gray-200 transition"
+                  className="bg-black text-white text-xs font-semibold px-3 py-1 rounded-md hover:bg-gray-800 transition"
                 >
                   {copiedId === lead.id ? "✅ Disalin!" : "📋 Salin Alamat"}
                 </button>
@@ -250,15 +237,13 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
               <div>
                 <button
                   onClick={async () => {
-                    const konfirmasi = window.confirm(
-                      `Hapus data atas nama ${lead.name}?`
-                    );
+                    const konfirmasi = window.confirm(`Hapus data atas nama ${lead.name}?`);
                     if (konfirmasi) {
                       await deleteDoc(doc(db, "leads", lead.id));
                       setShowModal(false);
                     }
                   }}
-                  className="text-red-400 hover:text-red-500 text-sm flex"
+                  className="text-red-500 hover:text-red-600 text-sm flex"
                 >
                   🗑️ Hapus
                 </button>
