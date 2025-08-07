@@ -58,7 +58,7 @@ const LeadsDashboard = () => {
   });
 
   // ✅ Daftar status yang bisa dipilih
-  const statusOptions = ["Semua", "Pending", "complete", "cancel"];
+  const statusOptions = ["Semua", "pending", "complete", "cancel"];
   const resiOptions = ["not", "done"];
 
   return (

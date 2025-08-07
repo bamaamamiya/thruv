@@ -17,7 +17,7 @@ export const filterLeadsByDate = (leads, start, end) => {
 // Hitung ringkasan data leads
 export const calculateSummary = (leads) => {
   const completed = leads.filter((lead) => lead.status === "complete");
-  const pending = leads.filter((lead) => lead.status === "Pending");
+  const pending = leads.filter((lead) => lead.status === "pending");
 
   const totalSales = completed.reduce(
     (sum, lead) => sum + (lead.price || 0),
@@ -50,7 +50,7 @@ export const generateChartData = (leads, selectedFilter, start, end) => {
 
       const pending = leads.filter((lead) => {
         const time = new Date(lead.createdAt.seconds * 1000);
-        return time.getHours() === hour && lead.status === "Pending";
+        return time.getHours() === hour && lead.status === "pending";
       }).length;
 
       return { label, complete, pending };
@@ -71,7 +71,7 @@ export const generateChartData = (leads, selectedFilter, start, end) => {
       if (map[key]) {
         if (lead.status === "complete") {
           map[key].complete += 1;
-        } else if (lead.status === "Pending") {
+        } else if (lead.status === "pending") {
           map[key].pending += 1;
         }
       }
@@ -99,7 +99,7 @@ export const generateChartData = (leads, selectedFilter, start, end) => {
       if (weekMap[label]) {
         if (lead.status === "complete") {
           weekMap[label].complete += 1;
-        } else if (lead.status === "Pending") {
+        } else if (lead.status === "pending") {
           weekMap[label].pending += 1;
         }
       }
@@ -124,7 +124,7 @@ export const generateChartData = (leads, selectedFilter, start, end) => {
 
       if (lead.status === "complete") {
         map[key].complete += 1;
-      } else if (lead.status === "Pending") {
+      } else if (lead.status === "pending") {
         map[key].pending += 1;
       }
     });
@@ -154,7 +154,7 @@ export const generateChartData = (leads, selectedFilter, start, end) => {
         if (map[key]) {
           if (lead.status === "complete") {
             map[key].complete += 1;
-          } else if (lead.status === "Pending") {
+          } else if (lead.status === "pending") {
             map[key].pending += 1;
           }
         }
@@ -181,7 +181,7 @@ export const generateChartData = (leads, selectedFilter, start, end) => {
 
         if (lead.status === "complete") {
           weekMap[key].complete += 1;
-        } else if (lead.status === "Pending") {
+        } else if (lead.status === "pending") {
           weekMap[key].pending += 1;
         }
       });

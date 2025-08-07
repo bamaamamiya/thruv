@@ -112,7 +112,7 @@ const FunnelPurchase = ({ pixel, product, price, namaProduct }) => {
         productTitle: product.title,
         productId: product.id || "unknown",
         createdAt: Timestamp.now(),
-        status: "Pending",
+        status: "pending",
         resiCheck: "not",
       });
 

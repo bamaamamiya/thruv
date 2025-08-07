@@ -8,6 +8,7 @@ import Summary from "../analytics/Summary";
 import LeadsChart from "../analytics/LeadsChart";
 
 import { getDateRange } from "../../utils/dateFilters";
+import { getPreviousRange } from "../../utils/getPreviousRange"; // ✅ Tambahkan ini
 import {
   filterLeadsByDate,
   calculateSummary,
@@ -18,6 +19,7 @@ const ShopifyStyleDashboard = () => {
   const [leads, setLeads] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState("today");
   const [customRange, setCustomRange] = useState([new Date(), new Date()]);
+
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "leads"), (snapshot) => {
       const docs = snapshot.docs.map((doc) => ({
@@ -30,12 +32,11 @@ const ShopifyStyleDashboard = () => {
     return () => unsub();
   }, []);
 
-
-  // Process date range and filter
+  // ✅ Dapatkan range aktif
   const [start, end] = getDateRange(selectedFilter, customRange);
   const filteredLeads = filterLeadsByDate(leads, start, end);
 
-  // Generate summary metrics
+  // ✅ Hitung metrik saat ini
   const {
     totalOrders,
     completedOrders,
@@ -44,7 +45,19 @@ const ShopifyStyleDashboard = () => {
     totalPendingValue,
   } = calculateSummary(filteredLeads);
 
-  // Generate chart data
+  // ✅ Dapatkan range sebelumnya
+  const [prevStart, prevEnd] = getPreviousRange(selectedFilter, start, end);
+	
+  // ✅ Hitung metrik sebelumnya
+  let pendingOrdersPrevious = 0;
+  if (prevStart && prevEnd) {
+    const previousLeads = filterLeadsByDate(leads, prevStart, prevEnd);
+    const previousSummary = calculateSummary(previousLeads);
+    pendingOrdersPrevious = previousSummary.pendingOrders || 0;
+  }
+
+
+  // ✅ Siapkan data grafik
   const chartData = generateChartData(
     filteredLeads,
     selectedFilter,
@@ -72,6 +85,7 @@ const ShopifyStyleDashboard = () => {
             totalPendingValue={totalPendingValue}
             start={start}
             end={end}
+            pendingOrdersPrevious={pendingOrdersPrevious}
           />
 
           <LeadsChart data={chartData} />

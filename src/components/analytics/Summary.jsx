@@ -6,21 +6,29 @@ const Summary = ({
   totalPendingValue,
   totalOrders,
   completedOrders,
+  pendingOrders,
   start,
   end,
-  totalSalesPrevious, // ⬅️ tambahkan prop ini
+  totalSalesPrevious,
+  pendingOrdersPrevious, // ✅
 }) => {
   const [showBreakdown, setShowBreakdown] = useState(false);
 
   const totalAll = totalSales + totalPendingValue;
 
   // 🧠 Persentase kenaikan
-  const salesChangePercent =
-    totalSalesPrevious > 0
-      ? ((totalSales - totalSalesPrevious) / totalSalesPrevious) * 100
+  const pendingChangePercent =
+    pendingOrdersPrevious > 0
+      ? ((pendingOrders - pendingOrdersPrevious) / pendingOrdersPrevious) * 100
       : 0;
 
-  const isIncrease = salesChangePercent >= 0;
+  const isIncrease = pendingChangePercent >= 0;
+
+  console.log({
+    pendingOrders,
+    pendingOrdersPrevious,
+    pendingChangePercent,
+  });
 
   return (
     <div className="text-center mb-8">
@@ -44,16 +52,16 @@ const Summary = ({
         {/* 📈 Persen Kenaikan */}
         <p
           className={`text-3xl font-semibold ${
-            salesChangePercent === 0
+            pendingChangePercent === 0
               ? "text-black"
               : isIncrease
-              ? "text-green-600"
+              ? "text-green-600" // karena increase pending = worse
               : "text-red-500"
           }`}
         >
-          {salesChangePercent > 0 && "↑"}
-          {salesChangePercent < 0 && "↓"}
-          {Math.abs(salesChangePercent).toFixed(1)}%
+          {pendingChangePercent > 0 && "↑"}
+          {pendingChangePercent < 0 && "↓"}
+          {Math.abs(pendingChangePercent).toFixed(1)}%
         </p>
       </div>
 
@@ -63,19 +71,19 @@ const Summary = ({
       >
         {showBreakdown ? "Hide Breakdown" : "Show Breakdown"}
       </button> */}
-			<div className="text-left">
-      <p className=" text-lg mt-2">{totalOrders} Orders</p>
-      <p className="text-sm text-gray-400 mt-1">
-        {format(start, "dd MMM yyyy")} – {format(end, "dd MMM yyyy")}
-      </p>
-      <p className="text-sm underline">
-        Conversion Rate:{" "}
-        {totalOrders > 0
-          ? ((completedOrders / totalOrders) * 100).toFixed(1)
-          : 0}
-        %
-      </p>
-					</div>
+      <div className="text-left">
+        <p className=" text-lg mt-2">{totalOrders} Orders</p>
+        <p className="text-sm text-gray-400 mt-1">
+          {format(start, "dd MMM yyyy")} – {format(end, "dd MMM yyyy")}
+        </p>
+        <p className="text-sm underline">
+          Conversion Rate:{" "}
+          {totalOrders > 0
+            ? ((completedOrders / totalOrders) * 100).toFixed(1)
+            : 0}
+          %
+        </p>
+      </div>
     </div>
   );
 };
