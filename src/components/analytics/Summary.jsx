@@ -71,13 +71,6 @@ const Summary = ({
         <p className="text-sm text-gray-400 mt-1">
           {format(start, "dd MMM yyyy")} – {format(end, "dd MMM yyyy")}
         </p>
-        <p className="text-sm underline">
-          Conversion Rate:{" "}
-          {totalOrders > 0
-            ? ((completedOrders / totalOrders) * 100).toFixed(1)
-            : 0}
-          %
-        </p>
       </div>
     </div>
   );

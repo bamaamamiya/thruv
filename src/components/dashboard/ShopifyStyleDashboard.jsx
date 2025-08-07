@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../../firebase";
-
+import ConversionRate from "../analytics/ConversionRate";
 import Navbar from "../analytics/Navbar";
 import FilterBar from "../analytics/FilterBar";
 import Summary from "../analytics/Summary";
 import LeadsChart from "../analytics/LeadsChart";
-
 import { getDateRange } from "../../utils/dateFilters";
 import { getPreviousRange } from "../../utils/getPreviousRange"; // ✅ Tambahkan ini
 import {
@@ -47,7 +46,7 @@ const ShopifyStyleDashboard = () => {
 
   // ✅ Dapatkan range sebelumnya
   const [prevStart, prevEnd] = getPreviousRange(selectedFilter, start, end);
-	
+
   // ✅ Hitung metrik sebelumnya
   let pendingOrdersPrevious = 0;
   if (prevStart && prevEnd) {
@@ -56,7 +55,6 @@ const ShopifyStyleDashboard = () => {
     pendingOrdersPrevious = previousSummary.pendingOrders || 0;
   }
 
-
   // ✅ Siapkan data grafik
   const chartData = generateChartData(
     filteredLeads,
@@ -64,6 +62,13 @@ const ShopifyStyleDashboard = () => {
     start,
     end
   );
+  const previousLeads = filterLeadsByDate(leads, prevStart, prevEnd);
+  const previousSummary = calculateSummary(previousLeads);
+
+  const previousConversionRate =
+    previousSummary.totalOrders > 0
+      ? (previousSummary.completedOrders / previousSummary.totalOrders) * 100
+      : null;
 
   return (
     <div>
@@ -89,6 +94,11 @@ const ShopifyStyleDashboard = () => {
           />
 
           <LeadsChart data={chartData} />
+					  <ConversionRate
+            completedOrders={completedOrders}
+            totalOrders={totalOrders}
+            previousRate={previousConversionRate}
+          />
         </div>
       </div>
     </div>

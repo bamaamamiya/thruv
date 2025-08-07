@@ -31,7 +31,7 @@ const CustomTooltip = ({ active, payload, label }) => {
   );
 };
 
-const LeadsChart = ({ data }) => {
+const LeadsChart = ({ data,chartType = "bar" }) => {
   const [barSize, setBarSize] = useState(30);
 
   // Ubah ukuran bar berdasarkan lebar layar
@@ -48,12 +48,13 @@ const LeadsChart = ({ data }) => {
 
   // Tambahkan nilai total untuk line chart (jika dibutuhkan)
   const enhancedData = [
-    { label: "", complete: 0, pending: 0, total: 0 },
-    ...data.map((item) => ({
-      ...item,
-      total: (item.complete || 0) + (item.pending || 0),
-    })),
-  ];
+  { label: "", complete: 0, pending: 0, total: 0 },
+  ...data.map((item) => ({
+    ...item,
+    total: (item.complete || 0) + (item.pending || 0),
+  })),
+];
+
 
   return (
     <div className="bg-white p-4 md:p-6 rounded-2xl shadow-md border border-gray-200 ">
