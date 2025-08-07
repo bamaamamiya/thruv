@@ -18,8 +18,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Page />} />
         <Route path="/lp" element={<LandingPage />} />
-        <Route path="/cctv1" element={<CctvBohlam />} />
-        <Route path="/cctv" element={<CctvBohlam2 />} />
+        <Route path="/cctv" element={<CctvBohlam />} />
+        <Route path="/cctv1" element={<CctvBohlam2 />} />
         <Route path="/pijat" element={<AlatPijat />} />
         <Route path="/login" element={<LoginPage />} />
         <Route
