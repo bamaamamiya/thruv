@@ -65,7 +65,7 @@ const LeadsDashboard = () => {
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold text-center mb-6">📦 Order Masuk</h1>
 
-        <div className="mb-6 text-center flex justify-between">
+        <div className="mb-6 text-center flex gap-2 w-full">
           <DatePicker
             selected={selectedDate}
             onChange={(date) => setSelectedDate(date)}
