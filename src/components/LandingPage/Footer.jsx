@@ -5,7 +5,6 @@ import Funnel from "../FunnelAtc";
 import Faqs from '../set/Faqs'
 
 const Footer = ({ promoImages, pixelId, produkBaru, footerImages ,faqs}) => {
-	console.log(pixelId , "pixel masuk")
   return (
     <div>
       {/* PROMO SECTION */}

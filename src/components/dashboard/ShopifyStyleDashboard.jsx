@@ -15,6 +15,9 @@ import {
   calculateSummary,
   generateChartData,
 } from "../../utils/processLeads";
+import ProfitSummary from "../analytics/ProfitSummary";
+import PendingProfit from "../analytics/PendingProfit";
+import ProfitTotal from "../analytics/ProfitTotal";
 
 const ShopifyStyleDashboard = () => {
   const [leads, setLeads] = useState([]);
@@ -43,6 +46,9 @@ const ShopifyStyleDashboard = () => {
     pendingOrders,
     totalSales,
     totalPendingValue,
+    totalCost,
+    pendingCost,
+    totalAllTimeCost, // ✅ Tambahkan ini
   } = calculateSummary(filteredLeads);
 
   // 3. Previous range & metrics
@@ -62,7 +68,6 @@ const ShopifyStyleDashboard = () => {
     start,
     end
   );
-
   return (
     <div>
       <Navbar />
@@ -83,6 +88,7 @@ const ShopifyStyleDashboard = () => {
             completedOrders={completedOrders}
             pendingOrders={pendingOrders}
             totalPendingValue={totalPendingValue}
+            totalCost={totalCost}
             start={start}
             end={end}
             pendingOrdersPrevious={previousSummary.pendingOrders || 0}
@@ -103,6 +109,17 @@ const ShopifyStyleDashboard = () => {
             completedOrders={completedOrders}
             pendingOrders={pendingOrders}
             totalOrders={totalOrders}
+          />
+          <ProfitTotal
+            totalSales={totalSales}
+            totalPendingValue={totalPendingValue}
+            totalCost={totalAllTimeCost} // ✅ Kirimkan totalAllTimeCost
+          />
+          <ProfitSummary totalSales={totalSales} totalCost={totalCost} />
+
+          <PendingProfit
+            totalPendingValue={totalPendingValue}
+            pendingCost={pendingCost}
           />
         </div>
       </div>

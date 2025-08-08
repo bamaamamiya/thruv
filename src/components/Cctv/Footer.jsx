@@ -55,6 +55,8 @@ const Footer = ({
       }, 30);
     }
   }, [isVisible]);
+
+
   return (
     <div>
       <div className="space-y-2">
@@ -107,6 +109,7 @@ const Footer = ({
           product={produkBaru}
           price={promoPrice}
           namaProduct={namaProduct}
+					costProduct={produkBaru.costProduct}
         />
       </div>
 

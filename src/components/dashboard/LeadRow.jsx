@@ -1,12 +1,15 @@
 // dashboard/leadrow.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
 const LeadRow = ({ lead, copiedId, setCopiedId }) => {
   const [showModal, setShowModal] = useState(false);
   const [updating, setUpdating] = useState(false);
-
+  const [costProductValue, setCostProductValue] = useState(
+    lead.costProduct || ""
+  );
+  const [priceValue, setPriceValue] = useState(lead.price || "");
   const formatHargaSingkat = (harga) => {
     if (harga >= 1_000_000) {
       return (harga / 1_000_000).toFixed(1).replace(".0", "") + "jt";
@@ -68,7 +71,71 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
     } finally {
       setUpdating(false);
     }
-  };
+  }; // Auto-save costProduct dengan debounce 500ms
+
+  // Auto-save costProduct dengan debounce 500ms
+  // useEffect(() => {
+  //   const timeout = setTimeout(async () => {
+  //     if (costProductValue !== lead.costProduct) {
+  //       setUpdating(true);
+  //       try {
+  //         await updateDoc(doc(db, "leads", lead.id), {
+  //           costProduct: Number(costProductValue),
+  //         });
+  //         console.log("✅ Cost product updated");
+  //       } catch (err) {
+  //         console.error("Gagal update cost product:", err);
+  //         alert("Gagal update cost product.");
+  //       } finally {
+  //         setUpdating(false);
+  //       }
+  //     }
+  //   }, 500);
+
+  //   return () => clearTimeout(timeout);
+  // }, [costProductValue, lead.costProduct, lead.id]);
+
+  useEffect(() => {
+    const timeout = setTimeout(async () => {
+      if (costProductValue !== lead.costProduct) {
+        setUpdating(true);
+        try {
+          await updateDoc(doc(db, "leads", lead.id), {
+            costProduct: Number(costProductValue),
+          });
+          console.log("✅ Cost product updated");
+        } catch (err) {
+          console.error("Gagal update cost product:", err);
+          alert("Gagal update cost product.");
+        } finally {
+          setUpdating(false);
+        }
+      }
+    }, 500);
+
+    return () => clearTimeout(timeout);
+  }, [costProductValue, lead.costProduct, lead.id]); // Auto-save priceValue dengan debounce 500ms
+
+  useEffect(() => {
+    const timeout = setTimeout(async () => {
+      if (priceValue !== lead.price) {
+        setUpdating(true);
+        try {
+          await updateDoc(doc(db, "leads", lead.id), {
+            price: Number(priceValue),
+          });
+          console.log("✅ Price updated");
+        } catch (err) {
+          console.error("Gagal update harga produk:", err);
+          alert("Gagal update harga produk.");
+        } finally {
+          setUpdating(false);
+        }
+      }
+    }, 500);
+
+    return () => clearTimeout(timeout);
+  }, [priceValue, lead.price, lead.id]);
 
   const statusOptions = ["pending", "complete", "cancel", "none"];
   const resiOptions = ["not", "done"];
@@ -136,7 +203,9 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
             <h2 className="text-lg font-semibold mb-4">📄 Detail Lead</h2>
 
             <div className="space-y-2">
-              <p><strong>Nama:</strong> {lead.name}</p>
+              <p>
+                <strong>Nama:</strong> {lead.name}
+              </p>
               <p>
                 <strong>WA:</strong>{" "}
                 <a
@@ -148,23 +217,75 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
                   {lead.whatsapp}
                 </a>
               </p>
-              <p><strong>Harga Produk:</strong> {formatHargaSingkat(lead.price)}</p>
-              <p><strong>Alamat:</strong> {lead.address}</p>
-              <p><strong>Metode:</strong> {lead.paymentMethod}</p>
-              <p><strong>Produk:</strong> {lead.productTitle}</p>
-              <p><strong>Status:</strong> <span className="capitalize font-semibold">{lead.status}</span></p>
-              <p><strong>Resi Check:</strong> <span className="capitalize font-semibold">{lead.resiCheck || "not"}</span></p>
-              <p className="text-xs text-gray-500">Masuk: {new Date(lead.createdAt.seconds * 1000).toLocaleString("id-ID")}</p>
+              <p>
+                <strong>Harga Produk:</strong> {formatHargaSingkat(lead.price)}
+              </p>
+              {/* Input cost product yang auto-save */}
+              <div>
+                <strong>Harga Produk:</strong>
+                <input
+                  type="number"
+                  className="border rounded px-2 py-1 text-sm w-full mt-1"
+                  value={priceValue}
+                  onChange={(e) => setPriceValue(e.target.value)}
+                  placeholder="Masukkan harga jual terbaru"
+                />
+              </div>
+              <p>
+                <strong>Alamat:</strong> {lead.address}
+              </p>
+              <p>
+                <strong>Metode:</strong> {lead.paymentMethod}
+              </p>
+              <p>
+                <strong>Produk:</strong> {lead.productTitle}
+              </p>
+              <p>
+                <strong>Status:</strong>{" "}
+                <span className="capitalize font-semibold">{lead.status}</span>
+              </p>
+
+              {/* Input cost product yang auto-save */}
+              <div>
+                <strong>Cost Product:</strong>
+                <input
+                  type="number"
+                  className="border rounded px-2 py-1 text-sm w-full mt-1"
+                  value={costProductValue}
+                  onChange={(e) => setCostProductValue(e.target.value)}
+                  placeholder="Masukkan cost product"
+                />
+              </div>
+
+              <p>
+                <strong>Resi Check:</strong>{" "}
+                <span className="capitalize font-semibold">
+                  {lead.resiCheck || "not"}
+                </span>
+              </p>
+              <p className="text-xs text-gray-500">
+                Masuk:{" "}
+                {new Date(lead.createdAt.seconds * 1000).toLocaleString(
+                  "id-ID"
+                )}
+              </p>
+
+              {updating && (
+                <p className="text-xs text-gray-500 mt-1">⏳ Menyimpan...</p>
+              )}
             </div>
 
             <div className="flex flex-wrap gap-2 mt-5">
               {statusOptions.map((status) => {
-                const isActive = lead.status === (status === "none" ? "" : status);
+                const isActive =
+                  lead.status === (status === "none" ? "" : status);
                 return (
                   <button
                     key={status}
                     disabled={updating}
-                    onClick={() => handleStatusChange(status === "none" ? "" : status)}
+                    onClick={() =>
+                      handleStatusChange(status === "none" ? "" : status)
+                    }
                     className={`px-3 py-1 text-xs font-bold rounded-full transition border ${
                       isActive
                         ? "bg-black text-white"

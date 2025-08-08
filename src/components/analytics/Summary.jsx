@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { format } from "date-fns";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCartShopping ,faArrowTrendUp} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCartShopping,
+  faArrowTrendUp,
+} from "@fortawesome/free-solid-svg-icons";
 const Summary = ({
   totalSales,
   totalPendingValue,
@@ -12,6 +15,7 @@ const Summary = ({
   end,
   totalSalesPrevious,
   pendingOrdersPrevious, // ✅
+  totalCost, // ✅ TAMBAHKAN prop totalCost di sini
 }) => {
   const [showBreakdown, setShowBreakdown] = useState(false);
 
@@ -24,6 +28,8 @@ const Summary = ({
       : 0;
 
   const isIncrease = pendingChangePercent >= 0;
+
+
 
   return (
     <div className="text-center mb-8">
@@ -56,8 +62,7 @@ const Summary = ({
         >
           {pendingChangePercent > 0 && "↑"}
           {pendingChangePercent < 0 && "↓"}
-					{Math.min(100, Math.round(Math.abs(pendingChangePercent)))}%
-
+          {Math.min(100, Math.round(Math.abs(pendingChangePercent)))}%
         </p>
       </div>
 

@@ -17,6 +17,7 @@ const CctvBohlam = () => {
     title: "Cctv bohlam",
     description: "Product CCTV BOHLAM",
     price: 129000,
+		costProduct:75000,
   };
 
 	// const BonusData = {
@@ -89,6 +90,8 @@ const CctvBohlam = () => {
     "Tanpa kabel & tanpa teknisi — cukup pasang di fitting lampu E27, langsung nyala.",
     "Support night vision, jadi tetap bisa ngawasin rumah meskipun malam atau lampu mati.",
   ];
+
+	console.log(funnelProduct , "di lp")
 
   return (
     <div>

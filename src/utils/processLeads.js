@@ -18,6 +18,7 @@ export const filterLeadsByDate = (leads, start, end) => {
 export const calculateSummary = (leads) => {
   const completed = leads.filter((lead) => lead.status === "complete");
   const pending = leads.filter((lead) => lead.status === "pending");
+  // const costProduct = leads.filter((lead) => lead.status === "costProduct");
 
   const totalSales = completed.reduce(
     (sum, lead) => sum + (lead.price || 0),
@@ -27,6 +28,27 @@ export const calculateSummary = (leads) => {
     (sum, lead) => sum + (lead.price || 0),
     0
   );
+  // ✅ PERBAIKAN: totalCost hanya dihitung dari lead yang sudah "complete"
+  const totalCost = completed.reduce(
+    (sum, lead) => sum + (lead.costProduct || 0),
+    0
+  );
+
+  // ✅ BARU: Hitung biaya khusus untuk lead yang "pending"
+  const pendingCost = pending.reduce(
+    (sum, lead) => sum + (lead.costProduct || 0),
+    0
+  );
+
+	// ✅ BARU: total biaya dari SEMUA lead
+  const totalAllTimeCost = leads.reduce(
+    (sum, lead) => sum + (lead.costProduct || 0),
+    0
+  );
+
+  const pendingProfit = totalPendingValue - pendingCost;
+
+  const profit = totalSales - totalCost;
 
   return {
     totalOrders: leads.length,
@@ -34,6 +56,10 @@ export const calculateSummary = (leads) => {
     pendingOrders: pending.length,
     totalSales,
     totalPendingValue,
+    totalCost,
+    profit,
+    pendingCost, 
+		totalAllTimeCost,
   };
 };
 

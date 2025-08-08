@@ -3,7 +3,7 @@ import { collection, setDoc, doc, Timestamp } from "firebase/firestore";
 import { db } from "../firebase";
 import emailjs from "@emailjs/browser";
 
-const FunnelPurchase = ({ pixel, product, price, namaProduct }) => {
+const FunnelPurchase = ({ pixel, product, price, costProduct }) => {
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("COD");
@@ -39,6 +39,7 @@ const FunnelPurchase = ({ pixel, product, price, namaProduct }) => {
     const isValid = /^62[0-9]{9,13}$/.test(cleaned);
     return isValid ? cleaned : null;
   };
+
 
   // ✅ Kirim Email via EmailJS
   const sendOrderEmail = async (data) => {
@@ -100,13 +101,13 @@ const FunnelPurchase = ({ pixel, product, price, namaProduct }) => {
     const docId = `${cleanedWA}_${product.id || "unknown"}`;
     const codFee = paymentMethod === "COD" ? 5000 : 0;
     const totalPrice = price + codFee;
-
     try {
       // ✅ Simpan ke Firestore
       await setDoc(doc(db, "leads", docId), {
         name,
         whatsapp: cleanedWA,
         price,
+        costProduct: product.costProduct || 0, // ✅ simpan cost produk
         address,
         paymentMethod,
         productTitle: product.title,
@@ -115,6 +116,7 @@ const FunnelPurchase = ({ pixel, product, price, namaProduct }) => {
         status: "pending",
         resiCheck: "not",
       });
+
 
       // ✅ Kirim Email ke Admin
       await sendOrderEmail({
