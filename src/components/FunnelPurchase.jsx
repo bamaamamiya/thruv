@@ -9,7 +9,6 @@ const FunnelPurchase = ({ pixel, product, price, costProduct }) => {
   const [paymentMethod, setPaymentMethod] = useState("COD");
   const [address, setAddress] = useState("");
   const [loading, setLoading] = useState(false);
-	console.log(pixel, "funnel")
   const emailJSConfigs = [
     {
       serviceID: "service_ibqyju2",

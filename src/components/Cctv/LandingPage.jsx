@@ -90,7 +90,8 @@ const CctvBohlam = () => {
     "Tanpa kabel & tanpa teknisi — cukup pasang di fitting lampu E27, langsung nyala.",
     "Support night vision, jadi tetap bisa ngawasin rumah meskipun malam atau lampu mati.",
   ];
-
+	const pixel = 2111198546014232
+	const pixelString = pixel.toString()
 
   return (
     <div>
@@ -110,7 +111,7 @@ const CctvBohlam = () => {
       />
       <Footer
         hargaJual={funnelProduct.price}
-        pixelId="2111198546014232"
+        pixelId={pixelString}
         produkBaru={funnelProduct}
         footerImages={["images/fotter2.webp", "images/fotter.webp"]}
         faqs={faqs}

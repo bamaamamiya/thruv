@@ -19,7 +19,7 @@ const Footer = ({
   const [isVisible, setIsVisible] = useState(false);
   const [currentValue, setCurrentValue] = useState(normalPrice);
   const promoRef = useRef(null);
-
+	console.log(pixelId)
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
