@@ -25,7 +25,7 @@ const OrderStatus = ({ completedOrders, pendingOrders, totalOrders }) => {
 
       <div className="w-full bg-gray-300 h-2 mt-2 rounded relative overflow-hidden">
         <div
-          className="bg-green-500 h-2 absolute left-0 top-0"
+          className="bg-green-600 h-2 absolute left-0 top-0"
           style={{ width: `${completedRate}%` }}
         />
         <div
