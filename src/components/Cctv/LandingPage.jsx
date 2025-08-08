@@ -20,10 +20,10 @@ const CctvBohlam = () => {
 		costProduct:75000,
   };
 
-	// const BonusData = {
-	// 	title:"Bonus yang di dapatkan :",
-	// 	bonus: "Fitting & Baut + Vidio Panduan"
-	// }
+	const BonusData = {
+		title:"Bonus yang di dapatkan :",
+		bonus: "Fitting & Baut + Vidio Panduan + Gratis COD"
+	}
 
   const bundles = [
     {
@@ -116,6 +116,8 @@ const CctvBohlam = () => {
         footerImages={["images/fotter2.webp", "images/fotter.webp"]}
         faqs={faqs}
         namaProduct={funnelProduct.title}
+				bonus={BonusData.bonus}
+				bonusTitle={BonusData.title}
       />
       {/* <Footer
         hargaJual={bundles[0].price}

@@ -19,7 +19,6 @@ const Footer = ({
   const [isVisible, setIsVisible] = useState(false);
   const [currentValue, setCurrentValue] = useState(normalPrice);
   const promoRef = useRef(null);
-	console.log(pixelId)
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -75,12 +74,12 @@ const Footer = ({
             Rp {Math.floor(currentValue).toLocaleString("id-ID")}
           </h1>
         </div>
-        {/* <div className="text-center text-sm">
+        <div className="text-center text-sm">
           <p className="font-bold">{bonusTitle}</p>
           <p className="font-semibold pr-2 pl-2">
             {bonus}
           </p>
-        </div> */}
+        </div>
         <br />
         <div className="w-auto h-8 bg-gray-300 rounded overflow-hidden m-2">
           <p className="bg-redto text-white text-sm px-3 flex items-center h-full w-1/3">
