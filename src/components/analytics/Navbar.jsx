@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const navigate = useNavigate();
+
+  // ✅ 1. Tambahkan state untuk menyimpan teks brand
+  const [isThruvShop, setIsThruvShop] = useState(true);
+
+  // ✅ 2. Fungsi untuk mengubah state (toggle)
+  const toggleStoreName = () => {
+    setIsThruvShop(!isThruvShop);
+  };
 
   return (
     <nav className="sticky top-0 z-30 bg-white border-b border-gray-200 px-6 py-3 flex justify-between items-center shadow-sm">
@@ -22,9 +30,16 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Right - Store Brand */}
-      <div className="flex items-center gap-3">
-        <p className="text-sm font-semibold text-gray-800">Thruv Shop</p>
+      {/* Right - Store Brand as a Button */}
+      {/* ✅ 3. Tambahkan onClick handler ke div */}
+      <div 
+        className="flex items-center gap-3 cursor-pointer"
+        onClick={toggleStoreName}
+      >
+        {/* ✅ 4. Tampilkan teks berdasarkan state */}
+        <p className="text-sm font-semibold text-gray-800">
+          {isThruvShop ? "Thruv Shop" : "My Store"}
+        </p>
         <img
           src="images/thruv.jpg"
           alt="Store Logo"
