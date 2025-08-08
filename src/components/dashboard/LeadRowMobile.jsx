@@ -13,8 +13,10 @@ const formatHargaSingkat = (harga) => {
 const LeadRowMobile = ({ lead, copiedId, setCopiedId }) => {
   const [showModal, setShowModal] = useState(false);
   const [updating, setUpdating] = useState(false);
-  const [costProductValue, setCostProductValue] = useState(lead.costProduct || "");
-
+  const [costProductValue, setCostProductValue] = useState(
+    lead.costProduct || ""
+  );
+  const [priceValue, setPriceValue] = useState(lead.price || "");
   const handleCopyAddress = () => {
     const prompt = `[PROVINSI], [KABUPATEN/KOTA], [KECAMATAN], [DESA/KELURAHAN] dan rapikan alamat lengkap, dan kecamatan terpisah.\n\nAlamat mentah: ${lead.address}`;
     navigator.clipboard.writeText(prompt).then(() => {
@@ -71,18 +73,33 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
     }
   };
 
-  const handleCostProductChange = async () => {
-    if (costProductValue === "" || isNaN(costProductValue)) {
-      alert("Cost product tidak boleh kosong dan harus angka.");
+  // Gabungkan semua logika update ke dalam satu fungsi
+  const handleUpdateAll = async () => {
+    // Ambil nilai dari state, misalnya costProductValue dan priceValue
+    // Anda harus memastikan state ini selalu merefleksikan nilai di input
+    if (
+      costProductValue === "" ||
+      isNaN(costProductValue) ||
+      priceValue === "" ||
+      isNaN(priceValue)
+    ) {
+      alert("Harga dan biaya produk tidak boleh kosong dan harus angka.");
       return;
     }
+
     setUpdating(true);
     try {
-      await updateDoc(doc(db, "leads", lead.id), { costProduct: Number(costProductValue) });
-      alert("✅ Cost product berhasil diupdate!");
+      // Buat satu objek data untuk diupdate
+      const updatedData = {
+        costProduct: Number(costProductValue),
+        price: Number(priceValue),
+      };
+
+      // Kirim satu kali update ke Firestore
+      await updateDoc(doc(db, "leads", lead.id), updatedData);
     } catch (err) {
-      console.error("Gagal update cost product:", err);
-      alert("Gagal update cost product.");
+      console.error("Gagal update data:", err);
+      alert("Gagal update data.");
     } finally {
       setUpdating(false);
     }
@@ -99,10 +116,13 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
       >
         <div className="flex justify-between text-sm mb-2 text-gray-400">
           <span>
-            {new Date(lead.createdAt.seconds * 1000).toLocaleDateString("id-ID", {
-              day: "2-digit",
-              month: "short",
-            })}
+            {new Date(lead.createdAt.seconds * 1000).toLocaleDateString(
+              "id-ID",
+              {
+                day: "2-digit",
+                month: "short",
+              }
+            )}
           </span>
           <span className="text-emerald-500 font-medium">
             {lead.paymentMethod}
@@ -150,25 +170,70 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
             <h2 className="text-xl font-semibold mb-4">📄 Detail Order</h2>
 
             <div className="space-y-2">
-              <p><span className="text-gray-500">Nama:</span> {lead.name}</p>
+              <p>
+                <span className="text-gray-500">Nama:</span> {lead.name}
+              </p>
               <p>
                 <span className="text-gray-500">WA:</span>{" "}
-                <a href={`https://wa.me/${lead.whatsapp}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                <a
+                  href={`https://wa.me/${lead.whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:underline"
+                >
                   {lead.whatsapp}
                 </a>
               </p>
-              <p><span className="text-gray-500">Harga:</span> {formatHargaSingkat(lead.price)}</p>
-              <p><span className="text-gray-500">Alamat:</span> {lead.address}</p>
-              <p><span className="text-gray-500">Metode:</span> {lead.paymentMethod}</p>
-              <p><span className="text-gray-500">Produk:</span> {lead.productTitle}</p>
-              <p><span className="text-gray-500">Status:</span> <span className="capitalize font-semibold">{lead.status}</span></p>
-              <p><span className="text-gray-500">Resi Check:</span> <span className="capitalize font-semibold">{lead.resiCheck || "not"}</span></p>
-              <p className="text-xs text-gray-400">Masuk: {new Date(lead.createdAt.seconds * 1000).toLocaleString("id-ID")}</p>
+              <p>
+                <span className="text-gray-500">Harga:</span>{" "}
+                {formatHargaSingkat(lead.price)}
+              </p>
+              <div className="mt-4">
+                <label className="block text-gray-500 text-xs mb-1">
+                  Harga:
+                </label>
+                <input
+                  type="number"
+                  value={priceValue}
+                  onChange={(e) => setPriceValue(e.target.value)}
+                  className="border rounded px-2 py-1 text-sm w-full"
+                  placeholder="Masukkan harga terbaru"
+                />
+              </div>
+              <p>
+                <span className="text-gray-500">Alamat:</span> {lead.address}
+              </p>
+              <p>
+                <span className="text-gray-500">Metode:</span>{" "}
+                {lead.paymentMethod}
+              </p>
+              <p>
+                <span className="text-gray-500">Produk:</span>{" "}
+                {lead.productTitle}
+              </p>
+              <p>
+                <span className="text-gray-500">Status:</span>{" "}
+                <span className="capitalize font-semibold">{lead.status}</span>
+              </p>
+              <p>
+                <span className="text-gray-500">Resi Check:</span>{" "}
+                <span className="capitalize font-semibold">
+                  {lead.resiCheck || "not"}
+                </span>
+              </p>
+              <p className="text-xs text-gray-400">
+                Masuk:{" "}
+                {new Date(lead.createdAt.seconds * 1000).toLocaleString(
+                  "id-ID"
+                )}
+              </p>
             </div>
 
             {/* Input Cost Product */}
             <div className="mt-4">
-              <label className="block text-gray-500 text-xs mb-1">Cost Product:</label>
+              <label className="block text-gray-500 text-xs mb-1">
+                Cost Product:
+              </label>
               <input
                 type="number"
                 value={costProductValue}
@@ -176,26 +241,31 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
                 className="border rounded px-2 py-1 text-sm w-full"
                 placeholder="Masukkan cost product"
               />
-              <button
-                onClick={handleCostProductChange}
-                disabled={updating}
-                className="bg-black text-white text-xs font-semibold px-3 py-1 rounded-md hover:bg-gray-800 transition mt-2"
-              >
-                {updating ? "⏳ Updating..." : "💾 Simpan Cost Product"}
-              </button>
             </div>
 
+            <button
+              onClick={handleUpdateAll}
+              disabled={updating}
+              className="bg-black text-white text-xs font-semibold px-3 py-1 rounded-md hover:bg-gray-800 transition mt-2"
+            >
+              {updating ? "⏳ Updating..." : "💾 Simpan Update Terbaru"}
+            </button>
             {/* Status Buttons */}
             <div className="flex flex-wrap gap-2 mt-4">
               {statusOptions.map((status) => {
-                const isActive = lead.status === (status === "none" ? "" : status);
+                const isActive =
+                  lead.status === (status === "none" ? "" : status);
                 return (
                   <button
                     key={status}
                     disabled={updating}
-                    onClick={() => handleStatusChange(status === "none" ? "" : status)}
+                    onClick={() =>
+                      handleStatusChange(status === "none" ? "" : status)
+                    }
                     className={`px-3 py-1 text-xs font-bold rounded-full transition border ${
-                      isActive ? "bg-black text-white" : "border-gray-300 text-gray-700 hover:bg-gray-100"
+                      isActive
+                        ? "bg-black text-white"
+                        : "border-gray-300 text-gray-700 hover:bg-gray-100"
                     }`}
                   >
                     {status === "pending"
@@ -220,7 +290,9 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
                     disabled={updating}
                     onClick={() => handleResiCheckChange(status)}
                     className={`px-3 py-1 text-xs font-bold rounded-full transition border ${
-                      isActive ? "bg-black text-white" : "border-gray-300 text-gray-700 hover:bg-gray-100"
+                      isActive
+                        ? "bg-black text-white"
+                        : "border-gray-300 text-gray-700 hover:bg-gray-100"
                     }`}
                   >
                     {status === "done" ? "📦 Resi Dicek" : "🕓 Belum Dicek"}
@@ -232,17 +304,25 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
             {/* Copy & Delete */}
             <div className="flex justify-between items-center mt-6">
               <div className="space-x-2">
-                <button onClick={handleCopy} className="bg-black text-white text-xs font-semibold px-3 py-1 rounded-md hover:bg-gray-800 transition">
+                <button
+                  onClick={handleCopy}
+                  className="bg-black text-white text-xs font-semibold px-3 py-1 rounded-md hover:bg-gray-800 transition"
+                >
                   {copiedId === lead.id ? "✅ Disalin!" : "📋 Salin Total"}
                 </button>
-                <button onClick={handleCopyAddress} className="bg-black text-white text-xs font-semibold px-3 py-1 rounded-md hover:bg-gray-800 transition">
+                <button
+                  onClick={handleCopyAddress}
+                  className="bg-black text-white text-xs font-semibold px-3 py-1 rounded-md hover:bg-gray-800 transition"
+                >
                   {copiedId === lead.id ? "✅ Disalin!" : "📋 Salin Alamat"}
                 </button>
               </div>
               <div>
                 <button
                   onClick={async () => {
-                    const konfirmasi = window.confirm(`Hapus data atas nama ${lead.name}?`);
+                    const konfirmasi = window.confirm(
+                      `Hapus data atas nama ${lead.name}?`
+                    );
                     if (konfirmasi) {
                       await deleteDoc(doc(db, "leads", lead.id));
                       setShowModal(false);
