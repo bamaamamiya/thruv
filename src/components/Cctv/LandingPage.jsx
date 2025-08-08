@@ -5,7 +5,7 @@ import Floting from "../set/Floting";
 
 const CctvBohlam = () => {
   const productImages = ["images/cctv/3.webp", "images/cctv/4.webp"];
-
+	
   const testimonies = [
     "images/cctv/testi1.webp",
     "images/cctv/testi2.webp",
@@ -91,7 +91,6 @@ const CctvBohlam = () => {
     "Support night vision, jadi tetap bisa ngawasin rumah meskipun malam atau lampu mati.",
   ];
 
-	console.log(funnelProduct , "di lp")
 
   return (
     <div>
