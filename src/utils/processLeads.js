@@ -1,8 +1,11 @@
 import {
-  format,
+   format,
   isWithinInterval,
   differenceInDays,
   startOfWeek,
+  endOfWeek,
+  subWeeks,
+  startOfMonth,
 } from "date-fns";
 
 // Filter leads berdasarkan rentang tanggal
@@ -18,37 +21,27 @@ export const filterLeadsByDate = (leads, start, end) => {
 export const calculateSummary = (leads) => {
   const completed = leads.filter((lead) => lead.status === "complete");
   const pending = leads.filter((lead) => lead.status === "pending");
-  // const costProduct = leads.filter((lead) => lead.status === "costProduct");
 
-  const totalSales = completed.reduce(
-    (sum, lead) => sum + (lead.price || 0),
-    0
-  );
+  const totalSales = completed.reduce((sum, lead) => sum + (lead.price || 0), 0);
   const totalPendingValue = pending.reduce(
     (sum, lead) => sum + (lead.price || 0),
     0
   );
-  // ✅ PERBAIKAN: totalCost hanya dihitung dari lead yang sudah "complete"
   const totalCost = completed.reduce(
     (sum, lead) => sum + (lead.costProduct || 0),
     0
   );
-
-  // ✅ BARU: Hitung biaya khusus untuk lead yang "pending"
   const pendingCost = pending.reduce(
     (sum, lead) => sum + (lead.costProduct || 0),
     0
   );
-
-	// ✅ BARU: total biaya dari SEMUA lead
   const totalAllTimeCost = leads.reduce(
     (sum, lead) => sum + (lead.costProduct || 0),
     0
   );
 
-  const pendingProfit = totalPendingValue - pendingCost;
-
   const profit = totalSales - totalCost;
+  const pendingProfit = totalPendingValue - pendingCost;
 
   return {
     totalOrders: leads.length,
@@ -58,8 +51,8 @@ export const calculateSummary = (leads) => {
     totalPendingValue,
     totalCost,
     profit,
-    pendingCost, 
-		totalAllTimeCost,
+    pendingCost,
+    totalAllTimeCost,
   };
 };
 
@@ -67,7 +60,7 @@ export const calculateSummary = (leads) => {
 export const generateChartData = (leads, selectedFilter, start, end) => {
   if (selectedFilter === "today" || selectedFilter === "yesterday") {
     return Array.from({ length: 24 }, (_, i) => {
-      const hour = i; // 0 to 23
+      const hour = i;
       const label = `${hour.toString().padStart(2, "0")}:00`;
       const complete = leads.filter((lead) => {
         const time = new Date(lead.createdAt.seconds * 1000);
@@ -95,10 +88,39 @@ export const generateChartData = (leads, selectedFilter, start, end) => {
       const key = format(time, "dd MMM");
 
       if (map[key]) {
-        if (lead.status === "complete") {
-          map[key].complete += 1;
-        } else if (lead.status === "pending") {
-          map[key].pending += 1;
+        if (lead.status === "complete") map[key].complete += 1;
+        else if (lead.status === "pending") map[key].pending += 1;
+      }
+    });
+
+    return Object.entries(map).map(([label, value]) => ({
+      label,
+      ...value,
+    }));
+  }
+
+  if (selectedFilter === "lastWeek") {
+    const lastWeekDate = subWeeks(new Date(), 1);
+    const startOfLastWeek = startOfWeek(lastWeekDate, { weekStartsOn: 1 });
+    const endOfLastWeek = endOfWeek(lastWeekDate, { weekStartsOn: 1 });
+
+    const map = {};
+    for (
+      let dt = new Date(startOfLastWeek);
+      dt <= endOfLastWeek;
+      dt.setDate(dt.getDate() + 1)
+    ) {
+      const key = format(new Date(dt), "dd MMM");
+      map[key] = { complete: 0, pending: 0 };
+    }
+
+    leads.forEach((lead) => {
+      const time = new Date(lead.createdAt.seconds * 1000);
+      if (isWithinInterval(time, { start: startOfLastWeek, end: endOfLastWeek })) {
+        const key = format(time, "dd MMM");
+        if (map[key]) {
+          if (lead.status === "complete") map[key].complete += 1;
+          else if (lead.status === "pending") map[key].pending += 1;
         }
       }
     });
@@ -110,32 +132,37 @@ export const generateChartData = (leads, selectedFilter, start, end) => {
   }
 
   if (selectedFilter === "month" || selectedFilter === "lastMonth") {
-    const weekMap = {
-      "Week 1": { complete: 0, pending: 0 },
-      "Week 2": { complete: 0, pending: 0 },
-      "Week 3": { complete: 0, pending: 0 },
-      "Week 4": { complete: 0, pending: 0 },
-    };
+  const weekMap = {};
 
-    leads.forEach((lead) => {
-      const time = new Date(lead.createdAt.seconds * 1000);
-      const weekOfMonth = Math.ceil(time.getDate() / 7);
-      const label = `Week ${weekOfMonth}`;
+  const monthStart = startOfMonth(start); // pakai start dari range filter
 
-      if (weekMap[label]) {
-        if (lead.status === "complete") {
-          weekMap[label].complete += 1;
-        } else if (lead.status === "pending") {
-          weekMap[label].pending += 1;
-        }
-      }
-    });
+  leads.forEach((lead) => {
+    const time = new Date(lead.createdAt.seconds * 1000);
+    // Hitung awal minggu dari tanggal lead (Senin sebagai awal minggu)
+    const startWeek = startOfWeek(time, { weekStartsOn: 1 });
+    // Hitung berapa hari selisih dari awal bulan ke awal minggu lead
+    const diffDays = differenceInDays(startWeek, monthStart);
+    // Tentukan nomor minggu: floor(difference / 7) + 1
+    const weekNumber = Math.floor(diffDays / 7) + 1;
+    const label = `Week ${weekNumber}`;
 
-    return Object.entries(weekMap).map(([label, value]) => ({
-      label,
-      ...value,
-    }));
-  }
+    if (!weekMap[label]) {
+      weekMap[label] = { complete: 0, pending: 0 };
+    }
+
+    if (lead.status === "complete") {
+      weekMap[label].complete += 1;
+    } else if (lead.status === "pending") {
+      weekMap[label].pending += 1;
+    }
+  });
+
+  return Object.entries(weekMap).map(([label, value]) => ({
+    label,
+    ...value,
+  }));
+}
+
 
   if (selectedFilter === "allTime") {
     const map = {};
@@ -144,15 +171,10 @@ export const generateChartData = (leads, selectedFilter, start, end) => {
       const time = new Date(lead.createdAt.seconds * 1000);
       const key = format(time, "MMM yyyy");
 
-      if (!map[key]) {
-        map[key] = { complete: 0, pending: 0 };
-      }
+      if (!map[key]) map[key] = { complete: 0, pending: 0 };
 
-      if (lead.status === "complete") {
-        map[key].complete += 1;
-      } else if (lead.status === "pending") {
-        map[key].pending += 1;
-      }
+      if (lead.status === "complete") map[key].complete += 1;
+      else if (lead.status === "pending") map[key].pending += 1;
     });
 
     return Object.entries(map).map(([label, value]) => ({
@@ -161,11 +183,9 @@ export const generateChartData = (leads, selectedFilter, start, end) => {
     }));
   }
 
-  // ✅ CUSTOM FILTER
   if (selectedFilter === "custom") {
     const dayDiff = differenceInDays(end, start);
 
-    // Jika kurang dari atau sama dengan 31 hari → tampilkan per hari
     if (dayDiff <= 31) {
       const map = {};
       for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
@@ -178,11 +198,8 @@ export const generateChartData = (leads, selectedFilter, start, end) => {
         const key = format(time, "dd MMM");
 
         if (map[key]) {
-          if (lead.status === "complete") {
-            map[key].complete += 1;
-          } else if (lead.status === "pending") {
-            map[key].pending += 1;
-          }
+          if (lead.status === "complete") map[key].complete += 1;
+          else if (lead.status === "pending") map[key].pending += 1;
         }
       });
 
@@ -191,25 +208,19 @@ export const generateChartData = (leads, selectedFilter, start, end) => {
         ...value,
       }));
     } else {
-      // Jika lebih dari 31 hari → group per minggu
       const weekMap = {};
 
       leads.forEach((lead) => {
         const time = new Date(lead.createdAt.seconds * 1000);
         if (!isWithinInterval(time, { start, end })) return;
 
-        const startWeek = startOfWeek(time, { weekStartsOn: 1 }); // Monday as first day
+        const startWeek = startOfWeek(time, { weekStartsOn: 1 });
         const key = format(startWeek, "'Week of' dd MMM");
 
-        if (!weekMap[key]) {
-          weekMap[key] = { complete: 0, pending: 0 };
-        }
+        if (!weekMap[key]) weekMap[key] = { complete: 0, pending: 0 };
 
-        if (lead.status === "complete") {
-          weekMap[key].complete += 1;
-        } else if (lead.status === "pending") {
-          weekMap[key].pending += 1;
-        }
+        if (lead.status === "complete") weekMap[key].complete += 1;
+        else if (lead.status === "pending") weekMap[key].pending += 1;
       });
 
       return Object.entries(weekMap).map(([label, value]) => ({

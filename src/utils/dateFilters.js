@@ -1,4 +1,3 @@
-// dateFilters.js
 import {
   startOfDay,
   endOfDay,
@@ -8,6 +7,7 @@ import {
   startOfMonth,
   endOfMonth,
   subMonths,
+  subWeeks, // <-- pastikan ini ada
 } from "date-fns";
 import { isValid } from "date-fns";
 
@@ -33,7 +33,23 @@ export const FILTER_OPTIONS = [
   {
     key: "week",
     label: "This Week",
-    getRange: () => [startOfWeek(new Date()), endOfWeek(new Date())],
+    getRange: () => [
+      startOfWeek(new Date(), { weekStartsOn: 1 }),
+      endOfWeek(new Date(), { weekStartsOn: 1 }),
+    ],
+  },
+  {
+    key: "lastWeek",
+    label: "Last Week",
+    getRange: () => {
+      console.log("Running lastWeek getRange");
+      const lastWeekDate = subWeeks(new Date(), 1);
+      console.log("lastWeekDate:", lastWeekDate);
+      return [
+        startOfWeek(lastWeekDate, { weekStartsOn: 1 }),
+        endOfWeek(lastWeekDate, { weekStartsOn: 1 }),
+      ];
+    },
   },
   {
     key: "month",

@@ -22,15 +22,22 @@ export const getPreviousRange = (selectedFilter, currentStart, currentEnd) => {
 
     case "week":
       const prevWeek = subWeeks(currentStart, 1);
-      return [startOfWeek(prevWeek), endOfWeek(prevWeek)];
+      return [
+        startOfWeek(prevWeek, { weekStartsOn: 1 }),
+        endOfWeek(prevWeek, { weekStartsOn: 1 }),
+      ];
+
+    case "lastWeek":
+      const prevLastWeek = subWeeks(currentStart, 1);
+      return [
+        startOfWeek(prevLastWeek, { weekStartsOn: 1 }),
+        endOfWeek(prevLastWeek, { weekStartsOn: 1 }),
+      ];
 
     case "month":
+    case "lastMonth":
       const prevMonth = subMonths(currentStart, 1);
       return [startOfMonth(prevMonth), endOfMonth(prevMonth)];
-
-    case "lastMonth":
-      const twoMonthsAgo = subMonths(currentStart, 1);
-      return [startOfMonth(twoMonthsAgo), endOfMonth(twoMonthsAgo)];
 
     case "custom":
       const diff = differenceInCalendarDays(currentEnd, currentStart);

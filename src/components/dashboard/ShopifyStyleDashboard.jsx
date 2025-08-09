@@ -113,7 +113,7 @@ const ShopifyStyleDashboard = () => {
           <ProfitTotal
             totalSales={totalSales}
             totalPendingValue={totalPendingValue}
-            totalCost={totalAllTimeCost} // ✅ Kirimkan totalAllTimeCost
+            totalCost={totalCost} 
           />
           <ProfitSummary totalSales={totalSales} totalCost={totalCost} />
 
