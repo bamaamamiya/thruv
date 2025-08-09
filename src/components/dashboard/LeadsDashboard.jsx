@@ -17,6 +17,7 @@ const LeadsDashboard = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState("Semua");
   const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedLeads, setSelectedLeads] = useState([]); // ✅ tambahan
 
   useEffect(() => {
     const q = query(collection(db, "leads"), orderBy("createdAt", "desc"));
@@ -53,6 +54,116 @@ const LeadsDashboard = () => {
 
   const statusOptions = ["Semua", "pending", "complete", "cancel"];
 
+  // ✅ Handler select/deselect
+  const handleSelectLead = (lead, isChecked) => {
+    setSelectedLeads((prev) => {
+      if (isChecked) {
+        return [...prev, lead];
+      } else {
+        return prev.filter((l) => l.id !== lead.id);
+      }
+    });
+  };
+
+  // ✅ Export CSV
+  // const exportToCSV = () => {
+  //   if (selectedLeads.length === 0) {
+  //     alert("Pilih minimal 1 lead untuk export!");
+  //     return;
+  //   }
+  //   const headers = [
+  //     "Nama Penerima",
+  //     "Alamat Penerima",
+  //     "Nomor Telepon",
+  //     "Harga Barang (Jika NON-COD)",
+  //     "Nilai COD (Jika COD)",
+  //     "Isi Paketan (Nama Produk)",
+  //     "Berat",
+  //     "Kode Pos",
+  //   ];
+
+  //   const rows = selectedLeads.map((l) => {
+  //     const paymentMethod = (l.paymentMethod || "").toLowerCase();
+  //     return [
+  //       l.name || "",
+  //       (l.address || "").replace(/,/g, ""), // hapus semua koma
+  //       l.whatsapp || "",
+  //       paymentMethod === "non-cod" ? l.price ?? "" : "",
+  //       paymentMethod === "cod" ? l.price ?? "" : "",
+  //       l.productTitle || "",
+  //       "1",
+  //       l.postalCode ?? "", // tetap string walau null/undefined
+  //     ];
+  //   });
+
+  //   const csvContent =
+  //     "data:text/csv;charset=utf-8," +
+  //     [headers, ...rows]
+  //       .map((row) => row.map((val) => val ?? "").join(",")) // paksa semua kolom ada
+  //       .join("\n");
+
+  //   const encodedUri = encodeURI(csvContent);
+  //   const link = document.createElement("a");
+  //   link.setAttribute("href", encodedUri);
+  //   link.setAttribute("download", "leads.csv");
+  //   document.body.appendChild(link);
+  //   link.click();
+  //   document.body.removeChild(link);
+
+  const exportToCSV = () => {
+    if (selectedLeads.length === 0) {
+      alert("Pilih minimal 1 lead untuk export!");
+      return;
+    }
+
+    const headers = [
+      "Nama Penerima",
+      "Alamat Penerima",
+      "Nomor Telepon",
+      "Harga Barang (Jika NON-COD)",
+      "Nilai COD (Jika COD)",
+      "Isi Paketan (Nama Produk)",
+      "Berat",
+      "Kode Pos",
+      "Customer Service",
+    ];
+
+    const rows = selectedLeads.map((l) => {
+      const paymentMethod = (l.paymentMethod || "").toLowerCase();
+      const clean = (val) =>
+        (val || "")
+          .toString()
+          .replace(/,/g, " ") // hapus koma
+          .replace(/\r?\n|\r/g, " ") // hapus enter
+          .trim();
+
+      return [
+        clean(l.name),
+        `"${clean(l.address)}"`, // diapit tanda kutip
+        clean(l.whatsapp),
+        paymentMethod === "non-cod" ? l.price ?? "" : "",
+        paymentMethod === "cod" ? l.price ?? "" : "",
+        clean(l.productTitle),
+        "1",
+        l.postalCode ?? "",
+        l.customerService || "", // kolom CS
+      ];
+    });
+
+    // BOM UTF-8 supaya Excel Indonesia baca normal
+    const csvContent =
+      "\uFEFF" + [headers, ...rows].map((row) => row.join(",")).join("\n");
+
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.setAttribute("href", url);
+    link.setAttribute("download", `leads_${Date.now()}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="font-sans">
       <Navbar />
@@ -78,15 +189,23 @@ const LeadsDashboard = () => {
               className="bg-white border border-gray-300 text-gray-800 px-4 py-2 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-[200px]"
             >
               {statusOptions.map((status) => (
-                <option key={status} value={status}>
+                <option key={status} value={status} className="capitalize">
                   {status}
                 </option>
               ))}
             </select>
+
+            <button
+              onClick={exportToCSV}
+              className="bg-green-600 text-white px-4 py-2 rounded-md shadow hover:bg-green-700"
+            >
+              Export CSV
+            </button>
           </div>
 
           {!isMobile && (
-            <div className="grid grid-cols-7 border-b border-gray-200 py-3 text-sm font-medium text-gray-500 px-2">
+            <div className="grid grid-cols-8 border-b border-gray-200 py-3 text-sm font-medium text-gray-500 px-2">
+              <span>Select</span>
               <span>Tanggal</span>
               <span>Nama</span>
               <span>WhatsApp</span>
@@ -137,6 +256,7 @@ const LeadsDashboard = () => {
                       lead={lead}
                       copiedId={copiedId}
                       setCopiedId={setCopiedId}
+                      onSelect={handleSelectLead}
                     />
                   )}
                 </React.Fragment>

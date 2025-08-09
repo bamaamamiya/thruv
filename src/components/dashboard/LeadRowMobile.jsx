@@ -13,10 +13,19 @@ const formatHargaSingkat = (harga) => {
 const LeadRowMobile = ({ lead, copiedId, setCopiedId }) => {
   const [showModal, setShowModal] = useState(false);
   const [updating, setUpdating] = useState(false);
-  const [costProductValue, setCostProductValue] = useState(
-    lead.costProduct || ""
-  );
-  const [priceValue, setPriceValue] = useState(lead.price || "");
+
+  // Form state for editing
+  const [formData, setFormData] = useState({
+    costProduct: lead.costProduct || "",
+    price: lead.price || "",
+    status: lead.status || "",
+    resiCheck: lead.resiCheck || "not",
+  });
+
+  const handleChange = (field, value) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
   const handleCopyAddress = () => {
     const prompt = `[PROVINSI], [KABUPATEN/KOTA], [KECAMATAN], [DESA/KELURAHAN] dan rapikan alamat lengkap, dan kecamatan terpisah.\n\nAlamat mentah: ${lead.address}`;
     navigator.clipboard.writeText(prompt).then(() => {
@@ -25,14 +34,14 @@ const LeadRowMobile = ({ lead, copiedId, setCopiedId }) => {
     });
   };
 
-  const handleCopy = () => {
+  const handleCopyOrder = () => {
     const pesan = `Terima kasih sudah melakukan pemesanan 🙏  
 Berikut detail pesanan Kakak:
 
 Nama Produk: ${lead.productTitle}  
 Harga Produk: ${formatHargaSingkat(lead.price)}  
-Ongkir: 
-Total Pembayaran: 
+Ongkir:  
+Total Pembayaran:  
 
 Nama: ${lead.name}  
 Alamat Lengkap: ${lead.address}
@@ -47,66 +56,45 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
     });
   };
 
-  const handleStatusChange = async (newStatus) => {
-    if (newStatus === lead.status) return;
-    setUpdating(true);
-    try {
-      await updateDoc(doc(db, "leads", lead.id), { status: newStatus });
-    } catch (err) {
-      console.error("Gagal update status:", err);
-      alert("Gagal update status.");
-    } finally {
-      setUpdating(false);
-    }
-  };
-
-  const handleResiCheckChange = async (newResiCheck) => {
-    if (newResiCheck === lead.resiCheck) return;
-    setUpdating(true);
-    try {
-      await updateDoc(doc(db, "leads", lead.id), { resiCheck: newResiCheck });
-    } catch (err) {
-      console.error("Gagal update resiCheck:", err);
-      alert("Gagal update status resi.");
-    } finally {
-      setUpdating(false);
-    }
-  };
-
-  // Gabungkan semua logika update ke dalam satu fungsi
-  const handleUpdateAll = async () => {
-    // Ambil nilai dari state, misalnya costProductValue dan priceValue
-    // Anda harus memastikan state ini selalu merefleksikan nilai di input
-    if (
-      costProductValue === "" ||
-      isNaN(costProductValue) ||
-      priceValue === "" ||
-      isNaN(priceValue)
-    ) {
-      alert("Harga dan biaya produk tidak boleh kosong dan harus angka.");
+  const handleSave = async () => {
+    if (!formData.price || !formData.costProduct) {
+      alert("Harga dan biaya produk tidak boleh kosong.");
       return;
     }
-
     setUpdating(true);
     try {
-      // Buat satu objek data untuk diupdate
-      const updatedData = {
-        costProduct: Number(costProductValue),
-        price: Number(priceValue),
-      };
-
-      // Kirim satu kali update ke Firestore
-      await updateDoc(doc(db, "leads", lead.id), updatedData);
+      await updateDoc(doc(db, "leads", lead.id), {
+        price: Number(formData.price),
+        costProduct: Number(formData.costProduct),
+        status: formData.status,
+        resiCheck: formData.resiCheck,
+      });
+      setShowModal(false);
     } catch (err) {
-      console.error("Gagal update data:", err);
-      alert("Gagal update data.");
+      console.error("Gagal update:", err);
+      alert("Gagal menyimpan data.");
     } finally {
       setUpdating(false);
     }
   };
 
-  const statusOptions = ["pending", "complete", "cancel", "none"];
-  const resiOptions = ["not", "done"];
+  const handleDelete = async () => {
+    if (window.confirm(`Hapus data atas nama ${lead.name}?`)) {
+      await deleteDoc(doc(db, "leads", lead.id));
+      setShowModal(false);
+    }
+  };
+
+  const statusOptions = [
+    { value: "", label: "🧼 None" },
+    { value: "pending", label: "🕓 Pending" },
+    { value: "complete", label: "✅ Complete" },
+    { value: "cancel", label: "❌ Cancel" },
+  ];
+  const resiOptions = [
+    { value: "not", label: "🕓 Belum Dicek" },
+    { value: "done", label: "📦 Resi Dicek" },
+  ];
 
   return (
     <>
@@ -116,13 +104,10 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
       >
         <div className="flex justify-between text-sm mb-2 text-gray-400">
           <span>
-            {new Date(lead.createdAt.seconds * 1000).toLocaleDateString(
-              "id-ID",
-              {
-                day: "2-digit",
-                month: "short",
-              }
-            )}
+            {new Date(lead.createdAt.seconds * 1000).toLocaleDateString("id-ID", {
+              day: "2-digit",
+              month: "short",
+            })}
           </span>
           <span className="text-emerald-500 font-medium">
             {lead.paymentMethod}
@@ -156,7 +141,6 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
         </div>
       </div>
 
-      {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center px-4">
           <div className="bg-white w-full max-w-md p-6 rounded-xl shadow-xl relative text-sm text-gray-800">
@@ -170,164 +154,96 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
             <h2 className="text-xl font-semibold mb-4">📄 Detail Order</h2>
 
             <div className="space-y-2">
-              <p>
-                <span className="text-gray-500">Nama:</span> {lead.name}
-              </p>
+              <p><span className="text-gray-500">Nama:</span> {lead.name}</p>
               <p>
                 <span className="text-gray-500">WA:</span>{" "}
-                <a
-                  href={`https://wa.me/${lead.whatsapp}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline"
-                >
+                <a href={`https://wa.me/${lead.whatsapp}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                   {lead.whatsapp}
                 </a>
               </p>
-              <p>
-                <span className="text-gray-500">Harga:</span>{" "}
-                {formatHargaSingkat(lead.price)}
-              </p>
-              <div className="mt-4">
-                <label className="block text-gray-500 text-xs mb-1">
-                  Harga:
-                </label>
+              <p><span className="text-gray-500">Alamat:</span> {lead.address}</p>
+              <p><span className="text-gray-500">Produk:</span> {lead.productTitle}</p>
+            </div>
+
+            <div className="mt-4 space-y-3">
+              <div>
+                <label className="block text-gray-500 text-xs mb-1">Harga:</label>
                 <input
                   type="number"
-                  value={priceValue}
-                  onChange={(e) => setPriceValue(e.target.value)}
-                  className="border rounded px-2 py-1 text-sm w-full"
-                  placeholder="Masukkan harga terbaru"
+                  value={formData.price}
+                  onChange={(e) => handleChange("price", e.target.value)}
+                  className="border rounded px-2 py-2 text-sm w-full"
                 />
               </div>
-              <p>
-                <span className="text-gray-500">Alamat:</span> {lead.address}
-              </p>
-              <p>
-                <span className="text-gray-500">Metode:</span>{" "}
-                {lead.paymentMethod}
-              </p>
-              <p>
-                <span className="text-gray-500">Produk:</span>{" "}
-                {lead.productTitle}
-              </p>
-              <p>
-                <span className="text-gray-500">Status:</span>{" "}
-                <span className="capitalize font-semibold">{lead.status}</span>
-              </p>
-              <p>
-                <span className="text-gray-500">Resi Check:</span>{" "}
-                <span className="capitalize font-semibold">
-                  {lead.resiCheck || "not"}
-                </span>
-              </p>
-              <p className="text-xs text-gray-400">
-                Masuk:{" "}
-                {new Date(lead.createdAt.seconds * 1000).toLocaleString(
-                  "id-ID"
-                )}
-              </p>
-            </div>
-
-            {/* Input Cost Product */}
-            <div className="mt-4">
-              <label className="block text-gray-500 text-xs mb-1">
-                Cost Product:
-              </label>
-              <input
-                type="number"
-                value={costProductValue}
-                onChange={(e) => setCostProductValue(e.target.value)}
-                className="border rounded px-2 py-1 text-sm w-full"
-                placeholder="Masukkan cost product"
-              />
-            </div>
-
-            <button
-              onClick={handleUpdateAll}
-              disabled={updating}
-              className="bg-black text-white text-xs font-semibold px-3 py-1 rounded-md hover:bg-gray-800 transition mt-2"
-            >
-              {updating ? "⏳ Updating..." : "💾 Simpan Update Terbaru"}
-            </button>
-            {/* Status Buttons */}
-            <div className="flex flex-wrap gap-2 mt-4">
-              {statusOptions.map((status) => {
-                const isActive =
-                  lead.status === (status === "none" ? "" : status);
-                return (
-                  <button
-                    key={status}
-                    disabled={updating}
-                    onClick={() =>
-                      handleStatusChange(status === "none" ? "" : status)
-                    }
-                    className={`px-3 py-1 text-xs font-bold rounded-full transition border ${
-                      isActive
-                        ? "bg-black text-white"
-                        : "border-gray-300 text-gray-700 hover:bg-gray-100"
-                    }`}
-                  >
-                    {status === "pending"
-                      ? "🕓 Pending"
-                      : status === "complete"
-                      ? "✅ Complete"
-                      : status === "cancel"
-                      ? "❌ Cancel"
-                      : "🧼 None"}
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Resi Check Buttons */}
-            <div className="flex flex-wrap gap-2 mt-3">
-              {resiOptions.map((status) => {
-                const isActive = (lead.resiCheck || "not") === status;
-                return (
-                  <button
-                    key={status}
-                    disabled={updating}
-                    onClick={() => handleResiCheckChange(status)}
-                    className={`px-3 py-1 text-xs font-bold rounded-full transition border ${
-                      isActive
-                        ? "bg-black text-white"
-                        : "border-gray-300 text-gray-700 hover:bg-gray-100"
-                    }`}
-                  >
-                    {status === "done" ? "📦 Resi Dicek" : "🕓 Belum Dicek"}
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Copy & Delete */}
-            <div className="flex justify-between items-center mt-6">
-              <div className="space-x-2">
-                <button
-                  onClick={handleCopy}
-                  className="bg-black text-white text-xs font-semibold px-3 py-1 rounded-md hover:bg-gray-800 transition"
-                >
-                  {copiedId === lead.id ? "✅ Disalin!" : "📋 Salin Total"}
-                </button>
-                <button
-                  onClick={handleCopyAddress}
-                  className="bg-black text-white text-xs font-semibold px-3 py-1 rounded-md hover:bg-gray-800 transition"
-                >
-                  {copiedId === lead.id ? "✅ Disalin!" : "📋 Salin Alamat"}
-                </button>
-              </div>
               <div>
+                <label className="block text-gray-500 text-xs mb-1">Cost Product:</label>
+                <input
+                  type="number"
+                  value={formData.costProduct}
+                  onChange={(e) => handleChange("costProduct", e.target.value)}
+                  className="border rounded px-2 py-2 text-sm w-full"
+                />
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {statusOptions.map((s) => (
+                  <button
+                    key={s.value}
+                    disabled={updating}
+                    onClick={() => handleChange("status", s.value)}
+                    className={`px-3 py-1 text-xs font-bold rounded-full border ${
+                      formData.status === s.value
+                        ? "bg-black text-white"
+                        : "border-gray-300 text-gray-700 hover:bg-gray-100"
+                    }`}
+                  >
+                    {s.label}
+                  </button>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {resiOptions.map((r) => (
+                  <button
+                    key={r.value}
+                    disabled={updating}
+                    onClick={() => handleChange("resiCheck", r.value)}
+                    className={`px-3 py-1 text-xs font-bold rounded-full border ${
+                      formData.resiCheck === r.value
+                        ? "bg-black text-white"
+                        : "border-gray-300 text-gray-700 hover:bg-gray-100"
+                    }`}
+                  >
+                    {r.label}
+                  </button>
+                ))}
+              </div>
+
+              <button
+                onClick={handleSave}
+                disabled={updating}
+                className="w-full bg-black text-white text-xs font-semibold px-3 py-2 rounded-md hover:bg-gray-800 transition"
+              >
+                {updating ? "⏳ Menyimpan..." : "💾 Simpan Perubahan"}
+              </button>
+
+              <div className="flex justify-between items-center mt-4">
+                <div className="space-x-2">
+                  <button
+                    onClick={handleCopyOrder}
+                    className="bg-black text-white text-xs font-semibold px-3 py-1 rounded-md hover:bg-gray-800"
+                  >
+                    {copiedId === lead.id ? "✅ Disalin!" : "📋 Salin Total"}
+                  </button>
+                  <button
+                    onClick={handleCopyAddress}
+                    className="bg-black text-white text-xs font-semibold px-3 py-1 rounded-md hover:bg-gray-800"
+                  >
+                    {copiedId === lead.id ? "✅ Disalin!" : "📋 Salin Alamat"}
+                  </button>
+                </div>
                 <button
-                  onClick={async () => {
-                    const konfirmasi = window.confirm(
-                      `Hapus data atas nama ${lead.name}?`
-                    );
-                    if (konfirmasi) {
-                      await deleteDoc(doc(db, "leads", lead.id));
-                      setShowModal(false);
-                    }
-                  }}
+                  onClick={handleDelete}
                   className="text-red-500 hover:text-red-600 text-sm flex"
                 >
                   🗑️ Hapus
