@@ -66,50 +66,6 @@ const LeadsDashboard = () => {
   };
 
   // ✅ Export CSV
-  // const exportToCSV = () => {
-  //   if (selectedLeads.length === 0) {
-  //     alert("Pilih minimal 1 lead untuk export!");
-  //     return;
-  //   }
-  //   const headers = [
-  //     "Nama Penerima",
-  //     "Alamat Penerima",
-  //     "Nomor Telepon",
-  //     "Harga Barang (Jika NON-COD)",
-  //     "Nilai COD (Jika COD)",
-  //     "Isi Paketan (Nama Produk)",
-  //     "Berat",
-  //     "Kode Pos",
-  //   ];
-
-  //   const rows = selectedLeads.map((l) => {
-  //     const paymentMethod = (l.paymentMethod || "").toLowerCase();
-  //     return [
-  //       l.name || "",
-  //       (l.address || "").replace(/,/g, ""), // hapus semua koma
-  //       l.whatsapp || "",
-  //       paymentMethod === "non-cod" ? l.price ?? "" : "",
-  //       paymentMethod === "cod" ? l.price ?? "" : "",
-  //       l.productTitle || "",
-  //       "1",
-  //       l.postalCode ?? "", // tetap string walau null/undefined
-  //     ];
-  //   });
-
-  //   const csvContent =
-  //     "data:text/csv;charset=utf-8," +
-  //     [headers, ...rows]
-  //       .map((row) => row.map((val) => val ?? "").join(",")) // paksa semua kolom ada
-  //       .join("\n");
-
-  //   const encodedUri = encodeURI(csvContent);
-  //   const link = document.createElement("a");
-  //   link.setAttribute("href", encodedUri);
-  //   link.setAttribute("download", "leads.csv");
-  //   document.body.appendChild(link);
-  //   link.click();
-  //   document.body.removeChild(link);
-
   const exportToCSV = () => {
     if (selectedLeads.length === 0) {
       alert("Pilih minimal 1 lead untuk export!");
@@ -125,28 +81,27 @@ const LeadsDashboard = () => {
       "Isi Paketan (Nama Produk)",
       "Berat",
       "Kode Pos",
-      "Customer Service",
     ];
+
+    const clean = (val) =>
+      (val || "")
+        .toString()
+        .replace(/,/g, " ") // hilangkan koma
+        .replace(/\r?\n|\r/g, " ") // hilangkan enter
+        .trim();
 
     const rows = selectedLeads.map((l) => {
       const paymentMethod = (l.paymentMethod || "").toLowerCase();
-      const clean = (val) =>
-        (val || "")
-          .toString()
-          .replace(/,/g, " ") // hapus koma
-          .replace(/\r?\n|\r/g, " ") // hapus enter
-          .trim();
 
       return [
         clean(l.name),
-        `"${clean(l.address)}"`, // diapit tanda kutip
+        `"${clean(l.address)}"`,
         clean(l.whatsapp),
         paymentMethod === "non-cod" ? l.price ?? "" : "",
         paymentMethod === "cod" ? l.price ?? "" : "",
         clean(l.productTitle),
         "1",
         l.postalCode ?? "",
-        l.customerService || "", // kolom CS
       ];
     });
 
@@ -154,11 +109,18 @@ const LeadsDashboard = () => {
     const csvContent =
       "\uFEFF" + [headers, ...rows].map((row) => row.join(",")).join("\n");
 
+    // Tentukan nama file
+    const fileName =
+      selectedLeads.length === 1
+        ? `${clean(selectedLeads[0].name)}.csv`
+        : `${new Date().toISOString().split("T")[0]}.csv`;
+
+    // Download file
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
     const link = document.createElement("a");
     const url = URL.createObjectURL(blob);
     link.setAttribute("href", url);
-    link.setAttribute("download", `leads_${Date.now()}.csv`);
+    link.setAttribute("download", fileName);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -197,7 +159,9 @@ const LeadsDashboard = () => {
 
             <button
               onClick={exportToCSV}
-              className="bg-green-600 text-white px-4 py-2 rounded-md shadow hover:bg-green-700"
+              className="bg-white border border-gray-300 text-gray-800 px-5 py-2.5 rounded-md 
+             hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500 
+             shadow-sm transition-all duration-200 font-medium"
             >
               Export CSV
             </button>

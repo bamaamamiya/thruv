@@ -5,25 +5,24 @@ import Floting from "../set/Floting";
 
 const CctvBohlam = () => {
   const productImages = ["images/cctv/3.webp", "images/cctv/4.webp"];
-	
+
   const testimonies = [
     "images/cctv/testi1.webp",
     "images/cctv/testi2.webp",
     "images/cctv/testi3.webp",
   ];
 
-
   const funnelProduct = {
     title: "Cctv bohlam",
     description: "Product CCTV BOHLAM",
     price: 129000,
-		costProduct:75000,
+    costProduct: 75000,
   };
 
-	// const BonusData = {
-	// 	title:"",
-	// 	bonus: "Fitting & Baut + Vidio Panduan + Gratis COD"
-	// }
+  // const BonusData = {
+  // 	title:"",
+  // 	bonus: "Fitting & Baut + Vidio Panduan + Gratis COD"
+  // }
 
   const bundles = [
     {
@@ -45,34 +44,36 @@ const CctvBohlam = () => {
 
   const faqs = [
     {
-      question: "Aman gak transfer dulu?",
-      answer:
-        "Aman kak, rekening atas nama resmi & kami kasih garansi 7 hari tukar baru. Sudah ratusan customer transfer duluan ✅",
-    },
-    {
       question: "Apakah CCTV ini harus pakai kabel?",
       answer:
-        "Tidak perlu! Cukup dipasang di fitting lampu biasa (E27), tanpa instalasi kabel tambahan.",
+        "Tidak perlu! Cukup pasang di fitting lampu biasa (E27), langsung nyala tanpa instalasi ribet atau biaya teknisi tambahan. Praktis & hemat waktu!",
     },
     {
-      question: "Apakah CCTV ini bisa dipantau dari HP?",
+      question: "Bagaimana cara setting CCTV ini?",
       answer:
-        "Bisa! CCTV ini terhubung ke HP kamu lewat aplikasi, jadi kamu bisa pantau dari mana aja secara real-time.",
+        "Super mudah! Kami sediakan buku panduan + video tutorial lengkap. Tinggal ikuti langkahnya, dalam hitungan menit CCTV siap dipakai.",
     },
     {
-      question: "Apakah kamera bisa muter otomatis?",
+      question: "Apakah CCTV ini bisa dipantau dan dikontrol dari HP?",
       answer:
-        "Ya! Kamera ini punya fitur rotasi 360° yang bisa dikontrol dari HP atau otomatis mengikuti gerakan.",
+        "Bisa! Tinggal buka aplikasi di HP, Anda bisa memantau gambar dan mengontrol arah kamera kapan saja, di mana saja, real-time langsung dari genggaman.",
     },
     {
-      question: "Kalau malam hari, masih kelihatan jelas gak?",
+      question: "Apakah kamera bisa dipantau dari jauh?",
       answer:
-        "Jelas! CCTV ini dilengkapi night vision, jadi tetap bisa merekam dengan jelas meskipun dalam gelap.",
+        "Ya! Selama CCTV terhubung ke WiFi dan HP Anda terkoneksi internet, Anda bisa memantau rumah, toko, atau kantor dari jarak ribuan kilometer sekalipun.",
     },
     {
-      question: "Apakah bisa digunakan di luar ruangan?",
+      question:
+        "Bagaimana kualitas rekaman CCTV ini di kondisi minim cahaya atau malam hari?",
       answer:
-        "Disarankan untuk penggunaan indoor. Jika ingin dipasang outdoor, pastikan terlindung dari hujan dan panas langsung.",
+        "Sangat jelas! Dengan teknologi night vision canggih, kamera ini mampu menangkap gambar tajam dan detail meskipun dalam gelap total, memastikan keamanan Anda 24 jam nonstop.",
+    },
+
+    {
+      question: "Aman gak transfer dulu?",
+      answer:
+        "Aman 100%! Rekening atas nama resmi & bergaransi 7 hari tukar baru jika ada masalah. Ratusan pelanggan sudah transfer duluan dan puas ✅",
     },
   ];
 
@@ -90,8 +91,8 @@ const CctvBohlam = () => {
     "Tanpa kabel & tanpa teknisi — cukup pasang di fitting lampu E27, langsung nyala.",
     "Support night vision, jadi tetap bisa ngawasin rumah meskipun malam atau lampu mati.",
   ];
-	const pixel = 2111198546014232
-	const pixelString = pixel.toString()
+  const pixel = 2111198546014232;
+  const pixelString = pixel.toString();
 
   return (
     <div>
@@ -116,8 +117,8 @@ const CctvBohlam = () => {
         footerImages={["images/fotter2.webp", "images/fotter.webp"]}
         faqs={faqs}
         namaProduct={funnelProduct.title}
-				// bonus={BonusData.bonus}
-				// bonusTitle={BonusData.title}
+        // bonus={BonusData.bonus}
+        // bonusTitle={BonusData.title}
       />
       {/* <Footer
         hargaJual={bundles[0].price}

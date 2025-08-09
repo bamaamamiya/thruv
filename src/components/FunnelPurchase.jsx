@@ -193,7 +193,7 @@ const FunnelPurchase = ({ pixel, product, price, costProduct }) => {
         <div className="mb-4">
           <input
             type="text"
-            placeholder="Contoh: 08xxxxxxxxxx"
+            placeholder="Masukkan No. WhatsApp Aktif"
             value={whatsapp}
             onChange={(e) => setWhatsapp(e.target.value.replace(/\D/g, ""))}
             className="w-full border rounded-lg p-2 focus:outline-none focus:ring"

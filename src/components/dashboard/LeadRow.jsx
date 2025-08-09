@@ -52,42 +52,63 @@ const useDebouncedSave = (value, originalValue, leadId, field) => {
 const LeadRow = ({ lead, copiedId, setCopiedId, onSelect }) => {
   const [showModal, setShowModal] = useState(false);
   const [priceValue, setPriceValue] = useState(lead.price || "");
-  const [costProductValue, setCostProductValue] = useState(lead.costProduct || "");
+  const [costProductValue, setCostProductValue] = useState(
+    lead.costProduct || ""
+  );
   const [isChecked, setIsChecked] = useState(false);
 
-  const savingPrice = useDebouncedSave(priceValue, lead.price, lead.id, "price");
-  const savingCost = useDebouncedSave(costProductValue, lead.costProduct, lead.id, "costProduct");
+  const savingPrice = useDebouncedSave(
+    priceValue,
+    lead.price,
+    lead.id,
+    "price"
+  );
+  const savingCost = useDebouncedSave(
+    costProductValue,
+    lead.costProduct,
+    lead.id,
+    "costProduct"
+  );
 
   const updating = savingPrice || savingCost;
 
   // 🔹 Handle checkbox select
-  const handleCheckboxChange = useCallback((e) => {
-    const checked = e.target.checked;
-    setIsChecked(checked);
-    onSelect?.(lead, checked);
-  }, [lead, onSelect]);
+  const handleCheckboxChange = useCallback(
+    (e) => {
+      const checked = e.target.checked;
+      setIsChecked(checked);
+      onSelect?.(lead, checked);
+    },
+    [lead, onSelect]
+  );
 
   // 🔹 Handle status update
-  const handleStatusChange = useCallback(async (newStatus) => {
-    if (newStatus === lead.status) return;
-    try {
-      await updateDoc(doc(db, "leads", lead.id), { status: newStatus });
-    } catch (err) {
-      console.error("Gagal update status:", err);
-      alert("Gagal update status.");
-    }
-  }, [lead]);
+  const handleStatusChange = useCallback(
+    async (newStatus) => {
+      if (newStatus === lead.status) return;
+      try {
+        await updateDoc(doc(db, "leads", lead.id), { status: newStatus });
+      } catch (err) {
+        console.error("Gagal update status:", err);
+        alert("Gagal update status.");
+      }
+    },
+    [lead]
+  );
 
   // 🔹 Handle resiCheck update
-  const handleResiCheckChange = useCallback(async (newResiCheck) => {
-    if (newResiCheck === lead.resiCheck) return;
-    try {
-      await updateDoc(doc(db, "leads", lead.id), { resiCheck: newResiCheck });
-    } catch (err) {
-      console.error("Gagal update resiCheck:", err);
-      alert("Gagal update status resi.");
-    }
-  }, [lead]);
+  const handleResiCheckChange = useCallback(
+    async (newResiCheck) => {
+      if (newResiCheck === lead.resiCheck) return;
+      try {
+        await updateDoc(doc(db, "leads", lead.id), { resiCheck: newResiCheck });
+      } catch (err) {
+        console.error("Gagal update resiCheck:", err);
+        alert("Gagal update status resi.");
+      }
+    },
+    [lead]
+  );
 
   // 🔹 Copy address
   const handleCopyAddress = () => {
@@ -125,12 +146,12 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
     { value: "pending", label: "🕓 Pending" },
     { value: "complete", label: "✅ Complete" },
     { value: "cancel", label: "❌ Cancel" },
-    { value: "", label: "🧼 None" }
+    { value: "", label: "🧼 None" },
   ];
 
   const resiOptions = [
     { value: "not", label: "🕓 Belum Dicek" },
-    { value: "done", label: "📦 Resi Dicek" }
+    { value: "done", label: "📦 Resi Dicek" },
   ];
 
   return (
@@ -202,10 +223,17 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
             <h2 className="text-lg font-semibold mb-4">📄 Detail Lead</h2>
 
             <div className="space-y-2">
-              <p><strong>Nama:</strong> {lead.name}</p>
+              <p>
+                <strong>Nama:</strong> {lead.name}
+              </p>
               <p>
                 <strong>WA:</strong>{" "}
-                <a href={`https://wa.me/${lead.whatsapp}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                <a
+                  href={`https://wa.me/${lead.whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:underline"
+                >
                   {lead.whatsapp}
                 </a>
               </p>
@@ -221,9 +249,15 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
                 />
               </div>
 
-              <p><strong>Alamat:</strong> {lead.address}</p>
-              <p><strong>Metode:</strong> {lead.paymentMethod}</p>
-              <p><strong>Produk:</strong> {lead.productTitle}</p>
+              <p>
+                <strong>Alamat:</strong> {lead.address}
+              </p>
+              <p>
+                <strong>Metode:</strong> {lead.paymentMethod}
+              </p>
+              <p>
+                <strong>Produk:</strong> {lead.productTitle}
+              </p>
 
               <div>
                 <strong>Cost Product:</strong>
@@ -236,12 +270,19 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
                 />
               </div>
 
-              <p><strong>Resi Check:</strong> {lead.resiCheck || "not"}</p>
+              <p>
+                <strong>Resi Check:</strong> {lead.resiCheck || "not"}
+              </p>
               <p className="text-xs text-gray-500">
-                Masuk: {new Date(lead.createdAt.seconds * 1000).toLocaleString("id-ID")}
+                Masuk:{" "}
+                {new Date(lead.createdAt.seconds * 1000).toLocaleString(
+                  "id-ID"
+                )}
               </p>
 
-              {updating && <p className="text-xs text-gray-500 mt-1">⏳ Menyimpan...</p>}
+              {updating && (
+                <p className="text-xs text-gray-500 mt-1">⏳ Menyimpan...</p>
+              )}
             </div>
 
             {/* Status Buttons */}
