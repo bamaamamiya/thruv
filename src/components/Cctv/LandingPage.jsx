@@ -95,7 +95,7 @@ const CctvBohlam = () => {
   const pixelString = pixel.toString();
 
   return (
-    <div>
+    <div className="bg-white">
       <Headline
         imgHeadLine="images/cctv/1.webp"
         headLine="Pernah kepikiran, rumah ditinggal sebentar aja bisa jadi sasaran maling?"

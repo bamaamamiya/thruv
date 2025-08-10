@@ -103,7 +103,21 @@ const FunnelPurchase = ({ pixel, product, price, costProduct }) => {
         status: "pending",
         resiCheck: "not",
       });
-
+			// FB Pixel Tracking
+			if (window.fbq) {
+				try {
+					fbq("trackSingle", pixel, "Purchase", {
+						content_name: product.title,
+						content_ids: [product.id || "123"],
+						content_type: "product",
+						value: product.price || 0,
+						currency: "IDR",
+					});
+				} catch (err) {
+					console.error("FB Pixel Error:", err);
+				}
+			}
+			
       // Kirim Email ke Admin
       await sendOrderEmail({
         name,
@@ -117,20 +131,6 @@ const FunnelPurchase = ({ pixel, product, price, costProduct }) => {
         order_date: new Date().toLocaleString("id-ID"),
       });
 
-      // FB Pixel Tracking
-      if (window.fbq) {
-        try {
-          fbq("trackSingle", pixel, "Purchase", {
-            content_name: product.title,
-            content_ids: [product.id || "123"],
-            content_type: "product",
-            value: product.price || 0,
-            currency: "IDR",
-          });
-        } catch (err) {
-          console.error("FB Pixel Error:", err);
-        }
-      }
 
       // Kirim WhatsApp ke Admin
       const message =
@@ -140,6 +140,7 @@ const FunnelPurchase = ({ pixel, product, price, costProduct }) => {
         `*No. WhatsApp:* ${cleanedWA}\n` +
         `*Alamat:* ${address}\n` +
         `*Metode Pembayaran:* ${paymentMethod}\n\n` +
+				
         `Mohon segera diproses, terima kasih`;
 
       const ADMIN_WA = "6282387881505";
