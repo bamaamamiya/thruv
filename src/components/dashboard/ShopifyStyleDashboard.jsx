@@ -21,7 +21,7 @@ import ProfitTotal from "../analytics/ProfitTotal";
 
 const ShopifyStyleDashboard = () => {
   const [leads, setLeads] = useState([]);
-  const [selectedFilter, setSelectedFilter] = useState("month");
+  const [selectedFilter, setSelectedFilter] = useState("today");
   const [customRange, setCustomRange] = useState([new Date(), new Date()]);
 
   // 1. Listen to Firebase leads
