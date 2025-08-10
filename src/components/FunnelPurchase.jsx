@@ -91,6 +91,7 @@ const FunnelPurchase = ({ pixel, product, price, costProduct }) => {
     `*No. WhatsApp:* ${cleanedWA}\n` +
     `*Alamat:* ${address}\n` +
     `*Metode Pembayaran:* ${paymentMethod}\n` +
+		
     `Mohon segera diproses, terima kasih`;
 
   const ADMIN_WA = "6282387881505";
