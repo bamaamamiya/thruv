@@ -168,7 +168,7 @@ const LeadsDashboard = () => {
           </div>
 
           {!isMobile && (
-            <div className="grid grid-cols-8 border-b border-gray-200 py-3 text-sm font-medium text-gray-500 px-2">
+            <div className="grid grid-cols-8 border-b text-center border-gray-200 py-3 text-sm font-medium text-gray-500 px-2">
               <span>Select</span>
               <span>Tanggal</span>
               <span>Nama</span>
@@ -214,6 +214,7 @@ const LeadsDashboard = () => {
                       lead={lead}
                       copiedId={copiedId}
                       setCopiedId={setCopiedId}
+											onSelect={handleSelectLead}
                     />
                   ) : (
                     <LeadRow

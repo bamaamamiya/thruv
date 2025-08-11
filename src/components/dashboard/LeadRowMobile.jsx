@@ -10,10 +10,18 @@ const formatHargaSingkat = (harga) => {
   return (harga / 1000).toFixed(0) + "rb";
 };
 
-const LeadRowMobile = ({ lead, copiedId, setCopiedId }) => {
+const LeadRowMobile = ({ lead, copiedId, setCopiedId, onSelect }) => {
   const [showModal, setShowModal] = useState(false);
   const [updating, setUpdating] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
+  const handleCheckboxChange = (e) => {
+    const checked = e.target.checked;
+    setIsChecked(checked);
+    if (onSelect) {
+      onSelect(lead, checked);
+    }
+  };
   // Form state for editing
   const [formData, setFormData] = useState({
     costProduct: lead.costProduct || "",
@@ -27,7 +35,7 @@ const LeadRowMobile = ({ lead, copiedId, setCopiedId }) => {
   };
 
   const handleCopyAddress = () => {
-    const prompt = `[PROVINSI], [KABUPATEN/KOTA], [KECAMATAN], [DESA/KELURAHAN] dan rapikan alamat lengkap, dan kecamatan terpisah.\n\nAlamat mentah: ${lead.address}`;
+    const prompt = `[PROVINSI], [KABUPATEN/KOTA], [KECAMATAN], [DESA/KELURAHAN] dan rapikan alamat lengkap, dan kelurahan/desa terpisah.\n\nAlamat mentah: ${lead.address}`;
     navigator.clipboard.writeText(prompt).then(() => {
       setCopiedId(lead.id);
       setTimeout(() => setCopiedId(null), 2000);
@@ -98,16 +106,25 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
 
   return (
     <>
+      <input
+        type="checkbox"
+        checked={isChecked}
+        onChange={handleCheckboxChange}
+        className="scale-125"
+      />
       <div
         onClick={() => setShowModal(true)}
         className="bg-white rounded-xl p-4 mb-4 shadow-sm hover:ring ring-gray-200 transition cursor-pointer"
       >
         <div className="flex justify-between text-sm mb-2 text-gray-400">
           <span>
-            {new Date(lead.createdAt.seconds * 1000).toLocaleDateString("id-ID", {
-              day: "2-digit",
-              month: "short",
-            })}
+            {new Date(lead.createdAt.seconds * 1000).toLocaleDateString(
+              "id-ID",
+              {
+                day: "2-digit",
+                month: "short",
+              }
+            )}
           </span>
           <span className="text-emerald-500 font-medium">
             {lead.paymentMethod}
@@ -154,20 +171,34 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
             <h2 className="text-xl font-semibold mb-4">📄 Detail Order</h2>
 
             <div className="space-y-2">
-              <p><span className="text-gray-500">Nama:</span> {lead.name}</p>
+              <p>
+                <span className="text-gray-500">Nama:</span> {lead.name}
+              </p>
               <p>
                 <span className="text-gray-500">WA:</span>{" "}
-                <a href={`https://wa.me/${lead.whatsapp}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                <a
+                  href={`https://wa.me/${lead.whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:underline"
+                >
                   {lead.whatsapp}
                 </a>
               </p>
-              <p><span className="text-gray-500">Alamat:</span> {lead.address}</p>
-              <p><span className="text-gray-500">Produk:</span> {lead.productTitle}</p>
+              <p>
+                <span className="text-gray-500">Alamat:</span> {lead.address}
+              </p>
+              <p>
+                <span className="text-gray-500">Produk:</span>{" "}
+                {lead.productTitle}
+              </p>
             </div>
 
             <div className="mt-4 space-y-3">
               <div>
-                <label className="block text-gray-500 text-xs mb-1">Harga:</label>
+                <label className="block text-gray-500 text-xs mb-1">
+                  Harga:
+                </label>
                 <input
                   type="number"
                   value={formData.price}
@@ -176,7 +207,9 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
                 />
               </div>
               <div>
-                <label className="block text-gray-500 text-xs mb-1">Cost Product:</label>
+                <label className="block text-gray-500 text-xs mb-1">
+                  Cost Product:
+                </label>
                 <input
                   type="number"
                   value={formData.costProduct}

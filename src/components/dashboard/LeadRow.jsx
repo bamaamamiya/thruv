@@ -112,7 +112,7 @@ const LeadRow = ({ lead, copiedId, setCopiedId, onSelect }) => {
 
   // 🔹 Copy address
   const handleCopyAddress = () => {
-    const prompt = `[PROVINSI], [KABUPATEN/KOTA], [KECAMATAN], [DESA/KELURAHAN] dan rapikan alamat lengkap, dan kecamatan terpisah.\n\nAlamat mentah: ${lead.address}`;
+    const prompt = `[PROVINSI], [KABUPATEN/KOTA], [KECAMATAN], [DESA/KELURAHAN] dan rapikan alamat lengkap, dan kelurahan/desa terpisah.\n\nAlamat mentah: ${lead.address}`;
     copyToClipboard(prompt, () => {
       setCopiedId(lead.id);
       setTimeout(() => setCopiedId(null), 2000);
@@ -167,6 +167,7 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
           onChange={handleCheckboxChange}
           onClick={(e) => e.stopPropagation()}
           aria-label="Select lead"
+          className="scale-125"
         />
         <span className="text-xs text-gray-500">
           {new Date(lead.createdAt.seconds * 1000).toLocaleDateString("id-ID", {
@@ -179,15 +180,15 @@ Untuk ongkir, akan dihitung otomatis dan dianggap disetujui oleh sistem 🙏`;
           href={`https://wa.me/${lead.whatsapp}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-600 hover:underline"
+          className="text-blue-600 hover:underline text-center"
           onClick={(e) => e.stopPropagation()}
         >
           {lead.whatsapp}
         </a>
-        <span className="text-green-600 font-medium">{lead.paymentMethod}</span>
+        <span className="text-green-600 font-medium text-center">{lead.paymentMethod}</span>
         <span className="text-gray-700 truncate">{lead.productTitle}</span>
         <span
-          className={`capitalize font-semibold text-sm ${
+          className={`capitalize font-semibold text-sm text-center ${
             lead.status === "complete"
               ? "text-green-500"
               : lead.status === "cancel"
