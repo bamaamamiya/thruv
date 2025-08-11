@@ -95,7 +95,18 @@ const ShopifyStyleDashboard = () => {
           />
 
           {/* Leads Chart */}
-          <LeadsChart data={chartData} />
+          <LeadsChart
+            data={chartData}
+            totalSales={totalSales}
+            totalOrders={totalOrders}
+            completedOrders={completedOrders}
+            pendingOrders={pendingOrders}
+            totalPendingValue={totalPendingValue}
+            totalCost={totalCost}
+            start={start}
+            end={end}
+            pendingOrdersPrevious={previousSummary.pendingOrders || 0}
+          />
 
           {/* Conversion Rate */}
           <ConversionRate
@@ -113,7 +124,7 @@ const ShopifyStyleDashboard = () => {
           <ProfitTotal
             totalSales={totalSales}
             totalPendingValue={totalPendingValue}
-            totalCost={totalCost} 
+            totalCost={totalCost}
           />
           <ProfitSummary totalSales={totalSales} totalCost={totalCost} />
 

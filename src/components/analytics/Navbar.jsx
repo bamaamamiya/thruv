@@ -32,7 +32,7 @@ const Navbar = () => {
 
       {/* Right - Store Brand as a Button */}
       {/* ✅ 3. Tambahkan onClick handler ke div */}
-      <div 
+      <div
         className="flex items-center gap-3 cursor-pointer"
         onClick={toggleStoreName}
       >
@@ -41,7 +41,7 @@ const Navbar = () => {
           {isThruvShop ? "Thruv Shop" : "My Store"}
         </p>
         <img
-          src="images/thruv.jpg"
+          src={isThruvShop ? "images/thruv.jpg" : "images/shop.png"}
           alt="Store Logo"
           className="w-8 h-8 rounded-md object-cover border border-gray-200"
         />
