@@ -102,6 +102,7 @@ const FunnelPurchase = ({ pixel, product, price, costProduct }) => {
         createdAt: Timestamp.now(),
         status: "pending",
         resiCheck: "not",
+				return: 0
       });
 			// FB Pixel Tracking
 			if (window.fbq) {
