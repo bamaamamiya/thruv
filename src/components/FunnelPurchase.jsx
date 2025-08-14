@@ -9,7 +9,6 @@ const FunnelPurchase = ({ pixel, product, price, costProduct }) => {
   const [paymentMethod, setPaymentMethod] = useState("COD");
   const [address, setAddress] = useState("");
   const [loading, setLoading] = useState(false);
-
   const emailJSConfigs = [
     {
       serviceID: "service_ibqyju2",
@@ -102,23 +101,23 @@ const FunnelPurchase = ({ pixel, product, price, costProduct }) => {
         createdAt: Timestamp.now(),
         status: "pending",
         resiCheck: "not",
-				return: 0
+				rts: 0,
       });
-			// FB Pixel Tracking
-			if (window.fbq) {
-				try {
-					fbq("trackSingle", pixel, "Purchase", {
-						content_name: product.title,
-						content_ids: [product.id || "123"],
-						content_type: "product",
-						value: product.price || 0,
-						currency: "IDR",
-					});
-				} catch (err) {
-					console.error("FB Pixel Error:", err);
-				}
-			}
-			
+      // FB Pixel Tracking
+      if (window.fbq) {
+        try {
+          fbq("trackSingle", pixel, "Purchase", {
+            content_name: product.title,
+            content_ids: [product.id || "123"],
+            content_type: "product",
+            value: product.price || 0,
+            currency: "IDR",
+          });
+        } catch (err) {
+          console.error("FB Pixel Error:", err);
+        }
+      }
+
       // Kirim Email ke Admin
       await sendOrderEmail({
         name,
@@ -132,7 +131,6 @@ const FunnelPurchase = ({ pixel, product, price, costProduct }) => {
         order_date: new Date().toLocaleString("id-ID"),
       });
 
-
       // Kirim WhatsApp ke Admin
       const message =
         `*PESANAN BARU*\n\n` +
@@ -141,11 +139,12 @@ const FunnelPurchase = ({ pixel, product, price, costProduct }) => {
         `*No. WhatsApp:* ${cleanedWA}\n` +
         `*Alamat:* ${address}\n` +
         `*Metode Pembayaran:* ${paymentMethod}\n\n` +
-				
         `Mohon segera diproses, terima kasih`;
 
       const ADMIN_WA = "6282387881505";
-      const whatsappURL = `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(message)}`;
+      const whatsappURL = `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(
+        message
+      )}`;
       window.open(whatsappURL, "_blank");
 
       // Reset Form
@@ -153,7 +152,6 @@ const FunnelPurchase = ({ pixel, product, price, costProduct }) => {
       setWhatsapp("");
       setAddress("");
       setPaymentMethod("COD");
-
     } catch (err) {
       console.error("Gagal simpan ke Firestore:", err);
       alert("Terjadi kesalahan saat menyimpan. Coba lagi.");
@@ -220,7 +218,9 @@ const FunnelPurchase = ({ pixel, product, price, costProduct }) => {
               />
               <label className="grid items-center relative cursor-pointer">
                 <img
-                  src={`/images/funnel/${method === "COD" ? "cod" : "transfer"}.webp`}
+                  src={`/images/funnel/${
+                    method === "COD" ? "cod" : "transfer"
+                  }.webp`}
                   alt={method}
                   className="w-12 h-12 object-contain"
                 />
