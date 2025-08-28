@@ -134,7 +134,7 @@ const CctvBohlam = () => {
         faqs={faqs}
 				namaProduct={bundles.title}
       /> */}
-			<StickyTopBar hours={0} minutes={15} seconds={0}/>
+			<StickyTopBar hours={0} minutes={20} seconds={0}/>
       <Floting />
     </div>
   );
