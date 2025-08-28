@@ -80,7 +80,7 @@ const Footer = ({
             { title: "CCTV SMARTHOME", value: 249000 },
             { title: "Video Petunjuk CCTV", value: 50000 },
             { title: "Fitting & Baut", value: 20000 },
-            { title: "Memori 32GB", value: 99000 },
+            { title: "Memori 64GB", value: 99000 },
           ]}
           totalValue={418000}
           promoPrice={promoPrice}
