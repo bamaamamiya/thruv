@@ -86,7 +86,6 @@ const FunnelPurchase = ({ pixel, product, price, costProduct }) => {
     const docId = `${cleanedWA}_${product.id || "unknown"}`;
     const codFee = paymentMethod === "COD" ? 5000 : 0;
     const totalPrice = price + codFee;
-
     try {
       // Simpan ke Firestore
       await setDoc(doc(db, "leads", docId), {
@@ -101,7 +100,7 @@ const FunnelPurchase = ({ pixel, product, price, costProduct }) => {
         createdAt: Timestamp.now(),
         status: "pending",
         resiCheck: "not",
-				rts: 0,
+        rts: 0,
       });
       // FB Pixel Tracking
       if (window.fbq) {

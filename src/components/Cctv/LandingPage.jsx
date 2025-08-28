@@ -13,14 +13,14 @@ const CctvBohlam = () => {
   ];
 
   const funnelProduct = {
-    title: "Cctv bohlam",
+    title: "CCTV + MEMORI",
     description: "Product CCTV BOHLAM",
-    price: 129000,
-    costProduct: 75000,
+    price: 199000,
+    costProduct: 116000,
   };
 
   // const BonusData = {
-  // 	title:"",
+  // 	title:"Bonus : ",
   // 	bonus: "Fitting & Baut + Vidio Panduan + Gratis COD"
   // }
 
@@ -43,6 +43,11 @@ const CctvBohlam = () => {
   ];
 
   const faqs = [
+    {
+      question: "Kalau barang rusak atau cacat gimana?",
+      answer:
+        "Ada Garansi 3 Hari Tukar Baru. Cukup kasih video unboxing + foto paket, langsung kami proses.",
+    },
     {
       question: "Apakah CCTV ini harus pakai kabel?",
       answer:
