@@ -80,9 +80,9 @@ const Footer = ({
             { title: "CCTV SMARTHOME", value: 249000 },
             { title: "Video Petunjuk CCTV", value: 50000 },
             { title: "Fitting & Baut", value: 20000 },
-            { title: "Memori 64GB", value: 99000 },
+            { title: "Memori 32GB", value: 70000 },
           ]}
-          totalValue={418000}
+          totalValue={389000}
           promoPrice={promoPrice}
         />
         {/* <div className="text-center text-sm">
