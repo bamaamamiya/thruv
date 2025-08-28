@@ -64,7 +64,7 @@ const Footer = ({
         <h1 className="text-2xl font-bold text-center" id="formulir">
           ⚠ Promo 50% Hanya Untuk 3 Orang Pemesanan Pertama ⚠
         </h1>
-        {/* <div className="text-center">
+        <div className="text-center">
           <p className="text-lg">
             Harga Normal <span className="line-through">Rp.249.000</span>
           </p>
@@ -74,8 +74,8 @@ const Footer = ({
           <h1 className="text-redto">
             Rp {Math.floor(currentValue).toLocaleString("id-ID")}
           </h1>
-        </div> */}
-        <ValueStack
+        </div>
+        {/* <ValueStack
           values={[
             { title: "CCTV SMARTHOME", value: 249000 },
             { title: "Video Petunjuk CCTV", value: 50000 },
@@ -84,7 +84,7 @@ const Footer = ({
           ]}
           totalValue={389000}
           promoPrice={promoPrice}
-        />
+        /> */}
         {/* <div className="text-center text-sm">
           <p className="font-bold">{bonusTitle}</p>
           <p className="font-semibold pr-2 pl-2">
