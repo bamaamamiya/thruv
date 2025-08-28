@@ -13,10 +13,10 @@ const CctvBohlam = () => {
   ];
 
   const funnelProduct = {
-    title: "CCTV + MEMORI",
+    title: "CCTV E27",
     description: "Product CCTV BOHLAM",
-    price: 199000,
-    costProduct: 116000,
+    price: 129000,
+    costProduct: 75000,
   };
 
   // const BonusData = {
@@ -43,11 +43,11 @@ const CctvBohlam = () => {
   ];
 
   const faqs = [
-    {
-      question: "Kalau barang rusak atau cacat gimana?",
-      answer:
-        "Ada Garansi 30 Hari Tukar Baru. Cukup kasih video unboxing + foto paket, langsung kami proses.",
-    },
+    // {
+    //   question: "Kalau barang rusak atau cacat gimana?",
+    //   answer:
+    //     "Ada Garansi 30 Hari Tukar Baru. Cukup kasih video unboxing + foto paket, langsung kami proses.",
+    // },
     {
       question: "Apakah CCTV ini harus pakai kabel?",
       answer:
