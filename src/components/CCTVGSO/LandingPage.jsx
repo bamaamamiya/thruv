@@ -12,10 +12,10 @@ const CctvBohlam = () => {
   ];
 
   const funnelProduct = {
-    title: "CCTV E27",
+    title: "CCTV + MEMORI",
     description: "Product CCTV BOHLAM",
-    price: 129000,
-    costProduct: 75000,
+    price: 199000,
+    costProduct: 116000,
   };
 
   // const BonusData = {
@@ -42,11 +42,11 @@ const CctvBohlam = () => {
   ];
 
   const faqs = [
-    // {
-    //   question: "Kalau barang rusak atau cacat gimana?",
-    //   answer:
-    //     "Ada Garansi 30 Hari Tukar Baru. Cukup kasih video unboxing + foto paket, langsung kami proses.",
-    // },
+    {
+      question: "Kalau barang rusak atau cacat gimana?",
+      answer:
+        "Ada Garansi 30 Hari Tukar Baru. Cukup kasih video unboxing + foto paket, langsung kami proses.",
+    },
     {
       question: "Apakah CCTV ini harus pakai kabel?",
       answer:
@@ -92,11 +92,23 @@ const CctvBohlam = () => {
     "Pantau rumah dari HP secara real-time, kapan saja dan di mana saja.",
     "Kamera bisa muter 360°, sudut pandang luas, gak ada titik buta.",
     "Ada motion detection — otomatis rekam & kirim notifikasi ke HP saat ada gerakan.",
-    "Tanpa kabel & tanpa teknisi — cukup pasang di fitting lampu E27, langsung nyala.",
+    "Instalasi cuma 2 menit — tinggal pasang di fitting lampu, CCTV langsung aktif & terhubung ke HP",
     "Support night vision, jadi tetap bisa ngawasin rumah meskipun malam atau lampu mati.",
   ];
+
+  const valueItems = [
+    { title: "CCTV Smarthome (Full Set)", value: 249000 },
+    { title: "Video Panduan Instalasi", value: 50000 },
+    { title: "Fitting & Baut Lengkap", value: 20000 },
+    { title: "Memori 32GB Rekaman", value: 70000 },
+  ];
+
   const pixel = 2111198546014232;
   const pixelString = pixel.toString();
+  const sumValues = (items) => {
+    return items.reduce((acc, item) => acc + item.value, 0);
+  };
+  const totalValue = sumValues(valueItems);
 
   return (
     <div className="bg-white">
@@ -121,18 +133,9 @@ const CctvBohlam = () => {
         footerImages={["images/fotter2.webp", "images/fotter.webp"]}
         faqs={faqs}
         namaProduct={funnelProduct.title}
-        // bonus={BonusData.bonus}
-        // bonusTitle={BonusData.title}
+        values={valueItems}
+        totalValue={totalValue} // otomatis dari promo + diskon
       />
-      {/* <Footer
-        hargaJual={bundles[0].price}
-        pixelId="2111198546014232"
-        produkBaru={bundles}
-        footerImages={["images/fotter2.webp", "images/fotter.webp"]}
-				bundles={bundles}
-        faqs={faqs}
-				namaProduct={bundles.title}
-      /> */}
       <Floting />
     </div>
   );
