@@ -2,7 +2,7 @@ import Content from "./Content";
 import Headline from "./Headline";
 import Footer from "./Footer";
 import Floting from "../set/Floting";
-
+import StickyTopBar from "../set/StickyTopBar";
 const CctvBohlam = () => {
   const productImages = ["images/cctv/3.webp", "images/cctv/4.webp"];
 
@@ -134,6 +134,7 @@ const CctvBohlam = () => {
         faqs={faqs}
 				namaProduct={bundles.title}
       /> */}
+			<StickyTopBar hours={0} minutes={15} seconds={0}/>
       <Floting />
     </div>
   );

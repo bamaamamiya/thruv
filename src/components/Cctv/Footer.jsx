@@ -60,8 +60,8 @@ const Footer = ({
 
   return (
     <div>
-      <div className="space-y-2">
-        <h1 className="text-2xl font-bold text-center" id="formulir">
+      <div className="space-y-2" id="formulir">
+        <h1 className="text-2xl font-bold text-center">
           ⚠ Promo 50% Hanya Untuk 3 Orang Pemesanan Pertama ⚠
         </h1>
         <div className="text-center">
@@ -98,30 +98,30 @@ const Footer = ({
             Sisa Promo: 1
           </p>
         </div>
-      </div>
 
-      {/* FORM TITLE + ARROW */}
-      <br />
-      <h1 className="text-center font-bold text-xl p-2">
-        Isi Data Sekarang Sebelum Promonya Habis — Siapa Cepat Dia Dapat!
-      </h1>
+        {/* FORM TITLE + ARROW */}
+        <br />
+        <h1 className="text-center font-bold text-xl p-2">
+          Isi Data Sekarang Sebelum Promonya Habis — Siapa Cepat Dia Dapat!
+        </h1>
 
-      <br />
-      <div className="text-center space-x-6 text-redto text-5xl animate-bounce">
-        <FontAwesomeIcon icon={faArrowDown} />
-        <FontAwesomeIcon icon={faArrowDown} />
-        <FontAwesomeIcon icon={faArrowDown} />
-      </div>
+        <br />
+        <div className="text-center space-x-6 text-redto text-5xl animate-bounce">
+          <FontAwesomeIcon icon={faArrowDown} />
+          <FontAwesomeIcon icon={faArrowDown} />
+          <FontAwesomeIcon icon={faArrowDown} />
+        </div>
 
-      {/* FORM FUNNEL */}
-      <div id="form">
-        <Funnel
-          pixel={pixelId}
-          product={produkBaru}
-          price={promoPrice}
-          namaProduct={namaProduct}
-          costProduct={produkBaru.costProduct}
-        />
+        {/* FORM FUNNEL */}
+        <div id="form">
+          <Funnel
+            pixel={pixelId}
+            product={produkBaru}
+            price={promoPrice}
+            namaProduct={namaProduct}
+            costProduct={produkBaru.costProduct}
+          />
+        </div>
       </div>
 
       {/* FAQ */}
