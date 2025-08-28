@@ -46,7 +46,7 @@ const CctvBohlam = () => {
     {
       question: "Kalau barang rusak atau cacat gimana?",
       answer:
-        "Ada Garansi 3 Hari Tukar Baru. Cukup kasih video unboxing + foto paket, langsung kami proses.",
+        "Ada Garansi 30 Hari Tukar Baru. Cukup kasih video unboxing + foto paket, langsung kami proses.",
     },
     {
       question: "Apakah CCTV ini harus pakai kabel?",
