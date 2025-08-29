@@ -13,7 +13,7 @@ const Floting = () => {
       ([entry]) => {
         setVisible(!entry.isIntersecting); // kalau form kelihatan → hide
       },
-      { threshold: 0.5 } // 50% dari form keliatan
+      { threshold: 0.20 } // 50% dari form keliatan
     );
 
     observer.observe(target);
