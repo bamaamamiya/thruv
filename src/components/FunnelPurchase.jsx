@@ -226,6 +226,11 @@ const FunnelPurchase = ({ pixel, product, price, costProduct }) => {
                 <span className="font-medium -mt-2">
                   {method === "COD" ? "Bayar di Tempat" : "Bank Transfer"}
                 </span>
+								 {method === "Bank Transfer" && (
+                  <span className="inline-block bg-redto/10 text-redto text-[11px] font-bold px-3 py-[2px] rounded-md shadow-sm border border-redto/70 capitalize tracking-wide">
+                    Potongan ONGKIR 10RB !!!
+                  </span>
+                )}
               </label>
             </div>
           ))}

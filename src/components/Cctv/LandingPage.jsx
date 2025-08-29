@@ -14,7 +14,7 @@ const CctvBohlam = () => {
   const funnelProduct = {
     title: "CCTV E27",
     description: "Product CCTV BOHLAM",
-    price: 129000,
+    price: 149000,
     costProduct: 75000,
   };
 
@@ -98,6 +98,15 @@ const CctvBohlam = () => {
   const pixel = 2111198546014232;
   const pixelString = pixel.toString();
 
+  function getNormalPrice(sellingPrice, discountRate) {
+    if (discountRate >= 1 || discountRate < 0) {
+      throw new Error("Discount rate harus antara 0 dan 1");
+    }
+    return sellingPrice / (1 - discountRate);
+  }
+  const discount = 0.5; // 50%
+	const hargaNormal = getNormalPrice(funnelProduct.price, discount);
+
   return (
     <div className="bg-white">
       <Headline
@@ -121,6 +130,7 @@ const CctvBohlam = () => {
         footerImages={["images/fotter2.webp", "images/fotter.webp"]}
         faqs={faqs}
         namaProduct={funnelProduct.title}
+        NormalPrice={hargaNormal}
         // bonus={BonusData.bonus}
         // bonusTitle={BonusData.title}
       />

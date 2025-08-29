@@ -16,8 +16,9 @@ const Footer = ({
   hargaJual,
   bonus,
   bonusTitle,
+	NormalPrice
 }) => {
-  const normalPrice = 249000; // harga normal
+  const normalPrice = NormalPrice; // harga normal
   const promoPrice = hargaJual; // harga promo
   const [isVisible, setIsVisible] = useState(false);
   const [currentValue, setCurrentValue] = useState(normalPrice);
@@ -66,7 +67,7 @@ const Footer = ({
         </h1>
         <div className="text-center">
           <p className="text-lg">
-            Harga Normal <span className="line-through">Rp.249.000</span>
+            Harga Normal <span className="line-through">Rp.{normalPrice.toLocaleString("id-ID")}</span>
           </p>
           <p className="text-lg">Harga Promo</p>
         </div>
