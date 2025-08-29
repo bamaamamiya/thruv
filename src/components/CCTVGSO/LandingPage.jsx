@@ -97,10 +97,13 @@ const CctvBohlam = () => {
   ];
 
   const valueItems = [
-    { title: "CCTV Smarthome (Full Set)", value: 249000 },
+    { title: "CCTV Smarthome", value: 249000 },
     { title: "Video Panduan Instalasi", value: 50000 },
     { title: "Fitting & Baut Lengkap", value: 20000 },
     { title: "Memori 32GB Rekaman", value: 70000 },
+    { title: "Garansi 1 Tahun", value: 200000 },
+    { title: "Akses App Premium", value: 150000 },
+    { title: "Support via WhatsApp + Tips Instalasi Cepat", value: 100000 },
   ];
 
   const pixel = 2111198546014232;
