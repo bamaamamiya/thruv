@@ -12,7 +12,7 @@ const CctvBohlam = () => {
   ];
 
   const funnelProduct = {
-    title: "CCTV + MEMORI",
+    title: "CCTV Bundles",
     description: "Product CCTV BOHLAM",
     price: 199000,
     costProduct: 116000,
