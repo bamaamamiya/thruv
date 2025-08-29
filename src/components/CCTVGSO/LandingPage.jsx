@@ -103,7 +103,7 @@ const CctvBohlam = () => {
     { title: "Memori 32GB Rekaman", value: 70000 },
     { title: "Garansi 1 Tahun", value: 200000 },
     { title: "Akses App Premium", value: 150000 },
-    { title: "Support via WhatsApp + Tips Instalasi Cepat", value: 100000 },
+    { title: "Support via WA + Tips", value: 100000 },
   ];
 
   const pixel = 2111198546014232;
