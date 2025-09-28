@@ -10,37 +10,46 @@ const ValueStack = ({ values, totalValue, promoPrice, bonuses }) => {
       </h2>
 
       {/* Value List */}
-      <div className="space-y-3">
+      <div className="divide-y divide-gray-200">
         {values.map((item, idx) => (
           <div
             key={idx}
-            className="flex justify-between items-center border-b pb-2"
+            className="flex justify-between items-start py-3"
           >
-            <p className="text-lg font-semibold text-gray-800">{item.title}</p>
-            <p className="text-gray-600 font-medium">
+            <div>
+              <p className="text-base font-semibold text-gray-800">
+                {item.title}
+              </p>
+              {item.detail && (
+                <p className="text-sm text-gray-500">{item.detail}</p>
+              )}
+            </div>
+            <p className="text-gray-900 font-bold whitespace-nowrap">
               Rp {item.value.toLocaleString("id-ID")}
             </p>
           </div>
         ))}
       </div>
 
-      {/* Bonus Section (Optional) */}
+      {/* Bonus Section */}
       {bonuses && bonuses.length > 0 && (
         <div className="bg-yellow-50 border border-yellow-300 rounded-xl p-4 space-y-3">
           <h3 className="text-lg font-bold text-yellow-700">
             🎁 BONUS SPESIAL (Gratis)
           </h3>
-          {bonuses.map((bonus, idx) => (
-            <div
-              key={idx}
-              className="flex justify-between items-center border-b pb-1"
-            >
-              <p className="text-gray-800 font-medium">{bonus.title}</p>
-              <p className="text-green-600 font-semibold">
-                Rp {bonus.value.toLocaleString("id-ID")}
-              </p>
-            </div>
-          ))}
+          <div className="divide-y divide-yellow-200">
+            {bonuses.map((bonus, idx) => (
+              <div
+                key={idx}
+                className="flex justify-between items-start py-2"
+              >
+                <p className="text-gray-800 font-medium">{bonus.title}</p>
+                <p className="text-green-600 font-bold whitespace-nowrap">
+                  Rp {bonus.value.toLocaleString("id-ID")}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
@@ -48,7 +57,7 @@ const ValueStack = ({ values, totalValue, promoPrice, bonuses }) => {
       <div className="border-t-2 border-gray-300 pt-4">
         <h3 className="text-xl font-bold text-gray-800 text-center">
           Kalau dijumlah, semua ini bernilai{" "}
-          <span className="text-red-600">
+          <span className="text-red-600 line-through">
             Rp {totalValue.toLocaleString("id-ID")}
           </span>
         </h3>
@@ -58,8 +67,8 @@ const ValueStack = ({ values, totalValue, promoPrice, bonuses }) => {
       </div>
 
       {/* Promo Price */}
-      <div className="bg-gradient-to-r from-red-600 to-red-700 text-white text-center py-6 rounded-xl shadow-xl space-y-3 ">
-        <p className="text-xl font-medium p-2">
+      <div className="bg-gradient-to-r from-red-600 to-red-700 text-white text-center py-6 rounded-xl shadow-xl space-y-3">
+        <p className="text-xl font-medium">
           Bayangkan dapet semua ini, tapi cukup keluar…
         </p>
         <p className="text-2xl font-semibold">Hari ini hanya</p>

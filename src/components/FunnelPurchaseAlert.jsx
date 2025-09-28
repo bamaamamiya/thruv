@@ -3,38 +3,20 @@ import { setDoc, doc, Timestamp } from "firebase/firestore";
 import { db } from "../firebase";
 import emailjs from "@emailjs/browser";
 import { cleanAddress, needsReview } from "../utils/addressCleaner";
-const FunnelPurchase = ({
+const FunnelPurchaseAlert = ({
   pixel,
   product,
   price,
   costProduct,
   discountTransfer,
-	buttonColor = "bg-redto",       // default warna tombol
+  buttonColor = "bg-redto", // default warna tombol
   buttonHoverColor = "hover:bg-red-700", // default hover
 }) => {
-
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("COD");
   const [address, setAddress] = useState("");
   const [loading, setLoading] = useState(false);
-  const emailJSConfigs = [
-    {
-      serviceID: "service_ibqyju2",
-      templateID: "template_jwgdbwb",
-      publicKey: "2eHmhZIn-wgy07zki",
-    },
-    {
-      serviceID: "service_7xk5qdi",
-      templateID: "template_rsvrrcr",
-      publicKey: "r6eSMw--zC23rNBwt",
-    },
-  ];
-
-  const getCurrentEmailJS = () => {
-    const day = new Date().getDate();
-    return day <= 15 ? emailJSConfigs[0] : emailJSConfigs[1];
-  };
 
   const cleanAndValidateWA = (wa) => {
     let cleaned = wa.replace(/\D/g, "");
@@ -43,25 +25,34 @@ const FunnelPurchase = ({
   };
 
   const sendOrderEmail = async (data) => {
-    const { serviceID, templateID, publicKey } = getCurrentEmailJS();
-
-    const templateParams = {
-      order_id: `${data.whatsapp}_${data.productId}`,
-      name: data.name,
-      whatsapp: data.whatsapp,
-      address: data.address,
-      product_title: data.productTitle,
-      price: data.price.toLocaleString("id-ID"),
-      total: data.total.toLocaleString("id-ID"),
-      payment_method: data.paymentMethod,
-      order_date: data.order_date,
-    };
-
     try {
-      await emailjs.send(serviceID, templateID, templateParams, publicKey);
-      console.log("Email sent successfully from", serviceID);
+      const res = await fetch(
+        "https://order-alert-six.vercel.app/api/send-email",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: data.name,
+            whatsapp: data.whatsapp,
+            address: data.address,
+            product_title: data.productTitle,
+            price: data.price,
+            total: data.total,
+            payment_method: data.paymentMethod,
+            order_date: data.order_date,
+          }),
+        }
+      );
+
+      if (!res.ok) {
+        throw new Error("Gagal kirim email");
+      }
+
+      console.log("Email order berhasil dikirim!");
     } catch (err) {
-      console.error("Email sending failed:", err);
+      console.error("Error kirim email:", err);
     }
   };
 
@@ -93,7 +84,7 @@ const FunnelPurchase = ({
     }
 
     const docId = `${cleanedWA}_${product.id || "unknown"}`;
-    const codFee = paymentMethod === "COD" ? 5000 : 0;
+    const codFee = paymentMethod === "COD" ? 0 : 0;
     const totalPrice = price + codFee;
     const addressCleaned = cleanAddress(address);
 
@@ -129,7 +120,6 @@ const FunnelPurchase = ({
         }
       }
 
-      // Kirim Email ke Admin
       await sendOrderEmail({
         name,
         whatsapp: cleanedWA,
@@ -258,10 +248,9 @@ const FunnelPurchase = ({
         >
           {loading ? "Memproses..." : "Konfirmasi Pesanan Di WhatsApp"}
         </button>
-
       </form>
     </div>
   );
 };
 
-export default FunnelPurchase;
+export default FunnelPurchaseAlert;

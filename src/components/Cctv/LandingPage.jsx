@@ -107,6 +107,8 @@ const CctvBohlam = () => {
   const discount = 0.5; // 50%
 	const hargaNormal = getNormalPrice(funnelProduct.price, discount);
 
+  const discountTransfer = true; // 🔥 tinggal ubah true/false
+
   return (
     <div className="bg-white">
       <Headline
@@ -131,6 +133,8 @@ const CctvBohlam = () => {
         faqs={faqs}
         namaProduct={funnelProduct.title}
         NormalPrice={hargaNormal}
+        discountTransfer={discountTransfer} // ⬅ lempar ke Footer
+				
         // bonus={BonusData.bonus}
         // bonusTitle={BonusData.title}
       />

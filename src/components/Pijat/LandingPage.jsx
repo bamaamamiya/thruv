@@ -18,6 +18,29 @@ const MassageGun = () => {
     price: 149000,
   };
 
+  const bundles = [
+    {
+      id: "mg-basic",
+      title: "Massage Gun (biasa)",
+      price: 149000,
+      badge: null,
+      features: ["1 Set Massage Gun 4-in-1"],
+    },
+    {
+      id: "mg-premium",
+      title: "Massage Gun 4-in-1 Premium Bundle",
+      price: 299000,
+      badge: "Penawaran Terbaik",
+      features: [
+        "1x Massage Gun 4-in-1 Premium",
+        "6 Kepala Pijat (4 standar + 2 bonus)",
+        "8 Level Kecepatan + Mode Panas",
+        "Baterai Tahan 6 Jam",
+        "Bonus Ebook Recovery",
+        "Garansi 1 Tahun",
+      ],
+    },
+  ];
 
   const faqs = [
     {
@@ -61,6 +84,21 @@ const MassageGun = () => {
     "Desain seperti pistol, ergonomis & mudah digunakan sendiri.",
   ];
 
+  const pixel = 2111198546014232;
+  const pixelString = pixel.toString();
+
+  function getNormalPrice(sellingPrice, discountRate) {
+    if (discountRate >= 1 || discountRate < 0) {
+      throw new Error("Discount rate harus antara 0 dan 1");
+    }
+    return sellingPrice / (1 - discountRate);
+  }
+
+  const discount = 0.5; // 50%
+  const hargaNormal = getNormalPrice(bundles[0].price, discount);
+
+  const discountTransfer = true; // 🔥 tinggal ubah true/false
+
   return (
     <div>
       <Headline
@@ -78,14 +116,28 @@ const MassageGun = () => {
         testimonies={testimonies}
       />
 
-      <Footer
+      {/* <Footer
         hargaJual={funnelProduct.price}
         pixelId="2588889891453558"
         produkBaru={funnelProduct}
         footerImages={["images/fotter2.webp", "images/fotter.webp"]}
         faqs={faqs}
         namaProduct={funnelProduct.title}
+        NormalPrice={hargaNormal}
+        discountTransfer={discountTransfer} // ⬅ lempar ke Footer
+      /> */}
+      <Footer
+        hargaJual={bundles[0].price}
+        pixelId="2588889891453558"
+        produkBaru={bundles}
+        footerImages={["images/fotter2.webp", "images/fotter.webp"]}
+        bundles={bundles}
+        faqs={faqs}
+        namaProduct="Massage Gun 4 in 1"
+        NormalPrice={hargaNormal} // <-- FIX
+				discountTransfer={discountTransfer}
       />
+
       <Floting />
     </div>
   );

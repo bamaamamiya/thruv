@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import Funnel from "../FunnelPurchase";
+import Funnel from "../FunnelPurchaseAlert";
 import Faqs from "../set/Faqs";
 import Count from "./../set/Count";
 import ValueStack from "../set/ValueStack";
 
 import { useEffect, useRef, useState } from "react";
+import ViewersCounter from "../set/ViewersCounter";
 const Footer = ({
   pixelId,
   produkBaru,
@@ -16,7 +17,8 @@ const Footer = ({
   hargaJual,
   bonus,
   bonusTitle,
-	NormalPrice
+  NormalPrice,
+  discountTransfer,
 }) => {
   const normalPrice = NormalPrice; // harga normal
   const promoPrice = hargaJual; // harga promo
@@ -67,7 +69,10 @@ const Footer = ({
         </h1>
         <div className="text-center">
           <p className="text-lg">
-            Harga Normal <span className="line-through">Rp.{normalPrice.toLocaleString("id-ID")}</span>
+            Harga Normal{" "}
+            <span className="line-through">
+              Rp.{normalPrice.toLocaleString("id-ID")}
+            </span>
           </p>
           <p className="text-lg">Harga Promo</p>
         </div>
@@ -76,6 +81,7 @@ const Footer = ({
             Rp {Math.floor(currentValue).toLocaleString("id-ID")}
           </h1>
         </div>
+        <br />
         {/* <ValueStack
           values={[
             { title: "CCTV SMARTHOME", value: 249000 },
@@ -92,13 +98,20 @@ const Footer = ({
             {bonus}
           </p>
         </div> */}
-        <br />
+        {/* 				
+				<div>
+					<Count/>
+				</div> */}
 
         <div className="w-auto h-8 bg-gray-300 rounded overflow-hidden m-2">
           <p className="bg-redto text-white text-sm px-3 flex items-center h-full w-1/3">
             Sisa Promo: 1
           </p>
         </div>
+
+        {/* <div>
+					<ViewersCounter/>
+				</div> */}
 
         {/* FORM TITLE + ARROW */}
         <br />
@@ -121,6 +134,7 @@ const Footer = ({
             price={promoPrice}
             namaProduct={namaProduct}
             costProduct={produkBaru.costProduct}
+            discountTransfer={discountTransfer} // ⬅ terusin ke Funnel
           />
         </div>
       </div>

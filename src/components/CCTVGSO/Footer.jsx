@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import Funnel from "../FunnelPurchase";
+import Funnel from "../FunnelPurchaseAlert";
 import Faqs from "../set/Faqs";
 import Count from "../set/Count";
 import ValueStack from "../set/ValueStack";
@@ -18,6 +18,7 @@ const Footer = ({
   bonusTitle,
   values,
   totalValue,
+  discountTransfer,
 }) => {
   const normalPrice = 249000; // harga normal
   const promoPrice = hargaJual; // harga promo
@@ -71,7 +72,6 @@ const Footer = ({
           totalValue={totalValue}
           promoPrice={promoPrice}
         />
-        <br />
 
         <div className="w-auto h-8 bg-gray-300 rounded overflow-hidden m-2">
           <p className="bg-redto text-white text-sm px-2 flex items-center h-full w-1/3">
@@ -100,6 +100,7 @@ const Footer = ({
             price={promoPrice}
             namaProduct={namaProduct}
             costProduct={produkBaru.costProduct}
+            discountTransfer={discountTransfer} // ⬅ terusin ke Funnel
           />
         </div>
       </div>

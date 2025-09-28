@@ -2,6 +2,7 @@ import Content from "./Content";
 import Headline from "./Headline";
 import Footer from "./Footer";
 import Floting from "../set/Floting";
+
 const CctvBohlam = () => {
   const productImages = ["images/cctv/3.webp", "images/cctv/4.webp"];
 
@@ -13,9 +14,9 @@ const CctvBohlam = () => {
 
   const funnelProduct = {
     title: "CCTV Bundles",
-    description: "Product CCTV BOHLAM",
-    price: 199000,
-    costProduct: 116000,
+    description: "CCTV Bundles",
+    price: 234000,
+    costProduct: 146000,
   };
 
   // const BonusData = {
@@ -96,22 +97,49 @@ const CctvBohlam = () => {
     "Support night vision, jadi tetap bisa ngawasin rumah meskipun malam atau lampu mati.",
   ];
 
-  const valueItems = [
-    { title: "CCTV Smarthome", value: 249000 },
-    { title: "Video Panduan Instalasi", value: 50000 },
-    { title: "Fitting & Baut Lengkap", value: 20000 },
-    { title: "Memori 32GB Rekaman", value: 70000 },
-    { title: "Garansi 1 Tahun", value: 200000 },
-    { title: "Akses App Premium", value: 150000 },
-    { title: "Support via WA + Tips", value: 100000 },
-  ];
+const valueItems = [
+  { 
+    title: "🎥 CCTV Smarthome Pro", 
+    detail: "Pantau rumah kapan saja, dari mana saja dengan kualitas HD", 
+    value: 249000 
+  },
+  { 
+    title: "🎁 Bonus #1: Gratis Potongan Ongkir", 
+    detail: "Hemat biaya kirim ke seluruh Indonesia", 
+    value: 25000 
+  },
+  { 
+    title: "🔧 Bonus #2: Fitting & Baut Lengkap", 
+    detail: "Langsung bisa dipasang tanpa keluar biaya tambahan", 
+    value: 20000 
+  },
+  { 
+    title: "💾 Bonus #3: Memori 32GB Rekaman", 
+    detail: "Simpan rekaman hingga ratusan jam, tanpa beli tambahan", 
+    value: 70000 
+  },
+  { 
+    title: "📱 Bonus #4: Akses App Premium", 
+    detail: "Kontrol CCTV dari HP dengan fitur premium", 
+    value: 150000 
+  },
+  { 
+    title: "✅ Garansi Ganti Baru 1 Tahun", 
+    detail: "Rusak? Langsung diganti unit baru tanpa ribet", 
+    value: 200000 
+  },
+];
 
-  const pixel = 2111198546014232;
+
+  const pixel = 123;
   const pixelString = pixel.toString();
   const sumValues = (items) => {
     return items.reduce((acc, item) => acc + item.value, 0);
   };
+	
   const totalValue = sumValues(valueItems);
+
+  const discountTransfer = false; // 🔥 tinggal ubah true/false
 
   return (
     <div className="bg-white">
@@ -138,6 +166,7 @@ const CctvBohlam = () => {
         namaProduct={funnelProduct.title}
         values={valueItems}
         totalValue={totalValue} // otomatis dari promo + diskon
+        discountTransfer={discountTransfer} // ⬅ lempar ke Footer
       />
       <Floting />
     </div>
