@@ -168,7 +168,7 @@ const FunnelPurchaseBundles = ({
               key={item.id}
               className={`border rounded-xl p-4 cursor-pointer transition-all duration-300 ${
                 bundle?.id === item.id
-                  ? "border-redto shadow-xl bg-green-50"
+                  ? "border-green-600 shadow-xl bg-green-50"
                   : "border-gray-300 hover:shadow-md"
               }`}
               onClick={() => setBundle(item)}
