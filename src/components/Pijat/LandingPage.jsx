@@ -2,6 +2,7 @@ import Content from "./Content";
 import Headline from "./Headline";
 import Footer from "./Footer";
 import Floting from "../set/Floting";
+import FakeNotif from "../set/FakeNotif";
 
 const MassageGun = () => {
   const productImages = ["images/pijat/1.webp", "images/pijat/2.webp"];
@@ -84,7 +85,7 @@ const MassageGun = () => {
     "Desain seperti pistol, ergonomis & mudah digunakan sendiri.",
   ];
 
-  const pixel = 2111198546014232;
+  const pixel = 2588889891453558;
   const pixelString = pixel.toString();
 
   function getNormalPrice(sellingPrice, discountRate) {
@@ -93,11 +94,10 @@ const MassageGun = () => {
     }
     return sellingPrice / (1 - discountRate);
   }
-
   const discount = 0.5; // 50%
-  const hargaNormal = getNormalPrice(bundles[0].price, discount);
+  const hargaNormal = getNormalPrice(funnelProduct.price, discount);
 
-  const discountTransfer = true; // 🔥 tinggal ubah true/false
+  const discountTransfer = false; // 🔥 tinggal ubah true/false
 
   return (
     <div>
@@ -116,17 +116,17 @@ const MassageGun = () => {
         testimonies={testimonies}
       />
 
-      {/* <Footer
+      <Footer
         hargaJual={funnelProduct.price}
-        pixelId="2588889891453558"
+        pixelId={pixelString}
         produkBaru={funnelProduct}
         footerImages={["images/fotter2.webp", "images/fotter.webp"]}
         faqs={faqs}
         namaProduct={funnelProduct.title}
         NormalPrice={hargaNormal}
         discountTransfer={discountTransfer} // ⬅ lempar ke Footer
-      /> */}
-      <Footer
+      />
+      {/* <Footer
         hargaJual={bundles[0].price}
         pixelId="2588889891453558"
         produkBaru={bundles}
@@ -136,7 +136,7 @@ const MassageGun = () => {
         namaProduct="Massage Gun 4 in 1"
         NormalPrice={hargaNormal} // <-- FIX
 				discountTransfer={discountTransfer}
-      />
+      /> */}
 
       <Floting />
     </div>
