@@ -21,23 +21,6 @@ const FunnelPurchaseBundles = ({
   const [bundle, setBundle] = useState(bundles?.[0] || null);
   const [loading, setLoading] = useState(false);
 
-  // const emailJSConfigs = [
-  //   {
-  //     serviceID: "service_ibqyju2",
-  //     templateID: "template_jwgdbwb",
-  //     publicKey: "2eHmhZIn-wgy07zki",
-  //   },
-  //   {
-  //     serviceID: "service_7xk5qdi",
-  //     templateID: "template_rsvrrcr",
-  //     publicKey: "r6eSMw--zC23rNBwt",
-  //   },
-  // ];
-  const getCurrentEmailJS = () => {
-    const day = new Date().getDate();
-    return day <= 15 ? emailJSConfigs[0] : emailJSConfigs[1];
-  };
-
   const cleanAndValidateWA = (wa) => {
     let cleaned = wa.replace(/\D/g, "");
     if (cleaned.startsWith("0")) cleaned = "62" + cleaned.slice(1);
@@ -185,7 +168,7 @@ const FunnelPurchaseBundles = ({
               key={item.id}
               className={`border rounded-xl p-4 cursor-pointer transition-all duration-300 ${
                 bundle?.id === item.id
-                  ? "border-green-600 shadow-xl bg-green-50"
+                  ? "border-redto shadow-xl bg-green-50"
                   : "border-gray-300 hover:shadow-md"
               }`}
               onClick={() => setBundle(item)}
@@ -204,11 +187,11 @@ const FunnelPurchaseBundles = ({
                   )}
                 </div>
                 <div className="text-right">
-                  <p className="text-2xl font-bold text-green-700">
+                  <p className="text-2xl font-bold text-redto">
                     Rp{item.price.toLocaleString("id-ID")}
                   </p>
                   {item.badge && (
-                    <span className="mt-2 inline-block bg-green-600 text-white text-xs text-center px-2 py-1 rounded">
+                    <span className="mt-2 inline-block bg-redto text-white text-xs text-center px-2 py-1 rounded">
                       {item.badge}
                     </span>
                   )}

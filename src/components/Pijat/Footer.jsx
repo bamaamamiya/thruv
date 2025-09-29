@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import Funnel from "../FunnelPurchaseAlert";
+import Funnel from "../FunnelPurchase";
 import Faqs from "../set/Faqs";
 import Count from "./../set/Count";
 import ValueStack from "../set/ValueStack";
@@ -81,6 +81,10 @@ const Footer = ({
             Rp {Math.floor(currentValue).toLocaleString("id-ID")}
           </h1>
         </div>
+        <div className="text-center text-xl font-bold italic">
+          <h1>+ Gratis Ongkir</h1>
+        </div>
+
         <br />
         {/* <ValueStack
           values={[

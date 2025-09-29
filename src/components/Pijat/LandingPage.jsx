@@ -16,30 +16,23 @@ const MassageGun = () => {
   const funnelProduct = {
     title: "Alat Pijat Elektrik",
     description: "Alat Pijat 4 in 1",
-    price: 149000,
+    price: 199000,
   };
 
   const bundles = [
     {
-      id: "mg-basic",
-      title: "Massage Gun (biasa)",
+      id: "mg-1",
+      title: "Massage Gun (1x)",
       price: 149000,
       badge: null,
       features: ["1 Set Massage Gun 4-in-1"],
     },
     {
-      id: "mg-premium",
-      title: "Massage Gun 4-in-1 Premium Bundle",
-      price: 299000,
-      badge: "Penawaran Terbaik",
-      features: [
-        "1x Massage Gun 4-in-1 Premium",
-        "6 Kepala Pijat (4 standar + 2 bonus)",
-        "8 Level Kecepatan + Mode Panas",
-        "Baterai Tahan 6 Jam",
-        "Bonus Ebook Recovery",
-        "Garansi 1 Tahun",
-      ],
+      id: "mg-2",
+      title: "Massage Gun (2x)",
+      price: 298000,
+      badge: "Hemat!",
+      features: ["2 Set Massage Gun 4-in-1"],
     },
   ];
 
@@ -128,14 +121,14 @@ const MassageGun = () => {
       />
       {/* <Footer
         hargaJual={bundles[0].price}
-        pixelId="2588889891453558"
+        pixelId={pixelString}
         produkBaru={bundles}
         footerImages={["images/fotter2.webp", "images/fotter.webp"]}
         bundles={bundles}
         faqs={faqs}
         namaProduct="Massage Gun 4 in 1"
         NormalPrice={hargaNormal} // <-- FIX
-				discountTransfer={discountTransfer}
+        discountTransfer={discountTransfer}
       /> */}
 
       <Floting />
