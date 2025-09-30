@@ -106,7 +106,7 @@ const valueItems = [
   { 
     title: "🎁 Bonus #1: Gratis Potongan Ongkir", 
     detail: "Hemat biaya kirim ke seluruh Indonesia", 
-    value: 25000 
+    value: 30000 
   },
   { 
     title: "🔧 Bonus #2: Fitting & Baut Lengkap", 
@@ -116,7 +116,7 @@ const valueItems = [
   { 
     title: "💾 Bonus #3: Memori 32GB Rekaman", 
     detail: "Simpan rekaman hingga ratusan jam, tanpa beli tambahan", 
-    value: 70000 
+    value: 85000 
   },
   { 
     title: "📱 Bonus #4: Akses App Premium", 
@@ -126,12 +126,12 @@ const valueItems = [
   { 
     title: "✅ Garansi Ganti Baru 1 Tahun", 
     detail: "Rusak? Langsung diganti unit baru tanpa ribet", 
-    value: 200000 
+    value: null
   },
 ];
 
 
-  const pixel = 123;
+  const pixel = 2111198546014232;
   const pixelString = pixel.toString();
   const sumValues = (items) => {
     return items.reduce((acc, item) => acc + item.value, 0);

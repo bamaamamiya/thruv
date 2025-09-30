@@ -19,6 +19,7 @@ const Footer = ({
   bonusTitle,
   NormalPrice,
   discountTransfer,
+  extraOffer, // 👈 props baru
 }) => {
   const normalPrice = NormalPrice; // harga normal
   const promoPrice = hargaJual; // harga promo
@@ -81,9 +82,12 @@ const Footer = ({
             Rp {Math.floor(currentValue).toLocaleString("id-ID")}
           </h1>
         </div>
-        <div className="text-center text-xl font-bold italic">
-          <h1>+ Gratis Ongkir</h1>
-        </div>
+        {/* EXTRA OFFER */}
+        {extraOffer && (
+          <div className="text-center text-xl font-bold italic">
+            <h1>{extraOffer}</h1>
+          </div>
+        )}
 
         <br />
         {/* <ValueStack

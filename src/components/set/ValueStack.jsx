@@ -12,10 +12,7 @@ const ValueStack = ({ values, totalValue, promoPrice, bonuses }) => {
       {/* Value List */}
       <div className="divide-y divide-gray-200">
         {values.map((item, idx) => (
-          <div
-            key={idx}
-            className="flex justify-between items-start py-3"
-          >
+          <div key={idx} className="flex justify-between items-start py-3">
             <div>
               <p className="text-base font-semibold text-gray-800">
                 {item.title}
@@ -25,7 +22,9 @@ const ValueStack = ({ values, totalValue, promoPrice, bonuses }) => {
               )}
             </div>
             <p className="text-gray-900 font-bold whitespace-nowrap">
-              Rp {item.value.toLocaleString("id-ID")}
+              {item.value
+                ? `Rp ${item.value.toLocaleString("id-ID")}`
+                : "✅ Termasuk"}
             </p>
           </div>
         ))}
@@ -39,10 +38,7 @@ const ValueStack = ({ values, totalValue, promoPrice, bonuses }) => {
           </h3>
           <div className="divide-y divide-yellow-200">
             {bonuses.map((bonus, idx) => (
-              <div
-                key={idx}
-                className="flex justify-between items-start py-2"
-              >
+              <div key={idx} className="flex justify-between items-start py-2">
                 <p className="text-gray-800 font-medium">{bonus.title}</p>
                 <p className="text-green-600 font-bold whitespace-nowrap">
                   Rp {bonus.value.toLocaleString("id-ID")}
@@ -75,8 +71,8 @@ const ValueStack = ({ values, totalValue, promoPrice, bonuses }) => {
         <p className="text-4xl font-extrabold tracking-wide drop-shadow-lg">
           Rp {promoPrice.toLocaleString("id-ID")}
         </p>
-        <p className="text-sm italic text-red-100 font-light">
-          *Harga naik 20% bulan depan atau setelah kuota habis
+        <p className="text-sm italic text-red-100 font-medium">
+          Gratis Ongkir Seluruh Indonesia
         </p>
       </div>
     </section>

@@ -61,6 +61,11 @@ const MassageGun = () => {
       answer:
         "Ya, dilengkapi 4 kepala pijat dengan fungsi berbeda: cocok untuk punggung, leher, kaki, hingga lengan.",
     },
+    {
+      question: "Apakah ada garansi produk?",
+      answer:
+        "Ya! Produk bergaransi 1 tahun penuh. Jika rusak atau cacat, langsung diganti baru 100% tanpa biaya tambahan. Cukup sertakan video unboxing & foto paket untuk klaim.",
+    },
   ];
 
   const problems = [
@@ -91,7 +96,7 @@ const MassageGun = () => {
   const hargaNormal = getNormalPrice(funnelProduct.price, discount);
 
   const discountTransfer = false; // 🔥 tinggal ubah true/false
-
+  const extraOffer = "Potongan Ongkir Keseluruh Indonesia";
   return (
     <div>
       <Headline
@@ -118,6 +123,7 @@ const MassageGun = () => {
         namaProduct={funnelProduct.title}
         NormalPrice={hargaNormal}
         discountTransfer={discountTransfer} // ⬅ lempar ke Footer
+        extraOffer={extraOffer} // 👈 kalau mau ditampilkan
       />
       {/* <Footer
         hargaJual={bundles[0].price}
