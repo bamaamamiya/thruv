@@ -10,6 +10,7 @@ const PurchaseAlertAboundent = ({
   price,
   costProduct,
   discountTransfer,
+  adminWA = "6282387881505",
   buttonColor = "bg-redto", // default warna tombol
   buttonHoverColor = "hover:bg-red-700", // default hover
 }) => {
@@ -32,28 +33,26 @@ const PurchaseAlertAboundent = ({
   // === Function: Save Abandoned Lead ===
   const saveAbandonedLead = (nameInput, waInput) => {
     if (debounceRef.current) clearTimeout(debounceRef.current);
-
     debounceRef.current = setTimeout(async () => {
       if (!nameInput || nameInput.length < 3) return;
       const cleanedWA = cleanAndValidateWA(waInput);
-      if (!cleanedWA) return;
-      if (!product) return;
+      if (!cleanedWA || !product) return;
 
-      const docId = `${cleanedWA}_${product.id || "unknown"}`;
+      const docId = `${cleanedWA}_${product.title || "unknown"}`;
+
       try {
         await setDoc(
-          doc(db, "leads", docId),
+          doc(db, "abandonedLeads", docId), // PISAH COLLECTION
           {
             name: nameInput,
             whatsapp: cleanedWA,
-            productId: product.id || "unknown",
             productTitle: product.title,
             status: "abandoned",
             createdAt: Timestamp.now(),
-          },
-          { merge: true } // update jika sudah ada
+          }
         );
-        console.log("Abandoned lead saved:", cleanedWA);
+
+        // console.log("Abandoned lead saved:", cleanedWA);
       } catch (err) {
         console.error("Gagal simpan abandoned lead:", err);
       }
@@ -123,7 +122,7 @@ const PurchaseAlertAboundent = ({
       return;
     }
 
-    const docId = `${cleanedWA}_${product.id || "unknown"}`;
+    const docId = `${cleanedWA}_${product.title || "unknown"}`;
     const codFee = paymentMethod === "COD" ? 0 : 0;
     const totalPrice = price + codFee;
     const addressCleaned = cleanAddress(address);
@@ -137,33 +136,29 @@ const PurchaseAlertAboundent = ({
       }
 
       // Update ke Firestore dengan status pending
-      await setDoc(
-        doc(db, "leads", docId),
-        {
-          name,
-          whatsapp: cleanedWA,
-          price,
-          costProduct: product.costProduct || 0,
-          address: address,
-          addressClean: addressCleaned,
-          paymentMethod,
-          productTitle: product.title,
-          productId: product.id || "unknown",
-          createdAt: Timestamp.now(),
-          status: "pending",
-          resiCheck: "not",
-          rts: 0,
-          needsReview: validation.needsReview,
-        },
-        { merge: true }
-      );
+      await setDoc(doc(db, "leads", docId), {
+        name,
+        whatsapp: cleanedWA,
+        price,
+        costProduct: product.costProduct || 0,
+        address: address,
+        addressClean: addressCleaned,
+        paymentMethod,
+        productTitle: product.title,
+        productId: product.title || "unknown",
+        createdAt: Timestamp.now(),
+        status: "pending",
+        resiCheck: "not",
+        rts: 0,
+        needsReview: validation.needsReview,
+      });
 
       // FB Pixel Tracking
       if (window.fbq) {
         try {
           fbq("trackSingle", pixel, "Purchase", {
             content_name: product.title,
-            content_ids: [product.id || "123"],
+            content_ids: [product.title || "123"],
             content_type: "product",
             value: product.price || 0,
             currency: "IDR",
@@ -178,7 +173,7 @@ const PurchaseAlertAboundent = ({
         whatsapp: cleanedWA,
         address,
         productTitle: product.title,
-        productId: product.id || "unknown",
+        productId: product.title || "unknown",
         price,
         total: totalPrice,
         paymentMethod,
@@ -195,8 +190,7 @@ const PurchaseAlertAboundent = ({
         `*Metode Pembayaran:* ${paymentMethod}\n\n` +
         `Mohon segera diproses, terima kasih`;
 
-      const ADMIN_WA = "6282387881505";
-      const whatsappURL = `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(
+       const whatsappURL = `https://wa.me/${adminWA}?text=${encodeURIComponent(
         message
       )}`;
       window.open(whatsappURL, "_blank");

@@ -14,7 +14,7 @@ const MassageGun = () => {
   ];
 
   const funnelProduct = {
-    title: "Alat Pijat Elektrik",
+    title: "Alat Pijat 4 in 1",
     description: "Alat Pijat 4 in 1",
     price: 149000,
 		costProduct: 90000,

@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import Funnel from "../FunnelPurchaseAllInOne";
+import Funnel from "../PurchaseAllInOne";
 import Faqs from "../set/Faqs";
 import Count from "./../set/Count";
 import ValueStack from "../set/ValueStack";
