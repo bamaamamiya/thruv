@@ -1,16 +1,18 @@
 // addressCleaner.js
+import { provinceDictionary } from "./data/provinceDictionary.js";
+import { kabupatenDictionary } from "./data/kabupatenDictionary.js";
+import { kecamatanDictionary } from "./data/kecamatanDictionary.js";
+import { desaDictionary } from "./data/desaDictionary.js";
+import { rtrwDictionary } from "./data/rtrwDictionary.js";
+import { streetDictionary } from "./data/streetDictionary.js";
+
 const dictionary = {
-  jl: "Jalan",
-  jln: "Jalan",
-  kec: "Kecamatan",
-  kab: "Kabupaten",
-  kel: "Kelurahan",
-  ds: "Desa",
-  rt: "RT",
-  rw: "RW",
-  komp: "Kompleks",
-  blok: "Blok",
-  perum: "Perumahan",
+  ...provinceDictionary,
+  ...kabupatenDictionary,
+  ...kecamatanDictionary,
+  ...desaDictionary,
+  ...rtrwDictionary,
+  ...streetDictionary,
 };
 
 export const cleanAddress = (addr) => {

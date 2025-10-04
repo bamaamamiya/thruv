@@ -6,7 +6,7 @@ import Count from "./../set/Count";
 import ValueStack from "../set/ValueStack";
 
 import { useEffect, useRef, useState } from "react";
-import ViewersCounter from "../set/ViewersCounter";
+import MengantarForm from "../FunnelMengantar";
 const Footer = ({
   pixelId,
   produkBaru,
@@ -19,6 +19,8 @@ const Footer = ({
   bonusTitle,
   NormalPrice,
   discountTransfer,
+  extraOffer, // 👈 props baru
+  adminWA,
 }) => {
   const normalPrice = NormalPrice; // harga normal
   const promoPrice = hargaJual; // harga promo
@@ -61,6 +63,39 @@ const Footer = ({
     }
   }, [isVisible]);
 
+// 	useEffect(() => {
+//   console.log("Props Footer:", {
+//     pixelId,
+//     produkBaru,
+//     footerImages,
+//     faqs,
+//     namaProduct,
+//     bundles,
+//     hargaJual,
+//     bonus,
+//     bonusTitle,
+//     NormalPrice,
+//     discountTransfer,
+//     extraOffer,
+//     adminWA,
+//   });
+// }, [
+//   pixelId,
+//   produkBaru,
+//   footerImages,
+//   faqs,
+//   namaProduct,
+//   bundles,
+//   hargaJual,
+//   bonus,
+//   bonusTitle,
+//   NormalPrice,
+//   discountTransfer,
+//   extraOffer,
+//   adminWA,
+// ]);
+
+
   return (
     <div>
       <div className="space-y-2" id="formulir">
@@ -81,6 +116,13 @@ const Footer = ({
             Rp {Math.floor(currentValue).toLocaleString("id-ID")}
           </h1>
         </div>
+        {/* EXTRA OFFER */}
+        {extraOffer && (
+          <div className="text-center text-lg font-bold italic">
+            <h1>{extraOffer}</h1>
+          </div>
+        )}
+
         <br />
         {/* <ValueStack
           values={[

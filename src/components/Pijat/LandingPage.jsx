@@ -2,7 +2,7 @@ import Content from "./Content";
 import Headline from "./Headline";
 import Footer from "./Footer";
 import Floting from "../set/Floting";
-import FakeNotif from "../set/FakeNotif";
+import MengantarForm from "./FooterMengantar";
 
 const MassageGun = () => {
   const productImages = ["images/pijat/1.webp", "images/pijat/2.webp"];
@@ -16,7 +16,8 @@ const MassageGun = () => {
   const funnelProduct = {
     title: "Alat Pijat Elektrik",
     description: "Alat Pijat 4 in 1",
-    price: 199000,
+    price: 149000,
+		costProduct: 90000,
   };
 
   const bundles = [
@@ -95,8 +96,8 @@ const MassageGun = () => {
   const discount = 0.5; // 50%
   const hargaNormal = getNormalPrice(funnelProduct.price, discount);
 
-  const discountTransfer = false; // 🔥 tinggal ubah true/false
-  const extraOffer = "Potongan Ongkir Keseluruh Indonesia";
+  const extraOffer = "Potongan Ongkir";
+
   return (
     <div>
       <Headline
@@ -122,9 +123,19 @@ const MassageGun = () => {
         faqs={faqs}
         namaProduct={funnelProduct.title}
         NormalPrice={hargaNormal}
-        discountTransfer={discountTransfer} // ⬅ lempar ke Footer
+        discountTransfer={false} // ⬅ lempar ke Footer
         extraOffer={extraOffer} // 👈 kalau mau ditampilkan
       />
+			{/* <MengantarForm
+				hargaJual={funnelProduct.price}
+        footerImages={["images/fotter2.webp", "images/fotter.webp"]}
+        faqs={faqs}
+        namaProduct={funnelProduct.title}
+        NormalPrice={hargaNormal}
+        extraOffer={extraOffer} // 👈 kalau mau ditampilkan
+				url="pijat"
+			/> */}
+
       {/* <Footer
         hargaJual={bundles[0].price}
         pixelId={pixelString}

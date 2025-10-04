@@ -2,6 +2,9 @@ import Content from "./Content";
 import Headline from "./Headline";
 import Footer from "./Footer";
 import Floting from "../set/Floting";
+import MengantarForm from "./FooterMengantar";
+
+
 const CctvBohlam = () => {
   const productImages = ["images/cctv/3.webp", "images/cctv/4.webp"];
 
@@ -105,9 +108,10 @@ const CctvBohlam = () => {
     return sellingPrice / (1 - discountRate);
   }
   const discount = 0.5; // 50%
-	const hargaNormal = getNormalPrice(funnelProduct.price, discount);
+  const hargaNormal = getNormalPrice(funnelProduct.price, discount);
 
-  const discountTransfer = true; // 🔥 tinggal ubah true/false
+  const discountTransfer = false; // 🔥 tinggal ubah true/false
+  const extraOffer = "+ Potongan Ongkir"
 
   return (
     <div className="bg-white">
@@ -134,10 +138,19 @@ const CctvBohlam = () => {
         namaProduct={funnelProduct.title}
         NormalPrice={hargaNormal}
         discountTransfer={discountTransfer} // ⬅ lempar ke Footer
-				
+				extraOffer={extraOffer}
         // bonus={BonusData.bonus}
         // bonusTitle={BonusData.title}
       />
+      {/* <MengantarForm
+				hargaJual={funnelProduct.price}
+        footerImages={["images/fotter2.webp", "images/fotter.webp"]}
+        faqs={faqs}
+        namaProduct={funnelProduct.title}
+        NormalPrice={hargaNormal}
+        extraOffer={extraOffer} // 👈 kalau mau ditampilkan
+				url="pijat"
+			/> */}
       {/* <Footer
         hargaJual={bundles[0].price}
         pixelId="2111198546014232"

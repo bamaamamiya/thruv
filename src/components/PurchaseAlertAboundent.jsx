@@ -1,12 +1,10 @@
-import React, { useState } from "react";
 import { setDoc, doc, Timestamp } from "firebase/firestore";
 import { db } from "../firebase";
-import emailjs from "@emailjs/browser";
 import { cleanAddress } from "../utils/addressCleaner";
 import { validateAddress } from "../utils/addressValidator";
-import { matchAddress } from "../utils/addressMatcher"; // import matcher
+import React, { useState, useEffect, useRef } from "react";
 
-const FunnelPurchaseAlert = ({
+const PurchaseAlertAboundent = ({
   pixel,
   product,
   price,
@@ -21,11 +19,45 @@ const FunnelPurchaseAlert = ({
   const [address, setAddress] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const debounceRef = useRef(null);
+
+  // === Helper ===
   const cleanAndValidateWA = (wa) => {
-    let cleaned = wa.replace(/\D/g, ""); // ambil hanya angka
-    if (cleaned.startsWith("0")) cleaned = "62" + cleaned.slice(1); // ganti 0 jadi 62
-    if (!cleaned.startsWith("62")) cleaned = "62" + cleaned; // jaga-jaga
+    let cleaned = wa.replace(/\D/g, "");
+    if (cleaned.startsWith("0")) cleaned = "62" + cleaned.slice(1);
+    if (!cleaned.startsWith("62")) cleaned = "62" + cleaned;
     return /^62[0-9]{9,15}$/.test(cleaned) ? cleaned : null;
+  };
+
+  // === Function: Save Abandoned Lead ===
+  const saveAbandonedLead = (nameInput, waInput) => {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+
+    debounceRef.current = setTimeout(async () => {
+      if (!nameInput || nameInput.length < 3) return;
+      const cleanedWA = cleanAndValidateWA(waInput);
+      if (!cleanedWA) return;
+      if (!product) return;
+
+      const docId = `${cleanedWA}_${product.id || "unknown"}`;
+      try {
+        await setDoc(
+          doc(db, "leads", docId),
+          {
+            name: nameInput,
+            whatsapp: cleanedWA,
+            productId: product.id || "unknown",
+            productTitle: product.title,
+            status: "abandoned",
+            createdAt: Timestamp.now(),
+          },
+          { merge: true } // update jika sudah ada
+        );
+        console.log("Abandoned lead saved:", cleanedWA);
+      } catch (err) {
+        console.error("Gagal simpan abandoned lead:", err);
+      }
+    }, 800);
   };
 
   const sendOrderEmail = async (data) => {
@@ -60,31 +92,35 @@ const FunnelPurchaseAlert = ({
     }
   };
 
+  // === Handle Submit Konfirmasi Pesanan ===
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (loading) return;
     setLoading(true);
 
-    // Validasi
     if (!name || !whatsapp || !address) {
       alert("Silakan isi semua data dengan lengkap!");
-      return setLoading(false);
+      setLoading(false);
+      return;
     }
 
     if (!product) {
       alert("Produk tidak ditemukan!");
-      return setLoading(false);
+      setLoading(false);
+      return;
     }
 
     if (address.length < 30) {
       alert("Alamat terlalu singkat. Mohon isi alamat lengkap.");
-      return setLoading(false);
+      setLoading(false);
+      return;
     }
 
     const cleanedWA = cleanAndValidateWA(whatsapp);
     if (!cleanedWA) {
       alert("Nomor WhatsApp tidak valid. Harus dimulai dengan 08 atau 62.");
-      return setLoading(false);
+      setLoading(false);
+      return;
     }
 
     const docId = `${cleanedWA}_${product.id || "unknown"}`;
@@ -96,25 +132,32 @@ const FunnelPurchaseAlert = ({
       const validation = validateAddress(address);
       if (!validation.valid) {
         alert(`${validation.reason}`);
-        return setLoading(false);
+        setLoading(false);
+        return;
       }
 
-      await setDoc(doc(db, "leads", docId), {
-        name,
-        whatsapp: cleanedWA,
-        price,
-        costProduct: product.costProduct || 0,
-        address: address,
-        addressClean: addressCleaned,
-        paymentMethod,
-        productTitle: product.title,
-        productId: product.id || "unknown",
-        createdAt: Timestamp.now(),
-        status: "pending",
-        resiCheck: "not",
-        rts: 0,
-        needsReview: validation.needsReview, // pakai dari helper
-      });
+      // Update ke Firestore dengan status pending
+      await setDoc(
+        doc(db, "leads", docId),
+        {
+          name,
+          whatsapp: cleanedWA,
+          price,
+          costProduct: product.costProduct || 0,
+          address: address,
+          addressClean: addressCleaned,
+          paymentMethod,
+          productTitle: product.title,
+          productId: product.id || "unknown",
+          createdAt: Timestamp.now(),
+          status: "pending",
+          resiCheck: "not",
+          rts: 0,
+          needsReview: validation.needsReview,
+        },
+        { merge: true }
+      );
+
       // FB Pixel Tracking
       if (window.fbq) {
         try {
@@ -142,7 +185,7 @@ const FunnelPurchaseAlert = ({
         order_date: new Date().toLocaleString("id-ID"),
       });
 
-      // Kirim WhatsApp ke Admin
+      // Kirim WA ke admin
       const message =
         `*PESANAN BARU*\n\n` +
         `*Produk:* ${product.title}\n` +
@@ -158,7 +201,7 @@ const FunnelPurchaseAlert = ({
       )}`;
       window.open(whatsappURL, "_blank");
 
-      // Reset Form
+      // Reset form
       setName("");
       setWhatsapp("");
       setAddress("");
@@ -182,7 +225,10 @@ const FunnelPurchaseAlert = ({
             type="text"
             placeholder="Nama Anda"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {
+              setName(e.target.value);
+              saveAbandonedLead(e.target.value, whatsapp);
+            }}
             className="w-full border rounded-lg p-2 focus:outline-none focus:ring"
           />
         </div>
@@ -193,7 +239,11 @@ const FunnelPurchaseAlert = ({
             type="text"
             placeholder="Masukkan No. WhatsApp Aktif"
             value={whatsapp}
-            onChange={(e) => setWhatsapp(e.target.value.replace(/\D/g, ""))}
+            onChange={(e) => {
+              const wa = e.target.value.replace(/\D/g, "");
+              setWhatsapp(wa);
+              saveAbandonedLead(name, wa);
+            }}
             className="w-full border rounded-lg p-2 focus:outline-none focus:ring"
           />
         </div>
@@ -263,4 +313,4 @@ const FunnelPurchaseAlert = ({
   );
 };
 
-export default FunnelPurchaseAlert;
+export default PurchaseAlertAboundent;
