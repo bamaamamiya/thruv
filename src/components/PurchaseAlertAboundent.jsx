@@ -1,4 +1,4 @@
-import { setDoc, doc, Timestamp } from "firebase/firestore";
+import { setDoc, doc, Timestamp, getDoc, updateDoc  } from "firebase/firestore";
 import { db } from "../firebase";
 import { cleanAddress } from "../utils/addressCleaner";
 import { validateAddress } from "../utils/addressValidator";
@@ -31,33 +31,50 @@ const PurchaseAlertAboundent = ({
   };
 
   // === Function: Save Abandoned Lead ===
-  const saveAbandonedLead = (nameInput, waInput) => {
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(async () => {
-      if (!nameInput || nameInput.length < 3) return;
-      const cleanedWA = cleanAndValidateWA(waInput);
-      if (!cleanedWA || !product) return;
+  const saveAbandonedLead = (nameInput, waInput, addressInput) => {
+  if (debounceRef.current) clearTimeout(debounceRef.current);
+  debounceRef.current = setTimeout(async () => {
+    if (!nameInput || nameInput.length < 3) return;
+    const cleanedWA = cleanAndValidateWA(waInput);
+    if (!cleanedWA || cleanedWA.length < 11) return;
+    if (!product) return;
 
-      const docId = `${cleanedWA}_${product.title || "unknown"}`;
+    const docId = `${cleanedWA}_${product.title || "unknown"}`;
+    const docRef = doc(db, "abandonedLeads", docId);
 
-      try {
+    try {
+      const snapshot = await getDoc(docRef);
+
+      if (snapshot.exists()) {
+        // update saja kalau sudah ada
         await setDoc(
-          doc(db, "abandonedLeads", docId), // PISAH COLLECTION
+          docRef,
           {
             name: nameInput,
             whatsapp: cleanedWA,
-            productTitle: product.title,
-            status: "abandoned",
-            createdAt: Timestamp.now(),
-          }
+            address: addressInput || "",
+            updatedAt: Timestamp.now(),
+          },
+          { merge: true }
         );
-
-        console.log("Abandoned lead saved:", cleanedWA);
-      } catch (err) {
-        console.error("Gagal simpan abandoned lead:", err);
+      } else {
+        // buat baru kalau belum ada
+        await setDoc(docRef, {
+          name: nameInput,
+          whatsapp: cleanedWA,
+          address: addressInput || "",
+          productTitle: product.title,
+          status: "abandoned",
+          createdAt: Timestamp.now(),
+        });
       }
-    }, 800);
-  };
+
+      console.log("Abandoned lead saved:", cleanedWA);
+    } catch (err) {
+      console.error("Gagal simpan abandoned lead:", err);
+    }
+  }, 1500);
+};
 
   const sendOrderEmail = async (data) => {
     try {
@@ -190,7 +207,7 @@ const PurchaseAlertAboundent = ({
         `*Metode Pembayaran:* ${paymentMethod}\n\n` +
         `Mohon segera diproses, terima kasih`;
 
-       const whatsappURL = `https://wa.me/${adminWA}?text=${encodeURIComponent(
+      const whatsappURL = `https://wa.me/${adminWA}?text=${encodeURIComponent(
         message
       )}`;
       window.open(whatsappURL, "_blank");
@@ -221,7 +238,7 @@ const PurchaseAlertAboundent = ({
             value={name}
             onChange={(e) => {
               setName(e.target.value);
-              saveAbandonedLead(e.target.value, whatsapp);
+              saveAbandonedLead(e.target.value, whatsapp, address);
             }}
             className="w-full border rounded-lg p-2 focus:outline-none focus:ring"
           />
@@ -236,7 +253,7 @@ const PurchaseAlertAboundent = ({
             onChange={(e) => {
               const wa = e.target.value.replace(/\D/g, "");
               setWhatsapp(wa);
-              saveAbandonedLead(name, wa);
+              saveAbandonedLead(name, wa, address);
             }}
             className="w-full border rounded-lg p-2 focus:outline-none focus:ring"
           />
@@ -248,7 +265,10 @@ const PurchaseAlertAboundent = ({
           <textarea
             placeholder="Masukkan Nomor Rumah, RT/RW, Kecamatan, Kota/Kab, Ciri2 Rumah"
             value={address}
-            onChange={(e) => setAddress(e.target.value)}
+            onChange={(e) => {
+              setAddress(e.target.value);
+              saveAbandonedLead(name, whatsapp, e.target.value);
+            }}
             rows={4}
             className="w-full border rounded-lg p-2 focus:outline-none focus:ring resize-none"
           />
