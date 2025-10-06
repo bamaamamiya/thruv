@@ -27,7 +27,7 @@ const PurchaseAlertAboundent = ({
     let cleaned = wa.replace(/\D/g, "");
     if (cleaned.startsWith("0")) cleaned = "62" + cleaned.slice(1);
     if (!cleaned.startsWith("62")) cleaned = "62" + cleaned;
-    return /^62[0-9]{9,15}$/.test(cleaned) ? cleaned : null;
+    return /^62[0-10]{10,14}$/.test(cleaned) ? cleaned : null;
   };
 
   // === Function: Save Abandoned Lead ===
