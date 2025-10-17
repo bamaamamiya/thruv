@@ -139,7 +139,8 @@ const PurchaseAlertAboundent = ({
       return;
     }
 
-    const docId = `${cleanedWA}_${product.title || "unknown"}`;
+    // const docId = `${cleanedWA}_${product.title || "unknown"}`;
+		const orderId = `${cleanedWA}_${product.title}_${Date.now()}`;
     const codFee = paymentMethod === "COD" ? 0 : 0;
     const totalPrice = price + codFee;
     const addressCleaned = cleanAddress(address);
@@ -153,7 +154,7 @@ const PurchaseAlertAboundent = ({
       }
 
       // Update ke Firestore dengan status pending
-      await setDoc(doc(db, "leads", docId), {
+      await setDoc(doc(db, "leads", orderId), {
         name,
         whatsapp: cleanedWA,
         price,

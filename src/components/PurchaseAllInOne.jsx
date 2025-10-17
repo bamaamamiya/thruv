@@ -1,9 +1,19 @@
-import { setDoc, doc, Timestamp } from "firebase/firestore";
+import { setDoc, doc, Timestamp, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { cleanAddress } from "../utils/addressCleaner";
 import { validateAddress } from "../utils/addressValidator";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { matchAddress } from "../utils/addressMatcher";
+
+// === Helper: Hitung Ongkir Otomatis ===
+const getOngkir = (province, regency) => {
+  province = province.toLowerCase();
+  regency = regency.toLowerCase();
+
+  if (province === "bali" && regency.includes("denpasar")) return 35000;
+  if (province === "jakarta") return 20000;
+  return 45000; // default normal
+};
 
 const PurchaseAllInOne = ({
   pixel,
@@ -12,8 +22,8 @@ const PurchaseAllInOne = ({
   costProduct,
   discountTransfer,
   adminWA = "6282387881505",
-  buttonColor = "bg-redto", // default warna tombol
-  buttonHoverColor = "hover:bg-red-700", // default hover
+  buttonColor = "bg-redto",
+  buttonHoverColor = "hover:bg-red-700",
 }) => {
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
@@ -23,7 +33,7 @@ const PurchaseAllInOne = ({
 
   const debounceRef = useRef(null);
 
-  // === Helper ===
+  // === Helper: Clean & Validasi WA ===
   const cleanAndValidateWA = (wa) => {
     let cleaned = wa.replace(/\D/g, "");
     if (cleaned.startsWith("0")) cleaned = "62" + cleaned.slice(1);
@@ -31,28 +41,42 @@ const PurchaseAllInOne = ({
     return /^62[0-9]{9,15}$/.test(cleaned) ? cleaned : null;
   };
 
-  // === Function: Save Abandoned Lead ===
-  const saveAbandonedLead = (nameInput, waInput) => {
+  // === Save / Update Abandoned Lead ===
+  const saveAbandonedLead = (nameInput, waInput, addressInput) => {
     if (debounceRef.current) clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(async () => {
       if (!nameInput || nameInput.length < 3) return;
       const cleanedWA = cleanAndValidateWA(waInput);
-      if (!cleanedWA || !product) return;
+      if (!cleanedWA || cleanedWA.length < 11) return;
+      if (!product) return;
 
       const docId = `${cleanedWA}_${product.title || "unknown"}`;
+      const docRef = doc(db, "abandonedLeads", docId);
 
       try {
-        await setDoc(
-          doc(db, "abandonedLeads", docId), // PISAH COLLECTION
-          {
+        const snapshot = await getDoc(docRef);
+
+        if (snapshot.exists()) {
+          await setDoc(
+            docRef,
+            {
+              name: nameInput,
+              whatsapp: cleanedWA,
+              address: addressInput || "",
+              updatedAt: Timestamp.now(),
+            },
+            { merge: true }
+          );
+        } else {
+          await setDoc(docRef, {
             name: nameInput,
             whatsapp: cleanedWA,
+            address: addressInput || "",
             productTitle: product.title,
             status: "abandoned",
             createdAt: Timestamp.now(),
-            paymentMethod,
-          }
-        );
+          });
+        }
 
         console.log("Abandoned lead saved:", cleanedWA);
       } catch (err) {
@@ -61,39 +85,25 @@ const PurchaseAllInOne = ({
     }, 800);
   };
 
+  // === Send Email ===
   const sendOrderEmail = async (data) => {
     try {
       const res = await fetch(
         "https://order-alert-six.vercel.app/api/send-email",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: data.name,
-            whatsapp: data.whatsapp,
-            address: data.address,
-            product_title: data.productTitle,
-            price: data.price,
-            total: data.total,
-            payment_method: data.paymentMethod,
-            order_date: data.order_date,
-          }),
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
         }
       );
-
-      if (!res.ok) {
-        throw new Error("Gagal kirim email");
-      }
-
+      if (!res.ok) throw new Error("Gagal kirim email");
       console.log("Email order berhasil dikirim!");
     } catch (err) {
       console.error("Error kirim email:", err);
     }
   };
 
-  // === Handle Submit Konfirmasi Pesanan ===
+  // === Submit Order ===
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (loading) return;
@@ -125,32 +135,39 @@ const PurchaseAllInOne = ({
     }
 
     const docId = `${cleanedWA}_${product.title || "unknown"}`;
-    const codFee = paymentMethod === "COD" ? 0 : 0;
-    const totalPrice = price + codFee;
     const addressCleaned = cleanAddress(address);
+
+    // === Validasi Alamat & Match ===
     const validation = validateAddress(addressCleaned);
     const matched = await matchAddress(addressCleaned);
     const needsReviewFlag = validation.needsReview || !matched.success;
 
-    try {
-      const validation = validateAddress(address);
-      if (!validation.valid) {
-        alert(`${validation.reason}`);
-        setLoading(false);
-        return;
-      }
+    if (!validation.valid) {
+      alert(`${validation.reason}`);
+      setLoading(false);
+      return;
+    }
 
-      // Update ke Firestore dengan status pending
+    // === Hitung Ongkir & Total ===
+    const ongkir = getOngkir(
+      matched.province?.name || "",
+      matched.regency?.name || ""
+    );
+    const totalPrice = price + ongkir;
+
+    try {
+      // Save ke Firestore
       await setDoc(doc(db, "leads", docId), {
         name,
         whatsapp: cleanedWA,
-        price,
-        costProduct: product.costProduct || 0,
-        address: address,
-        addressClean: addressCleaned,
+        address: addressCleaned,
         paymentMethod,
         productTitle: product.title,
         productId: product.title || "unknown",
+        price,
+        costProduct: product.costProduct || 0,
+        ongkir,
+        totalPrice,
         createdAt: Timestamp.now(),
         status: "pending",
         resiCheck: "not",
@@ -162,6 +179,9 @@ const PurchaseAllInOne = ({
         village: matched.village?.name || "",
       });
 
+      // Save Abandoned Lead juga
+      saveAbandonedLead(name, whatsapp, addressCleaned);
+
       // FB Pixel Tracking
       if (window.fbq) {
         try {
@@ -169,7 +189,7 @@ const PurchaseAllInOne = ({
             content_name: product.title,
             content_ids: [product.title || "123"],
             content_type: "product",
-            value: product.price || 0,
+            value: totalPrice,
             currency: "IDR",
           });
         } catch (err) {
@@ -177,37 +197,38 @@ const PurchaseAllInOne = ({
         }
       }
 
+      // Send Email
       await sendOrderEmail({
         name,
         whatsapp: cleanedWA,
-        address,
+        address: addressCleaned,
         productTitle: product.title,
-        productId: product.title || "unknown",
         price,
         total: totalPrice,
         paymentMethod,
         order_date: new Date().toLocaleString("id-ID"),
       });
 
-      // Kirim WA ke admin
-      const message =
+      // Kirim WA ke Admin
+      const message = 
         `*PESANAN BARU*\n\n` +
         `*Produk:* ${product.title}\n` +
-        `*Nama:* ${name}\n` +
-        `*No. WhatsApp:* ${cleanedWA}\n` +
-        `*Alamat:* ${address}\n` +
+        `*Harga Produk:* ${price}\n` +
+        `*Ongkir:* ${ongkir}\n` +
+        `*Total Pembayaran:* ${totalPrice}\n\n` +
+        `Nama: ${name}\n` +
+        `Alamat Lengkap: ${addressCleaned}\n` +
         `*Metode Pembayaran:* ${paymentMethod}\n\n` +
         `Mohon segera diproses, terima kasih`;
-      const whatsappURL = `https://wa.me/${adminWA}?text=${encodeURIComponent(
-        message
-      )}`;
-      window.open(whatsappURL, "_blank");
 
-      // Reset form
+      window.open(`https://wa.me/${adminWA}?text=${encodeURIComponent(message)}`, "_blank");
+
+      // Reset Form
       setName("");
       setWhatsapp("");
       setAddress("");
       setPaymentMethod("COD");
+
     } catch (err) {
       console.error("Gagal simpan ke Firestore:", err);
       alert("Terjadi kesalahan saat menyimpan. Coba lagi.");
@@ -229,7 +250,7 @@ const PurchaseAllInOne = ({
             value={name}
             onChange={(e) => {
               setName(e.target.value);
-              saveAbandonedLead(e.target.value, whatsapp);
+              saveAbandonedLead(e.target.value, whatsapp, address);
             }}
             className="w-full border rounded-lg p-2 focus:outline-none focus:ring"
           />
@@ -244,7 +265,7 @@ const PurchaseAllInOne = ({
             onChange={(e) => {
               const wa = e.target.value.replace(/\D/g, "");
               setWhatsapp(wa);
-              saveAbandonedLead(name, wa);
+              saveAbandonedLead(name, wa, address);
             }}
             className="w-full border rounded-lg p-2 focus:outline-none focus:ring"
           />
@@ -256,7 +277,10 @@ const PurchaseAllInOne = ({
           <textarea
             placeholder="Masukkan Nomor Rumah, RT/RW, Kecamatan, Kota/Kab, Ciri2 Rumah"
             value={address}
-            onChange={(e) => setAddress(e.target.value)}
+            onChange={(e) => {
+              setAddress(e.target.value);
+              saveAbandonedLead(name, whatsapp, e.target.value);
+            }}
             rows={4}
             className="w-full border rounded-lg p-2 focus:outline-none focus:ring resize-none"
           />
