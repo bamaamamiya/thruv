@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import Funnel from "../PurchaseAllInOne";
+import Funnel from "../FunnelPurchaseAllInOne";
 import Faqs from "../set/Faqs";
 import Count from "./../set/Count";
 import ValueStack from "../set/ValueStack";
@@ -63,38 +63,37 @@ const Footer = ({
     }
   }, [isVisible]);
 
-// 	useEffect(() => {
-//   console.log("Props Footer:", {
-//     pixelId,
-//     produkBaru,
-//     footerImages,
-//     faqs,
-//     namaProduct,
-//     bundles,
-//     hargaJual,
-//     bonus,
-//     bonusTitle,
-//     NormalPrice,
-//     discountTransfer,
-//     extraOffer,
-//     adminWA,
-//   });
-// }, [
-//   pixelId,
-//   produkBaru,
-//   footerImages,
-//   faqs,
-//   namaProduct,
-//   bundles,
-//   hargaJual,
-//   bonus,
-//   bonusTitle,
-//   NormalPrice,
-//   discountTransfer,
-//   extraOffer,
-//   adminWA,
-// ]);
-
+  // 	useEffect(() => {
+  //   console.log("Props Footer:", {
+  //     pixelId,
+  //     produkBaru,
+  //     footerImages,
+  //     faqs,
+  //     namaProduct,
+  //     bundles,
+  //     hargaJual,
+  //     bonus,
+  //     bonusTitle,
+  //     NormalPrice,
+  //     discountTransfer,
+  //     extraOffer,
+  //     adminWA,
+  //   });
+  // }, [
+  //   pixelId,
+  //   produkBaru,
+  //   footerImages,
+  //   faqs,
+  //   namaProduct,
+  //   bundles,
+  //   hargaJual,
+  //   bonus,
+  //   bonusTitle,
+  //   NormalPrice,
+  //   discountTransfer,
+  //   extraOffer,
+  //   adminWA,
+  // ]);
 
   return (
     <div>
