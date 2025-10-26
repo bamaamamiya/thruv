@@ -2,11 +2,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import Funnel from "../FunnelPurchaseAllInOne";
 import Faqs from "../set/Faqs";
-import Count from "./../set/Count";
-import ValueStack from "../set/ValueStack";
 
 import { useEffect, useRef, useState } from "react";
-import MengantarForm from "../FunnelMengantar";
 const Footer = ({
   pixelId,
   produkBaru,
@@ -62,39 +59,6 @@ const Footer = ({
       }, 30);
     }
   }, [isVisible]);
-
-// 	useEffect(() => {
-//   console.log("Props Footer:", {
-//     pixelId,
-//     produkBaru,
-//     footerImages,
-//     faqs,
-//     namaProduct,
-//     bundles,
-//     hargaJual,
-//     bonus,
-//     bonusTitle,
-//     NormalPrice,
-//     discountTransfer,
-//     extraOffer,
-//     adminWA,
-//   });
-// }, [
-//   pixelId,
-//   produkBaru,
-//   footerImages,
-//   faqs,
-//   namaProduct,
-//   bundles,
-//   hargaJual,
-//   bonus,
-//   bonusTitle,
-//   NormalPrice,
-//   discountTransfer,
-//   extraOffer,
-//   adminWA,
-// ]);
-
 
   return (
     <div>
