@@ -31,7 +31,6 @@ const FunnelPurchaseAllInOne = ({
     return /^62[0-9]{9,14}$/.test(cleaned) ? cleaned : null;
   };
 
-	console.log(pixel)
   // === Save Abandoned Lead with Merge ===
   const saveAbandonedLead = (nameInput, waInput, addressInput) => {
     if (debounceRef.current) clearTimeout(debounceRef.current);
