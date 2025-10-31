@@ -9,11 +9,12 @@ import LeadsDashboard from "./components/dashboard/LeadsDashboard";
 import LoginPage from "./components/dashboard/LoginPage";
 import PrivateRoute from "./components/dashboard/PrivateRoute";
 import CctvBohlam from "./components/Cctv/LandingPage";
+import CctvBohlam1 from "./components/CctvUpdate/LandingPage";
 import CctvBohlam2 from "./components/Cctv2/LandingPage";
 import CctvGSO from "./components/CCTVGSO/LandingPage";
 import OrderSummaryDashboard from "./components/dashboard/ShopifyStyleDashboard";
 import AlatPijat from "./components/Pijat/LandingPage";
-import BrandPage from "./components/BrandPage/Page"
+import BrandPage from "./components/BrandPage/Page";
 function App() {
   return (
     <BrowserRouter>
@@ -21,7 +22,8 @@ function App() {
         <Route path="/" element={<Page />} />
         <Route path="/lp" element={<LandingPage />} />
         <Route path="/brand" element={<BrandPage />} />
-        <Route path="/cctv" element={<CctvBohlam />} />
+        <Route path="/cctv1" element={<CctvBohlam />} />
+        <Route path="/cctv" element={<CctvBohlam1 />} />
         <Route path="/cctv2" element={<CctvBohlam2 />} />
         <Route path="/smart-cctv" element={<CctvGSO />} />
         <Route path="/pijat" element={<AlatPijat />} />

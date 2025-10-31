@@ -107,139 +107,138 @@ const FunnelPurchaseAllInOne = ({
   };
 
   // === Handle Submit Pesanan ===
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  if (loading) return;
-  setLoading(true);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (loading) return;
+    setLoading(true);
 
-  if (!name || !whatsapp || !address) {
-    alert("Silakan isi semua data dengan lengkap!");
-    setLoading(false);
-    return;
-  }
-
-  const cleanedWA = cleanAndValidateWA(whatsapp);
-  if (!cleanedWA) {
-    alert("Nomor WhatsApp tidak valid. Harus dimulai dengan 08 atau 62.");
-    setLoading(false);
-    return;
-  }
-
-  const safeProductTitle = product?.title
-    ? product.title.replace(/\s+/g, "-").toLowerCase()
-    : "default";
-
-  const orderId = `${cleanedWA}_${safeProductTitle}_${Date.now()}`;
-
-  try {
-    // ✅ Lazy Import modul berat di sini
-    const { setDoc, doc, Timestamp, getDoc } = await import("firebase/firestore");
-    const { db } = await import("../firebase");
-    const { cleanAddress } = await import("../utils/addressCleaner");
-    const { validateAddress } = await import("../utils/addressValidator");
-    const { matchAddress } = await import("../utils/addressMatcher");
-    const { calculateOngkir } = await import("../utils/calculateOngkir");
-
-    const addressCleaned = cleanAddress(address);
-
-    // Validation & matching
-    const validation = validateAddress(addressCleaned);
-    if (!validation.valid) {
-      alert(
-        validation.reason === "Alamat terlalu singkat"
-          ? "Alamat terlalu singkat 🙏. Mohon sertakan jalan, nomor rumah, dan kecamatan."
-          : validation.reason
-      );
+    if (!name || !whatsapp || !address) {
+      alert("Silakan isi semua data dengan lengkap!");
       setLoading(false);
       return;
     }
 
-    const matched = await matchAddress(addressCleaned);
-    const ongkir = calculateOngkir(matched.province?.name);
-    const needsReviewFlag = validation.needsReview || !matched.success;
-    const totalPrice = price + ongkir;
-
-    // Save order
-    await setDoc(doc(db, "leads", orderId), {
-      name,
-      whatsapp: cleanedWA,
-      address: address,
-      addressClean: addressCleaned,
-      price,
-      costProduct: product.costProduct || 0,
-      ongkir,
-      paymentMethod,
-      productTitle: product.title,
-      createdAt: Timestamp.now(),
-      updatedAt: Timestamp.now(),
-      status: "pending",
-      resiCheck: "not",
-      confirmation: "belum",
-      customerConfirmed: false,
-      rts: 0,
-      needsReview: needsReviewFlag,
-      province: matched.province?.name || "",
-      regency: matched.regency?.name || "",
-      district: matched.district?.name || "",
-      village: matched.village?.name || "",
-    });
-
-    // FB Pixel
-    if (window.fbq) {
-      try {
-        fbq("trackSingle", pixel, "Purchase", {
-          content_name: product.title,
-          content_ids: [product.title || "123"],
-          content_type: "product",
-          value: price || 0,
-          currency: "IDR",
-        });
-      } catch (err) {
-        console.error("FB Pixel Error:", err);
-      }
+    const cleanedWA = cleanAndValidateWA(whatsapp);
+    if (!cleanedWA) {
+      alert("Nomor WhatsApp tidak valid. Harus dimulai dengan 08 atau 62.");
+      setLoading(false);
+      return;
     }
 
-    await sendOrderEmail({
-      name,
-      whatsapp: cleanedWA,
-      address,
-      productTitle: product.title,
-      productId: product.title || "unknown",
-      price,
-      total: totalPrice,
-      paymentMethod,
-      order_date: new Date().toLocaleString("id-ID"),
-    });
+    const safeProductTitle = product?.title
+      ? product.title.replace(/\s+/g, "-").toLowerCase()
+      : "default";
 
-    // Kirim WA ke admin
-    const message =
-      `*PESANAN BARU*\n\n` +
-      `*Produk:* ${product.title}\n` +
-      `*Nama:* ${name}\n` +
-      `*No. WhatsApp:* ${cleanedWA}\n` +
-      `*Alamat:* ${address}\n` +
-      `*Metode Pembayaran:* ${paymentMethod}\n\n` +
-      `Mohon segera diproses, terima kasih`;
-    const whatsappURL = `https://wa.me/${adminWA}?text=${encodeURIComponent(
-      message
-    )}`;
-    window.open(whatsappURL, "_blank");
+    const orderId = `${cleanedWA}_${safeProductTitle}_${Date.now()}`;
 
-    // Reset form
-    setName("");
-    setWhatsapp("");
-    setAddress("");
-    setPaymentMethod("COD");
-  } catch (err) {
-    console.error("Gagal simpan ke Firestore:", err);
-    alert("Terjadi kesalahan saat menyimpan. Coba lagi.");
-  } finally {
-    setLoading(false);
-  }
-};
+    try {
+      // ✅ Lazy Import modul berat di sini
+      const { setDoc, doc, Timestamp, getDoc } = await import(
+        "firebase/firestore"
+      );
+      const { db } = await import("../firebase");
+      const { cleanAddress } = await import("../utils/addressCleaner");
+      const { validateAddress } = await import("../utils/addressValidator");
+      const { matchAddress } = await import("../utils/addressMatcher");
+      const { calculateOngkir } = await import("../utils/calculateOngkir");
 
+      const addressCleaned = cleanAddress(address);
 
+      // Validation & matching
+      const validation = validateAddress(addressCleaned);
+      if (!validation.valid) {
+        alert(
+          validation.reason === "Alamat terlalu singkat"
+            ? "Alamat terlalu singkat 🙏. Mohon sertakan jalan, nomor rumah, dan kecamatan."
+            : validation.reason
+        );
+        setLoading(false);
+        return;
+      }
 
+      const matched = await matchAddress(addressCleaned);
+      const ongkir = calculateOngkir(matched.province?.name);
+      const needsReviewFlag = validation.needsReview || !matched.success;
+      const totalPrice = price + ongkir;
+
+      // Save order
+      await setDoc(doc(db, "leads", orderId), {
+        name,
+        whatsapp: cleanedWA,
+        address: address,
+        addressClean: addressCleaned,
+        price,
+        costProduct: product.costProduct || 0,
+        ongkir,
+        paymentMethod,
+        productTitle: product.title,
+        createdAt: Timestamp.now(),
+        updatedAt: Timestamp.now(),
+        status: "pending",
+        resiCheck: "not",
+        confirmation: "belum",
+        customerConfirmed: false,
+        rts: 0,
+        needsReview: needsReviewFlag,
+        province: matched.province?.name || "",
+        regency: matched.regency?.name || "",
+        district: matched.district?.name || "",
+        village: matched.village?.name || "",
+      });
+
+      // FB Pixel
+      if (window.fbq) {
+        try {
+          fbq("trackSingle", pixel, "Purchase", {
+            content_name: product.title,
+            content_ids: [product.title || "123"],
+            content_type: "product",
+            value: price || 0,
+            currency: "IDR",
+          });
+        } catch (err) {
+          console.error("FB Pixel Error:", err);
+        }
+      }
+
+      await sendOrderEmail({
+        name,
+        whatsapp: cleanedWA,
+        address,
+        productTitle: product.title,
+        productId: product.title || "unknown",
+        price,
+        total: totalPrice,
+        paymentMethod,
+        order_date: new Date().toLocaleString("id-ID"),
+      });
+
+      // Kirim WA ke admin
+      const message =
+        `*PESANAN BARU*\n\n` +
+        `*Produk:* ${product.title}\n` +
+        `*Nama:* ${name}\n` +
+        `*No. WhatsApp:* ${cleanedWA}\n` +
+        `*Alamat:* ${address}\n` +
+        `*Metode Pembayaran:* ${paymentMethod}\n\n` +
+        `Mohon segera diproses, terima kasih`;
+      const whatsappURL = `https://wa.me/${adminWA}?text=${encodeURIComponent(
+        message
+      )}`;
+      window.open(whatsappURL, "_blank");
+
+      // Reset form
+      setName("");
+      setWhatsapp("");
+      setAddress("");
+      setPaymentMethod("COD");
+    } catch (err) {
+      console.error("Gagal simpan ke Firestore:", err);
+      alert("Terjadi kesalahan saat menyimpan. Coba lagi.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="max-w-md mx-auto bg-white p-6 rounded-2xl">
@@ -291,7 +290,6 @@ const handleSubmit = async (e) => {
         </div>
 
         {/* Payment Method */}
-        <h3 className="text-lg font-bold mb-2">Metode Pembayaran:</h3>
         <div className="mb-4">
           {["COD", "Bank Transfer"].map((method) => (
             <div
@@ -332,11 +330,14 @@ const handleSubmit = async (e) => {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full text-2xl ${buttonColor} text-white font-bold py-2 px-4 rounded-lg transition ${
+          className={`w-full text-2xl ${buttonColor} text-white font-bold py-2 px-4 rounded-lg transition capitalize ${
             loading ? "opacity-50 cursor-not-allowed" : buttonHoverColor
           }`}
         >
-          {loading ? "Memproses..." : "Konfirmasi Pesanan Di WhatsApp"}
+          {/* {loading ? "Memproses..." : "Ambil Promo & Lanjut Ke WA ADMIN"} */}
+          {loading
+            ? "Memproses..."
+            : "Ambil Promo di WhatsApp"}
         </button>
       </form>
     </div>
