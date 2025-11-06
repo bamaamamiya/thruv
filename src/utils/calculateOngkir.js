@@ -5,7 +5,7 @@ export const calculateOngkir = (provinceName) => {
 
   switch (provinceName.toLowerCase()) {
     case "jawa timur":
-      ongkir = 30000;
+      ongkir = 25000;
       break;
     case "bali":
       ongkir = 35000;
