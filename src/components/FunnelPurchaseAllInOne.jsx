@@ -165,6 +165,7 @@ const FunnelPurchaseAllInOne = ({
       await setDoc(doc(db, "leads", orderId), {
         name,
         whatsapp: cleanedWA,
+        address: address,
         addressClean: addressCleaned,
         price,
         costProduct: product.costProduct || 0,
@@ -214,15 +215,17 @@ const FunnelPurchaseAllInOne = ({
 
       // Kirim WA ke admin
       const message =
-        `PESANAN BARU\n\n` +
-        `Produk: ${product.title}\n` +
-        `Nama: ${name}\n` +
-        `Metode Pembayaran: ${paymentMethod}\n\n` +
+        `*PESANAN BARU*\n\n` +
+        `*Produk:* ${product.title}\n` +
+        `*Nama:* ${name}\n` +
+        `*No. WhatsApp:* ${cleanedWA}\n` +
+        `*Alamat:* ${address}\n` +
+        `*Metode Pembayaran:* ${paymentMethod}\n\n` +
         `Mohon segera diproses, terima kasih`;
       const whatsappURL = `https://wa.me/${adminWA}?text=${encodeURIComponent(
         message
       )}`;
-      window.location.href = whatsappURL;
+      window.open(whatsappURL, "_blank");
 
       // Reset form
       setName("");
@@ -332,7 +335,9 @@ const FunnelPurchaseAllInOne = ({
           }`}
         >
           {/* {loading ? "Memproses..." : "Ambil Promo & Lanjut Ke WA ADMIN"} */}
-          {loading ? "Memproses..." : "Ambil Promo di WhatsApp"}
+          {loading
+            ? "Memproses..."
+            : "Ambil Promo di WhatsApp"}
         </button>
       </form>
     </div>
