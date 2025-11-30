@@ -165,7 +165,6 @@ const FunnelPurchaseAllInOne = ({
       await setDoc(doc(db, "leads", orderId), {
         name,
         whatsapp: cleanedWA,
-        address: address,
         addressClean: addressCleaned,
         price,
         costProduct: product.costProduct || 0,
