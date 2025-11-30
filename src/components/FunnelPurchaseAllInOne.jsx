@@ -1,6 +1,10 @@
 import React, { useState, useRef } from "react";
 import { setDoc, doc, Timestamp, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import { cleanAddress } from "../utils/addressCleaner";
+import { validateAddress } from "../utils/addressValidator";
+import { matchAddress } from "../utils/addressMatcher";
+import { calculateOngkir } from "../utils/calculateOngkir";
 
 const FunnelPurchaseAllInOne = ({
   pixel,
@@ -128,7 +132,7 @@ const FunnelPurchaseAllInOne = ({
     const orderId = `${cleanedWA}_${safeProductTitle}_${Date.now()}`;
 
     try {
-      // Lazy Import
+      // ✅ Lazy Import modul berat di sini
       const { setDoc, doc, Timestamp, getDoc } = await import(
         "firebase/firestore"
       );
@@ -140,7 +144,7 @@ const FunnelPurchaseAllInOne = ({
 
       const addressCleaned = cleanAddress(address);
 
-      // Validation & Matching
+      // Validation & matching
       const validation = validateAddress(addressCleaned);
       if (!validation.valid) {
         alert(
@@ -157,7 +161,7 @@ const FunnelPurchaseAllInOne = ({
       const needsReviewFlag = validation.needsReview || !matched.success;
       const totalPrice = price + ongkir;
 
-      // Save Order
+      // Save order
       await setDoc(doc(db, "leads", orderId), {
         name,
         whatsapp: cleanedWA,
@@ -197,7 +201,6 @@ const FunnelPurchaseAllInOne = ({
         }
       }
 
-      // Send Email
       await sendOrderEmail({
         name,
         whatsapp: cleanedWA,
@@ -210,22 +213,19 @@ const FunnelPurchaseAllInOne = ({
         order_date: new Date().toLocaleString("id-ID"),
       });
 
-      // WhatsApp Message
+      // Kirim WA ke admin
       const message =
         `PESANAN BARU\n\n` +
         `Produk: ${product.title}\n` +
         `Nama: ${name}\n` +
         `Metode Pembayaran: ${paymentMethod}\n\n` +
         `Mohon segera diproses, terima kasih`;
-
       const whatsappURL = `https://wa.me/${adminWA}?text=${encodeURIComponent(
         message
       )}`;
-
-      // Redirect aman (tanpa window.open)
       window.location.href = whatsappURL;
 
-      // Reset Form
+      // Reset form
       setName("");
       setWhatsapp("");
       setAddress("");
