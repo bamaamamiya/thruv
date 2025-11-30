@@ -1,10 +1,5 @@
+"use client";
 import React, { useState, useRef } from "react";
-import { setDoc, doc, Timestamp, getDoc } from "firebase/firestore";
-import { db } from "../firebase";
-import { cleanAddress } from "../utils/addressCleaner";
-import { validateAddress } from "../utils/addressValidator";
-import { matchAddress } from "../utils/addressMatcher";
-import { calculateOngkir } from "../utils/calculateOngkir";
 
 const AllInOne = ({
   pixel,
@@ -23,7 +18,7 @@ const AllInOne = ({
   const [loading, setLoading] = useState(false);
   const debounceRef = useRef(null);
 
-  // === Helper ===
+  // === Clean & Validate WhatsApp ===
   const cleanAndValidateWA = (wa) => {
     let cleaned = wa.replace(/\D/g, "");
     if (cleaned.startsWith("0")) cleaned = "62" + cleaned.slice(1);
@@ -31,19 +26,22 @@ const AllInOne = ({
     return /^62[0-9]{9,14}$/.test(cleaned) ? cleaned : null;
   };
 
-  // === Save Abandoned Lead with Debounce ===
-  const saveAbandonedLead = (nameInput, waInput, addressInput) => {
+  // === Save Abandoned Lead (Debounce) ===
+  const saveAbandonedLead = async (nameInput, waInput, addressInput) => {
     if (debounceRef.current) clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(async () => {
-      if (!nameInput || nameInput.length < 3) return;
-      const cleanedWA = cleanAndValidateWA(waInput);
-      if (!cleanedWA || !product) return;
-
-      const docId = `${cleanedWA}_${product.title || "unknown"}`;
-      const docRef = doc(db, "abandonedLeads", docId);
-
       try {
+        if (!nameInput || nameInput.length < 3) return;
+        const cleanedWA = cleanAndValidateWA(waInput);
+        if (!cleanedWA || !product) return;
+
+        const { setDoc, doc, getDoc, Timestamp } = await import("firebase/firestore");
+        const { db } = await import("../firebase");
+
+        const docId = `${cleanedWA}_${product.title || "unknown"}`;
+        const docRef = doc(db, "abandonedLeads", docId);
         const snapshot = await getDoc(docRef);
+
         if (snapshot.exists()) {
           await setDoc(
             docRef,
@@ -65,9 +63,9 @@ const AllInOne = ({
             createdAt: Timestamp.now(),
           });
         }
-        console.log("Abandoned lead saved:", cleanedWA);
+        console.log("💾 Abandoned lead saved:", cleanedWA);
       } catch (err) {
-        console.error("Gagal simpan abandoned lead:", err);
+        console.error("❌ Gagal simpan abandoned lead:", err);
       }
     }, 1500);
   };
@@ -75,22 +73,19 @@ const AllInOne = ({
   // === Send Order Email ===
   const sendOrderEmail = async (data) => {
     try {
-      const res = await fetch(
-        "https://order-alert-six.vercel.app/api/send-email",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        }
-      );
+      const res = await fetch("https://order-alert-six.vercel.app/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
       if (!res.ok) throw new Error("Gagal kirim email");
-      console.log("Email order berhasil dikirim!");
+      console.log("📧 Email order berhasil dikirim!");
     } catch (err) {
-      console.error("Error kirim email:", err);
+      console.error("❌ Error kirim email:", err);
     }
   };
 
-  // === Handle Submit Pesanan ===
+  // === Handle Submit (WA-First Mode) ===
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (loading) return;
@@ -109,7 +104,11 @@ const AllInOne = ({
       return;
     }
 
-    // --- Siapkan WA URL dulu ---
+    const safeProductTitle = product?.title
+      ? product.title.replace(/\s+/g, "-").toLowerCase()
+      : "default";
+    const orderId = `${cleanedWA}_${safeProductTitle}_${Date.now()}`;
+
     const message =
       `*PESANAN BARU*\n\n` +
       `*Produk:* ${product.title}\n` +
@@ -117,63 +116,58 @@ const AllInOne = ({
       `*No. WhatsApp:* ${cleanedWA}\n` +
       `*Alamat:* ${address}\n` +
       `*Metode Pembayaran:* ${paymentMethod}\n\n` +
-      `Mohon segera diproses, terima kasih`;
+      `Mohon segera diproses, terima kasih 🙏`;
+
     const whatsappURL = `https://wa.me/${adminWA}?text=${encodeURIComponent(message)}`;
 
-    // 🔥 Langsung buka WA
-    window.open(whatsappURL, "_blank");
+    // === 1️⃣ Langsung buka WA dulu (user gesture context) ===
+    const newTab = window.open(whatsappURL, "_blank");
+    if (!newTab) console.warn("⚠️ Browser block popup WA");
 
-    try {
-      const safeProductTitle = product?.title
-        ? product.title.replace(/\s+/g, "-").toLowerCase()
-        : "default";
-      const orderId = `${cleanedWA}_${safeProductTitle}_${Date.now()}`;
+    // === 2️⃣ Jalankan proses backend TANPA await (biar gak delay redirect) ===
+    (async () => {
+      try {
+        // Lazy import modules
+        const { setDoc, doc, Timestamp } = await import("firebase/firestore");
+        const { db } = await import("../firebase");
+        const { cleanAddress } = await import("../utils/addressCleaner");
+        const { validateAddress } = await import("../utils/addressValidator");
+        const { matchAddress } = await import("../utils/addressMatcher");
+        const { calculateOngkir } = await import("../utils/calculateOngkir");
 
-      const addressCleaned = cleanAddress(address);
-      const validation = validateAddress(addressCleaned);
-      if (!validation.valid) {
-        alert(
-          validation.reason === "Alamat terlalu singkat"
-            ? "Alamat terlalu singkat 🙏. Mohon sertakan jalan, nomor rumah, dan kecamatan."
-            : validation.reason
-        );
-        setLoading(false);
-        return;
-      }
+        const addressCleaned = cleanAddress(address);
+        const validation = validateAddress(addressCleaned);
+        const matched = await matchAddress(addressCleaned);
+        const ongkir = calculateOngkir(matched.province?.name);
+        const totalPrice = price + ongkir;
 
-      const matched = await matchAddress(addressCleaned);
-      const ongkir = calculateOngkir(matched.province?.name);
-      const needsReviewFlag = validation.needsReview || !matched.success;
-      const totalPrice = price + ongkir;
+        // Firestore Save
+        await setDoc(doc(db, "leads", orderId), {
+          name,
+          whatsapp: cleanedWA,
+          address,
+          addressClean: addressCleaned,
+          price,
+          costProduct: costProduct || 0,
+          ongkir,
+          paymentMethod,
+          productTitle: product.title,
+          createdAt: Timestamp.now(),
+          updatedAt: Timestamp.now(),
+          status: "pending",
+          resiCheck: "not",
+          confirmation: "belum",
+          customerConfirmed: false,
+          rts: 0,
+          needsReview: validation.needsReview || !matched.success,
+          province: matched.province?.name || "",
+          regency: matched.regency?.name || "",
+          district: matched.district?.name || "",
+          village: matched.village?.name || "",
+        });
 
-      // Save to Firestore
-      await setDoc(doc(db, "leads", orderId), {
-        name,
-        whatsapp: cleanedWA,
-        address,
-        addressClean: addressCleaned,
-        price,
-        costProduct: product.costProduct || 0,
-        ongkir,
-        paymentMethod,
-        productTitle: product.title,
-        createdAt: Timestamp.now(),
-        updatedAt: Timestamp.now(),
-        status: "pending",
-        resiCheck: "not",
-        confirmation: "belum",
-        customerConfirmed: false,
-        rts: 0,
-        needsReview: needsReviewFlag,
-        province: matched.province?.name || "",
-        regency: matched.regency?.name || "",
-        district: matched.district?.name || "",
-        village: matched.village?.name || "",
-      });
-
-      // FirePixel
-      if (window.fbq) {
-        try {
+        // Pixel tracking (no await)
+        if (window.fbq) {
           fbq("trackSingle", pixel, "Purchase", {
             content_name: product.title,
             content_ids: [product.title || "123"],
@@ -181,39 +175,41 @@ const AllInOne = ({
             value: price || 0,
             currency: "IDR",
           });
-        } catch (err) {
-          console.error("FB Pixel Error:", err);
+          fbq("flush");
+          console.log("🎯 Pixel Purchase terkirim!");
         }
+
+        // Send Email
+        sendOrderEmail({
+          name,
+          whatsapp: cleanedWA,
+          address,
+          productTitle: product.title,
+          productId: product.title || "unknown",
+          price,
+          total: totalPrice,
+          paymentMethod,
+          order_date: new Date().toLocaleString("id-ID"),
+        });
+
+        console.log("✅ Backend task selesai di background!");
+      } catch (err) {
+        console.error("❌ Error backend task:", err);
       }
+    })();
 
-      // Kirim email
-      await sendOrderEmail({
-        name,
-        whatsapp: cleanedWA,
-        address,
-        productTitle: product.title,
-        productId: product.title || "unknown",
-        price,
-        total: totalPrice,
-        paymentMethod,
-        order_date: new Date().toLocaleString("id-ID"),
-      });
-
-      // Reset form
+    // === 3️⃣ Reset form ===
+    setTimeout(() => {
       setName("");
       setWhatsapp("");
       setAddress("");
       setPaymentMethod("COD");
-    } catch (err) {
-      console.error("Gagal simpan ke Firestore:", err);
-      alert("Terjadi kesalahan saat menyimpan. Coba lagi.");
-    } finally {
       setLoading(false);
-    }
+    }, 800);
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white p-6 rounded-2xl">
+    <div className="max-w-md mx-auto bg-white p-6 rounded-2xl shadow-md">
       <h2 className="text-xl font-bold mb-4">Data Penerima:</h2>
       <form onSubmit={handleSubmit}>
         {/* Nama */}
@@ -260,7 +256,7 @@ const AllInOne = ({
           />
         </div>
 
-        {/* Payment Method */}
+        {/* Payment */}
         <div className="mb-4">
           {["COD", "Bank Transfer"].map((method) => (
             <div
@@ -295,7 +291,7 @@ const AllInOne = ({
           ))}
         </div>
 
-        {/* Submit Button */}
+        {/* Button */}
         <button
           type="submit"
           disabled={loading}

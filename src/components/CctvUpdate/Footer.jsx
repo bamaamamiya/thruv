@@ -157,7 +157,7 @@ const Footer = ({
 				</div> */}
 
         <div className="w-auto h-8 bg-gray-300 rounded overflow-hidden m-2">
-          <p className="bg-redto text-white text-sm px-3 flex items-center h-full w-1/3">
+          <p className="bg-redto text-white text-xs px-3 flex items-center h-full w-1/3">
             Sisa Promo: 1
           </p>
         </div>

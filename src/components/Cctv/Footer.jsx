@@ -63,38 +63,43 @@ const Footer = ({
     }
   }, [isVisible]);
 
-// 	useEffect(() => {
-//   console.log("Props Footer:", {
-//     pixelId,
-//     produkBaru,
-//     footerImages,
-//     faqs,
-//     namaProduct,
-//     bundles,
-//     hargaJual,
-//     bonus,
-//     bonusTitle,
-//     NormalPrice,
-//     discountTransfer,
-//     extraOffer,
-//     adminWA,
-//   });
-// }, [
-//   pixelId,
-//   produkBaru,
-//   footerImages,
-//   faqs,
-//   namaProduct,
-//   bundles,
-//   hargaJual,
-//   bonus,
-//   bonusTitle,
-//   NormalPrice,
-//   discountTransfer,
-//   extraOffer,
-//   adminWA,
-// ]);
-
+  // 	useEffect(() => {
+  //   console.log("Props Footer:", {
+  //     pixelId,
+  //     produkBaru,
+  //     footerImages,
+  //     faqs,
+  //     namaProduct,
+  //     bundles,
+  //     hargaJual,
+  //     bonus,
+  //     bonusTitle,
+  //     NormalPrice,
+  //     discountTransfer,
+  //     extraOffer,
+  //     adminWA,
+  //   });
+  // }, [
+  //   pixelId,
+  //   produkBaru,
+  //   footerImages,
+  //   faqs,
+  //   namaProduct,
+  //   bundles,
+  //   hargaJual,
+  //   bonus,
+  //   bonusTitle,
+  //   NormalPrice,
+  //   discountTransfer,
+  //   extraOffer,
+  //   adminWA,
+  // ]);
+  const fotters = [
+    "Bisa COD (Bayar di Tempat)",
+    "Garansi 100% Uang Kembali jika produk tidak sesuai pesanan",
+    "Garansi 1 Tahun untuk kerusakan produk Langsung Ganti Baru",
+    "Harga Promo Termurah Se-Indonesia Stok Terbatas — Siapa Cepat Dia Dapat!",
+  ];
 
   return (
     <div>
@@ -112,18 +117,24 @@ const Footer = ({
           <p className="text-lg">Harga Promo</p>
         </div>
         <div className="text-center text-5xl font-bold " ref={promoRef}>
-          <h1 className="text-redto">
+          {/* <h1 className="text-redto">
             Rp {Math.floor(currentValue).toLocaleString("id-ID")}
-          </h1>
+          </h1> */}
+          <h1 className="text-redto">199RB</h1>
         </div>
         {/* EXTRA OFFER */}
         {extraOffer && (
-          <div className="text-center text-lg font-bold italic">
+          <div className="text-center text-xl font-bold italic">
             <h1>{extraOffer}</h1>
           </div>
         )}
+        <div className="text-center font-bold text-sm p-4">
+          <h1>
+            Cukup keluar seratus ribuan, tapi bisa amankan barang bernilai
+            puluhan juta di rumahmu.
+          </h1>
+        </div>
 
-        <br />
         {/* <ValueStack
           values={[
             { title: "CCTV SMARTHOME", value: 249000 },
@@ -180,6 +191,20 @@ const Footer = ({
           />
         </div>
       </div>
+      <div className="flex justify-center mt-6">
+        <section className="w-full max-w-md bg-gray-50 p-6 rounded-lg">
+          <ul className="space-y-4">
+            {fotters.map((item, idx) => (
+              <li key={idx} className="flex items-start space-x-3">
+                <span className="flex-shrink-0 mt-1 text-red-500 text-xl">
+                  ✔
+                </span>
+                <span className="font-medium">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
 
       {/* FAQ */}
       <div>
@@ -188,6 +213,7 @@ const Footer = ({
 
       {/* FOOTER IMAGE */}
       <br />
+
       <div className="grid justify-center items-center">
         {footerImages.map((img, i) => (
           <img

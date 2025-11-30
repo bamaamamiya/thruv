@@ -28,7 +28,7 @@ const HeadLine = ({
   );
   return (
     <div>
-      <div className="grid justify-center items-center text-center text-3xl text-redto font-bold p-4">
+      <div className="grid justify-center items-center text-center text-2xl text-redto font-bold p-4">
         <h1>{headLine}</h1>
         <br />
         <p className="text-xl">{subHeadLine}</p>

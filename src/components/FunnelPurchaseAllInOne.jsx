@@ -1,10 +1,6 @@
 import React, { useState, useRef } from "react";
 import { setDoc, doc, Timestamp, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import { cleanAddress } from "../utils/addressCleaner";
-import { validateAddress } from "../utils/addressValidator";
-import { matchAddress } from "../utils/addressMatcher";
-import { calculateOngkir } from "../utils/calculateOngkir";
 
 const FunnelPurchaseAllInOne = ({
   pixel,
@@ -132,7 +128,7 @@ const FunnelPurchaseAllInOne = ({
     const orderId = `${cleanedWA}_${safeProductTitle}_${Date.now()}`;
 
     try {
-      // ✅ Lazy Import modul berat di sini
+      // Lazy Import
       const { setDoc, doc, Timestamp, getDoc } = await import(
         "firebase/firestore"
       );
@@ -144,7 +140,7 @@ const FunnelPurchaseAllInOne = ({
 
       const addressCleaned = cleanAddress(address);
 
-      // Validation & matching
+      // Validation & Matching
       const validation = validateAddress(addressCleaned);
       if (!validation.valid) {
         alert(
@@ -161,7 +157,7 @@ const FunnelPurchaseAllInOne = ({
       const needsReviewFlag = validation.needsReview || !matched.success;
       const totalPrice = price + ongkir;
 
-      // Save order
+      // Save Order
       await setDoc(doc(db, "leads", orderId), {
         name,
         whatsapp: cleanedWA,
@@ -201,6 +197,7 @@ const FunnelPurchaseAllInOne = ({
         }
       }
 
+      // Send Email
       await sendOrderEmail({
         name,
         whatsapp: cleanedWA,
@@ -213,21 +210,22 @@ const FunnelPurchaseAllInOne = ({
         order_date: new Date().toLocaleString("id-ID"),
       });
 
-      // Kirim WA ke admin
+      // WhatsApp Message
       const message =
-        `*PESANAN BARU*\n\n` +
-        `*Produk:* ${product.title}\n` +
-        `*Nama:* ${name}\n` +
-        `*No. WhatsApp:* ${cleanedWA}\n` +
-        `*Alamat:* ${address}\n` +
-        `*Metode Pembayaran:* ${paymentMethod}\n\n` +
+        `PESANAN BARU\n\n` +
+        `Produk: ${product.title}\n` +
+        `Nama: ${name}\n` +
+        `Metode Pembayaran: ${paymentMethod}\n\n` +
         `Mohon segera diproses, terima kasih`;
+
       const whatsappURL = `https://wa.me/${adminWA}?text=${encodeURIComponent(
         message
       )}`;
-      window.open(whatsappURL, "_blank");
 
-      // Reset form
+      // Redirect aman (tanpa window.open)
+      window.location.href = whatsappURL;
+
+      // Reset Form
       setName("");
       setWhatsapp("");
       setAddress("");
@@ -335,9 +333,7 @@ const FunnelPurchaseAllInOne = ({
           }`}
         >
           {/* {loading ? "Memproses..." : "Ambil Promo & Lanjut Ke WA ADMIN"} */}
-          {loading
-            ? "Memproses..."
-            : "Ambil Promo di WhatsApp"}
+          {loading ? "Memproses..." : "Ambil Promo di WhatsApp"}
         </button>
       </form>
     </div>
