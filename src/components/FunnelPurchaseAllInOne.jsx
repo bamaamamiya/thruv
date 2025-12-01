@@ -165,7 +165,6 @@ const FunnelPurchaseAllInOne = ({
       await setDoc(doc(db, "leads", orderId), {
         name,
         whatsapp: cleanedWA,
-        address: address,
         addressClean: addressCleaned,
         price,
         costProduct: product.costProduct || 0,
@@ -215,17 +214,27 @@ const FunnelPurchaseAllInOne = ({
 
       // Kirim WA ke admin
       const message =
-        `*PESANAN BARU*\n\n` +
-        `*Produk:* ${product.title}\n` +
-        `*Nama:* ${name}\n` +
-        `*No. WhatsApp:* ${cleanedWA}\n` +
-        `*Alamat:* ${address}\n` +
-        `*Metode Pembayaran:* ${paymentMethod}\n\n` +
+        `PESANAN BARU\n\n` +
+        `Produk: ${product.title}\n` +
+        `Nama: ${name}\n` +
+        `Metode Pembayaran: ${paymentMethod}\n\n` +
         `Mohon segera diproses, terima kasih`;
-      const whatsappURL = `https://wa.me/${adminWA}?text=${encodeURIComponent(
+      // === Redirect Aman ke WhatsApp (Kompatibel FB/IG Browser) ===
+      const whatsappURL = `https://api.whatsapp.com/send?phone=${adminWA}&text=${encodeURIComponent(
         message
       )}`;
-      window.open(whatsappURL, "_blank");
+
+      try {
+        // Redirect normal
+        window.location.href = whatsappURL;
+      } catch (err) {
+        console.error("Redirect gagal, mencoba fallback...", err);
+
+        // Fallback (FB/IG kadang blokir redirect pertama)
+        setTimeout(() => {
+          window.location.href = whatsappURL;
+        }, 400);
+      }
 
       // Reset form
       setName("");
@@ -335,9 +344,7 @@ const FunnelPurchaseAllInOne = ({
           }`}
         >
           {/* {loading ? "Memproses..." : "Ambil Promo & Lanjut Ke WA ADMIN"} */}
-          {loading
-            ? "Memproses..."
-            : "Ambil Promo di WhatsApp"}
+          {loading ? "Memproses..." : "Ambil Promo di WhatsApp"}
         </button>
       </form>
     </div>

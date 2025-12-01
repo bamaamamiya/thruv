@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import Funnel from "../FunnelPurchaseAllInOne";
+import Funnel from "../FunnelPurchaseBundles";
 import Faqs from "../set/Faqs";
 import Count from "./../set/Count";
 import ValueStack from "../set/ValueStack";
@@ -96,10 +96,14 @@ const Footer = ({
   // ]);
   const fotters = [
     "Bisa COD (Bayar di Tempat)",
-    "Garansi 100% Uang Kembali jika produk tidak sesuai pesanan",
-    "Garansi 1 Tahun untuk kerusakan produk Langsung Ganti Baru",
+    "Garansi 100% jika produk tidak sesuai pesanan",
     "Harga Promo Termurah Se-Indonesia Stok Terbatas — Siapa Cepat Dia Dapat!",
   ];
+
+	const formatHargaToRb = (number) => {
+    if (!number) return "0rb";
+    return Math.round(number / 1000) + "rb";
+  };
 
   return (
     <div>
@@ -120,7 +124,7 @@ const Footer = ({
           {/* <h1 className="text-redto">
             Rp {Math.floor(currentValue).toLocaleString("id-ID")}
           </h1> */}
-          <h1 className="text-redto">199RB</h1>
+          <h1 className="text-redto">{formatHargaToRb(produkBaru[0].price)}</h1>
         </div>
         {/* EXTRA OFFER */}
         {extraOffer && (
@@ -157,7 +161,7 @@ const Footer = ({
 				</div> */}
 
         <div className="w-auto h-8 bg-gray-300 rounded overflow-hidden m-2">
-          <p className="bg-redto text-white text-sm px-3 flex items-center h-full w-1/3">
+          <p className="bg-redto text-white text-xs px-3 flex items-center h-full w-1/3">
             Sisa Promo: 1
           </p>
         </div>
@@ -185,6 +189,7 @@ const Footer = ({
             pixel={pixelId}
             product={produkBaru}
             price={promoPrice}
+						bundles={bundles}
             namaProduct={namaProduct}
             costProduct={produkBaru.costProduct}
             discountTransfer={discountTransfer} // ⬅ terusin ke Funnel

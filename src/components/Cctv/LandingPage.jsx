@@ -26,19 +26,18 @@ const CctvBohlam = () => {
 
   const bundles = [
     {
-      id: "bohlam-only",
-      title: "CCTV Bohlam",
-      price: 129000,
+      id: "CCTV E27",
+      title: "CCTV",
+      price: 179000,
+      image: "images/cctv/3.webp",
+      costProduct: 75000,
     },
     {
-      id: "bohlam-16gb",
-      title: "CCTV + Memori 16GB",
-      price: 199000,
-    },
-    {
-      id: "bohlam-32gb",
-      title: "CCTV + Memori 32GB",
-      price: 249000,
+      id: "CCTV E27 + MEMORI 64GB",
+      title: "CCTV + MEMORI 64GB",
+      price: 285000,
+      image: "images/cctv/3.webp",
+      costProduct: 135000,
     },
   ];
 
@@ -103,13 +102,13 @@ const CctvBohlam = () => {
   //   "Tanpa kabel & tanpa teknisi — cukup pasang di fitting lampu E27, langsung nyala.",
   //   "Support night vision, jadi tetap bisa ngawasin rumah meskipun malam atau lampu mati.",
   // ];
-	const solutions = [
-  "Bisa lihat kondisi rumah langsung dari HP, kapan pun dan di mana pun kamu berada.",
-  "Kameranya bisa muter ke segala arah, jadi gak ada sudut yang kelewat.",
-  "Begitu ada gerakan mencurigakan, HP kamu langsung dapet pemberitahuan otomatis.",
-  "Gak perlu kabel atau teknisi — tinggal putar di fitting lampu, langsung bisa dipakai.",
-  "Bisa ngawasin rumah meski malam hari, tetap jelas walau lampu mati.",
-];
+  const solutions = [
+    "Bisa lihat kondisi rumah langsung dari HP, kapan pun dan di mana pun kamu berada.",
+    "Kameranya bisa muter ke segala arah, jadi gak ada sudut yang kelewat.",
+    "Begitu ada gerakan mencurigakan, HP kamu langsung dapet pemberitahuan otomatis.",
+    "Gak perlu kabel atau teknisi — tinggal putar di fitting lampu, langsung bisa dipakai.",
+    "Bisa ngawasin rumah meski malam hari, tetap jelas walau lampu mati.",
+  ];
 
   const pixel = 2111198546014232;
   const pixelString = pixel.toString();
@@ -121,10 +120,10 @@ const CctvBohlam = () => {
     return sellingPrice / (1 - discountRate);
   }
   const discount = 0.5; // 50%
-  const hargaNormal = getNormalPrice(funnelProduct.price, discount);
+  const hargaNormal = getNormalPrice(bundles[0].price, discount);
 
   const discountTransfer = false; // 🔥 tinggal ubah true/false
-  const extraOffer = "+ Gratis Ongkir";
+  const extraOffer = "+ Potongan Ongkir";
 
   return (
     <div className="bg-white">
@@ -143,12 +142,13 @@ const CctvBohlam = () => {
         testimonies={testimonies}
       />
       <Footer
-        hargaJual={funnelProduct.price}
+        hargaJual={bundles[0].price}
         pixelId={pixelString}
-        produkBaru={funnelProduct}
+        produkBaru={bundles}
         footerImages={["images/fotter2.webp"]}
         faqs={faqs}
-        namaProduct={funnelProduct.title}
+        bundles={bundles}
+        namaProduct={bundles.title}
         NormalPrice={hargaNormal}
         discountTransfer={discountTransfer} // ⬅ lempar ke Footer
         extraOffer={extraOffer}

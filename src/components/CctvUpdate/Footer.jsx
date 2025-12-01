@@ -96,8 +96,7 @@ const Footer = ({
   // ]);
   const fotters = [
     "Bisa COD (Bayar di Tempat)",
-    "Garansi 100% Uang Kembali jika produk tidak sesuai pesanan",
-    "Garansi 1 Tahun untuk kerusakan produk Langsung Ganti Baru",
+    "Garansi 100% jika produk tidak sesuai pesanan",
     "Harga Promo Termurah Se-Indonesia Stok Terbatas — Siapa Cepat Dia Dapat!",
   ];
 
