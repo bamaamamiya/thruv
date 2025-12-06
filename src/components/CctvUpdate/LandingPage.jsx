@@ -124,7 +124,7 @@ const CctvBohlam = () => {
   const hargaNormal = getNormalPrice(funnelProduct.price, discount);
 
   const discountTransfer = false; // 🔥 tinggal ubah true/false
-  const extraOffer = "+ Gratis Ongkir";
+  const extraOffer = "+ Potongan Ongkir";
 
   return (
     <div className="bg-white">
