@@ -15,8 +15,8 @@ const CctvBohlam = () => {
   const funnelProduct = {
     title: "CCTV E27",
     description: "Product CCTV BOHLAM",
-    price: 179000,
-    costProduct: 105000,
+    price: 129000,
+    costProduct: 75000,
   };
 
   // const BonusData = {
