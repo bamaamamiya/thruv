@@ -100,6 +100,11 @@ const Footer = ({
     "Harga Promo Termurah Se-Indonesia Stok Terbatas — Siapa Cepat Dia Dapat!",
   ];
 
+	const formatHargaToRb = (number) => {
+    if (!number) return "0rb";
+    return Math.round(number / 1000) + "rb";
+  };
+
   return (
     <div>
       <div className="space-y-2" id="formulir">
@@ -119,7 +124,7 @@ const Footer = ({
           {/* <h1 className="text-redto">
             Rp {Math.floor(currentValue).toLocaleString("id-ID")}
           </h1> */}
-          <h1 className="text-redto">129RB</h1>
+					<h1 className="text-redto uppercase">{formatHargaToRb(produkBaru.price)}</h1>
         </div>
         {/* EXTRA OFFER */}
         {extraOffer && (
