@@ -151,7 +151,7 @@ const CctvBohlam = () => {
         namaProduct={funnelProduct.title}
         NormalPrice={hargaNormal}
         discountTransfer={discountTransfer} // ⬅ lempar ke Footer
-        extraOffer={extraOffer}
+        extraOffer={false}
         // bonus={BonusData.bonus}
         // bonusTitle={BonusData.title}
       />
