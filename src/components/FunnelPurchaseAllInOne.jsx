@@ -347,6 +347,9 @@ const FunnelPurchaseAllInOne = ({
           {loading ? "Memproses..." : "Ambil Promo di WhatsApp"}
         </button>
       </form>
+      <p className="text-center text-xs p-2 italic font-semibold text-gray-700">
+        Mohon isi data hanya jika siap dihubungi hari ini & menerima pengiriman.
+      </p>
     </div>
   );
 };
