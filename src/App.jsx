@@ -15,6 +15,7 @@ import CctvGSO from "./components/CCTVGSO/LandingPage";
 import OrderSummaryDashboard from "./components/dashboard/ShopifyStyleDashboard";
 import AlatPijat from "./components/Pijat/LandingPage";
 import BrandPage from "./components/BrandPage/Page";
+import CatokASL from "./components/CatokASL/LandingPage";
 function App() {
   return (
     <BrowserRouter>
@@ -27,6 +28,7 @@ function App() {
         <Route path="/cctv2" element={<CctvBohlam2 />} />
         <Route path="/smart-cctv" element={<CctvGSO />} />
         <Route path="/pijat" element={<AlatPijat />} />
+        <Route path="/catok" element={<CatokASL />} />
         <Route path="/login" element={<LoginPage />} />
         <Route
           path="/order"

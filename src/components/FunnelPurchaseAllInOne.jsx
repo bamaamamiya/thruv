@@ -15,6 +15,7 @@ const FunnelPurchaseAllInOne = ({
   discountTransfer,
   buttonColor = "bg-redto",
   buttonHoverColor = "hover:bg-red-700",
+  useOngkir = true,
 }) => {
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
@@ -156,9 +157,16 @@ const FunnelPurchaseAllInOne = ({
         return;
       }
 
-      const matched = await matchAddress(addressCleaned);
-      const ongkir = calculateOngkir(matched.province?.name);
-      const needsReviewFlag = validation.needsReview || !matched.success;
+      let matched = {};
+      let ongkir = 0;
+      let needsReviewFlag = false;
+
+      if (useOngkir) {
+        matched = await matchAddress(addressCleaned);
+        ongkir = calculateOngkir(matched.province?.name);
+        needsReviewFlag = validation.needsReview || !matched.success;
+      }
+
       const totalPrice = price + ongkir;
 
       // Save order
@@ -178,11 +186,11 @@ const FunnelPurchaseAllInOne = ({
         confirmation: "belum",
         customerConfirmed: false,
         rts: 0,
-        needsReview: needsReviewFlag,
-        province: matched.province?.name || "",
-        regency: matched.regency?.name || "",
-        district: matched.district?.name || "",
-        village: matched.village?.name || "",
+        needsReview: useOngkir ? needsReviewFlag : false,
+        province: useOngkir ? matched.province?.name || "" : "",
+        regency: useOngkir ? matched.regency?.name || "" : "",
+        district: useOngkir ? matched.district?.name || "" : "",
+        village: useOngkir ? matched.village?.name || "" : "",
       });
 
       // FB Pixel
