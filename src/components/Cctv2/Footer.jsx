@@ -1,9 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import Funnel from "../AllinOne";
+import Funnel from "../FunnelPurchaseAllInOne";
 import Faqs from "../set/Faqs";
+import Count from "./../set/Count";
+import ValueStack from "../set/ValueStack";
 
 import { useEffect, useRef, useState } from "react";
+import MengantarForm from "../FunnelMengantar";
 const Footer = ({
   pixelId,
   produkBaru,
@@ -18,6 +21,8 @@ const Footer = ({
   discountTransfer,
   extraOffer, // 👈 props baru
   adminWA,
+  extraPush,
+  useOngkir, // 👈 terima di sini
 }) => {
   const normalPrice = NormalPrice; // harga normal
   const promoPrice = hargaJual; // harga promo
@@ -60,6 +65,48 @@ const Footer = ({
     }
   }, [isVisible]);
 
+  // 	useEffect(() => {
+  //   console.log("Props Footer:", {
+  //     pixelId,
+  //     produkBaru,
+  //     footerImages,
+  //     faqs,
+  //     namaProduct,
+  //     bundles,
+  //     hargaJual,
+  //     bonus,
+  //     bonusTitle,
+  //     NormalPrice,
+  //     discountTransfer,
+  //     extraOffer,
+  //     adminWA,
+  //   });
+  // }, [
+  //   pixelId,
+  //   produkBaru,
+  //   footerImages,
+  //   faqs,
+  //   namaProduct,
+  //   bundles,
+  //   hargaJual,
+  //   bonus,
+  //   bonusTitle,
+  //   NormalPrice,
+  //   discountTransfer,
+  //   extraOffer,
+  //   adminWA,
+  // ]);
+  const fotters = [
+    "Bisa COD (Bayar di Tempat)",
+    "Garansi 100% jika produk tidak sesuai pesanan",
+    "Harga Promo Termurah Se-Indonesia Stok Terbatas — Siapa Cepat Dia Dapat!",
+  ];
+
+  const formatHargaToRb = (number) => {
+    if (!number) return "0rb";
+    return Math.round(number / 1000) + "rb";
+  };
+
   return (
     <div>
       <div className="space-y-2" id="formulir">
@@ -76,18 +123,23 @@ const Footer = ({
           <p className="text-lg">Harga Promo</p>
         </div>
         <div className="text-center text-5xl font-bold " ref={promoRef}>
-          <h1 className="text-redto">
+          {/* <h1 className="text-redto">
             Rp {Math.floor(currentValue).toLocaleString("id-ID")}
+          </h1> */}
+          <h1 className="text-redto uppercase">
+            {formatHargaToRb(produkBaru.price)}
           </h1>
         </div>
         {/* EXTRA OFFER */}
         {extraOffer && (
-          <div className="text-center text-lg font-bold italic">
+          <div className="text-center text-xl font-bold italic">
             <h1>{extraOffer}</h1>
           </div>
         )}
+        <div className="text-center font-bold text-sm p-4">
+          <h1>{extraPush}</h1>
+        </div>
 
-        <br />
         {/* <ValueStack
           values={[
             { title: "CCTV SMARTHOME", value: 249000 },
@@ -110,7 +162,7 @@ const Footer = ({
 				</div> */}
 
         <div className="w-auto h-8 bg-gray-300 rounded overflow-hidden m-2">
-          <p className="bg-redto text-white text-sm px-3 flex items-center h-full w-1/3">
+          <p className="bg-redto text-white text-xs px-3 flex items-center h-full w-1/3">
             Sisa Promo: 1
           </p>
         </div>
@@ -141,8 +193,23 @@ const Footer = ({
             namaProduct={namaProduct}
             costProduct={produkBaru.costProduct}
             discountTransfer={discountTransfer} // ⬅ terusin ke Funnel
+            useOngkir={useOngkir} // 🔥 KIRIM KE FUNNEL
           />
         </div>
+      </div>
+      <div className="flex justify-center mt-6">
+        <section className="w-full max-w-md bg-gray-50 p-6 rounded-lg">
+          <ul className="space-y-4">
+            {fotters.map((item, idx) => (
+              <li key={idx} className="flex items-start space-x-3">
+                <span className="flex-shrink-0 mt-1 text-red-500 text-xl">
+                  ✔
+                </span>
+                <span className="font-medium">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
       </div>
 
       {/* FAQ */}
@@ -152,6 +219,7 @@ const Footer = ({
 
       {/* FOOTER IMAGE */}
       <br />
+
       <div className="grid justify-center items-center">
         {footerImages.map((img, i) => (
           <img

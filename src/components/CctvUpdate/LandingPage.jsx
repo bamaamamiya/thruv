@@ -103,13 +103,13 @@ const CctvBohlam = () => {
   //   "Tanpa kabel & tanpa teknisi — cukup pasang di fitting lampu E27, langsung nyala.",
   //   "Support night vision, jadi tetap bisa ngawasin rumah meskipun malam atau lampu mati.",
   // ];
-	const solutions = [
-  "Bisa lihat kondisi rumah langsung dari HP, kapan pun dan di mana pun kamu berada.",
-  "Kameranya bisa muter ke segala arah, jadi gak ada sudut yang kelewat.",
-  "Begitu ada gerakan mencurigakan, HP kamu langsung dapet pemberitahuan otomatis.",
-  "Gak perlu kabel atau teknisi — tinggal putar di fitting lampu, langsung bisa dipakai.",
-  "Bisa ngawasin rumah meski malam hari, tetap jelas walau lampu mati.",
-];
+  const solutions = [
+    "Bisa lihat kondisi rumah langsung dari HP, kapan pun dan di mana pun kamu berada.",
+    "Kameranya bisa muter ke segala arah, jadi gak ada sudut yang kelewat.",
+    "Begitu ada gerakan mencurigakan, HP kamu langsung dapet pemberitahuan otomatis.",
+    "Gak perlu kabel atau teknisi — tinggal putar di fitting lampu, langsung bisa dipakai.",
+    "Bisa ngawasin rumah meski malam hari, tetap jelas walau lampu mati.",
+  ];
 
   const pixel = 2111198546014232;
   const pixelString = pixel.toString();
@@ -125,6 +125,8 @@ const CctvBohlam = () => {
 
   const discountTransfer = false; // 🔥 tinggal ubah true/false
   const extraOffer = "+ Potongan Ongkir";
+  const extraPush =
+    "Harga diatas belum termasuk ongkir";
 
   return (
     <div className="bg-white">
@@ -152,27 +154,8 @@ const CctvBohlam = () => {
         NormalPrice={hargaNormal}
         discountTransfer={discountTransfer} // ⬅ lempar ke Footer
         extraOffer={false}
-        // bonus={BonusData.bonus}
-        // bonusTitle={BonusData.title}
+        extraPush={extraPush}
       />
-      {/* <MengantarForm
-				hargaJual={funnelProduct.price}
-        footerImages={["images/fotter2.webp", "images/fotter.webp"]}
-        faqs={faqs}
-        namaProduct={funnelProduct.title}
-        NormalPrice={hargaNormal}
-        extraOffer={extraOffer} // 👈 kalau mau ditampilkan
-				url="pijat"
-			/> */}
-      {/* <Footer
-        hargaJual={bundles[0].price}
-        pixelId="2111198546014232"
-        produkBaru={bundles}
-        footerImages={["images/fotter2.webp", "images/fotter.webp"]}
-				bundles={bundles}
-        faqs={faqs}
-				namaProduct={bundles.title}
-      /> */}
       <Floting />
     </div>
   );

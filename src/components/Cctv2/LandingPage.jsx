@@ -2,8 +2,6 @@ import Content from "./Content";
 import Headline from "./Headline";
 import Footer from "./Footer";
 import Floting from "../set/Floting";
-import MengantarForm from "./FooterMengantar";
-
 
 const CctvBohlam = () => {
   const productImages = ["images/cctv/3.webp", "images/cctv/4.webp"];
@@ -15,34 +13,12 @@ const CctvBohlam = () => {
   ];
 
   const funnelProduct = {
-    title: "CCTV E27",
+    title: "CCTV E27 + MEMORI 16GB",
     description: "Product CCTV BOHLAM",
-    price: 129000,
-    costProduct: 75000,
+    price: 229000,
+    costProduct: 150000,
+		useOngkir: false,
   };
-
-  // const BonusData = {
-  // 	title:"Bonus : ",
-  // 	bonus: "Fitting & Baut + Vidio Panduan + Gratis COD"
-  // }
-
-  const bundles = [
-    {
-      id: "bohlam-only",
-      title: "CCTV Bohlam",
-      price: 129000,
-    },
-    {
-      id: "bohlam-16gb",
-      title: "CCTV + Memori 16GB",
-      price: 199000,
-    },
-    {
-      id: "bohlam-32gb",
-      title: "CCTV + Memori 32GB",
-      price: 249000,
-    },
-  ];
 
   const faqs = [
     // {
@@ -84,21 +60,36 @@ const CctvBohlam = () => {
     },
   ];
 
+  // const problems = [
+  //   "Rumah sering kosong tapi gak tahu gimana cara pantau dari jauh.",
+  //   "Maling masuk rumah bisa lewat sudut yang gak terjangkau CCTV biasa.",
+  //   "CCTV lama cuma rekam, gak ada notifikasi saat ada gerakan mencurigakan.",
+  //   "Pasang CCTV ribet, butuh teknisi dan kabel panjang kemana-mana.",
+  // ];
   const problems = [
-    "Rumah sering kosong tapi gak tahu gimana cara pantau dari jauh.",
-    "Maling masuk rumah bisa lewat sudut yang gak terjangkau CCTV biasa.",
-    "CCTV lama cuma rekam, gak ada notifikasi saat ada gerakan mencurigakan.",
-    "Pasang CCTV ribet, butuh teknisi dan kabel panjang kemana-mana.",
+    "Udah kerja banting tulang tiap hari, tapi rumah sering kosong tanpa pengawasan",
+    "Barang-barang hasil kerja keras bisa raib cuma dalam beberapa menit waktu rumah sepi",
+    "Maling sekarang makin pintar, tahu kapan rumah kosong dan CCTV gak merekam arah itu",
+    "Gak ada tetangga yang sadar, gak ada bukti siapa pelakunya — ujung-ujungnya cuma bisa pasrah.",
+    "Baru sadar rumah dibobol pas semuanya udah terlambat.",
   ];
 
+  // const solutions = [
+  //   "Pantau rumah dari HP secara real-time, kapan saja dan di mana saja.",
+  //   "Kamera bisa muter 360°, sudut pandang luas, gak ada titik buta.",
+  //   "Ada motion detection — otomatis rekam & kirim notifikasi ke HP saat ada gerakan.",
+  //   "Tanpa kabel & tanpa teknisi — cukup pasang di fitting lampu E27, langsung nyala.",
+  //   "Support night vision, jadi tetap bisa ngawasin rumah meskipun malam atau lampu mati.",
+  // ];
   const solutions = [
-    "Pantau rumah dari HP secara real-time, kapan saja dan di mana saja.",
-    "Kamera bisa muter 360°, sudut pandang luas, gak ada titik buta.",
-    "Ada motion detection — otomatis rekam & kirim notifikasi ke HP saat ada gerakan.",
-    "Tanpa kabel & tanpa teknisi — cukup pasang di fitting lampu E27, langsung nyala.",
-    "Support night vision, jadi tetap bisa ngawasin rumah meskipun malam atau lampu mati.",
+    "Bisa lihat kondisi rumah langsung dari HP, kapan pun dan di mana pun kamu berada.",
+    "Kameranya bisa muter ke segala arah, jadi gak ada sudut yang kelewat.",
+    "Begitu ada gerakan mencurigakan, HP kamu langsung dapet pemberitahuan otomatis.",
+    "Gak perlu kabel atau teknisi — tinggal putar di fitting lampu, langsung bisa dipakai.",
+    "Bisa ngawasin rumah meski malam hari, tetap jelas walau lampu mati.",
   ];
-  const pixel = 2588889891453558
+
+  const pixel = 2111198546014232;
   const pixelString = pixel.toString();
 
   function getNormalPrice(sellingPrice, discountRate) {
@@ -111,19 +102,21 @@ const CctvBohlam = () => {
   const hargaNormal = getNormalPrice(funnelProduct.price, discount);
 
   const discountTransfer = false; // 🔥 tinggal ubah true/false
-  const extraOffer = "+ Potongan Ongkir"
+  const extraOffer = "+ Bonus Memori & Gratis Ongkir";
+  const extraPush =
+    "Sudah termasuk kartu memori. Bisa upgrade kapasitas untuk rekam lebih lama";
 
   return (
     <div className="bg-white">
       <Headline
         imgHeadLine="images/cctv/1.webp"
-        headLine="Pernah kepikiran, rumah ditinggal sebentar aja bisa jadi sasaran maling?"
-        subHeadLine="Atau tiba-tiba barang hilang tapi gak tau siapa pelakunya?"
+        headLine="Capek kerja siang-malam beli barang berharga… tapi bisa hilang dalam sekejap kalau rumah kosong?"
+        subHeadLine="Amankan rumah dan barang berharga di mana pun kamu taruh mudah dipasang, bisa diandalkan bertahun-tahun, tanpa ribet kabel atau teknisi"
         problemTitle="📹 Banyak Rumah Masih Rentan Karena Masalah Seperti Ini:"
         problems={problems}
       />
       <Content
-        solutionTitle="Bayangin Pak… Rumah kosong pas lagi mudik atau kerja, eh tiba-tiba ada orang asing masuk halaman rumah!😱 Untungnya, CCTV Bohlam ini kirim notifikasi ke HP + rekam kejadian secara real-time!📲"
+        solutionTitle="Bayangin, Kerja keras tiap hari tapi rumah sering kosong? Barang hasil jerih payah bisa hilang dalam sekejap. Cegah semua itu dengan CCTV Bohlam — cukup putar di fitting lampu, langsung nyala tanpa teknisi atau kabel ribet."
         solutions={solutions}
         mainImage="images/cctv/2.webp"
         productImages={productImages}
@@ -133,33 +126,15 @@ const CctvBohlam = () => {
         hargaJual={funnelProduct.price}
         pixelId={pixelString}
         produkBaru={funnelProduct}
-        footerImages={["images/fotter2.webp", "images/fotter.webp"]}
+        footerImages={["images/fotter2.webp"]}
         faqs={faqs}
         namaProduct={funnelProduct.title}
         NormalPrice={hargaNormal}
         discountTransfer={discountTransfer} // ⬅ lempar ke Footer
-				extraOffer={extraOffer}
-        // bonus={BonusData.bonus}
-        // bonusTitle={BonusData.title}
+        extraOffer={extraOffer}
+        extraPush={extraPush}
+        useOngkir={funnelProduct.useOngkir} // ✅ TERUSKAN
       />
-      {/* <MengantarForm
-				hargaJual={funnelProduct.price}
-        footerImages={["images/fotter2.webp", "images/fotter.webp"]}
-        faqs={faqs}
-        namaProduct={funnelProduct.title}
-        NormalPrice={hargaNormal}
-        extraOffer={extraOffer} // 👈 kalau mau ditampilkan
-				url="pijat"
-			/> */}
-      {/* <Footer
-        hargaJual={bundles[0].price}
-        pixelId="2111198546014232"
-        produkBaru={bundles}
-        footerImages={["images/fotter2.webp", "images/fotter.webp"]}
-				bundles={bundles}
-        faqs={faqs}
-				namaProduct={bundles.title}
-      /> */}
       <Floting />
     </div>
   );

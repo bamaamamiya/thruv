@@ -21,6 +21,8 @@ const Footer = ({
   discountTransfer,
   extraOffer, // 👈 props baru
   adminWA,
+  extraPush,
+  useOngkir, // 👈 terima di sini
 }) => {
   const normalPrice = NormalPrice; // harga normal
   const promoPrice = hargaJual; // harga promo
@@ -100,7 +102,7 @@ const Footer = ({
     "Harga Promo Termurah Se-Indonesia Stok Terbatas — Siapa Cepat Dia Dapat!",
   ];
 
-	const formatHargaToRb = (number) => {
+  const formatHargaToRb = (number) => {
     if (!number) return "0rb";
     return Math.round(number / 1000) + "rb";
   };
@@ -124,7 +126,9 @@ const Footer = ({
           {/* <h1 className="text-redto">
             Rp {Math.floor(currentValue).toLocaleString("id-ID")}
           </h1> */}
-					<h1 className="text-redto uppercase">{formatHargaToRb(produkBaru.price)}</h1>
+          <h1 className="text-redto uppercase">
+            {formatHargaToRb(produkBaru.price)}
+          </h1>
         </div>
         {/* EXTRA OFFER */}
         {extraOffer && (
@@ -133,10 +137,7 @@ const Footer = ({
           </div>
         )}
         <div className="text-center font-bold text-sm p-4">
-          <h1>
-            Cukup keluar seratus ribuan, tapi bisa amankan barang bernilai
-            puluhan juta di rumahmu.
-          </h1>
+          <h1>{extraPush}</h1>
         </div>
 
         {/* <ValueStack
@@ -192,6 +193,7 @@ const Footer = ({
             namaProduct={namaProduct}
             costProduct={produkBaru.costProduct}
             discountTransfer={discountTransfer} // ⬅ terusin ke Funnel
+            useOngkir={useOngkir} // 🔥 KIRIM KE FUNNEL
           />
         </div>
       </div>
