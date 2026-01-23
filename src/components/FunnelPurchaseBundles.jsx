@@ -302,7 +302,7 @@ const FunnelPurchaseBundlesAllInOne = ({
 
                 {/* RIGHT: PRICE + BADGE */}
                 <div className="text-right">
-                  <p className="text-2xl font-extrabold text-redto">
+                  <p className="text-xl font-extrabold text-redto">
                     {formatHargaToRb(item.price)}
                   </p>
 

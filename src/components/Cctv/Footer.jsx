@@ -21,6 +21,8 @@ const Footer = ({
   discountTransfer,
   extraOffer, // 👈 props baru
   adminWA,
+  extraPush,
+
 }) => {
   const normalPrice = NormalPrice; // harga normal
   const promoPrice = hargaJual; // harga promo
@@ -132,11 +134,8 @@ const Footer = ({
             <h1>{extraOffer}</h1>
           </div>
         )}
-        <div className="text-center font-bold text-sm p-4">
-          <h1>
-            Cukup keluar seratus ribuan, tapi bisa amankan barang bernilai
-            puluhan juta di rumahmu.
-          </h1>
+				<div className="text-center font-bold text-sm p-4">
+          <h1>{extraPush}</h1>
         </div>
 
         {/* <ValueStack

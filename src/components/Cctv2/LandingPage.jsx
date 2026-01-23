@@ -15,9 +15,9 @@ const CctvBohlam = () => {
   const funnelProduct = {
     title: "CCTV E27 + MEMORI 16GB",
     description: "Product CCTV BOHLAM",
-    price: 229000,
-    costProduct: 150000,
-		useOngkir: false,
+    price: 199000,
+    costProduct: 120000,
+		useOngkir: true,
   };
 
   const faqs = [
@@ -101,10 +101,10 @@ const CctvBohlam = () => {
   const discount = 0.5; // 50%
   const hargaNormal = getNormalPrice(funnelProduct.price, discount);
 
-  const discountTransfer = false; // 🔥 tinggal ubah true/false
-  const extraOffer = "+ Bonus Memori & Gratis Ongkir";
+  const discountTransfer = true; // 🔥 tinggal ubah true/false
+  const extraOffer = "+ Bonus Memori 16GB";
   const extraPush =
-    "Sudah termasuk kartu memori. Bisa upgrade kapasitas untuk rekam lebih lama";
+    "Harga diatas belum termasuk ongkir";
 
   return (
     <div className="bg-white">

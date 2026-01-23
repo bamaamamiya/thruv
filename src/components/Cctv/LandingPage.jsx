@@ -28,16 +28,16 @@ const CctvBohlam = () => {
     {
       id: "CCTV E27",
       title: "CCTV",
-      price: 179000,
+      price: 129000,
       image: "images/cctv/3.webp",
       costProduct: 75000,
     },
     {
       id: "CCTV E27 + MEMORI 64GB",
-      title: "CCTV + MEMORI 64GB",
-      price: 285000,
+      title: "CCTV + MEMORI 16GB",
+      price: 199000,
       image: "images/cctv/3.webp",
-      costProduct: 135000,
+      costProduct: 120000,
     },
   ];
 
@@ -122,9 +122,10 @@ const CctvBohlam = () => {
   const discount = 0.5; // 50%
   const hargaNormal = getNormalPrice(bundles[0].price, discount);
 
-  const discountTransfer = false; // 🔥 tinggal ubah true/false
+  const discountTransfer = true; // 🔥 tinggal ubah true/false
   const extraOffer = "+ Potongan Ongkir";
-
+	const extraPush =
+    "Harga diatas belum termasuk ongkir";
   return (
     <div className="bg-white">
       <Headline
@@ -151,28 +152,10 @@ const CctvBohlam = () => {
         namaProduct={bundles.title}
         NormalPrice={hargaNormal}
         discountTransfer={discountTransfer} // ⬅ lempar ke Footer
-        extraOffer={extraOffer}
-        // bonus={BonusData.bonus}
-        // bonusTitle={BonusData.title}
+        extraOffer={false}
+				extraPush={extraPush}
+        
       />
-      {/* <MengantarForm
-				hargaJual={funnelProduct.price}
-        footerImages={["images/fotter2.webp", "images/fotter.webp"]}
-        faqs={faqs}
-        namaProduct={funnelProduct.title}
-        NormalPrice={hargaNormal}
-        extraOffer={extraOffer} // 👈 kalau mau ditampilkan
-				url="pijat"
-			/> */}
-      {/* <Footer
-        hargaJual={bundles[0].price}
-        pixelId="2111198546014232"
-        produkBaru={bundles}
-        footerImages={["images/fotter2.webp", "images/fotter.webp"]}
-				bundles={bundles}
-        faqs={faqs}
-				namaProduct={bundles.title}
-      /> */}
       <Floting />
     </div>
   );

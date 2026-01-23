@@ -25,8 +25,7 @@ function App() {
         <Route path="/brand" element={<BrandPage />} />
         <Route path="/cctv1" element={<CctvBohlam />} />
         <Route path="/cctv" element={<CctvBohlam1 />} />
-				{/* cctvbohlam2 testing pricing */}
-        <Route path="/cctv2" element={<CctvBohlam2 />} /> 
+        <Route path="/cctv-smart" element={<CctvBohlam2 />} /> 
         <Route path="/smart-cctv" element={<CctvGSO />} />
         <Route path="/pijat" element={<AlatPijat />} />
         <Route path="/catok" element={<CatokASL />} />
