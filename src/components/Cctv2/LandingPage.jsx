@@ -13,10 +13,10 @@ const CctvBohlam = () => {
   ];
 
   const funnelProduct = {
-    title: "CCTV E27 + MEMORI 16GB",
+    title: "CCTV E27",
     description: "Product CCTV BOHLAM",
-    price: 199000,
-    costProduct: 120000,
+    price: 179000,
+    costProduct: 75000,
 		useOngkir: true,
   };
 
@@ -131,7 +131,7 @@ const CctvBohlam = () => {
         namaProduct={funnelProduct.title}
         NormalPrice={hargaNormal}
         discountTransfer={discountTransfer} // ⬅ lempar ke Footer
-        extraOffer={extraOffer}
+        extraOffer={false}
         extraPush={extraPush}
         useOngkir={funnelProduct.useOngkir} // ✅ TERUSKAN
       />
