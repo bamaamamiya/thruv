@@ -1,12 +1,13 @@
 import React, { useState, useRef } from "react";
 import { setDoc, doc, Timestamp, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import { sha256 } from "../utils/hash";
 import { cleanAddress } from "../utils/addressCleaner";
 import { validateAddress } from "../utils/addressValidator";
 import { matchAddress } from "../utils/addressMatcher";
 import { calculateOngkir } from "../utils/calculateOngkir";
 
-const FunnelPurchaseAllInOne = ({
+const FunnelGrand = ({
   pixel,
   product,
   price,
@@ -162,7 +163,17 @@ const FunnelPurchaseAllInOne = ({
 
       if (useOngkir) {
         matched = await matchAddress(addressCleaned);
-        ongkir = calculateOngkir(matched.province?.name);
+
+        // ❌ HARD REJECT jika provinsi tidak ditemukan
+        if (!matched.province) {
+          alert(
+            "Provinsi tidak terdeteksi 🙏\n\nMohon tulis nama provinsi dengan jelas.\nContoh: Jawa Timur, Bali, DKI Jakarta.",
+          );
+          setLoading(false);
+          return;
+        }
+
+        ongkir = calculateOngkir(matched.province.name);
         needsReviewFlag = validation.needsReview || !matched.success;
       }
 
@@ -195,10 +206,13 @@ const FunnelPurchaseAllInOne = ({
       // FB Pixel
       if (window.fbq) {
         try {
+          const hashedPhone = await sha256(cleanedWA);
+
           fbq("trackSingle", pixel, "Purchase", {
             content_name: product.title,
             content_ids: [product.title || "123"],
             content_type: "product",
+            ph: hashedPhone, // 🔥 SHA256 hashed phone
             value: price || 0,
             currency: "IDR",
           });
@@ -361,4 +375,4 @@ const FunnelPurchaseAllInOne = ({
   );
 };
 
-export default FunnelPurchaseAllInOne;
+export default FunnelGrand;

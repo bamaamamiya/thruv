@@ -15,9 +15,9 @@ const CctvBohlam = () => {
   const funnelProduct = {
     title: "CCTV E27",
     description: "Product CCTV BOHLAM",
-    price: 179000,
-    costProduct: 75000,
-		useOngkir: true,
+    price: 229000,
+    costProduct: 150000,
+		useOngkir: false,
   };
 
   const faqs = [
@@ -101,10 +101,9 @@ const CctvBohlam = () => {
   const discount = 0.5; // 50%
   const hargaNormal = getNormalPrice(funnelProduct.price, discount);
 
-  const discountTransfer = true; // 🔥 tinggal ubah true/false
-  const extraOffer = "+ Bonus Memori 16GB";
-  const extraPush =
-    "Harga diatas belum termasuk ongkir";
+  const discountTransfer = false; // 🔥 tinggal ubah true/false
+  const extraOffer = "+ Bonus Memori";
+  const extraPush ="Gratis Ongkir Seluruh Pulau Jawa";
 
   return (
     <div className="bg-white">
@@ -131,7 +130,7 @@ const CctvBohlam = () => {
         namaProduct={funnelProduct.title}
         NormalPrice={hargaNormal}
         discountTransfer={discountTransfer} // ⬅ lempar ke Footer
-        extraOffer={false}
+        extraOffer={extraOffer}
         extraPush={extraPush}
         useOngkir={funnelProduct.useOngkir} // ✅ TERUSKAN
       />
