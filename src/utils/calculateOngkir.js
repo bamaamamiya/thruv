@@ -1,18 +1,19 @@
 export const calculateOngkir = (provinceName) => {
-  let ongkir = 20000; // default 20k
+  if (!provinceName) return 20000;
 
-  if (!provinceName) return ongkir;
+  const shippingMap = {
+    "banten": 20000,
+    "dki jakarta": 20000,
+    "jakarta": 20000,
+    "jawa barat": 20000,
+    "jawa tengah": 20000,
+    "di yogyakarta": 23000,
+    "yogyakarta": 23000,
+    "jawa timur": 25000,
+    "bali": 35000,
+  };
 
-  switch (provinceName.toLowerCase()) {
-    case "jawa timur":
-      ongkir = 25000;
-      break;
-    case "bali":
-      ongkir = 35000;
-      break;
-    default:
-      ongkir = 20000;
-  }
+  const normalized = provinceName.toLowerCase().trim();
 
-  return ongkir;
+  return shippingMap[normalized] || 20000; // default luar area
 };

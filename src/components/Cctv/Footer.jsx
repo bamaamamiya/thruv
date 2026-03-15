@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import Funnel from "../FunnelPurchaseBundles";
 import Faqs from "../set/Faqs";
-import Count from "./../set/Count";
 import ValueStack from "../set/ValueStack";
 
 import { useEffect, useRef, useState } from "react";

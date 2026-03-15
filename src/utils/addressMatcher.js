@@ -1,8 +1,14 @@
 // utils/addressMatcher.js
 import { cleanAddress } from "./addressCleaner.js";
 
-const BASE_API = "https://flow-ship.vercel.app/api"; 
+const BASE_API = "https://flow-ship.vercel.app/api";
 // -> ambil dari hasil merge (bisa juga taruh di GitHub)
+const normalize = (text) => {
+  return text
+    .toLowerCase()
+    .replace(/\s+/g, "")
+    .replace(/[^a-z]/g, "");
+};
 
 const safeFetch = async (url) => {
   try {
@@ -17,7 +23,7 @@ const safeFetch = async (url) => {
 
 export const matchAddress = async (rawAddress) => {
   const cleaned = cleanAddress(rawAddress).toLowerCase();
-
+  const normalizedAddress = normalize(cleaned);
   // Ambil dataset utama
   const provinces = await safeFetch(`${BASE_API}/provinces.json`);
   const regencies = await safeFetch(`${BASE_API}/regencies.json`);
@@ -26,22 +32,19 @@ export const matchAddress = async (rawAddress) => {
 
   // Cari provinsi
   const province = provinces.find((p) =>
-    cleaned.includes(p.name.toLowerCase())
+    normalizedAddress.includes(normalize(p.name)),
   );
 
-  // Cari kabupaten/kota
   const regency = regencies.find((r) =>
-    cleaned.includes(r.name.toLowerCase())
+    normalizedAddress.includes(normalize(r.name)),
   );
 
-  // Cari kecamatan
   const district = districts.find((d) =>
-    cleaned.includes(d.name.toLowerCase())
+    normalizedAddress.includes(normalize(d.name)),
   );
 
-  // Cari desa/kelurahan
   const village = villages.find((v) =>
-    cleaned.includes(v.name.toLowerCase())
+    normalizedAddress.includes(normalize(v.name)),
   );
 
   return {

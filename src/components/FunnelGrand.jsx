@@ -167,7 +167,7 @@ const FunnelGrand = ({
         // ❌ HARD REJECT jika provinsi tidak ditemukan
         if (!matched.province) {
           alert(
-            "Provinsi tidak terdeteksi 🙏\n\nMohon tulis nama provinsi dengan jelas.\nContoh: Jawa Timur, Bali, DKI Jakarta.",
+            "Mohon isi provinsi kakak 🙏\n\nContoh:\n- Jawa Timur / Jatim\n- DKI Jakarta / Jakarta\n- Bali\n- Jawa Barat / Jabar",
           );
           setLoading(false);
           return;
@@ -189,6 +189,8 @@ const FunnelGrand = ({
         ongkir,
         paymentMethod,
         productTitle: product.title,
+        messageSent: false,
+        automation: true,
         createdAt: Timestamp.now(),
         updatedAt: Timestamp.now(),
         status: "pending",
@@ -207,7 +209,6 @@ const FunnelGrand = ({
       if (window.fbq) {
         try {
           const hashedPhone = await sha256(cleanedWA);
-
           fbq("trackSingle", pixel, "Purchase", {
             content_name: product.title,
             content_ids: [product.title || "123"],

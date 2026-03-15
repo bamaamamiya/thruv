@@ -9,6 +9,12 @@ export const provinceDictionary = {
   jktbr: "Jakarta Barat",
   jkttr: "Jakarta Timur",
   jktsl: "Jakarta Selatan",
+
+  // ✅ Yogyakarta additions
+  diy: "DI Yogyakarta",
+  jogja: "DI Yogyakarta",
+  yogyakarta: "DI Yogyakarta",
+
   sumut: "Sumatera Utara",
   sumbar: "Sumatera Barat",
   sumsel: "Sumatera Selatan",

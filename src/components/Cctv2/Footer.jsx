@@ -1,8 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import Funnel from "../FunnelPurchaseAllInOne";
+import Funnel from "../Funnel";
 import Faqs from "../set/Faqs";
-import Count from "./../set/Count";
 import ValueStack from "../set/ValueStack";
 
 import { useEffect, useRef, useState } from "react";
@@ -36,7 +35,7 @@ const Footer = ({
           setIsVisible(true);
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
 
     if (promoRef.current) {
