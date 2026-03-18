@@ -2,7 +2,6 @@ export const calculateOngkir = (provinceName) => {
   if (!provinceName) return 20000;
 
   const shippingMap = {
-    "banten": 20000,
     "dki jakarta": 20000,
     "jakarta": 20000,
     "jawa barat": 20000,
