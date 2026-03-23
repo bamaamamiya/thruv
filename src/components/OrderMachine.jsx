@@ -7,7 +7,7 @@ import { validateAddress } from "../utils/addressValidator";
 import { matchAddress } from "../utils/addressMatcher";
 import { calculateOngkir } from "../utils/calculateOngkir";
 
-const FunnelGrand = ({
+const OrderMachine = ({
   pixel,
   product,
   price,
@@ -18,6 +18,9 @@ const FunnelGrand = ({
   buttonHoverColor = "hover:bg-red-700",
   useOngkir = true,
 }) => {
+  if (!product || !product.pricing) {
+  return <div>Loading...</div>;
+}
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("COD");
@@ -115,96 +118,87 @@ const FunnelGrand = ({
     setLoading(true);
 
     if (!name || !whatsapp || !address) {
-      alert("Silakan isi semua data dengan lengkap!");
+      alert("Isi data lengkap!");
       setLoading(false);
       return;
     }
 
     const cleanedWA = cleanAndValidateWA(whatsapp);
     if (!cleanedWA) {
-      alert("Nomor WhatsApp tidak valid. Harus dimulai dengan 08 atau 62.");
+      alert("WA tidak valid");
       setLoading(false);
       return;
     }
 
-    const safeProductTitle = product?.title
-      ? product.title.replace(/\s+/g, "-").toLowerCase()
-      : "default";
-
-    const orderId = `${cleanedWA}_${safeProductTitle}_${Date.now()}`;
-
     try {
-      // ✅ Lazy Import modul berat di sini
-      const { setDoc, doc, Timestamp, getDoc } =
-        await import("firebase/firestore");
-      const { db } = await import("../firebase");
-      const { cleanAddress } = await import("../utils/addressCleaner");
-      const { validateAddress } = await import("../utils/addressValidator");
-      const { matchAddress } = await import("../utils/addressMatcher");
-      const { calculateOngkir } = await import("../utils/calculateOngkir");
-
       const addressCleaned = cleanAddress(address);
-
-      // Validation & matching
       const validation = validateAddress(addressCleaned);
+
       if (!validation.valid) {
-        alert(
-          validation.reason === "Alamat terlalu singkat"
-            ? "Alamat terlalu singkat 🙏. Mohon sertakan jalan, nomor rumah, dan kecamatan."
-            : validation.reason,
-        );
+        alert(validation.reason);
         setLoading(false);
         return;
       }
 
       let matched = {};
       let ongkir = 0;
-      let needsReviewFlag = false;
 
       if (useOngkir) {
         matched = await matchAddress(addressCleaned);
 
-        // ❌ HARD REJECT jika provinsi tidak ditemukan
         if (!matched.province) {
-          alert(
-            "Mohon isi provinsi kakak 🙏\n\nContoh:\n- Jawa Timur / Jatim\n- DKI Jakarta / Jakarta\n- Bali\n- Jawa Barat / Jabar",
-          );
+          alert("Isi provinsi");
           setLoading(false);
           return;
         }
 
         ongkir = calculateOngkir(matched.province.name);
-        needsReviewFlag = validation.needsReview || !matched.success;
       }
 
-      const totalPrice = price + ongkir;
-			const randomDelay = Math.floor(Math.random() * (70000 - 50000 + 1)) + 50000; // 50-70 detik
+      // 🔥 AMBIL DATA DARI PRODUCT DB
+      const price = product.pricing?.price || 0;
+      const costProduct = product.pricing?.cost || 0;
 
-      // Save order
+      const totalPrice = price + ongkir;
+
+      const orderId = `${cleanedWA}_${product.id}_${Date.now()}`;
+
       await setDoc(doc(db, "leads", orderId), {
+        // CUSTOMER
         name,
         whatsapp: cleanedWA,
         addressClean: addressCleaned,
-        price,
-        costProduct: product.costProduct || 0,
-        ongkir,
-        paymentMethod,
+				paymentMethod,
+        // PRODUCT (🔥 dari DB)
+        productId: product.id,
         productTitle: product.title,
-        automation: true,
+
+        price,
+        costProduct,
+
+        // 🔥 UPSSELL READY
+        upsells: product.upsells || [],
+        selectedUpsell: null,
+
+        // PRICE
+        ongkir,
+        total: totalPrice,
+
+        // STATUS
+        status: "pending",
+        state: "WAITING_UPSELL",
+
+        // SYSTEM
         messageSent: false,
-        sendAt: Timestamp.fromMillis(Date.now() + randomDelay), // contoh 1 menit dari sekarang
+        automation: true,
+
         createdAt: Timestamp.now(),
         updatedAt: Timestamp.now(),
-        status: "pending",
-        resiCheck: "not",
-        confirmation: "belum",
-        customerConfirmed: false,
-        rts: 0,
-        needsReview: useOngkir ? needsReviewFlag : false,
-        province: useOngkir ? matched.province?.name || "" : "",
-        regency: useOngkir ? matched.regency?.name || "" : "",
-        district: useOngkir ? matched.district?.name || "" : "",
-        village: useOngkir ? matched.village?.name || "" : "",
+
+        province: matched.province?.name || "",
+        regency: matched.regency?.name || "",
+        district: matched.district?.name || "",
+        village: matched.village?.name || "",
       });
 
       // FB Pixel
@@ -378,4 +372,4 @@ const FunnelGrand = ({
   );
 };
 
-export default FunnelGrand;
+export default OrderMachine;

@@ -7,7 +7,7 @@ import CctvBohlam from "./components/Cctv/LandingPage";
 import CctvBohlam1 from "./components/CctvUpdate/LandingPage";
 import CctvBohlam2 from "./components/Cctv2/LandingPage";
 import BrandPage from "./components/BrandPage/Page";
-
+import CctvBohlamDB from "./components/CctvDB/LandingPage";
 function App() {
   return (
     <BrowserRouter>
@@ -16,6 +16,7 @@ function App() {
         <Route path="/brand" element={<BrandPage />} />
         <Route path="/cctv1" element={<CctvBohlam />} />
         <Route path="/cctv" element={<CctvBohlam1 />} />
+        <Route path="/cctvdb" element={<CctvBohlamDB />} />
         <Route path="/cctv-smart" element={<CctvBohlam2 />} /> 
       </Routes>
     </BrowserRouter>
