@@ -182,6 +182,7 @@ const FunnelGrand = ({
 
       // Save order
       await setDoc(doc(db, "leads", orderId), {
+				// CUSTOMER
         name,
         whatsapp: cleanedWA,
         addressClean: addressCleaned,
@@ -198,7 +199,6 @@ const FunnelGrand = ({
         status: "pending",
         resiCheck: "not",
         confirmation: "belum",
-        customerConfirmed: false,
         rts: 0,
         needsReview: useOngkir ? needsReviewFlag : false,
         province: useOngkir ? matched.province?.name || "" : "",

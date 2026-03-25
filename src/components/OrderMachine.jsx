@@ -19,8 +19,8 @@ const OrderMachine = ({
   useOngkir = true,
 }) => {
   if (!product || !product.pricing) {
-  return <div>Loading...</div>;
-}
+    return <div>Loading...</div>;
+  }
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("COD");
@@ -142,63 +142,83 @@ const OrderMachine = ({
 
       let matched = {};
       let ongkir = 0;
+      let needsReviewFlag = false;
 
       if (useOngkir) {
         matched = await matchAddress(addressCleaned);
 
+        // ❌ HARD REJECT jika provinsi tidak ditemukan
         if (!matched.province) {
-          alert("Isi provinsi");
+          alert(
+            "Mohon isi provinsi kakak 🙏\n\nContoh:\n- Jawa Timur / Jatim\n- DKI Jakarta / Jakarta\n- Bali\n- Jawa Barat / Jabar",
+          );
           setLoading(false);
           return;
         }
 
         ongkir = calculateOngkir(matched.province.name);
+        needsReviewFlag = validation.needsReview || !matched.success;
       }
 
       // 🔥 AMBIL DATA DARI PRODUCT DB
-      const price = product.pricing?.price || 0;
-      const costProduct = product.pricing?.cost || 0;
-
+      const price = product.pricing.price || 0;
+      const costProduct = product.pricing.cost || 0;
       const totalPrice = price + ongkir;
 
       const orderId = `${cleanedWA}_${product.id}_${Date.now()}`;
+      const randomDelay =
+        Math.floor(Math.random() * (70000 - 50000 + 1)) + 50000; // 50-70 detik
 
       await setDoc(doc(db, "leads", orderId), {
-        // CUSTOMER
+        // 👤 CUSTOMER
         name,
         whatsapp: cleanedWA,
         addressClean: addressCleaned,
-				paymentMethod,
-        // PRODUCT (🔥 dari DB)
+        paymentMethod,
+
+        // 📦 PRODUCT
         productId: product.id,
         productTitle: product.title,
-
         price,
         costProduct,
 
-        // 🔥 UPSSELL READY
+        // 🔥 UPSELL
         upsells: product.upsells || [],
         selectedUpsell: null,
 
-        // PRICE
+        // 💰 PRICING
         ongkir,
         total: totalPrice,
 
-        // STATUS
+        // 🔄 FLOW
+        state: "WAITING_CONFIRMATION",
+        lastMessageState: null,
+        lastMessageAt: null,
+
+        // 📊 BUSINESS
         status: "pending",
-        state: "WAITING_UPSELL",
+        confirmation: "belum",
 
-        // SYSTEM
-        messageSent: false,
+        // ⚙️ SYSTEM
         automation: true,
+				queuedForMessage : true,
 
+        // 🚚 LOGISTIC
+        resiCheck: "not",
+        rts: 0,
+
+        // ⚠️ VALIDATION
+        needsReview: useOngkir ? needsReviewFlag : false,
+
+        // 📍 LOCATION
+        province: useOngkir ? matched.province?.name || "" : "",
+        regency: useOngkir ? matched.regency?.name || "" : "",
+        district: useOngkir ? matched.district?.name || "" : "",
+        village: useOngkir ? matched.village?.name || "" : "",
+
+        // 🕒 TIME
         createdAt: Timestamp.now(),
         updatedAt: Timestamp.now(),
-
-        province: matched.province?.name || "",
-        regency: matched.regency?.name || "",
-        district: matched.district?.name || "",
-        village: matched.village?.name || "",
       });
 
       // FB Pixel

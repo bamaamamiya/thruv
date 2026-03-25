@@ -15,8 +15,8 @@ function App() {
         <Route path="/" element={<Page />} />
         <Route path="/brand" element={<BrandPage />} />
         <Route path="/cctv1" element={<CctvBohlam />} />
-        <Route path="/cctv" element={<CctvBohlam1 />} />
-        <Route path="/cctvdb" element={<CctvBohlamDB />} />
+        <Route path="/cctvlama" element={<CctvBohlam1 />} />
+        <Route path="/cctv" element={<CctvBohlamDB />} />
         <Route path="/cctv-smart" element={<CctvBohlam2 />} /> 
       </Routes>
     </BrowserRouter>
