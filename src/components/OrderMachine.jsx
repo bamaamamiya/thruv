@@ -202,7 +202,7 @@ const OrderMachine = ({
         // ⚙️ SYSTEM
         automation: true,
 				queuedForMessage : true,
-
+				nextSendAt: Timestamp.fromDate(new Date(Date.now() + 15000)),//15detik
         // 🚚 LOGISTIC
         resiCheck: "not",
         rts: 0,
