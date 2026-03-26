@@ -6,7 +6,7 @@ import { cleanAddress } from "../utils/addressCleaner";
 import { validateAddress } from "../utils/addressValidator";
 import { matchAddress } from "../utils/addressMatcher";
 import { calculateOngkir } from "../utils/calculateOngkir";
-
+import { detectProvinceFast } from "../utils/detectProvinceFast";
 const OrderMachine = ({
   pixel,
   product,
@@ -140,25 +140,36 @@ const OrderMachine = ({
         return;
       }
 
-      let matched = {};
-      let ongkir = 0;
+      // let matched = {};
+      // let ongkir = 0;
       let needsReviewFlag = false;
+      const provinceName = detectProvinceFast(addressCleaned);
 
-      if (useOngkir) {
-        matched = await matchAddress(addressCleaned);
+      // if (useOngkir) {
+      //   matched = await matchAddress(addressCleaned);
 
-        // ❌ HARD REJECT jika provinsi tidak ditemukan
-        if (!matched.province) {
-          alert(
-            "Mohon isi provinsi kakak 🙏\n\nContoh:\n- Jawa Timur / Jatim\n- DKI Jakarta / Jakarta\n- Bali\n- Jawa Barat / Jabar",
-          );
-          setLoading(false);
-          return;
-        }
+      //   // ❌ HARD REJECT jika provinsi tidak ditemukan
+      //   if (!matched.province) {
+      //     alert(
+      //       "Mohon isi provinsi kakak 🙏\n\nContoh:\n- Jawa Timur / Jatim\n- DKI Jakarta / Jakarta\n- Bali\n- Jawa Barat / Jabar",
+      //     );
+      //     setLoading(false);
+      //     return;
+      //   }
 
-        ongkir = calculateOngkir(matched.province.name);
-        needsReviewFlag = validation.needsReview || !matched.success;
+      //   ongkir = calculateOngkir(matched.province.name);
+      //   needsReviewFlag = validation.needsReview || !matched.success;
+      // }
+
+      if (!provinceName) {
+        alert(
+          "Mohon isi provinsi ya kak 🙏\n\nContoh:\n- Jakarta\n- Bandung\n- Surabaya",
+        );
+        setLoading(false);
+        return;
       }
+
+      const ongkir = calculateOngkir(provinceName);
 
       // 🔥 AMBIL DATA DARI PRODUCT DB
       const price = product.pricing.price || 0;
@@ -201,8 +212,8 @@ const OrderMachine = ({
 
         // ⚙️ SYSTEM
         automation: true,
-				queuedForMessage : true,
-				nextSendAt: Timestamp.fromDate(new Date(Date.now() + 15000)),//15detik
+        queuedForMessage: true,
+        nextSendAt: Timestamp.fromDate(new Date(Date.now() + randomDelay)), //15detik
         // 🚚 LOGISTIC
         resiCheck: "not",
         rts: 0,
@@ -211,11 +222,8 @@ const OrderMachine = ({
         needsReview: useOngkir ? needsReviewFlag : false,
 
         // 📍 LOCATION
-        province: useOngkir ? matched.province?.name || "" : "",
-        regency: useOngkir ? matched.regency?.name || "" : "",
-        district: useOngkir ? matched.district?.name || "" : "",
-        village: useOngkir ? matched.village?.name || "" : "",
-
+        // province: useOngkir ? matched.province?.name || "" : "",
+				province: useOngkir ? provinceName : "",
         // 🕒 TIME
         createdAt: Timestamp.now(),
         updatedAt: Timestamp.now(),
