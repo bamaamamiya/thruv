@@ -177,8 +177,6 @@ const OrderMachine = ({
       const totalPrice = price + ongkir;
 
       const orderId = `${cleanedWA}_${product.id}_${Date.now()}`;
-      const randomDelay =
-        Math.floor(Math.random() * (70000 - 50000 + 1)) + 50000; // 50-70 detik
 
       await setDoc(doc(db, "leads", orderId), {
         // 👤 CUSTOMER
@@ -195,6 +193,7 @@ const OrderMachine = ({
 
         // 🔥 UPSELL
         upsells: product.upsells || [],
+				upsellEnabled: product.upsellEnabled || false, // ✅ FIX DI SINI
         selectedUpsell: null,
 
         // 💰 PRICING
@@ -213,7 +212,8 @@ const OrderMachine = ({
         // ⚙️ SYSTEM
         automation: true,
         queuedForMessage: true,
-        nextSendAt: Timestamp.fromDate(new Date(Date.now() + randomDelay)), //15detik
+				nextSendAt: Timestamp.now(),
+				chatId: null,
         // 🚚 LOGISTIC
         resiCheck: "not",
         rts: 0,
