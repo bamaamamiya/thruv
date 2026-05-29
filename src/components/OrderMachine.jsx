@@ -214,6 +214,8 @@ const OrderMachine = ({
         queuedForMessage: true,
 				nextSendAt: Timestamp.now(),
 				chatId: null,
+				aiMode: "auto",
+				aiFallbackCount: 0,
         // 🚚 LOGISTIC
         resiCheck: "not",
         rts: 0,
