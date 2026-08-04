@@ -193,7 +193,7 @@ const OrderMachine = ({
 
         // 🔥 UPSELL
         upsells: product.upsells || [],
-				upsellEnabled: product.upsellEnabled || false, // ✅ FIX DI SINI
+        upsellEnabled: product.upsellEnabled || false, // ✅ FIX DI SINI
         selectedUpsell: null,
 
         // 💰 PRICING
@@ -212,10 +212,10 @@ const OrderMachine = ({
         // ⚙️ SYSTEM
         automation: true,
         queuedForMessage: true,
-				nextSendAt: Timestamp.now(),
-				chatId: null,
-				aiMode: "auto",
-				aiFallbackCount: 0,
+        nextSendAt: Timestamp.now(),
+        chatId: null,
+        aiMode: "auto",
+        aiFallbackCount: 0,
         // 🚚 LOGISTIC
         resiCheck: "not",
         rts: 0,
@@ -225,7 +225,7 @@ const OrderMachine = ({
 
         // 📍 LOCATION
         // province: useOngkir ? matched.province?.name || "" : "",
-				province: useOngkir ? provinceName : "",
+        province: useOngkir ? provinceName : "",
         // 🕒 TIME
         createdAt: Timestamp.now(),
         updatedAt: Timestamp.now(),
@@ -235,13 +235,18 @@ const OrderMachine = ({
       if (window.fbq) {
         try {
           const hashedPhone = await sha256(cleanedWA);
-          fbq("trackSingle", pixel, "Purchase", {
-            content_name: product.title,
-            content_ids: [product.title || "123"],
-            content_type: "product",
-            ph: hashedPhone, // 🔥 SHA256 hashed phone
-            value: price || 0,
-            currency: "IDR",
+
+          const pixelIds = Array.isArray(pixel) ? pixel : [pixel];
+
+          pixelIds.forEach((id) => {
+            fbq("trackSingle", id, "Purchase", {
+              content_name: product.title,
+              content_ids: [product.title || "123"],
+              content_type: "product",
+              ph: hashedPhone,
+              value: price || 0,
+              currency: "IDR",
+            });
           });
         } catch (err) {
           console.error("FB Pixel Error:", err);

@@ -100,7 +100,10 @@ const SpeakerMini = () => {
     "Ubah ruang tamu jadi tempat karaoke kapan saja tanpa biaya mahal.",
   ];
 
-  const pixel = 600654142367970;
+  const pixels = [
+  "600654142367970", // pixel baru
+  "2111198546014232", // pixel lama
+];
   const pixelString = pixel.toString();
 
   function getNormalPrice(sellingPrice, discountRate) {
@@ -136,7 +139,7 @@ const SpeakerMini = () => {
       />
       <Footer
         hargaJual={product?.pricing?.price}
-        pixelId={pixelString}
+        pixelId={pixels}
         produkBaru={product}
         footerImages={["images/fotter2.webp"]}
         faqs={faqs}
