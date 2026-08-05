@@ -104,7 +104,6 @@ const SpeakerMini = () => {
   "600654142367970", // pixel baru
   "2111198546014232", // pixel lama
 ];
-  const pixelString = pixel.toString();
 
   function getNormalPrice(sellingPrice, discountRate) {
     if (discountRate >= 1 || discountRate < 0) {

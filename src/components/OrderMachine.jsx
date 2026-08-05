@@ -18,6 +18,9 @@ const OrderMachine = ({
   buttonHoverColor = "hover:bg-red-700",
   useOngkir = true,
 }) => {
+  console.log("========== ORDER MACHINE ==========");
+  console.log("Pixel:", pixel);
+  console.log("Product:", product);
   if (!product || !product.pricing) {
     return <div>Loading...</div>;
   }
@@ -231,6 +234,10 @@ const OrderMachine = ({
         updatedAt: Timestamp.now(),
       });
 
+      console.log("window.fbq =", window.fbq);
+      console.log("Pixel prop =", pixel);
+      console.log("Price =", price);
+      console.log("WA =", cleanedWA);
       // FB Pixel
       if (window.fbq) {
         try {
@@ -239,6 +246,8 @@ const OrderMachine = ({
           const pixelIds = Array.isArray(pixel) ? pixel : [pixel];
 
           pixelIds.forEach((id) => {
+            console.log("Kirim Purchase ke pixel:", id);
+
             fbq("trackSingle", id, "Purchase", {
               content_name: product.title,
               content_ids: [product.title || "123"],
