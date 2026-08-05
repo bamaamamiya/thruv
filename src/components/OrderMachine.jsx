@@ -7,11 +7,11 @@ import { validateAddress } from "../utils/addressValidator";
 import { matchAddress } from "../utils/addressMatcher";
 import { calculateOngkir } from "../utils/calculateOngkir";
 import { detectProvinceFast } from "../utils/detectProvinceFast";
+import ProductBundles from "./product/ProductBundles";
+
 const OrderMachine = ({
   pixel,
   product,
-  price,
-  costProduct,
   adminWA = "6282387881505",
   discountTransfer,
   buttonColor = "bg-redto",
@@ -21,17 +21,54 @@ const OrderMachine = ({
   console.log("========== ORDER MACHINE ==========");
   console.log("Pixel:", pixel);
   console.log("Product:", product);
-  if (!product || !product.pricing) {
+
+  if (!product) {
     return <div>Loading...</div>;
   }
+
+  const settings = React.useMemo(
+    () => ({
+      bundle: true,
+      upsell: false,
+      cod: true,
+      bankTransfer: true,
+      ongkir: true,
+      comparePrice: true,
+      aiAgent: false,
+      countdown: false,
+      countdownMinute: 15,
+      showStock: true,
+      maxOrder: 3,
+      saveLead: true,
+      ...(product?.settings || {}),
+    }),
+    [product],
+  );
+
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState("COD");
+  const [paymentMethod, setPaymentMethod] = useState(
+    settings.cod ? "COD" : "Bank Transfer",
+  );
   const [address, setAddress] = useState("");
   const [loading, setLoading] = useState(false);
   const debounceRef = useRef(null);
+  const [selectedBundle, setSelectedBundle] = useState(
+    product?.bundles?.length ? product.bundles[0] : null,
+  );
 
   // === Helper ===
+
+  const paymentMethods = React.useMemo(() => {
+    const methods = [];
+
+    if (settings.cod) methods.push("COD");
+
+    if (settings.bankTransfer) methods.push("Bank Transfer");
+
+    return methods;
+  }, [settings.cod, settings.bankTransfer]);
+
   const cleanAndValidateWA = (wa) => {
     let cleaned = wa.replace(/\D/g, "");
     if (cleaned.startsWith("0")) cleaned = "62" + cleaned.slice(1);
@@ -144,7 +181,6 @@ const OrderMachine = ({
       }
 
       // let matched = {};
-      // let ongkir = 0;
       let needsReviewFlag = false;
       const provinceName = detectProvinceFast(addressCleaned);
 
@@ -164,19 +200,26 @@ const OrderMachine = ({
       //   needsReviewFlag = validation.needsReview || !matched.success;
       // }
 
-      if (!provinceName) {
+      if (settings.ongkir && !provinceName) {
         alert(
           "Mohon isi provinsi ya kak 🙏\n\nContoh:\n- Jakarta\n- Bandung\n- Surabaya",
         );
         setLoading(false);
         return;
       }
+      let ongkir = 0;
 
-      const ongkir = calculateOngkir(provinceName);
+      if (settings.ongkir) {
+        ongkir = calculateOngkir(provinceName);
+      }
 
       // 🔥 AMBIL DATA DARI PRODUCT DB
-      const price = product.pricing.price || 0;
-      const costProduct = product.pricing.cost || 0;
+      const activePricing = selectedBundle
+        ? selectedBundle.pricing
+        : product.pricing;
+
+      const price = activePricing.price;
+      const costProduct = activePricing.cost;
       const totalPrice = price + ongkir;
 
       const orderId = `${cleanedWA}_${product.id}_${Date.now()}`;
@@ -191,6 +234,10 @@ const OrderMachine = ({
         // 📦 PRODUCT
         productId: product.id,
         productTitle: product.title,
+        bundleId: selectedBundle?.id || null,
+        bundleTitle: selectedBundle?.title || null,
+        bundleQty: selectedBundle?.quantity || 1,
+        bundleBadge: selectedBundle?.badge || "",
         price,
         costProduct,
 
@@ -217,7 +264,7 @@ const OrderMachine = ({
         queuedForMessage: true,
         nextSendAt: Timestamp.now(),
         chatId: null,
-        aiMode: "auto",
+        aiMode: settings.aiAgent ? "auto" : "manual",
         aiFallbackCount: 0,
         // 🚚 LOGISTIC
         resiCheck: "not",
@@ -267,6 +314,8 @@ const OrderMachine = ({
         whatsapp: cleanedWA,
         address,
         productTitle: product.title,
+        bundle: selectedBundle?.title || "Default",
+        quantity: selectedBundle?.quantity || 1,
         productId: product.title || "unknown",
         price,
         total: totalPrice,
@@ -278,6 +327,8 @@ const OrderMachine = ({
       const message =
         `PESANAN BARU\n\n` +
         `Produk: ${product.title}\n` +
+        `Paket: ${selectedBundle?.title || "Default"}\n` +
+        `Qty : ${selectedBundle?.quantity || 1}\n` +
         `Nama: ${name}\n` +
         `Metode Pembayaran: ${paymentMethod}\n\n` +
         `Mohon segera diproses, terima kasih`;
@@ -302,7 +353,7 @@ const OrderMachine = ({
       setName("");
       setWhatsapp("");
       setAddress("");
-      setPaymentMethod("COD");
+      setPaymentMethod(settings.cod ? "COD" : "Bank Transfer");
     } catch (err) {
       console.error("Gagal simpan ke Firestore:", err);
       alert("Terjadi kesalahan saat menyimpan. Coba lagi.");
@@ -313,6 +364,18 @@ const OrderMachine = ({
 
   return (
     <div className="max-w-md mx-auto bg-white p-6 rounded-2xl">
+      {settings.bundle && product?.bundles?.length > 0 && (
+        <div className="mb-6">
+          <h2 className="font-semibold text-lg mb-3">Pilih Paket</h2>
+
+          <ProductBundles
+            bundles={product.bundles}
+            selectedBundle={selectedBundle}
+            setSelectedBundle={setSelectedBundle}
+          />
+        </div>
+      )}
+
       <h2 className="text-xl font-bold mb-4">Data Penerima:</h2>
 
       <form onSubmit={handleSubmit}>
@@ -362,7 +425,7 @@ const OrderMachine = ({
 
         {/* Payment Method */}
         <div className="mb-4">
-          {["COD", "Bank Transfer"].map((method) => (
+          {paymentMethods.map((method) => (
             <div
               key={method}
               className="flex items-center cursor-pointer border-2 p-4 rounded-md mb-2"

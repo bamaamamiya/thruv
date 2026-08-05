@@ -21,15 +21,6 @@ const SpeakerMini = () => {
     fetchProduct();
   }, []);
 
-  const funnelProduct = product
-    ? {
-        title: product.title,
-        price: product.pricing?.price,
-        costProduct: product.pricing?.cost,
-        upsells: product.upsells || [],
-      }
-    : null;
-
   const productImages = ["images/speaker/5.webp", "images/speaker/4.webp"];
 
   const testimonies = [
@@ -39,6 +30,21 @@ const SpeakerMini = () => {
   ];
 
   const faqs = [
+    {
+      question: "Apakah suara mic ada delay?",
+      answer:
+        "Tidak. Sistem wireless dibuat agar suara mic tetap responsif saat bernyanyi.",
+    },
+    {
+      question: "Apakah cocok untuk hadiah anak?",
+      answer:
+        "Sangat cocok. Banyak digunakan sebagai hadiah ulang tahun karena bisa dimainkan bersama keluarga.",
+    },
+    {
+      question: "Apakah mudah digunakan?",
+      answer:
+        "Ya. Tidak membutuhkan setting rumit, cukup hidupkan speaker, sambungkan Bluetooth, lalu mulai bernyanyi.",
+    },
     {
       question: "Apakah harus pakai kabel saat digunakan?",
       answer:
@@ -78,11 +84,11 @@ const SpeakerMini = () => {
   //   "Pasang CCTV ribet, butuh teknisi dan kabel panjang kemana-mana.",
   // ];
   const problems = [
-    "Kumpul keluarga jadi sepi karena semua sibuk main HP.",
-    "Suara speaker HP terlalu kecil untuk karaoke bersama.",
-    "Anak-anak cepat bosan saat di rumah.",
-    "Acara keluarga terasa biasa tanpa hiburan.",
-    "Mau karaoke di rumah tapi alatnya mahal dan ribet.",
+    "Anak-anak cepat bosan dan akhirnya kembali bermain HP.",
+    "Kumpul keluarga terasa hambar karena tidak ada aktivitas bersama.",
+    "Speaker HP tidak cukup keras untuk bernyanyi ramai-ramai.",
+    "Ingin karaoke tapi malas keluar rumah dan bayar mahal.",
+    "Speaker biasa tidak punya mic sehingga kurang seru untuk karaoke.",
   ];
 
   // const solutions = [
@@ -93,17 +99,20 @@ const SpeakerMini = () => {
   //   "Support night vision, jadi tetap bisa ngawasin rumah meskipun malam atau lampu mati.",
   // ];
   const solutions = [
-    "Tinggal nyalakan, langsung karaoke tanpa setting rumit.",
-    "Suara lebih kencang dan jernih dibanding speaker HP.",
-    "Mic wireless membuat bernyanyi lebih bebas dan seru.",
-    "Cocok untuk keluarga, anak-anak, hingga acara bersama teman.",
-    "Ubah ruang tamu jadi tempat karaoke kapan saja tanpa biaya mahal.",
+    "2 Mic Wireless membuat semua orang bisa ikut bernyanyi tanpa rebutan.",
+    "Suara lebih powerful dibanding speaker HP untuk karaoke bersama.",
+    "Tinggal nyalakan dan sambungkan Bluetooth, langsung siap digunakan.",
+    "Cocok untuk quality time keluarga, ulang tahun, dan kumpul teman.",
+    "Nikmati sensasi karaoke di rumah tanpa harus keluar biaya mahal.",
+    "Desain mini portable mudah dibawa untuk acara keluarga, piknik, atau perjalanan.",
+    "Baterai tahan lama hingga berjam-jam untuk menemani waktu bernyanyi lebih lama.",
+    "Bisa digunakan anak-anak maupun orang dewasa dengan penggunaan yang mudah.",
   ];
 
   const pixels = [
-  "600654142367970", // pixel baru
-  "2111198546014232", // pixel lama
-];
+    "600654142367970", // pixel baru
+    "2111198546014232", // pixel lama
+  ];
 
   function getNormalPrice(sellingPrice, discountRate) {
     if (discountRate >= 1 || discountRate < 0) {
@@ -117,20 +126,20 @@ const SpeakerMini = () => {
     : 0;
 
   const discountTransfer = false; // 🔥 tinggal ubah true/false
-  const extraOffer = "+ Bonus 2 Mic";
-  const extraPush = "Harga diatas belum termasuk ongkir";
+  const extraOffer = "🎁 Paket Lengkap Speaker + Bonus 2 Mic Wireless";
+  const extraPush = "Dapatkan promo khusus hari ini + rincian pembayaran sesuai lokasi Anda.";
 
   return (
     <div className="bg-white">
       <Headline
         imgHeadLine="images/speaker/1.webp"
-        headLine="Momen Kumpul Terasa Sepi Karena Gak Ada yang Menghidupkan Suasana?"
-        subHeadLine="Speaker Karaoke Mini dengan mic wireless yang bikin keluarga dan teman lebih seru bernyanyi bersama kapan saja."
-        problemTitle="😔 Kenapa Momen Kumpul Sering Terasa Kurang Seru :"
+        headLine="Anak Mulai Bosan di Rumah & Keluarga Sibuk Dengan HP Masing-Masing?"
+        subHeadLine="Hidupkan kembali suasana rumah dengan Speaker Karaoke Mini + 2 Mic Wireless. Tinggal nyalakan, pilih lagu, dan mulai bernyanyi bersama."
+        problemTitle="😔 Kenapa Momen Kumpul Sering Terasa Kurang Seru?"
         problems={problems}
       />
       <Content
-        solutionTitle="Bayangin, setiap akhir pekan di rumah dipenuhi tawa dan nyanyian, bukan lagi semua sibuk dengan HP masing-masing. Hadirkan momen kebersamaan yang lebih hangat dengan Speaker Karaoke Mini yang siap menemani setiap acara."
+        solutionTitle="Bayangkan rumah yang biasanya sunyi berubah menjadi tempat penuh tawa, nyanyian, dan momen bersama keluarga."
         solutions={solutions}
         mainImage="images/speaker/3.webp"
         productImages={productImages}

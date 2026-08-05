@@ -186,11 +186,9 @@ const Footer = ({
           <Funnel
             pixel={pixelId}
             product={produkBaru}
-            price={promoPrice}
             namaProduct={namaProduct}
-            costProduct={produkBaru?.pricing?.cost || 0}
-            discountTransfer={discountTransfer} // ⬅ terusin ke Funnel
-            useOngkir={useOngkir} // 🔥 KIRIM KE FUNNEL
+            discountTransfer={discountTransfer}
+            useOngkir={useOngkir}
           />
         </div>
       </div>
