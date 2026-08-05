@@ -117,7 +117,7 @@ const SpeakerMini = () => {
     : 0;
 
   const discountTransfer = false; // 🔥 tinggal ubah true/false
-  const extraOffer = "+ Potongan Ongkir";
+  const extraOffer = "+ Bonus 2 Mic";
   const extraPush = "Harga diatas belum termasuk ongkir";
 
   return (
@@ -145,7 +145,7 @@ const SpeakerMini = () => {
         namaProduct={product?.title}
         NormalPrice={hargaNormal}
         discountTransfer={discountTransfer} // ⬅ lempar ke Footer
-        extraOffer={false}
+        extraOffer={extraOffer}
         extraPush={extraPush}
       />
       <Floting />
