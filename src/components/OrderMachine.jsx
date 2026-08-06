@@ -327,8 +327,6 @@ const OrderMachine = ({
       const message =
         `PESANAN BARU\n\n` +
         `Produk: ${product.title}\n` +
-        `Paket: ${selectedBundle?.title || "Default"}\n` +
-        `Qty : ${selectedBundle?.quantity || 1}\n` +
         `Nama: ${name}\n` +
         `Metode Pembayaran: ${paymentMethod}\n\n` +
         `Mohon segera diproses, terima kasih`;
