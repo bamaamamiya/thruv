@@ -28,19 +28,22 @@ const OrderMachine = ({
 
   const settings = React.useMemo(
     () => ({
-      bundle: true,
-      upsell: false,
-      cod: true,
-      bankTransfer: true,
-      ongkir: true,
-      comparePrice: true,
-      aiAgent: false,
-      countdown: false,
-      countdownMinute: 15,
-      showStock: true,
-      maxOrder: 3,
-      saveLead: true,
-      ...(product?.settings || {}),
+      checkout: {
+        cod: true,
+        bankTransfer: true,
+        ongkir: true,
+        bundle: true,
+        ...(product?.settings?.checkout || {}),
+      },
+
+      automation: {
+        aiAgent: false,
+        reminder: false,
+        faq: false,
+        followUp: false,
+        upsell: false,
+        ...(product?.settings?.automation || {}),
+      },
     }),
     [product],
   );
@@ -48,7 +51,7 @@ const OrderMachine = ({
   const [name, setName] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [paymentMethod, setPaymentMethod] = useState(
-    settings.cod ? "COD" : "Bank Transfer",
+    settings.checkout.cod ? "COD" : "Bank Transfer",
   );
   const [address, setAddress] = useState("");
   const [loading, setLoading] = useState(false);
@@ -62,12 +65,16 @@ const OrderMachine = ({
   const paymentMethods = React.useMemo(() => {
     const methods = [];
 
-    if (settings.cod) methods.push("COD");
+    if (settings.checkout.cod) {
+      methods.push("COD");
+    }
 
-    if (settings.bankTransfer) methods.push("Bank Transfer");
+    if (settings.checkout.bankTransfer) {
+      methods.push("Bank Transfer");
+    }
 
     return methods;
-  }, [settings.cod, settings.bankTransfer]);
+  }, [settings.checkout.cod, settings.checkout.bankTransfer]);
 
   const cleanAndValidateWA = (wa) => {
     let cleaned = wa.replace(/\D/g, "");
@@ -200,7 +207,7 @@ const OrderMachine = ({
       //   needsReviewFlag = validation.needsReview || !matched.success;
       // }
 
-      if (settings.ongkir && !provinceName) {
+      if (settings.checkout.ongkir && !provinceName) {
         alert(
           "Mohon isi provinsi ya kak 🙏\n\nContoh:\n- Jakarta\n- Bandung\n- Surabaya",
         );
@@ -209,14 +216,15 @@ const OrderMachine = ({
       }
       let ongkir = 0;
 
-      if (settings.ongkir) {
+      if (settings.checkout.ongkir) {
         ongkir = calculateOngkir(provinceName);
       }
 
       // 🔥 AMBIL DATA DARI PRODUCT DB
-      const activePricing = selectedBundle
-        ? selectedBundle.pricing
-        : product.pricing;
+      const activePricing =
+        settings.checkout.bundle && selectedBundle
+          ? selectedBundle.pricing
+          : product.pricing;
 
       const price = activePricing.price;
       const costProduct = activePricing.cost;
@@ -234,48 +242,51 @@ const OrderMachine = ({
         // 📦 PRODUCT
         productId: product.id,
         productTitle: product.title,
-        bundleId: selectedBundle?.id || null,
-        bundleTitle: selectedBundle?.title || null,
-        bundleQty: selectedBundle?.quantity || 1,
-        bundleBadge: selectedBundle?.badge || "",
+
+        bundleId: settings.checkout.bundle ? selectedBundle?.id || null : null,
+        bundleTitle: settings.checkout.bundle
+          ? selectedBundle?.title || null
+          : null,
+        bundleQty: settings.checkout.bundle ? selectedBundle?.quantity || 1 : 1,
+        bundleBadge: settings.checkout.bundle
+          ? selectedBundle?.badge || ""
+          : "",
+
         price,
         costProduct,
-
-        // 🔥 UPSELL
-        upsells: product.upsells || [],
-        upsellEnabled: product.upsellEnabled || false, // ✅ FIX DI SINI
-        selectedUpsell: null,
 
         // 💰 PRICING
         ongkir,
         total: totalPrice,
 
-        // 🔄 FLOW
-        state: "WAITING_CONFIRMATION",
-        lastMessageState: null,
-        lastMessageAt: null,
-
         // 📊 BUSINESS
         status: "pending",
-        confirmation: "belum",
+        // human/order state
+        state: "NEW",
 
         // ⚙️ SYSTEM
-        automation: true,
-        queuedForMessage: true,
-        nextSendAt: Timestamp.now(),
+        queuedForMessage: false,
+        // automation state
+
+        aiStatus: settings.automation.aiAgent ? "QUEUED" : "SKIPPED",
+
+        // automation metadata
+        aiProcessingAt: null,
+        aiLastSentAt: null,
+        aiRetryCount: 0,
+        // whatsapp
+
         chatId: null,
-        aiMode: settings.aiAgent ? "auto" : "manual",
-        aiFallbackCount: 0,
         // 🚚 LOGISTIC
         resiCheck: "not",
         rts: 0,
 
         // ⚠️ VALIDATION
-        needsReview: useOngkir ? needsReviewFlag : false,
+        needsReview: settings.checkout.ongkir ? needsReviewFlag : false,
 
         // 📍 LOCATION
         // province: useOngkir ? matched.province?.name || "" : "",
-        province: useOngkir ? provinceName : "",
+        province: settings.checkout.ongkir ? provinceName : "",
         // 🕒 TIME
         createdAt: Timestamp.now(),
         updatedAt: Timestamp.now(),
@@ -351,7 +362,7 @@ const OrderMachine = ({
       setName("");
       setWhatsapp("");
       setAddress("");
-      setPaymentMethod(settings.cod ? "COD" : "Bank Transfer");
+      setPaymentMethod(settings.checkout.cod ? "COD" : "Bank Transfer");
     } catch (err) {
       console.error("Gagal simpan ke Firestore:", err);
       alert("Terjadi kesalahan saat menyimpan. Coba lagi.");
@@ -362,7 +373,7 @@ const OrderMachine = ({
 
   return (
     <div className="max-w-md mx-auto bg-white p-6 rounded-2xl">
-      {settings.bundle && product?.bundles?.length > 0 && (
+      {settings.checkout.bundle && product?.bundles?.length > 0 && (
         <div className="mb-6">
           <h2 className="font-semibold text-lg mb-3">Pilih Paket</h2>
 
