@@ -33,7 +33,7 @@ const SpeakerMini = () => {
     {
       question: "Apakah suara mic ada delay?",
       answer:
-        "Tidak. Sistem wireless dibuat agar suara mic tetap responsif saat bernyanyi.",
+        "Tidak. Mic dibuat agar suara tetap cepat dan tidak terasa terlambat saat bernyanyi.",
     },
     {
       question: "Apakah cocok untuk hadiah anak?",
@@ -58,7 +58,7 @@ const SpeakerMini = () => {
     {
       question: "Apakah mic langsung tersambung ke speaker?",
       answer:
-        "Ya. Mic wireless akan otomatis terhubung saat speaker dinyalakan sehingga tidak perlu pairing yang rumit.",
+        "Ya, Tidak perlu setting rumit. Nyalakan speaker dan mic, lalu bisa langsung dipakai.",
     },
     {
       question: "Bisa dipakai anak-anak?",
@@ -68,12 +68,12 @@ const SpeakerMini = () => {
     {
       question: "Selain Bluetooth bisa pakai apa lagi?",
       answer:
-        "Bisa memutar lagu melalui TF Card yang berisi file MP3 sehingga tetap bisa digunakan tanpa koneksi Bluetooth.",
+        "Bisa juga pakai kartu memori untuk memutar lagu MP3",
     },
     {
       question: "Aman gak transfer dulu?",
       answer:
-        "Aman 100%! Rekening atas nama resmi & bergaransi 7 hari tukar baru jika ada masalah. Ratusan pelanggan sudah transfer duluan dan puas ✅",
+        "Takut transfer duluan? Tenang. Pembayaran dilakukan ke rekening resmi toko. Jika barang bermasalah, tersedia garansi tukar baru 7 hari sesuai ketentuan.",
     },
   ];
 
@@ -99,14 +99,14 @@ const SpeakerMini = () => {
   //   "Support night vision, jadi tetap bisa ngawasin rumah meskipun malam atau lampu mati.",
   // ];
   const solutions = [
-    "2 Mic Wireless membuat semua orang bisa ikut bernyanyi tanpa rebutan.",
-    "Suara lebih powerful dibanding speaker HP untuk karaoke bersama.",
+    "Ada 2 mic, jadi bisa nyanyi berdua tanpa rebutan.",
+    "Suara lebih keras daripada speaker HP, jadi enak buat karaoke bareng.",
     "Tinggal nyalakan dan sambungkan Bluetooth, langsung siap digunakan.",
     "Cocok untuk quality time keluarga, ulang tahun, dan kumpul teman.",
     "Nikmati sensasi karaoke di rumah tanpa harus keluar biaya mahal.",
-    "Desain mini portable mudah dibawa untuk acara keluarga, piknik, atau perjalanan.",
-    "Baterai tahan lama hingga berjam-jam untuk menemani waktu bernyanyi lebih lama.",
-    "Bisa digunakan anak-anak maupun orang dewasa dengan penggunaan yang mudah.",
+    "Ukurannya kecil, jadi mudah dibawa ke mana-mana.",
+    "Baterainya tahan lama, jadi bisa karaoke lebih lama.",
+    "Mudah dipakai anak-anak maupun orang dewasa.",
   ];
 
   const pixels = [
