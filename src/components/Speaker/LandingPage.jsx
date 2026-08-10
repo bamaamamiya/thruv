@@ -126,7 +126,7 @@ const SpeakerMini = () => {
     : 0;
 
   const discountTransfer = false; // 🔥 tinggal ubah true/false
-  const extraOffer = "🎤 PAKET KARAOKE KELUARGA Speaker Mini + 2 Mic Wireless";
+  const extraOffer = "🎁 Paket Lengkap Speaker + 2 Mic Wireless";;
   const extraPush = "Dapatkan promo khusus hari ini + rincian pembayaran sesuai lokasi Anda.";
 
   return (
