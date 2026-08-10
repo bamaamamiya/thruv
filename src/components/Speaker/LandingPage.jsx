@@ -21,7 +21,7 @@ const SpeakerMini = () => {
     fetchProduct();
   }, []);
 
-  const productImages = ["images/speaker/5.webp", "images/speaker/4.webp"];
+  const productImages = ["images/speaker/1.webp", "images/speaker/4.webp"];
 
   const testimonies = [
     "images/speaker/testi1.webp",
@@ -126,13 +126,13 @@ const SpeakerMini = () => {
     : 0;
 
   const discountTransfer = false; // 🔥 tinggal ubah true/false
-  const extraOffer = "🎁 Paket Lengkap Speaker + Bonus 2 Mic Wireless";
+  const extraOffer = "🎤 PAKET KARAOKE KELUARGA Speaker Mini + 2 Mic Wireless";
   const extraPush = "Dapatkan promo khusus hari ini + rincian pembayaran sesuai lokasi Anda.";
 
   return (
     <div className="bg-white">
       <Headline
-        imgHeadLine="images/speaker/1.webp"
+        imgHeadLine="images/speaker/head.webp"
         headLine="Anak Mulai Bosan di Rumah & Keluarga Sibuk Dengan HP Masing-Masing?"
         subHeadLine="Hidupkan kembali suasana rumah dengan Speaker Karaoke Mini + 2 Mic Wireless. Tinggal nyalakan, pilih lagu, dan mulai bernyanyi bersama."
         problemTitle="😔 Kenapa Momen Kumpul Sering Terasa Kurang Seru?"
@@ -141,7 +141,7 @@ const SpeakerMini = () => {
       <Content
         solutionTitle="Bayangkan rumah yang biasanya sunyi berubah menjadi tempat penuh tawa, nyanyian, dan momen bersama keluarga."
         solutions={solutions}
-        mainImage="images/speaker/3.webp"
+        mainImage="images/speaker/tail.webp"
         productImages={productImages}
         testimonies={testimonies}
       />

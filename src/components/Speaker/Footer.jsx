@@ -192,7 +192,7 @@ const Footer = ({
           />
         </div>
       </div>
-      <div className="flex justify-center mt-6">
+      {/* <div className="flex justify-center mt-6">
         <section className="w-full max-w-md bg-gray-50 p-6 rounded-lg">
           <ul className="space-y-4">
             {fotters.map((item, idx) => (
@@ -205,7 +205,7 @@ const Footer = ({
             ))}
           </ul>
         </section>
-      </div>
+      </div> */}
 
       {/* FAQ */}
       <div>

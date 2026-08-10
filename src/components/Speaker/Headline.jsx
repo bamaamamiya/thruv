@@ -40,7 +40,7 @@ const HeadLine = ({
       <div className="flex justify-center">
         <section className="space-y-4 p-4">
           <h2 className="text-xl font-bold text-center">{problemTitle}</h2>
-          <ul className="space-y-2" style={{ "--emoji": "'🚨'" }}>
+          <ul className="space-y-2" style={{ "--emoji": "'❌'" }}>
             {problems.map((item, idx) => (
               <li
                 key={idx}
