@@ -30,7 +30,7 @@ const CctvBohlam = () => {
       }
     : null;
 
-  const productImages = ["images/cctv/3.webp", "images/cctv/4.webp"];
+  const productImages = ["images/cctv/p1.webp", "images/cctv/44.webp"];
 
   const testimonies = [
     "images/cctv/testi1.webp",
@@ -43,23 +43,6 @@ const CctvBohlam = () => {
   // 	bonus: "Fitting & Baut + Vidio Panduan + Gratis COD"
   // }
 
-  const bundles = [
-    {
-      id: "bohlam-only",
-      title: "CCTV Bohlam",
-      price: 129000,
-    },
-    {
-      id: "bohlam-16gb",
-      title: "CCTV + Memori 16GB",
-      price: 199000,
-    },
-    {
-      id: "bohlam-32gb",
-      title: "CCTV + Memori 32GB",
-      price: 249000,
-    },
-  ];
 
   const faqs = [
     // {
@@ -151,7 +134,7 @@ const CctvBohlam = () => {
   return (
     <div className="bg-white">
       <Headline
-        imgHeadLine="images/cctv/1.webp"
+        imgHeadLine="images/cctv/head.webp"
         headLine="Capek kerja siang-malam beli barang berharga… tapi bisa hilang dalam sekejap kalau rumah kosong?"
         subHeadLine="Amankan rumah dan barang berharga di mana pun kamu taruh mudah dipasang, bisa diandalkan bertahun-tahun, tanpa ribet kabel atau teknisi"
         problemTitle="📹 Banyak Rumah Masih Rentan Karena Masalah Seperti Ini:"

@@ -20,7 +20,6 @@ const OrderMachine = ({
 }) => {
   console.log("========== ORDER MACHINE ==========");
   console.log("Pixel:", pixel);
-  console.log("Product:", product);
 
   if (!product) {
     return <div>Loading...</div>;
