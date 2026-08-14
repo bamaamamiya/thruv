@@ -67,8 +67,7 @@ const SpeakerMini = () => {
     },
     {
       question: "Selain Bluetooth bisa pakai apa lagi?",
-      answer:
-        "Bisa juga pakai kartu memori untuk memutar lagu MP3",
+      answer: "Bisa juga pakai kartu memori untuk memutar lagu MP3",
     },
     {
       question: "Aman gak transfer dulu?",
@@ -126,8 +125,10 @@ const SpeakerMini = () => {
     : 0;
 
   const discountTransfer = false; // 🔥 tinggal ubah true/false
-  const extraOffer = "🎁 Paket Lengkap Speaker + 2 Mic Wireless";;
-  const extraPush = "Dapatkan promo khusus hari ini + rincian pembayaran sesuai lokasi Anda.";
+  const extraOffer =
+    "🎁 GRATIS 2 MIC WIRELESS! Beli 1 Speaker Mini, Dapat 2 Mic";
+  const extraPush =
+    "🔥 PROMO KHUSUS HARI INI! Dapatkan Speaker Mini + GRATIS 2 Mic Wireless. Promo ini hanya berlaku hari ini dan selama stok promo masih tersedia. Jangan sampai kelewatan!";
 
   return (
     <div className="bg-white">
