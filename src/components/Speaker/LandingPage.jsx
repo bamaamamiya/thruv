@@ -1,7 +1,6 @@
 import Content from "./Content";
 import Headline from "./Headline";
 import Footer from "./Footer";
-import Floting from "../set/Floting";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useEffect, useState } from "react";
@@ -158,7 +157,6 @@ const SpeakerMini = () => {
         extraOffer={extraOffer}
         extraPush={extraPush}
       />
-      <Floting />
     </div>
   );
 };
