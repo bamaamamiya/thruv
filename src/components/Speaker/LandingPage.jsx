@@ -124,9 +124,8 @@ const SpeakerMini = () => {
     : 0;
 
   const discountTransfer = false; // 🔥 tinggal ubah true/false
-  const extraOffer = "🎁 Paket Lengkap Speaker + Bonus 2 Mic Wireless";
-  const extraPush =
-    "Dapatkan promo khusus hari ini + rincian pembayaran sesuai lokasi Anda.";
+  const extraOffer = "Ambil 1 Speaker, Gratis 2 Mic";
+  const extraPush = "Harga promo belum termasuk ongkir.";
   return (
     <div className="bg-white">
       <Headline
