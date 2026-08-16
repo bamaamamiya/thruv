@@ -9,7 +9,7 @@ const CctvBohlam = () => {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const docRef = doc(db, "products", "prod-03"); // 🔥 id dari DB
+      const docRef = doc(db, "products", "prod-01"); // 🔥 id dari DB
       const snapshot = await getDoc(docRef);
 
       if (snapshot.exists()) {
