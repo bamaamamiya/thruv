@@ -1,6 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import Funnel from "../OrderMachine";
+import {
+  faArrowDown,
+  faEye,
+  faShoppingCart,
+} from "@fortawesome/free-solid-svg-icons";
+import Funnel from "../OrderMachineNew";
 import Faqs from "../set/Faqs";
 
 import { useEffect, useRef, useState } from "react";
@@ -25,6 +29,19 @@ const Footer = ({
   const promoPrice = produkBaru?.pricing?.price || 0; // harga promo
   const [isVisible, setIsVisible] = useState(false);
   const [currentValue, setCurrentValue] = useState(normalPrice);
+  const [viewersCount] = useState(
+    () => Math.floor(Math.random() * (100 - 80 + 1)) + 80,
+  );
+
+  const [soldCount] = useState(
+    () => Math.floor(Math.random() * (700 - 500 + 1)) + 500,
+  );
+  const [timeLeft, setTimeLeft] = useState({
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+
   const promoRef = useRef(null);
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -61,6 +78,51 @@ const Footer = ({
       }, 30);
     }
   }, [isVisible]);
+
+  useEffect(() => {
+    const STORAGE_KEY = "checkout_promo_end_time";
+    const DURATION = 12 * 60 * 1000; // 12 menit
+
+    let endTime = localStorage.getItem(STORAGE_KEY);
+
+    if (!endTime) {
+      endTime = Date.now() + DURATION;
+      localStorage.setItem(STORAGE_KEY, endTime.toString());
+    } else {
+      endTime = parseInt(endTime, 10);
+
+      // Kalau countdown sudah habis,
+      // mulai countdown 12 menit lagi.
+      if (endTime <= Date.now()) {
+        endTime = Date.now() + DURATION;
+        localStorage.setItem(STORAGE_KEY, endTime.toString());
+      }
+    }
+
+    const updateCountdown = () => {
+      const remaining = Math.max(0, endTime - Date.now());
+
+      const totalSeconds = Math.floor(remaining / 1000);
+
+      const hours = Math.floor(totalSeconds / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      setTimeLeft({
+        hours,
+        minutes,
+        seconds,
+      });
+    };
+
+    const interval = setInterval(updateCountdown, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const formatTime = (value) => {
+    return String(value).padStart(2, "0");
+  };
 
   // 	useEffect(() => {
   //   console.log("Props Footer:", {
@@ -136,6 +198,42 @@ const Footer = ({
         <div className="text-center font-bold text-sm p-4">
           <h1>{extraPush}</h1>
         </div>
+        {/* SOCIAL PROOF */}
+        <div className="mx-auto mt-3 mb-4 grid max-w-md grid-cols-2 gap-3 px-2">
+          {/* VIEWERS */}
+          <div className="flex items-center gap-3 rounded-xl border border-gray-200 bg-white p-3 shadow-sm">
+            <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-redto/10 text-redto">
+              <FontAwesomeIcon icon={faEye} className="text-lg" />
+            </div>
+
+            <div className="min-w-0">
+              <p className="text-lg font-extrabold leading-none text-gray-900">
+                {viewersCount}
+              </p>
+
+              <p className="mt-1 text-[11px] font-medium leading-tight text-gray-500">
+                orang sedang melihat
+              </p>
+            </div>
+          </div>
+
+          {/* SOLD */}
+          <div className="flex items-center gap-3 rounded-xl border border-gray-200 bg-white p-3 shadow-sm">
+            <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-redto/10 text-redto">
+              <FontAwesomeIcon icon={faShoppingCart} className="text-lg" />
+            </div>
+
+            <div className="min-w-0">
+              <p className="text-lg font-extrabold leading-none text-gray-900">
+                {soldCount}
+              </p>
+
+              <p className="mt-1 text-[11px] font-medium leading-tight text-gray-500">
+                total terjual hingga kini
+              </p>
+            </div>
+          </div>
+        </div>
 
         {/* <ValueStack
           values={[
@@ -173,6 +271,54 @@ const Footer = ({
         <h1 className="text-center font-bold text-xl p-2">
           Isi Data Sekarang Sebelum Promonya Habis — Siapa Cepat Dia Dapat!
         </h1>
+
+        {/* COUNTDOWN */}
+        <div className="mx-auto mt-5 max-w-sm px-4">
+          <div className="rounded-2xl border border-gray-200 bg-white px-5 py-4 shadow-sm">
+            <p className="text-center text-sm font-medium text-gray-500">
+              Promo berakhir dalam
+            </p>
+
+            <div className="mt-3 flex items-center justify-center gap-2">
+              {/* JAM */}
+              <div className="min-w-16 rounded-xl bg-gray-50 px-3 py-2 text-center">
+                <div className="text-2xl font-bold tracking-tight text-gray-900">
+                  {formatTime(timeLeft.hours)}
+                </div>
+
+                <div className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-gray-400">
+                  Jam
+                </div>
+              </div>
+
+              <span className="pb-4 text-xl font-bold text-gray-300">:</span>
+
+              {/* MENIT */}
+              <div className="min-w-16 rounded-xl bg-gray-50 px-3 py-2 text-center">
+                <div className="text-2xl font-bold tracking-tight text-gray-900">
+                  {formatTime(timeLeft.minutes)}
+                </div>
+
+                <div className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-gray-400">
+                  Menit
+                </div>
+              </div>
+
+              <span className="pb-4 text-xl font-bold text-gray-300">:</span>
+
+              {/* DETIK */}
+              <div className="min-w-16 rounded-xl bg-redto/5 px-3 py-2 text-center">
+                <div className="text-2xl font-bold tracking-tight text-redto">
+                  {formatTime(timeLeft.seconds)}
+                </div>
+
+                <div className="mt-0.5 text-[10px] font-semibold uppercase tracking-wider text-redto/60">
+                  Detik
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <br />
         <div className="text-center space-x-6 text-redto text-5xl animate-bounce">
