@@ -39,6 +39,18 @@ const OrderMachine = ({
         upsell: false,
         ...(product?.settings?.automation || {}),
       },
+
+      comparePrice: product?.settings?.comparePrice ?? true,
+
+      saveLead: product?.settings?.saveLead ?? true,
+
+      countdown: product?.settings?.countdown ?? false,
+
+      countdownMinute: product?.settings?.countdownMinute ?? 15,
+
+      showStock: product?.settings?.showStock ?? true,
+
+      maxOrder: product?.settings?.maxOrder ?? 3,
     }),
     [product],
   );
@@ -84,50 +96,68 @@ const OrderMachine = ({
 
   // === Save Abandoned Lead with Merge ===
   const saveAbandonedLead = (nameInput, waInput, addressInput) => {
-  if (debounceRef.current) {
-    clearTimeout(debounceRef.current);
-  }
-
-  debounceRef.current = setTimeout(async () => {
-    if (!nameInput || nameInput.trim().length < 3) return;
-
-    const cleanedWA = cleanAndValidateWA(waInput);
-
-    if (!cleanedWA || !product?.id) return;
-
-    const docId = `${cleanedWA}_${product.id}`;
-    const docRef = doc(db, "abandonedLeads", docId);
-
-    try {
-      const snapshot = await getDoc(docRef);
-
-      // Kalau lead sudah converted, jangan balikin ke abandoned
-      if (snapshot.exists() && snapshot.data()?.status === "converted") {
-        console.log("Lead sudah converted, skip abandoned update");
-        return;
-      }
-
-      await setDoc(
-        docRef,
-        {
-          name: nameInput.trim(),
-          whatsapp: cleanedWA,
-          address: addressInput?.trim() || "",
-          productId: product.id,
-          productTitle: product.title || "unknown",
-          status: "abandoned",
-          updatedAt: Timestamp.now(),
-        },
-        { merge: true },
-      );
-
-      console.log("✅ Abandoned lead saved:", cleanedWA);
-    } catch (err) {
-      console.error("❌ Gagal simpan abandoned lead:", err);
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
     }
-  }, 1500);
-};
+
+    debounceRef.current = setTimeout(async () => {
+      const cleanedWA = cleanAndValidateWA(waInput);
+
+      if (!cleanedWA || !product?.id) return;
+
+      const docId = `${cleanedWA}_${product.id}`;
+      const docRef = doc(db, "abandonedLeads", docId);
+
+      try {
+        const snapshot = await getDoc(docRef);
+
+        // Jangan ubah abandoned lead yang sudah converted
+        if (snapshot.exists() && snapshot.data()?.status === "converted") {
+          console.log("Lead sudah converted, skip abandoned update");
+          return;
+        }
+
+        const existingData = snapshot.exists() ? snapshot.data() : {};
+
+        await setDoc(
+          docRef,
+          {
+            name: nameInput?.trim() || "",
+            whatsapp: cleanedWA,
+            address: addressInput?.trim() || "",
+            productId: product.id,
+            productTitle: product.title || "unknown",
+
+            status: "abandoned",
+
+            // Hanya dibuat sekali
+            createdAt: existingData.createdAt || Timestamp.now(),
+
+            // Selalu diperbarui
+            updatedAt: Timestamp.now(),
+          },
+          { merge: true },
+        );
+
+        console.log("✅ Abandoned lead saved:", cleanedWA);
+      } catch (err) {
+        console.error("❌ Gagal simpan abandoned lead:", err);
+      }
+    }, 500);
+  };
+
+  React.useEffect(() => {
+    return () => {
+      if (debounceRef.current) {
+        clearTimeout(debounceRef.current);
+        debounceRef.current = null;
+      }
+    };
+  }, []);
+
   const saveLeadImmediately = async ({ nameInput, waInput, addressInput }) => {
+    if (!settings.saveLead) return;
+
     if (!nameInput || nameInput.trim().length < 3) return;
 
     const cleanedWA = cleanAndValidateWA(waInput);
@@ -148,6 +178,7 @@ const OrderMachine = ({
           productId: product.id,
           productTitle: product.title || "unknown",
           status: "abandoned",
+          createdAt: existingData.createdAt || Timestamp.now(),
           updatedAt: Timestamp.now(),
         },
         { merge: true },
