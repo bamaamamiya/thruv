@@ -178,7 +178,7 @@ const OrderMachine = ({
           productId: product.id,
           productTitle: product.title || "unknown",
           status: "abandoned",
-          createdAt: existingData.createdAt || Timestamp.now(),
+          createdAt: Timestamp.now(),
           updatedAt: Timestamp.now(),
         },
         { merge: true },

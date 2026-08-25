@@ -9,11 +9,13 @@ import CctvBohlam2 from "./components/Cctv2/LandingPage";
 import BrandPage from "./components/BrandPage/Page";
 import CctvBohlamDB from "./components/CctvDB/LandingPage";
 import SpeakerMini from "./components/Speaker/LandingPage"
+import ManualOrder from "./components/Order/LandingPage"
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Page />} />
+        <Route path="/order" element={<ManualOrder />} />
         <Route path="/brand" element={<BrandPage />} />
         <Route path="/cctv1" element={<CctvBohlam />} />
         <Route path="/cctvlama" element={<CctvBohlam1 />} />
