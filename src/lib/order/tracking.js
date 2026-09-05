@@ -71,75 +71,49 @@ export function trackInitiateCheckout({
 // PURCHASE
 // ==========================================
 
-export async function trackPurchase({
+export function trackPurchase({
   pixel,
   product,
   price,
   quantity = 1,
 }) {
-  console.log("🔥🔥🔥 PURCHASE TRACKING START 🔥🔥🔥");
+  return new Promise((resolve) => {
+    if (typeof window === "undefined" || typeof window.fbq !== "function") {
+      return resolve(false);
+    }
 
-  if (typeof window === "undefined") {
-    console.error("❌ Window tidak tersedia");
-    return false;
-  }
+    const pixelIds = getPixelIds(pixel);
+    if (!pixelIds.length) return resolve(false);
 
-  console.log("🔍 window.fbq:", window.fbq);
-  console.log("🔍 Pixel ID:", pixel);
-  console.log("🔍 Product:", product?.title);
-  console.log("🔍 Price:", price);
+    let finished = 0;
+    let resolved = false;
 
-  if (typeof window.fbq !== "function") {
-    console.error(
-      "❌❌❌ META PIXEL TIDAK TERSEDIA"
-    );
+    const finish = () => {
+      if (resolved) return;
+      resolved = true;
+      resolve(true);
+    };
 
-    return false;
-  }
+    const timer = setTimeout(finish, 1200);
 
-  const pixelIds = getPixelIds(pixel);
-
-  if (!pixelIds.length) {
-    console.error(
-      "❌❌❌ PIXEL ID KOSONG"
-    );
-
-    return false;
-  }
-
-  for (const pixelId of pixelIds) {
-    console.log("=================================");
-    console.log("📡 MENGIRIM PURCHASE");
-    console.log("Pixel ID:", pixelId);
-    console.log("Product:", product.title);
-    console.log("Value:", Number(price) || 0);
-    console.log("=================================");
-
-    window.fbq(
-      "trackSingle",
-      pixelId,
-      "Purchase",
-      {
+    pixelIds.forEach((pixelId) => {
+      window.fbq("trackSingle", pixelId, "Purchase", {
         content_name: product.title,
         content_ids: [product.id || product.title],
         content_type: "product",
-
         value: Number(price) || 0,
         currency: "IDR",
-
         num_items: quantity,
-      }
-    );
 
-    console.log(
-      "✅ fbq Purchase SUDAH DIPANGGIL:",
-      pixelId
-    );
-  }
+        event_callback: () => {
+          finished++;
 
-  console.log(
-    "🟢 SEMUA PURCHASE SUDAH DITEMBAKKAN KE FBQ"
-  );
-
-  return true;
+          if (finished === pixelIds.length) {
+            clearTimeout(timer);
+            finish();
+          }
+        },
+      });
+    });
+  });
 }

@@ -17,6 +17,10 @@ const OrderMachine = ({
   console.log("========== ORDER MACHINE ==========");
   console.log("Pixel:", pixel);
 
+  if (!product) {
+    return <div>Loading...</div>;
+  }
+
   const settings = React.useMemo(
     () => ({
       checkout: {
@@ -348,7 +352,6 @@ const OrderMachine = ({
       // ==========================================
       // 4. META — INITIATE CHECKOUT
       // ==========================================
-      console.log("🟡 Menjalankan InitiateCheckout...");
 
       await trackInitiateCheckout({
         pixel,
@@ -356,41 +359,18 @@ const OrderMachine = ({
         price: pricing.total,
         quantity: selectedBundle?.quantity || 1,
       });
-      console.log("✅ InitiateCheckout selesai");
 
       // ==========================================
-      // 5. PURCHASE — META PIXEL
+      // 5. PURCHASE
       // ==========================================
 
-      console.log("=================================");
-      console.log("🔥 MULAI META PURCHASE");
-      console.log("Pixel ID:", pixel);
-      console.log("Product:", product.title);
-      console.log("Value:", pricing.total);
-      console.log("=================================");
-
-      const purchaseTracked = await trackPurchase({
+      await trackPurchase({
         pixel,
         product,
         price: pricing.total,
+        whatsapp: cleanedWA,
         quantity: selectedBundle?.quantity || 1,
       });
-
-      console.log("🔥 META PURCHASE SELESAI DIPANGGIL");
-      console.log("Purchase tracked:", purchaseTracked);
-
-      // ==========================================
-      // 5.1 GIVE META PIXEL TIME TO SEND
-      // ==========================================
-
-      console.log("⏳ Menunggu Pixel Meta sebelum lanjut...");
-
-      await new Promise((resolve) => {
-        setTimeout(resolve, 1500);
-      });
-
-      console.log("✅ Waktu tunggu Pixel selesai");
-      console.log("➡️ Lanjut ke proses email...");
 
       // ==========================================
       // 6. EMAIL
@@ -425,6 +405,7 @@ const OrderMachine = ({
         `https://api.whatsapp.com/send?phone=${adminWA}` +
         `&text=${encodeURIComponent(message)}`;
 
+      // Redirect normal
       window.location.href = whatsappURL;
     } catch (err) {
       console.error("Gagal proses order:", err);
@@ -434,9 +415,7 @@ const OrderMachine = ({
       setLoading(false);
     }
   };
-  if (!product) {
-    return <div>Loading...</div>;
-  }
+
   return (
     <div className="mx-auto w-full max-w-md rounded-2xl border border-gray-100 bg-white p-5 shadow-sm sm:p-6">
       {settings.checkout.bundle && product?.bundles?.length > 0 && (
