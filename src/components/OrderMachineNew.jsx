@@ -17,9 +17,7 @@ const OrderMachine = ({
   console.log("========== ORDER MACHINE ==========");
   console.log("Pixel:", pixel);
 
-  if (!product) {
-    return <div>Loading...</div>;
-  }
+ 
 
   const settings = React.useMemo(
     () => ({
@@ -87,6 +85,7 @@ const OrderMachine = ({
     return methods;
   }, [settings.checkout.cod, settings.checkout.bankTransfer]);
 
+	
   const cleanAndValidateWA = (wa) => {
     let cleaned = wa.replace(/\D/g, "");
     if (cleaned.startsWith("0")) cleaned = "62" + cleaned.slice(1);
@@ -415,6 +414,11 @@ const OrderMachine = ({
       setLoading(false);
     }
   };
+
+	 if (!product) {
+    return <div>Loading...</div>;
+  }
+
 
   return (
     <div className="mx-auto w-full max-w-md rounded-2xl border border-gray-100 bg-white p-5 shadow-sm sm:p-6">

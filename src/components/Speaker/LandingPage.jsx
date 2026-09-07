@@ -107,10 +107,8 @@ const SpeakerMini = () => {
     "Mudah dipakai anak-anak maupun orang dewasa.",
   ];
 
-  const pixels = [
-    "600654142367970", // pixel baru
-    "2111198546014232", // pixel lama
-  ];
+  const pixel = 2111198546014232;
+  const pixelString = pixel.toString();
 
   function getNormalPrice(sellingPrice, discountRate) {
     if (discountRate >= 1 || discountRate < 0) {
@@ -144,14 +142,14 @@ const SpeakerMini = () => {
       />
       <Footer
         hargaJual={product?.pricing?.price}
-        pixelId={pixels}
+        pixelId={pixelString}
         produkBaru={product}
         footerImages={["images/fotter2.webp"]}
         faqs={faqs}
         namaProduct={product?.title}
         NormalPrice={hargaNormal}
         discountTransfer={discountTransfer} // ⬅ lempar ke Footer
-        extraOffer={extraOffer}
+        extraOffer={false}
         extraPush={extraPush}
       />
     </div>
