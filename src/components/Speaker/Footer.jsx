@@ -81,7 +81,7 @@ const Footer = ({
 
 	useEffect(() => {
 		const STORAGE_KEY = "checkout_promo_end_time";
-		const DURATION = 15 * 60 * 1000; // 12 menit
+		const DURATION = 12 * 60 * 1000; // 12 menit
 
 		let endTime = localStorage.getItem(STORAGE_KEY);
 
