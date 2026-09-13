@@ -355,7 +355,7 @@ const OrderMachine = ({
       await trackInitiateCheckout({
         pixel,
         product,
-        price: pricing.total,
+        price: pricing.price,
         quantity: selectedBundle?.quantity || 1,
       });
 
@@ -366,7 +366,7 @@ const OrderMachine = ({
       await trackPurchase({
         pixel,
         product,
-        price: pricing.total,
+        price: pricing.price,
         whatsapp: cleanedWA,
         quantity: selectedBundle?.quantity || 1,
       });
